@@ -1,0 +1,284 @@
+html{
+  overflow-y: visible;
+}
+
+
+body {
+  margin:0;
+}
+/*     HEADER CSS    */
+
+#HD{
+  margin: 0;
+  padding: 0;
+  background-color: blue;
+  position: fixed;
+  width:100%;
+  height:100px;
+  z-index:10;
+}
+
+.HD_main_tab_btn{
+  height: 100%;
+  width: calc((100% - 550px)/2);
+  min-width: 150px;
+  float: right;
+  background-repeat: no-repeat;
+  font-size: 30px;
+}
+
+#HD_option_btn{
+  height: 100%;
+  width: 50px;
+  float: right;
+  position: relative;
+}
+
+.HD_option_btn{
+  height: 50px;
+  width: 50px;
+position:absolute;
+  background-repeat: no-repeat;
+}
+
+/*    MENU CSS    */
+
+.RM{
+  width: 175px;
+  height: calc(100% - 100px);
+  background-color: green;
+  position: fixed;
+  top: 100px;
+  right: 0px;
+  padding: 10px;
+}
+
+.RM input[type=text], .RM select{
+  width: 100%;
+}
+
+.RM button{
+  width: 90%;
+  height: 36px;
+  margin-left: 5%;
+}
+
+#QL_RM_Ooyodo, #FC_RM_Ooyodo{
+  height:195px;
+  width:195px;
+  position:absolute;
+  right:0px;
+  bottom: 0px;
+  background-color: yellow;
+}
+
+/*    FOOTER CSS    */
+
+.FT{
+  width: calc(100% - 195px);
+  height: 180px;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  border: 1px solid black;
+
+}
+
+#FC_FT_quest_list{
+  width: 100px;
+  float: left;
+  height: 100%;
+}
+
+.cellDiv{
+  position:absolute;
+  border: 1px solid black;
+}
+
+
+
+.centeredContent{
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  max-width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+
+#QL_quest_boxes{
+  width: calc(100% - 195px);
+  position: absolute;
+  top: 100px;
+  height: calc(100% - 100px);
+}
+
+.QL_questBox{
+  float:left;
+  width:350px;
+  height:375px;
+  margin:10px;
+  border-style:solid;
+  position: relative;
+}
+
+
+#QL_RM_input_pending_quests_error_msg{
+  color: red;
+}
+
+/*       COLOR PANEL         */
+
+#CP{
+  z-index:10;
+  height:500px;
+  width:90%;
+  padding:10px;
+  background-color:grey;
+  position:absolute;
+  top:50px;
+  left:50px;
+}
+
+
+#CP_state_settings, #CP_color_table {
+  float: left;
+}
+
+#CP_example{
+  float: left;
+  width:100px;
+  height:75px;
+  border: 2px solid black;
+}
+
+#IPQ{
+  z-index:10;
+  height:280px;
+  width:175px;
+  padding:10px;
+  background-color:orange;
+  position:absolute;
+  top:110px;
+  right:20px;
+}
+
+
+
+/*     RIBBON CSS        */
+
+.wrapper {
+
+  position: relative;
+
+}
+
+.ribbon-wrapper {
+  width: 85px;
+  height: 85px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  transform-origin: right top;
+}
+
+.ribbon {
+  font: bold 15px Sans-Serif;
+  color: #333;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+  position: relative;
+  padding: 7px 0;
+  left: -5px;
+  top: 15px;
+  width: 120px;
+  background-color: #BFDC7A;
+  color: #6a6340;
+  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 3px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.ribbon:before, .ribbon:after {
+  content: "";
+  border-top:   3px solid #6e8900;
+  border-left:  3px solid transparent;
+  border-right: 3px solid transparent;
+  position:absolute;
+  bottom: -3px;
+}
+
+.ribbon:before {
+  left: 0;
+}
+.ribbon:after {
+  right: 0;
+}​
+
+
+/*  TABLE CSS  */
+
+th, td {
+  padding: 5px;
+  text-align: center;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+
+
+
+
+
+/*   SWITCH CSS    */
+
+.switch input {display:none;}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(66px);
+  -ms-transform: translateX(66px);
+  transform: translateX(66px);
+}
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+/*   COLORPICKER CSS  */
+
+.colorpicker{
+  width: 100%;
+}
