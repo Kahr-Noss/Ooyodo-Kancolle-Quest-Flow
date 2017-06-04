@@ -512,14 +512,7 @@ $(function () {
       Object.keys(ALL_QUESTS_LIST).forEach(quest=>{
         ALL_QUEST_STATE_TMP[quest] = 'completed';
       });
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-console.log(pendingQuests);
->>>>>>> origin/master
-=======
-      
->>>>>>> origin/master
+
       pendingQuests.forEach(quest=>{
         //only for the one-time quests
         if(ALL_QUESTS_LIST[quest].period === 'once') {
