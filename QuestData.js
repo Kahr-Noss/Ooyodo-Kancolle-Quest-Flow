@@ -1476,6 +1476,27 @@ const ALL_QUESTS_LIST = {
       "S":["Kinu Kai Ni","Kitakami Kai Ni","Ooi Kai Ni","Kuma Kai","Aoba Kai, Uranami Kai, Shikinami Kai"]
     }
   },
+  "A75":{
+    "Jp":"新編「第一戦隊」を編成せよ！",
+    "En":"Organize the New First Squadron!",
+    "content":"Have Nagato Kai Ni as flagship and Mutsu Kai as second ship in your main fleet.",
+    "ressources":{
+      "F":"0",
+      "A":"880",
+      "S":"0",
+      "B":"0"
+    },
+    "reward":[
+    ["C","Instant repair",2],
+    ["I","Irako",1]
+    ],
+    "requires":["B31"],
+    "unlocks":["B99"],
+    "period":"once",
+    "needs":{
+      "S":["Nagato Kai Ni","Mutsu Kai"]
+    }
+  },
   "B1":{
     "Jp":"はじめての「出撃」！",
     "En":" The First Sortie",
@@ -2097,7 +2118,7 @@ const ALL_QUESTS_LIST = {
     ["E","Type 1 AP Shell",1]
     ],
     "requires":["A42"],
-    "unlocks":["A43"],
+    "unlocks":["A43","A75"],
     "period":"once",
     "needs":{
       "M":["4-2"],
@@ -3524,7 +3545,49 @@ const ALL_QUESTS_LIST = {
       "M":["1-2", "1-3", "1-4", "1-5"]
     }
   },
-
+  "B98":{
+    "Jp":"海上護衛体制の強化に努めよ！",
+    "En":"Focus the Strengthening of the Maritime Escort !",
+    "content":"Sortie a fleet with at least 3 Destroyers or Coastal Defense Ships to world 1-3, 1-4, 1-5, S rank the boss nodes. Sortie to world 1-6 and reqch node N.",
+    "ressources":{
+      "F":"400",
+      "A":"0",
+      "S":"0",
+      "B":"400"
+    },
+    "reward":[
+    ["C","Development material",4],
+    ["I","Furniture Fairy",1]
+    ],
+    "requires":["Bd2"],
+    "unlocks":["B99"],
+    "period":"once",
+    "needs":{
+      "M":["1-6", "1-3", "1-4", "1-5"]
+    }
+  },
+  "B99":{
+    "Jp":"新編「第一戦隊」、抜錨せよ！",
+    "En":"Sortie the New First Squadron!",
+    "content":"Sortie a fleet with Nagato Kai Ni as flagship, Mutsu Kai as second ship and up to 4 additional ships to world 4-5 and 5-5. S rank the boss nodes.",
+    "ressources":{
+      "F":"0",
+      "A":"880",
+      "S":"880",
+      "B":"0"
+    },
+    "reward":[
+    ["C","Improvement material",4],
+    ["E","New Kanhon Design Anti-torpedo Bulge (Large)",1]
+    ],
+    "requires":["A75","B98"],
+    "unlocks":[],
+    "period":"once",
+    "needs":{
+      "M":["4-5", "5-5"],
+      "S":["Nagato Kai Ni","Mutsu Kai"]
+    }
+  },
 
 
 
@@ -4721,7 +4784,7 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{
       "E":[["61cm Quadruple (Oxygen) Torpedo Mount",3],["Type 93 Passive Sonar",3],["61cm Triple Torpedo Mount",4]],
-      "C":[["Development Materials",120]]
+      "C":[["Development material",120]]
     }
   },
   "F51":{
@@ -4873,7 +4936,7 @@ const ALL_QUESTS_LIST = {
     ["C","Development material",1]
     ],
     "requires":[],
-    "unlocks":["D3"],
+    "unlocks":["D3","D22"],
     "period":"daily",
     "needs":{}
   },
@@ -5197,7 +5260,7 @@ const ALL_QUESTS_LIST = {
     ["I","Headquarters Personnel",1]
     ],
     "requires":["C6"],
-    "unlocks":[],
+    "unlocks":["D22"],
     "period":"once",
     "needs":{
       "M":["Exp. 8"]
@@ -5255,17 +5318,40 @@ const ALL_QUESTS_LIST = {
       "B":"100"
     },
     "reward":[
-    ["I","Ne Type Engine",1],
+    ["I","Furniture box medium",2]
+    ],
+    "requires":["D2", "D18"],
+    "unlocks":[],
+    "period":"monthly",
+    "needs":{
+      "M":["Exp. 30","Exp. 31"],
+      "R":[["Steel",5000],["Bauxite",1500]]
+    }
+  },
+  "D22":{
+    "Jp":"輸送船団護衛を強化せよ！",
+    "En":"Reinforce the Transport Escort !",
+    "content":"Complete Expedition 5 four times.",
+    "ressources":{
+      "F":"1000",
+      "A":"0",
+      "S":"0",
+      "B":"300"
+    },
+    "reward":[
+    ["I","",1],
     ["C","Development material",2]
     ],
     "requires":["D20", "B88"],
     "unlocks":[],
     "period":"once",
     "needs":{
-      "M":["Exp. 30","Exp. 31"],
-      "R":[["Steel",5000],["Bauxite",1500]]
+      "M":["Exp. 5"]
     }
   },
+
+
+
   "C1":{
     "Jp":"はじめての「演習」！",
     "En":" The First Exercise",
@@ -5893,7 +5979,7 @@ const ALL_QUESTS_LIST = {
     ["C","Development material",1]
     ],
     "requires":["Bd1"],
-    "unlocks":["Bd3", "Bd5", "Bw1", "Bw3", "A58", "A66", "A67", "B48", "B63", "C8", "C9", "F31"],
+    "unlocks":["Bd3", "Bd5", "Bw1", "Bw3", "A58", "A66", "A67", "B48", "B63", "C8", "C9", "F31", "B98"],
     "period":"daily",
     "needs":{}
   },
