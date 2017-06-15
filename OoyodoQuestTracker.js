@@ -591,7 +591,7 @@ function resetPeriodicQuest(period){
             // update the ALL_QUEST STATE list with the one just cqlculated if on inconsistencies
             $("#FC_RM_show_state_colors").prop("checked",true);
             implementQuestsStateUpdated(pendingQuests,userDecisions, advice, setPeriodicQuestCompleted);
-          });
+              });
         }
       }
     }
@@ -599,7 +599,7 @@ function resetPeriodicQuest(period){
 
     // this function will ask the user if he remember doing one time quests that can't be calculated
     function askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback){
-      // if there is unknown quests remaining
+    // if there is unknown quests remaining
       if (unknowQuestsGroup.length > 0){
 
         var questsGroup = unknowQuestsGroup.shift();
@@ -608,7 +608,7 @@ function resetPeriodicQuest(period){
           questsGroup.forEach(quest => {
             ALL_QUEST_STATE_TMP[quest] = "completed";
           });
-          askForUnknowQuestState(unknowQuestsGroup, advice, userDecisions, callback);
+          askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback);
         } else if (ALL_QUESTS_LIST[questsGroup[0]].requires.some(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "locked" && ALL_QUESTS_LIST[requiredQuest].period === 'once'})){
           questsGroup.forEach(quest => {
             ALL_QUEST_STATE_TMP[quest] = "locked";
@@ -634,9 +634,9 @@ function resetPeriodicQuest(period){
             });
             userDecisions[questsGroup[0]] =  $(this).val();
             if ($(this).hasClass("idk")){
-              advice.push(ALL_QUESTS_LIST[questsGroup[0]].requires.filter(function(quest){return ALL_QUESTS_LIST[quest].period !== 'once'}));
-              console.log("Complete quest   " +blblbl + " and recalculate your quest state");
-            }
+                advice.push(ALL_QUESTS_LIST[questsGroup[0]].requires.filter(function(quest){return ALL_QUESTS_LIST[quest].period !== 'once'}));
+// TODO change the creation of table
+                        }
             askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback);
           });
         }
@@ -658,6 +658,7 @@ function resetPeriodicQuest(period){
       $(`#IPQ`).hide("fast");
       updateAllColors();
       setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted}),365);
+
       if (advice.length >0){
         // TODO  write the quests that should be completed
       }
@@ -1550,7 +1551,7 @@ function timeVerificationLoop(lastTime){
   // get the time in Tokyo (place of the servers)
   var now =  moment().utcOffset("+09:00");
 var resetTimes = getResetTime(lastTime,"quarterly");
-Object.key(resetTimes).forEach(period => {
+Object.keys(resetTimes).forEach(period => {
   if(checkQuestReset(now,resetTimes[period])){
     resetPeriodicQuest(period);
     //TODO message at the bottom
@@ -1825,7 +1826,7 @@ $('#IPQ_btn_OK').click(function () {
   var inputedPendingQuests = questInputToArray($("#IPQ_txt_area").val());
 
   // if no periodic quests are inputed
-  if (inputedPendingQuests.filter(function(quest){return ALL_QUESTS_LIST[quest] === 'once'})){
+  if (inputedPendingQuests.every(function(quest){return ALL_QUESTS_LIST[quest].period === 'once'})){
     var popup = $(`<div class="MSG" id="MSG_ask_periodic_quests">Admiral, it seems that you<br>
     didn't input any periodic quests...<br>
     Should I consider that you have completed all of them ?<br>
