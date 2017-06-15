@@ -63,6 +63,14 @@ position:absolute;
   margin-left: 5%;
 }
 
+#QL_RM_reset{
+  width:100%;
+  position: absolute;
+  bottom:195px;
+  right:0px;
+  height:20px;
+}
+
 #QL_RM_Ooyodo, #FC_RM_Ooyodo{
   height:195px;
   width:195px;
@@ -88,6 +96,22 @@ position:absolute;
   width: 100px;
   float: left;
   height: 100%;
+}
+
+#FC_FT_quest_requirement{
+  overflow-y: auto;
+}
+
+.complete_btn{
+  width:100%;
+  position: absolute;
+  top:0px;
+  left:0px;
+}
+
+.range_indicator{
+  width:30px;
+  display: inline-block;
 }
 
 .cellDiv{
@@ -167,7 +191,26 @@ position:absolute;
   right:20px;
 }
 
+/*    TUTORIAL      */
 
+#tuto{
+  z-index:50;
+  position: absolute;
+  background-color: orange;
+}
+
+.square{
+  pointer-events:none;
+  border: solid 7px #f00;
+  z-index:100;
+  position:fixed;
+}
+
+.MSG{
+  z-index:50;
+  position: absolute;
+  background-color: orange;
+}
 
 /*     RIBBON CSS        */
 
@@ -182,8 +225,8 @@ position:absolute;
   height: 85px;
   overflow: hidden;
   position: absolute;
-  top: -3px;
-  right: -3px;
+  top: -8px;
+  right: -8px;
   transform-origin: right top;
 }
 
