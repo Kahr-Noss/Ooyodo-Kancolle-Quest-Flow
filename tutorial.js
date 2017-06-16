@@ -67,17 +67,28 @@ $(function () {
       If there is any inconsistencies in what you input, I'll tell you.<br>
       The case and spacing doesn't matter, I'll always be able to understand what you type, Admiral.<br>
       <br>
-      For this tutorial, let's input the following quests: <br>
-      //TODO
-      A22, A29, A31<br>
+      For this tutorial, let's input the following quests (you can copy/paste them): <br>
+      A29, A46, A65, A71, B12, B32, B44, Bd8, Bw7, D21, D23, F36, F42<br>
       Click on OK when you are done.`);
       drawSquareAroundElement($(".HD_option_btn[value='IPQ']"));
       $("#tuto_next").remove();
       $("#IPQ_btn_OK").bind("click.tutorial_answer", function(){
         var inputArray = $("#IPQ_txt_area").val().toUpperCase().replace(/\s/g, '').split(',').sort();
 
-        if (inputArray[0] === "A22" && inputArray[1] === "A29" && inputArray[2] === "A31"){
-          step_5_startingQuests();
+        if (inputArray[0] === "A29"
+        && inputArray[1] === "A46"
+        && inputArray[2] === "A65"
+        && inputArray[3] === "A71"
+        && inputArray[4] === "B12"
+        && inputArray[5] === "B32"
+        && inputArray[6] === "B44"
+        && inputArray[7] === "BD8"
+        && inputArray[8] === "BW7"
+        && inputArray[9] === "D21"
+        && inputArray[10] === "D23"
+        && inputArray[11] === "F36"
+        && inputArray[12] === "F42"){
+          step_4_2_UnknownQuests();
         } else {
           step_4_fail();
         }
@@ -91,11 +102,28 @@ $(function () {
       Click on OK when you are done.`);
     }
 
+    function step_4_2_UnknownQuests(){
+      $("#IPQ_btn_OK").unbind("click.tutorial_answer");
+      $(".square").remove();
+      $("#tuto_text").html(`Sometimes, just inputing your current quests isn't enough<br>
+      to know all your progression. In that case, I'll ask you to tell me if you completed<br>
+      or not some group of quests. I'll display them one by one on the flowchart and wait for your answer.<br>
+      If you answer "I don't know", I'll consider that you completed them, and at the end I'll give<br>
+      you a list of quests to complete to before reinputing your pending quests.<br>
+      For this tutorial your answers don't matter (it's not your real progression), so click whatever you want!`);
+        drawSquareAroundElement($("#MSG_ask_quest_state"));
+//TODO
+/*        $("#FC_RM_loading_btn").bind("click.tutorial_answer", function(){
+step_5_startingQuests();
+        });*/
+      }
+
     function step_5_startingQuests(){
+      //TODO
       $("#IPQ_btn_OK").unbind("click.tutorial_answer");
       $(".square").remove();
       $("#tuto_text").html(`Perfect!<br>
-        With these information, I'm able to deduce your progression in the quest tree.<br>
+        With all these information, I'm able to deduce your progression in the quest tree.<br>
         Now, let's update the flochart by removing all the quests you have already completed.<br>
         <br>
         You can type from which quest you want the flowchart to start with in the "starting quests"<br>
@@ -387,32 +415,32 @@ $(function () {
             $(".square").remove();
 
             $("#tuto_text").html(`Perfect Admiral!<br>
-          This concludes the tutorial for this tool<br>
-          I hope you will make good use of it!`);
+              This concludes the tutorial for this tool<br>
+              I hope you will make good use of it!`);
 
-          $("#tuto_content").append($(`<button id="tuto_end" style="height:30px; width:80px;">Next =></button>`));
-          $("#tuto_end").click(function(){
-              $("#tuto").remove();
+              $("#tuto_content").append($(`<button id="tuto_end" style="height:30px; width:80px;">Next =></button>`));
+              $("#tuto_end").click(function(){
+                $("#tuto").remove();
+              });
+            }
+
+
+
+
+            function drawSquareAroundElement(element){
+              var width = Math.round(element.outerWidth()  + 10) ;
+              var height = Math.round(element.outerHeight() + 10) ;
+              var top = Math.round(element.offset().top -12);
+              var left =  Math.round(element.offset().left -12);
+              var square = $(`<div class="square" style="
+              top:${top}px;
+              left:${left}px;
+              width:${width}px;
+              height:${height}px;">
+              </div>`);
+              $("body").append(square);
+            }
+
+            //  drawSquareAroundElement($("#FC_RM_highlight_downward"));
+
           });
-          }
-
-
-
-
-          function drawSquareAroundElement(element){
-            var width = Math.round(element.outerWidth()  + 10) ;
-            var height = Math.round(element.outerHeight() + 10) ;
-            var top = Math.round(element.offset().top -12);
-            var left =  Math.round(element.offset().left -12);
-            var square = $(`<div class="square" style="
-            top:${top}px;
-            left:${left}px;
-            width:${width}px;
-            height:${height}px;">
-            </div>`);
-            $("body").append(square);
-          }
-
-          //  drawSquareAroundElement($("#FC_RM_highlight_downward"));
-
-        });

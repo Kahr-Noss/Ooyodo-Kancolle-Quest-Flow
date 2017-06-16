@@ -3361,8 +3361,8 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Improvement material",2],
-      ["E","Type 2 Seaplane Fighter Kai",1],
-      ["E","PBY-5A Catalina",1]
+      ["E","Type 2 Seaplane Fighter Kai",1,"Choose one : "],
+      ["E","PBY-5A Catalina",1,"or "]
     ],
     "requires":["B8", "B87"],
     "unlocks":["F51","D21"],
@@ -3383,8 +3383,8 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Irako",1],
-      ["E","Improved Kanhon Type Turbine",1],
-      ["E","Enhanced Kanhon Type Boiler",1]
+      ["E","Improved Kanhon Type Turbine",1,"Choose one : "],
+      ["E","Enhanced Kanhon Type Boiler",1,"or "]
     ],
     "requires":["B19"],
     "unlocks":[],
@@ -3511,8 +3511,8 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Improvement material",4],
-      ["E","Kyoufuu Kai",1],
-      ["E","New Kanhon Design Anti-torpedo Bulge (Medium)",1]
+      ["E","Kyoufuu Kai",1,"Choose one : "],
+      ["E","New Kanhon Design Anti-torpedo Bulge (Medium)",1,"or "]
     ],
     "requires":["B87"],
     "unlocks":["B96","A76"],
@@ -3619,8 +3619,8 @@ const ALL_QUESTS_LIST = {
       "B":"0"
     },
     "reward":[
-      ["I","Medal",1],
-      ["I","New Model Gun Mount Improvement Material",1]
+      ["I","Medal",1,"Choose one : "],
+      ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
     "requires":["Bw5","B98"],
     "unlocks":[],
@@ -4533,7 +4533,7 @@ const ALL_QUESTS_LIST = {
     "needs":{
       "E":[["Type 96 Fighter",1]],
       "S":["Houshou"],
-      "C":[["Medal",2]]
+      "I":[["Medal",2]]
     }
   },
   "F36":{
@@ -4555,7 +4555,7 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{
       "E":[["61cm Quintuple (Oxygen) Torpedo Mount",1],["61cm Triple (Oxygen) Torpedo Mount",1]],
-      "C":[["Medal",2]]
+      "I":[["Medal",2]]
     }
   },
   "F37":{
@@ -4927,8 +4927,8 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Development material",2],
-      ["I","Medal",1],
-      ["I","New Model Gun Mount Improvement Material",1]
+      ["I","Medal",1,"Choose one : "],
+      ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
     "requires":["F53"],
     "unlocks":["D23"],
@@ -4950,8 +4950,8 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Development material",3],
-      ["I","Medal",1],
-      ["I","New Model Gun Mount Improvement Material",1]
+      ["I","Medal",1,"Choose one : "],
+      ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
     "requires":["D23"],
     "unlocks":[],
@@ -5734,7 +5734,7 @@ const ALL_QUESTS_LIST = {
     }
   },
   "Bq2":{
-    "Jp":"戦果拡張任務！　「Ｚ作戦」前段作戦",
+    "Jp":"戦果拡張任務！「Ｚ作戦」前段作戦",
     "En":"Ranking Expansion Mission: 'Operation Z' Frontal Operation!",
     "content":"Sortie to World 2-4, 6-1, 6-3 and obtain A-rank or higher victories at the Boss nodes. Sortie to World 6-4 and obtain an S-rank victory at the Boss node.",
     "ressources":{

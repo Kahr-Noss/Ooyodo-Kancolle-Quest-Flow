@@ -3,7 +3,7 @@ $(function () {
   //  *********   GLOBAL VARIABLES   ************
 
   //default color object
-  const DEFAULT_COLORS = {
+  const COLORS = {
     A:{
       pending_color:"#43C769",
       completed_color:"#8cf28c",
@@ -66,7 +66,7 @@ $(function () {
       border_width:5,
       background:true,
       background_mode:'Auto',
-      background_light:100,
+      background_light:-100,
       background_saturation:-20,
       background_color:'#ffffff'
     },
@@ -76,7 +76,7 @@ $(function () {
       border_width:5,
       background:true,
       background_mode:'Auto',
-      background_light:-100,
+      background_light:100,
       background_saturation:-75,
       background_color:'#ffffff'
     },
@@ -102,7 +102,7 @@ $(function () {
     }
   };
 
-  var COLORS     //COLORS parameters currently used
+
   var ALL_QUEST_STATE = {};                     // current quests state
   var ALL_QUEST_STATE_TMP = {};                 // temporary object used to calculate quests state, global because multiple functions use it
   var myDiagram;                                // the GOJS diagram
@@ -111,28 +111,24 @@ $(function () {
   // function used at the loading of the page
   function initialisation(){
 
-    // if there is a color cookie, load it else load the default colors
-    var colorsCookie = getCookie('colors');
-    COLORS = ( colorsCookie !== '' ) ? JSON.parse(colorsCookie) : cloneObject(DEFAULT_COLORS);
-
     //load various data in the DOM
     loadRequiredShipList();
     loadRewardList();
 
     displayAllQuestBoxes(Object.keys(ALL_QUESTS_LIST));
-    loadColorPanel();
+
     //load the pending quests saved in the cookie, or an empty one if no cookie are saved
 
     // load the user quest cookie or create an empty one
-    var questCookie = getCookie('user_quests') || {pendingQuests:[], userDecisions:{}, periodicCompleted:false};
+    var questCookie = getCookie('user_quests') || {pendingQuests:[], userDecisions:{}, periodicCompleted:false, timeStamp:moment().utcOffset("+09:00").format()};
     //TODO change it it to cookie time
-    timeVerificationLoop(moment("Jun 15 2017 04:00:01 GMT+0900"));
+    timeVerificationLoop(questCookie.timeStamp);
 
     calculateQuestState(questCookie.pendingQuests, questCookie.userDecisions, questCookie.periodicCompleted);
 
 
     loadFlowchart();
-    resizeFlowchart( $(window).height() - 280 - 4, $(window).width() - 175 -20);
+    resizeFlowchart( $(window).height() - 240 - 4, $(window).width() - 175 -20);
     displayFlowchart();
     updateAllColors();
   }
@@ -386,7 +382,7 @@ $(function () {
     function setQuestAsCompleted(quest){
       // TODO decommenter les cookies
       //  var questsCookie = JSON.parse(getCookie('user_quests'));
-
+//questsCookie.timeStamp = moment().utcOffset("+09:00").format();
       //set the quest as completed
       ALL_QUEST_STATE[quest] = 'completed';
       updateQuestStateDisplay(quest);
@@ -397,19 +393,44 @@ $(function () {
         if ( ALL_QUESTS_LIST[unlockedQuest].requires.every(function(requiredQuest){return ALL_QUEST_STATE[requiredQuest] === 'completed';})){
           ALL_QUEST_STATE[unlockedQuest] = 'pending';
           updateQuestStateDisplay(unlockedQuest);
-          updateQuestListDisplay([]);
+
           //      questsCookie.pendingQuests.push(unlockedQuest);
         }
       });
+      updateQuestListDisplay([]);
       updateAllColors();
 
       //    setCookie('user_quests',JSON.stringify(questsCookie),365);
     }
 
-// reset the periodic quests of the secified period
-function resetPeriodicQuest(period){
-  // TODO
-}
+    // reset the periodic quests of the secified period
+    function resetPeriodicQuest(period){
+        // TODO decommenter les cookies
+  //  var questsCookie = JSON.parse(getCookie('user_quests'));
+  //questsCookie.timeStamp = moment().utcOffset("+09:00").format();
+      var periodicQuestsList = Object.keys(ALL_QUESTS_LIST).filter(function(quest){return ALL_QUESTS_LIST[quest].period === period});
+      // set all periodic quests to ??? state (to remove any problem to set the pending state)
+      periodicQuestsList.forEach(quest =>{
+        ALL_QUEST_STATE[quest] = "???";
+      });
+        /*    questsCookie.pendingQuests.filter(function(quest){return ALL_QUESTS_LIST[quest].period === period}).forEach(quest =>{
+        questsCookie.pendingQuests.splice(questsCookie.pendingQuests.indexOf(quest),1);
+      });*/
+      periodicQuestsList.forEach(quest =>{
+        if( ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE[requiredQuest] === 'completed';})){
+          ALL_QUEST_STATE[quest] = "pending";
+      //    questsCookie.pendingQuests.push(quest);
+        } else {
+          ALL_QUEST_STATE[quest] = "locked";
+        }
+        updateQuestStateDisplay(quest);
+      });
+      updateQuestListDisplay([]);
+      updateAllColors();
+      console.log(period + " quests reset!");
+      console.log(ALL_QUEST_STATE);
+        //    setCookie('user_quests',JSON.stringify(questsCookie),365);
+    }
 
     // ******      FLOWCHART CREATION     *********
 
@@ -468,10 +489,12 @@ function resetPeriodicQuest(period){
     // sort all the node to display only the one which correspond to starting and ending quests
     function buildPartialFlowchart(){
       $("#FC_RM_loading_btn").prop("disabled", true);
-      let partialQuestList = [];
-      let startingQuestsList = questInputToArray($('#FC_RM_starting_quests').val());
-      let endingQuestsList =questInputToArray($('#FC_RM_ending_quests').val());
-      let direction = (endingQuestsList.length === 0) ? "up" : "down" ;
+      var partialQuestList = [];
+      var startingQuestsList = questInputToArray($('#FC_RM_starting_quests').val());
+      var endingQuestsList =questInputToArray($('#FC_RM_ending_quests').val());
+      var direction = (endingQuestsList.length === 0) ? "up" : "down" ;
+      var usePending = $("#FC_RM_use_pending_quests").is(":checked");
+      var showPeriodic =  $("#FC_RM_use_periodic_quests").is(":checked");
 
       $('#FC_RM_starting_quests').val(startingQuestsList.join(', '));
       $('#FC_RM_ending_quests').val(endingQuestsList.join(', '));
@@ -484,12 +507,31 @@ function resetPeriodicQuest(period){
       } else {
         if(direction === 'up'){
           startingQuestsList.forEach(quest => {
-            addUnlockedQuests(partialQuestList, quest);
+            addUnlockedQuests(quest).forEach(qst => {
+              if($.inArray(qst,partialQuestList) === -1){
+                partialQuestList.push(qst);
+              }
+            });
           });
         } else if (direction == 'down'){
-          endingQuestsList.forEach(quest => {
-            addRequiredQuests(partialQuestList, startingQuestsList, quest);
-          });
+          if (usePending){
+            endingQuestsList.forEach(quest => {
+              addUncompletedRequiredQuests(quest, showPeriodic).forEach(qst => {
+                if($.inArray(qst,partialQuestList) === -1){
+                  partialQuestList.push(qst);
+                }
+              });
+            });
+          } else {
+            //if not using pending quests , just go down all quests and sop on starting ones
+            endingQuestsList.forEach(quest => {
+              addRequiredQuests(startingQuestsList, quest).forEach(qst => {
+                if($.inArray(qst,partialQuestList) === -1){
+                  partialQuestList.push(qst);
+                }
+              });
+            });
+          }
         }
         displayPartialTree(partialQuestList);
         displayQuestListSelect(partialQuestList);
@@ -499,28 +541,62 @@ function resetPeriodicQuest(period){
     }
 
     // add the quest that are unlocked
-    function addUnlockedQuests(partialQuestList, quest){
-      if ($.inArray(quest,partialQuestList) === -1){
-        partialQuestList.push(quest);
-        if(ALL_QUESTS_LIST[quest].unlocks.length !== 0){
-          ALL_QUESTS_LIST[quest].unlocks.forEach(unlockedQuest => {
-            addUnlockedQuests(partialQuestList,unlockedQuest);
-          });
-        }
-      }
+    function addUnlockedQuests(quest){
+      var partialQuestList = [];
+      partialQuestList.push(quest);
+      ALL_QUESTS_LIST[quest].unlocks.forEach(unlockedQuest => {
+        addUnlockedQuests(unlockedQuest).forEach(qst => {
+          if($.inArray(qst,partialQuestList) === -1){
+            partialQuestList.push(qst);
+          }
+        });
+      });
+
+      return partialQuestList;
     }
 
     // add quest that are required to unlock this quest
-    function addRequiredQuests(partialQuestList, startingQuestsList, quest){
-      if ($.inArray(quest,partialQuestList) === -1){
-        partialQuestList.push(quest);
-        //if the quest hqve requirement qnd isn't listed as a starting quest
-        if(ALL_QUESTS_LIST[quest].requires.length !== 0 && $.inArray(quest,startingQuestsList) === -1){
-          ALL_QUESTS_LIST[quest].requires.forEach(requiredQuest => {
-            addRequiredQuests(partialQuestList, startingQuestsList, requiredQuest);
+    function addRequiredQuests(startingQuestsList, quest){
+      var partialQuestList = [];
+      partialQuestList.push(quest);
+      //if the quest have requirement qnd isn't listed as a starting quest
+      if($.inArray(quest,startingQuestsList) === -1){
+        ALL_QUESTS_LIST[quest].requires.forEach(requiredQuest => {
+          addRequiredQuests(startingQuestsList, requiredQuest).forEach(qst=>{
+            if($.inArray(qst,partialQuestList) === -1){
+              partialQuestList.push(qst);
+            }
           });
+        });
+
+      }
+      return partialQuestList;
+    }
+
+
+    // add quest that are required to unlock this quest
+    function addUncompletedRequiredQuests(quest, showPeriodic){
+      var partialQuestList = [];
+      if (ALL_QUEST_STATE[quest] !== "completed"){
+        //if the quest have requirement qnd isn't listed as a starting quest
+        ALL_QUESTS_LIST[quest].requires.forEach(requiredQuest => {
+          addUncompletedRequiredQuests(requiredQuest, showPeriodic).forEach(qst => {
+            if($.inArray(qst,partialQuestList) === -1){
+              partialQuestList.push(qst);
+            }
+          });
+        });
+        if (showPeriodic){
+          partialQuestList.push(quest);
+        } else {
+          if (ALL_QUESTS_LIST[quest].period === 'once'){
+            partialQuestList.push(quest);
+          } else if (partialQuestList.length > 0){
+            partialQuestList.push(quest);
+          }
         }
       }
+      return partialQuestList;
     }
 
     // using pending quests  list calculate the state of all quests
@@ -591,7 +667,7 @@ function resetPeriodicQuest(period){
             // update the ALL_QUEST STATE list with the one just cqlculated if on inconsistencies
             $("#FC_RM_show_state_colors").prop("checked",true);
             implementQuestsStateUpdated(pendingQuests,userDecisions, advice, setPeriodicQuestCompleted);
-              });
+          });
         }
       }
     }
@@ -599,7 +675,7 @@ function resetPeriodicQuest(period){
 
     // this function will ask the user if he remember doing one time quests that can't be calculated
     function askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback){
-    // if there is unknown quests remaining
+      // if there is unknown quests remaining
       if (unknowQuestsGroup.length > 0){
 
         var questsGroup = unknowQuestsGroup.shift();
@@ -634,9 +710,12 @@ function resetPeriodicQuest(period){
             });
             userDecisions[questsGroup[0]] =  $(this).val();
             if ($(this).hasClass("idk")){
-                advice.push(ALL_QUESTS_LIST[questsGroup[0]].requires.filter(function(quest){return ALL_QUESTS_LIST[quest].period !== 'once'}));
-// TODO change the creation of table
-                        }
+              ALL_QUESTS_LIST[questsGroup[0]].requires.filter(function(quest){return ALL_QUESTS_LIST[quest].period !== 'once'}).forEach(quest =>{
+                if (advice.indexOf(quest) === -1){
+                  advice.push(quest);
+                }
+              });
+            }
             askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback);
           });
         }
@@ -657,9 +736,10 @@ function resetPeriodicQuest(period){
       $("#IPQ_error_msg").text("");
       $(`#IPQ`).hide("fast");
       updateAllColors();
-      setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted}),365);
+      setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, timeStamp:moment().utcOffset("+09:00").format()}),365);
 
       if (advice.length >0){
+        console.log(advice);
         // TODO  write the quests that should be completed
       }
 
@@ -895,9 +975,7 @@ function resetPeriodicQuest(period){
           }
         });
         GroupListOutput.push(groupOutput);
-
       }
-
       return GroupListOutput;
     }
 
@@ -920,7 +998,7 @@ function resetPeriodicQuest(period){
 
     // calculate the requierments for the selected quest (by analyzing the required quest list)
     function calculateQuestRequirements(questList){
-      var requirements = {S:[],E:[],M:[],C:[],O:[],Q:[],R:[]};
+      var requirements = {S:[],E:[],M:[],C:[],I:[],Q:[],R:[]};
       var rewardsList = {};
 
       // if the "hide quest rewards" is checked, the items got as reward and required in following quests won't be displayed
@@ -1302,146 +1380,6 @@ function updateQuestListDisplay(questList){
   displayedPeriod.length === 0 ? "None" : formatTextLineBreak(displayedPeriod.toString().replace(/,/g,", "),25) );
 }
 
-//load the color setting panel with the cookies / default data
-function loadColorPanel(){
-  //Create the HTML code of color panel
-  var questLetters = ['A','B','C','D','E','F','G','S','W'];
-
-  var tbodyColorHTML = '';
-  questLetters.forEach(letter =>{
-    tbodyColorHTML += `<tr>
-    <td> ${letter} :</td>
-    <td> <input type='text' class="colorpicker" id="CP_${letter}_pending_color"/></td>
-    <td> <input type='text' class="colorpicker" id="CP_${letter}_completed_color"/></td>
-    <td> <input type='text' class="colorpicker" id="CP_${letter}_locked_color"/></td>
-    </tr>`;
-  });
-  $('#CP_tbodyColor').html(tbodyColorHTML);
-
-  //fill the HTML with COLORS Values
-  $(".colorpicker").each(function(){
-    var id = $(this).attr("id").split('_');
-    $(this).spectrum({
-      showInitial: true,
-      clickoutFiresChange: false,
-      color: getQuestColor(id[1],id[2],true,false),//COLORS[id[1]][`${id[2]}_${id[3]}`],
-      disabled: COLORS[id[2]].background,
-      change: function(color){
-        COLORS[id[1]][`${id[2]}_${id[3]}`] = color.toHexString();
-        updateExampleBox(id[1],id[2]);
-      }
-
-    });
-  });
-
-  $(".state_colorpicker").each(function(){
-    var id = $(this).attr("id").split('_');
-
-    $(this).spectrum({
-      showInitial: true,
-      clickoutFiresChange: false,
-      change: function(color){
-        var state = $("#CP_state_settings :radio[name=CP_select_setting_state]:checked").val();
-        COLORS[state][`${id[2]}_${id[3]}`] = color.toHexString();
-        updateExampleBox('',state);
-      }
-    });
-
-    if($(this).attr("id") === 'CP_settings_background_color'){
-      $(this).on('change.spectrum', function(e, color) {
-        var state = $("#CP_state_settings :radio[name=CP_select_setting_state]:checked").val();
-        displayColorInPickerBoxes(state);
-      });
-    }
-
-  });
-
-  // when changing state selection, reload the new state settings
-  $("#CP_state_settings :radio[name=CP_select_setting_state]").change(function(){
-    var state = $(this).val();
-
-    //check the right mode for background
-    $(`#CP_state_settings :radio[name=CP_settings_background][value="${COLORS[state].background_mode}"]`).prop('checked',true);
-
-
-    //check the boxes
-    $(".CP_toogle_setting_element").each(function(){
-      var setting = $(this).attr("id").split("_")[2];
-      var checked = COLORS[state][setting];
-      $(this).prop("checked", checked);
-      $(this).trigger("change");
-    });
-
-    //load the settings range
-    $(".settings_range").each(function(){
-      var id = $(this).attr("id").split('_');
-      var value = COLORS[state][`${id[2]}_${id[3]}`];
-      $(this).val(value);
-      $(`#${$(this).attr("id")}_value`).text(value);
-    });
-
-    //load the color pickers
-    $(".state_colorpicker").each(function(){
-      var id=$(this).attr("id").split('_');
-      $(this).spectrum("set",  COLORS[state][`${id[2]}_${id[3]}`]);
-    });
-
-    // load the example box
-    updateExampleBox("", state);
-  });
-}
-
-
-// load all the colors for one state column in the color panel
-function displayColorInPickerBoxes(state){
-  var availability = $("#CP_settings_background").is(":checked")  ? 'disable' : 'enable' ;
-  $(`input[id$=${state}_color]`).each(function(){
-    var quest = $(this).prop("id").split('_')[1];
-    $(this).spectrum(availability).spectrum("set",  getQuestColor(quest,state,true,false));
-  });
-}
-
-// show the color changes on the example box
-function updateExampleBox(_quest, _state){
-  var value = $("#CP_example").attr("value").split("_");
-  var quest = _quest || value[0];
-  var state = '';
-  var selected = false;
-  var notHighlighted = false;
-  switch (_state){
-    case 'selected':{
-      state = value[1];
-      selected = true;
-      notHighlighted = false;
-      break;
-    }
-    case 'notHighlighted':{
-      state = value[1];
-      selected = false;
-      notHighlighted = true;
-      break;
-    }
-    default:{
-      state = _state || value[1];
-      selected = false;
-      notHighlighted = false;
-    }
-  }
-
-  $("#CP_example").attr("value",`${quest}_${state}`)
-  .css('background-color',getQuestColor(quest,state,!notHighlighted, selected))
-  .css('border-width',COLORS[_state || state].border_width)
-  .css('border-color',COLORS[_state || state].border_color)
-  .children().text(`${quest}${Math.floor((Math.random() * 99) + 1)}`);
-  /*
-  var period = ALL_QUESTS_LIST[quest].period;
-  if (period !== "once"){
-  addRibbonToDiv($("#CP_example"), getRibbonColor(period),  period);
-} else {
-removeRibbonFromDiv($("#CP_example"));
-}*/
-}
-
 
 function resizeFlowchart(height,width){
   var div = myDiagram.div;
@@ -1470,11 +1408,14 @@ function removeRibbonFromDiv(divJQ){
 function parseRewardObject(reward){
   var output = '';
   reward.forEach(loot => {
-    if(loot[0] === 'A'){
-      output += `<br>${loot[1]}`;
+    // if it's an unique object
+    if(loot[0] === 'A' || loot[0] === 'S' || loot[0] === 'F'){
+      output += `<br>${loot[3] ? loot[3] : ""}${loot[1]}`;
     } else {
-      output += `<br>${loot[1]} x ${loot[2]}`;
+      //show the quantity
+      output += `<br>${loot[3] ? loot[3] : ""}${loot[1]} x ${loot[2]}`;
     }
+
   });
   //delete the first <br>
   if(output.length >=4){
@@ -1550,42 +1491,44 @@ function formatTextLineBreak(text, length){
 function timeVerificationLoop(lastTime){
   // get the time in Tokyo (place of the servers)
   var now =  moment().utcOffset("+09:00");
-var resetTimes = getResetTime(lastTime,"quarterly");
-Object.keys(resetTimes).forEach(period => {
-  if(checkQuestReset(now,resetTimes[period])){
-    resetPeriodicQuest(period);
+  var resetTimes = getResetTime(lastTime);
+  Object.keys(resetTimes).forEach(period => {
+    if(checkQuestReset(now,resetTimes[period])){
+      resetPeriodicQuest(period);
+    }
+  });
+  if(Object.keys(resetTimes).length >0){
     //TODO message at the bottom
   }
-});
-  setTimeout(function(){timeVerificationLoop(now);},60000);
+  setTimeout(function(){timeVerificationLoop(now,60000)});
 }
 
 function getResetTime(lastTime){
   var resetTimes = {};
   //daily
-      // reset every day at 5 AM
-      resetTimes.daily = moment(moment(lastTime).hours() < 5 ? moment(lastTime) : moment(lastTime).add(1,"days")).hour(5).minute(0).second(0);
+  // reset every day at 5 AM
+  resetTimes.daily = moment(moment(lastTime).hours() < 5 ? moment(lastTime) : moment(lastTime).add(1,"days")).hour(5).minute(0).second(0);
 
   //weekly
-      // reset every monday at 5 AM
-      resetTimes.weekly = moment(moment(lastTime).hours() < 5 && moment(lastTime).isoWeekday() === 1 ? moment(lastTime) : moment(lastTime).add(1,"weeks")).isoWeekday(1).hour(5).minute(0).second(0);
-        //monthly
-      // reset every month at 5 AM
-      resetTimes.monthly = moment(moment(lastTime).hours() < 5 && moment(lastTime).date() === 1 ? moment(lastTime) : moment(lastTime).add(1,"month")).date(1).hour(5).minute(0).second(0);
-    //quarterly
-    // reset first of march, june, september and December
-      // months are 0 indexed
-      var thisYear_March = moment(lastTime).month(2).date(1).hour(5).minute(0).second(0);
-      var thisYear_June = moment(lastTime).month(5).date(1).hour(5).minute(0).second(0);
-      var thisYear_September = moment(lastTime).month(8).date(1).hour(5).minute(0).second(0);
-      var thisYear_December = moment(lastTime).month(11).date(1).hour(5).minute(0).second(0);
-      var nextYear_March = moment(lastTime).add(1,"years").month(2).date(1).hour(5).minute(0).second(0);
-      if (moment(lastTime).diff(thisYear_March)<0){resetTimes.quarterly = thisYear_March;}
-      else  if (moment(lastTime).diff(thisYear_June)<0){resetTimes.quarterly = thisYear_June;}
-      else  if (moment(lastTime).diff(thisYear_September)<0){resetTimes.quarterly = thisYear_September;}
-      else  if (moment(lastTime).diff(thisYear_December)<0){resetTimes.quarterly = thisYear_December;}
-      else  {resetTimes.quarterly = nextYear_March;}
-return resetTimes;
+  // reset every monday at 5 AM
+  resetTimes.weekly = moment(moment(lastTime).hours() < 5 && moment(lastTime).isoWeekday() === 1 ? moment(lastTime) : moment(lastTime).add(1,"weeks")).isoWeekday(1).hour(5).minute(0).second(0);
+  //monthly
+  // reset every month at 5 AM
+  resetTimes.monthly = moment(moment(lastTime).hours() < 5 && moment(lastTime).date() === 1 ? moment(lastTime) : moment(lastTime).add(1,"month")).date(1).hour(5).minute(0).second(0);
+  //quarterly
+  // reset first of march, june, september and December
+  // months are 0 indexed
+  var thisYear_March = moment(lastTime).month(2).date(1).hour(5).minute(0).second(0);
+  var thisYear_June = moment(lastTime).month(5).date(1).hour(5).minute(0).second(0);
+  var thisYear_September = moment(lastTime).month(8).date(1).hour(5).minute(0).second(0);
+  var thisYear_December = moment(lastTime).month(11).date(1).hour(5).minute(0).second(0);
+  var nextYear_March = moment(lastTime).add(1,"years").month(2).date(1).hour(5).minute(0).second(0);
+  if (moment(lastTime).diff(thisYear_March)<0){resetTimes.quarterly = thisYear_March;}
+  else  if (moment(lastTime).diff(thisYear_June)<0){resetTimes.quarterly = thisYear_June;}
+  else  if (moment(lastTime).diff(thisYear_September)<0){resetTimes.quarterly = thisYear_September;}
+  else  if (moment(lastTime).diff(thisYear_December)<0){resetTimes.quarterly = thisYear_December;}
+  else  {resetTimes.quarterly = nextYear_March;}
+  return resetTimes;
 
 }
 
@@ -1677,10 +1620,7 @@ $(".HD_option_btn").click(function () {
     $(".POP").hide("fast");
   } else {
     $(".POP").hide();
-    if(popup === "CP"){
-      $("#CP_state_settings :radio[name=CP_select_setting_state][value='pending']").prop('checked', true).trigger("change");
-      $("#CP").show("fast");
-    } else if(popup === "IPQ"){
+    if(popup === "IPQ"){
       $('#IPQ').show("fast");
       $('#IPQ_txt_area').focus();
     }
@@ -1721,10 +1661,17 @@ $('#FC_RM_starting_quests, #FC_RM_ending_quests').on('input',function () {
 });
 
 // write the pending quests in the starting quests textbox
-$("#FC_RM_use_pending_quests").change(function(){
+$("#FC_RM_use_pending_quests, #FC_RM_use_periodic_quests").change(function(){
   $('#FC_RM_select_preset_quests')[0].selectedIndex = 0;
+  $("#FC_RM_use_periodic_quests").prop("disabled",!$("#FC_RM_use_pending_quests").is(":checked"));
   if ($("#FC_RM_use_pending_quests").is(':checked')){
-    $("#FC_RM_starting_quests").val(getQuestsInState(ALL_QUEST_STATE,'pending').toString()).prop("disabled",true);
+    $("#FC_RM_starting_quests").val(getQuestsInState(ALL_QUEST_STATE,'pending').filter(function(quest){
+      if($("#FC_RM_use_periodic_quests").is(':checked')){
+        return true;
+      } else {
+        return ALL_QUESTS_LIST[quest].period === "once";
+      }
+    }).toString()).prop("disabled",true);
   } else {
     $("#FC_RM_starting_quests").prop("disabled",false).focus();
   }
@@ -1757,6 +1704,11 @@ $('#FC_RM_select_preset_quests').change(function () {
 // update all the colors if the shaow state color checkbox change
 $("#FC_RM_show_state_colors").change(function(){
   updateAllColors();
+});
+
+// update the flowchart displayed on change
+$("#FC_RM_show_state_colors").change(function(){
+  buildPartialFlowchart();
 });
 
 // **********   QUEST LIST PANEL MENU LISTENNERS    ***************
@@ -1829,7 +1781,7 @@ $('#IPQ_btn_OK').click(function () {
   if (inputedPendingQuests.every(function(quest){return ALL_QUESTS_LIST[quest].period === 'once'})){
     var popup = $(`<div class="MSG" id="MSG_ask_periodic_quests">Admiral, it seems that you<br>
     didn't input any periodic quests...<br>
-    Should I consider that you have completed all of them ?<br>
+    Do you have completed all of them right now?<br>
     Care, it may change my calculation's result of your progression!!<br>
     <button type="button" class="MSG_btn" value="true">Yes !</button>
     <button type="button" class="MSG_btn" value="false">No</button>
@@ -1892,104 +1844,10 @@ $(`#FC_FT_quest_info_complete_btn`).click(function(){
   $(this).hide();
 });
 
-
-// *****  color panel event listenner  *****
-
-// cancel the modifications and close the panel
-$("#CP_color_cancel").click(function(){
-  // TODO activer quand yaura les cookies
-  //  COLORS = JSON.parse(getCookie("colors"));
-  $("#CP").hide("fast");
+// change the diagram size when the window size is changed
+$( window ).resize(function() {
+  resizeFlowchart( $(window).height() - 240 - 4, $(window).width() - 175 -20);
 });
-
-// save the colors modifications and close the panel
-$("#CP_color_ok").click(function(){
-  setCookie('colors', JSON.stringify(COLORS), 365);
-  updateAllColors();
-  $("#CP").hide("fast");
-});
-
-// reset all changes to default and keep  the panel open
-$("#CP_color_reset").click(function(){
-  COLORS = cloneObject(DEFAULT_COLORS);
-  loadColorPanel();
-});
-
-// on click on the auto / manuel button for background
-$("#CP_state_settings :radio[name=CP_settings_background]").change(function(){
-  var mode = $("#CP_state_settings :radio[name=CP_settings_background]:checked").val();
-  var state = $("#CP_state_settings :radio[name=CP_select_setting_state]:checked").val();
-  //COLORS[state].background_mode = mode;
-  if( COLORS[state].background){
-    if ( (($(this).is(":checked") && mode === 'Auto') || (!$(this).is(":checked") && mode === 'Manual'))){
-      $("#CP_settings_background_light, #CP_settings_background_saturation").attr("disabled", false);
-      $("#CP_settings_background_color").spectrum("disable");
-    } else {
-      $("#CP_settings_background_light, #CP_settings_background_saturation").attr("disabled", true);
-      $("#CP_settings_background_color").spectrum("enable");
-    }
-  }
-  displayColorInPickerBoxes(state);
-  updateExampleBox("", state);
-});
-
-// on click on the checkboxes border / ribbon / background
-$(".CP_toogle_setting_element").change(function(){
-  var element = $(this).attr("id").split("_")[2];
-  var state = $("#CP_state_settings :radio[name=CP_select_setting_state]:checked").val();
-  var isChecked = $(this).is(":checked");
-
-  // disable input if checkbox is unchecked
-  if ($(this).is(":checked")){
-    $(this).closest("td").next().find("input").attr("disabled", false);
-    $(this).closest("td").next().find(".state_colorpicker").spectrum("enable");
-  } else {
-    $(this).closest("td").next().find("input").attr("disabled", true);
-    $(this).closest("td").next().find(".state_colorpicker").spectrum("disable");
-  }
-
-  COLORS[state][element] = isChecked;
-
-  if(element === 'background'){
-    //if no option have been checked for background mode, select Auto on acitvation, else, select the recorded one
-    $("#CP_state_settings :radio[name=CP_settings_background]:checked").trigger("change");
-  }
-  updateExampleBox("", state);
-
-});
-
-// save to COLORS when the cursor value is changed
-$(".settings_range").change(function(){
-  var state = $("#CP_state_settings :radio[name=CP_select_setting_state]:checked").val();
-  var id = $(this).attr("id").split('_');
-  COLORS[state][`${id[2]}_${id[3]}`] = parseFloat($(this).val());
-  displayColorInPickerBoxes(state);
-  updateExampleBox("", state);
-});
-
-// display the cursor value as it moves
-$(".settings_range").on('input',function(){
-  var id = $(this).attr("id");
-  $(`#${id}_value`).text($(this).val());
-  switch(id){
-    case "CP_settings_border_width":{
-      $("#CP_example").css("border-width", $(this).val());
-      break;
-    }
-
-    case "CP_settings_background_light":
-    case "CP_settings_background_saturation":{
-      $("#CP_example").css("background-color",
-      lightSaturationModifications(
-        COLORS[$("#CP_example").attr("value").split("_")[0]].pending_color,
-        $("#CP_settings_background_light").val(),
-        $("#CP_settings_background_saturation").val()
-      ));
-      break;
-    }
-  }
-});
-
 
 
 });

@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>Ooyodo Quest Tracker</title>
-  <link rel="stylesheet" href="spectrum.css"/>
   <link rel="stylesheet" type="text/css" href="OoyodoQuestTracker.css"/>
 </head>
 
@@ -11,10 +10,9 @@
 
   <!--  Title bar  -->
   <div id="HD">
-    <img src="files/webpage/header_banner.jpg" style="width:500px; height:100px;">
+    <img src="files/webpage/header_banner.jpg" style="width:500px; height:60px;">
     <div id="HD_option_btn">
-    <button class="HD_option_btn" value="CP" style="background-image:url(files/webpage/option_icon.jpg); top:0px; right:0px;"></button>
-    <button class="HD_option_btn" value="IPQ" style="background-image:url(files/webpage/IPQ_icon.jpg); top:50px; right:0px;"></button>
+    <button class="HD_option_btn" value="IPQ" style="background-image:url(files/webpage/IPQ_icon.jpg); top:0px; right:0px;"></button>
 </div>
     <button class="HD_main_tab_btn" value="QL" style="background-image:url(files/webpage/quest_list_icon.jpg);">
       Quests List
@@ -29,19 +27,20 @@
   <div class="main_tab" id="FC">
 
     <!--  Flowchart  -->
-    <div id="myDiagramDiv" style="border: solid 1px black; top: 100px;"></div>
+    <div id="myDiagramDiv" style="border: solid 1px black; top: 60px;"></div>
 
     <!--  Right Menu  -->
     <div class="RM" id="FC_RM">
       Starting quests:
       <br>
-      <input type="text" id="FC_RM_starting_quests">
+      <input type="text" id="FC_RM_starting_quests" onfocus="this.select();">
       <br><br>
       <input type="checkbox" id="FC_RM_use_pending_quests"> &nbsp;Use pending quests as starter.
-      <br><hr>
+      <br>  &nbsp; <input type="checkbox" id="FC_RM_use_periodic_quests" checked disabled> &nbsp;Include periodic quests
+  <br><hr>
       Ending quests:
       <br>
-      <input type="text" id="FC_RM_ending_quests">
+      <input type="text" id="FC_RM_ending_quests" onfocus="this.select();">
       <br><br>
       <select id="FC_RM_select_preset_quests">
         <option selected disabled hidden value="">Select a quests chain</option>
@@ -63,6 +62,7 @@
       <br>
       <input type="checkbox" id="FC_RM_highlight_upward" checked> &nbsp;Highlight upward
       <br>
+
       <input type="checkbox" id="FC_RM_show_state_colors" checked> &nbsp;Use quest state colors
 <br>
       <input type="checkbox" id="FC_FT_quest_requirement_hide_quest_rewards" checked> &nbsp;Hide loots from previous quests
@@ -178,93 +178,13 @@
       <span>State displayed:<br><b><span id="QL_RM_displayed_state">All</span></b></span>
       <br><br>
       <span>Period diplayed:<br><b><span id="QL_RM_displayed_period">All</span></b></span>
-      <button type="button" id='QL_RM_reset'>Reset</button>
+      <button type="button" id='QL_RM_reset'>Clear search parameters</button>
 
       <div id="QL_RM_Ooyodo"></div>
     </div>
   </div>
 
-  <!--  COLORS OPTION PANEL  -->
 
-  <div class="POP" id="CP" hidden>
-    Night Mode<br><br>
-    <label class="switch" style="position: relative; display: inline-block; width: 100px; height: 34px;">
-      <input type="checkbox">
-      <div class="slider round" style="position: absolute;  cursor: pointer;  top: 0;  left: 0;  right: 0;  bottom: 0;  background-color: #ccc;  -webkit-transition: .4s;  transition: .4s;">
-      </div>
-    </label>
-    <br>
-
-    <button id="CP_color_cancel" style="height:30px; width:80px;">Cancel</button>
-    <button id="CP_color_ok" style="height:30px; width:80px;">OK</button>
-    <br>      <button id="CP_color_reset" style="height:30px; width:160px;">Reset to default</button>
-
-    <br><br>
-    <table id="CP_color_table">
-      <thead>
-        <tr>
-          <th>Quest<br>category</th>
-          <th>Pending<br>(default)</th>
-          <th>Completed</th>
-          <th>Locked</th>
-        </tr>
-      </thead>
-      <tbody id='CP_tbodyColor'></tbody>
-    </table>
-
-
-    <div id="CP_example" value="A_pending"><div class="centeredContent">A1</div></div>
-
-    <table id="CP_state_settings">
-      <tr>
-        <th><input type="radio" name="CP_select_setting_state" value="pending" checked> &nbsp;pending :</th>
-        <td><input type="checkbox" class="CP_toogle_setting_element" id="CP_settings_border"> &nbsp;Border :</td>
-        <td>
-          color :&nbsp;<input type='text' class="state_colorpicker" id="CP_settings_border_color"/> &nbsp;
-          size :&nbsp;<div class="range_indicator" id='CP_settings_border_width_value'></div><input class="settings_range" id="CP_settings_border_width" type="range"  min="0" max="50"/>
-        </td>
-      </tr>
-      <tr>
-        <th><input type="radio" name="CP_select_setting_state" value="completed"> &nbsp;completed :</th>
-        <td><input type="checkbox" class="CP_toogle_setting_element" id="CP_settings_ribbon"> &nbsp;Ribbon :</td>
-        <td>
-          color :&nbsp;<input type='text' class="state_colorpicker" id="CP_settings_ribbon_color"/> &nbsp;
-          size :&nbsp;<div class="range_indicator" id='CP_settings_ribbon_size_value'></div><input class="settings_range" id="CP_settings_ribbon_size" type="range"  min="0" max="2" step="0.05"/>
-        </td>
-      </tr>
-      <tr>
-        <th><input type="radio" name="CP_select_setting_state" value="locked"> &nbsp;locked :</th>
-        <td rowspan="3"><input type="checkbox" class="CP_toogle_setting_element" id="CP_settings_background"> &nbsp;Background :</td>
-        <td rowspan="3">
-          <table>
-            <tr>
-              <td>
-                <input type="radio" name="CP_settings_background" value="Auto" checked> &nbsp;Auto :
-              </td>
-              <td id="CP_settings_background_Auto_cell">
-                light :&nbsp;<div class="range_indicator" id='CP_settings_background_light_value'></div><input class="settings_range" id="CP_settings_background_light" type="range"  min="-100" max="100"  value="0"/><br>
-                saturation :&nbsp;<div class="range_indicator" id='CP_settings_background_saturation_value'></div><input class="settings_range" id="CP_settings_background_saturation" type="range"  min="-100" max="100"  value="0"/><br>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="radio" name="CP_settings_background" value="Manual"> &nbsp;Manual :
-              </td>
-              <td id="CP_settings_background_Manual_cell">
-                <input type='text' class="state_colorpicker" id="CP_settings_background_color"/>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-      <tr>
-        <th><input type="radio" name="CP_select_setting_state" value="selected"> &nbsp;selected :</th>
-      </tr>
-      <tr>
-        <th><input type="radio" name="CP_select_setting_state" value="notHighlighted"> &nbsp;notHighlighted :</th>
-      </tr>
-    </table>
-  </div>
 
 <div class="POP" id="IPQ" hidden>
     <center><textarea id="IPQ_txt_area" rows="8" cols="22"></textarea>
@@ -283,7 +203,6 @@
   <script src="jquery-3.2.1.min.js"></script>
   <script src="GoJs.js"></script>
   <script type='text/javascript' src='tinycolor.js'></script>
-  <script src='spectrum.js'></script>
   <script src='moment.js'></script>
   <script src="QuestData.js"></script>
   <script src="OoyodoQuestTracker.js"></script>
