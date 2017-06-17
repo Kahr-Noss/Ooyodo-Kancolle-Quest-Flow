@@ -3361,7 +3361,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Improvement material",2],
-      ["E","Type 2 Seaplane Fighter Kai",1,"Choose one : "],
+      ["E","Type 2 Seaplane Fighter Kai",1,"Choose one : <br>"],
       ["E","PBY-5A Catalina",1,"or "]
     ],
     "requires":["B8", "B87"],
@@ -3383,7 +3383,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Irako",1],
-      ["E","Improved Kanhon Type Turbine",1,"Choose one : "],
+      ["E","Improved Kanhon Type Turbine",1,"Choose one : <br>"],
       ["E","Enhanced Kanhon Type Boiler",1,"or "]
     ],
     "requires":["B19"],
@@ -3511,7 +3511,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Improvement material",4],
-      ["E","Kyoufuu Kai",1,"Choose one : "],
+      ["E","Kyoufuu Kai",1,"Choose one : <br>"],
       ["E","New Kanhon Design Anti-torpedo Bulge (Medium)",1,"or "]
     ],
     "requires":["B87"],
@@ -3619,7 +3619,7 @@ const ALL_QUESTS_LIST = {
       "B":"0"
     },
     "reward":[
-      ["I","Medal",1,"Choose one : "],
+      ["I","Medal",1,"Choose one : <br>"],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
     "requires":["Bw5","B98"],
@@ -4678,7 +4678,7 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{
       "E":[["25mm Triple Autocannon Mount",2],["25mm Twin Autocannon Mount",2],["25mm Single Autocannon Mount",1]],
-      "M":[["Furniture Coins",5000]]
+      "R":[["Furniture Coins",5000]]
     }
   },
   "F43":{
@@ -4721,7 +4721,7 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{
       "E":[["14cm Single Gun Mount",2],["12.7cm Twin High-angle Gun Mount",2],["15.2cm Single Gun Mount",2]],
-      "M":[["Furniture Coins",5000]]
+      "R":[["Furniture Coins",5000]]
     }
   },
   "F45":{
@@ -4764,7 +4764,7 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{
       "E":[["Shiden Kai 2",3]],
-      "M":[["New Technology Aircraft Blueprint",2],["Ne Type Engine",1]]
+      "I":[["New Technology Aircraft Blueprint",2],["Ne Type Engine",1]]
     }
   },
   "F47":{
@@ -4806,7 +4806,7 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{
       "E":[["7.7mm AA Gun",2],["12.7cm Main Gun",2],["Type 96 Fighter",2]],
-      "M":[["Furniture Coins",5000]]
+      "R":[["Furniture Coins",5000]]
     }
   },
   "F49":{
@@ -4927,7 +4927,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Development material",2],
-      ["I","Medal",1,"Choose one : "],
+      ["I","Medal",1,"Choose one : <br>"],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
     "requires":["F53"],
@@ -4950,7 +4950,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Development material",3],
-      ["I","Medal",1,"Choose one : "],
+      ["I","Medal",1,"Choose one : <br>"],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
     "requires":["D23"],

@@ -9,17 +9,14 @@
 <body>
 
   <!--  Title bar  -->
-  <div id="HD">
-    <img src="files/webpage/header_banner.jpg" style="width:500px; height:60px;">
+  <div id="HD" style="background-image:url(files/webpage/header_background.jpg);">
+    <img src="files/webpage/logo_kancolle.png" style="width:63px; height:60px;">
+    <img src="files/webpage/header_title.png">
     <div id="HD_option_btn">
-    <button class="HD_option_btn" value="IPQ" style="background-image:url(files/webpage/IPQ_icon.jpg); top:0px; right:0px;"></button>
+    <button class="HD_option_btn" value="IPQ" style="background-image:url(files/webpage/IPQ_icon.png); top:0px; right:0px;"></button>
 </div>
-    <button class="HD_main_tab_btn" value="QL" style="background-image:url(files/webpage/quest_list_icon.jpg);">
-      Quests List
-    </button>
-    <button class="HD_main_tab_btn" value="FC" style="background-image:url(files/webpage/flowchart_icon.jpg);">
-      Flowchart
-    </button>
+    <button class="HD_main_tab_btn" value="QL" style="background-image:url(files/webpage/quest_list_icon.png);"></button>
+    <button class="HD_main_tab_btn" value="FC" style="background-image:url(files/webpage/flowchart_icon.png);"></button>
 
   </div>
 
@@ -36,7 +33,7 @@
       <input type="text" id="FC_RM_starting_quests" onfocus="this.select();">
       <br><br>
       <input type="checkbox" id="FC_RM_use_pending_quests"> &nbsp;Use pending quests as starter.
-      <br>  &nbsp; <input type="checkbox" id="FC_RM_use_periodic_quests" checked disabled> &nbsp;Include periodic quests
+      <br><input type="checkbox" id="FC_RM_use_periodic_quests" checked> &nbsp;Include periodic quests
   <br><hr>
       Ending quests:
       <br>
@@ -79,7 +76,7 @@
         <input type="text" id="FC_FT_search_Quest" style="width:96%;"><br>
         <select id="FC_FT_select_quest_list" size='8' style="width:100%;"></select>
       </div>
-      <div class="cellDiv" style="width:calc((100% - 320px) * 0.1); height:100%;  top:0px; left:100px;">
+      <div class="cellDiv" style="width:calc((100% - 320px) * 0.1); height:75%;  top:0px; left:100px;">
         <div class="centeredContent" id="FC_FT_quest_info_quest_code"></div>
         <button type="button" class="complete_btn" id='FC_FT_quest_info_complete_btn' hidden>Set as completed</button>
 
@@ -93,16 +90,16 @@
       <div class="cellDiv" style="width:calc((100% - 320px) * 0.6); height:50%;  top:25%; left:calc((100% - 320px) * 0.1 + 100px);">
         <div class="centeredContent" id="FC_FT_quest_info_content"></div>
       </div>
-      <div class="cellDiv" style="width:calc((100% - 320px) * 0.2); height:25%;  top:75%; left:calc((100% - 320px) * 0.1 + 100px);">
+      <div class="cellDiv" style="width:calc((100% - 320px) * 0.2); height:25%;  top:75%; left:100px;">
         <div class="centeredContent" id="FC_FT_quest_info_ressources"></div>
       </div>
-      <div class="cellDiv" style="width:calc((100% - 320px) * 0.4); height:25%;  top:75%; left:calc((100% - 320px) * 0.3 + 100px);">
+      <div class="cellDiv" style="width:calc((100% - 320px) * 0.3); height:75%;  top:0px; left:calc((100% - 320px) * 0.7 + 100px);">
         <div class="centeredContent" id="FC_FT_quest_info_reward"></div>
       </div>
-      <div class="cellDiv" style="width:calc((100% - 320px) * 0.3); height:50%;  top:0%; left:calc((100% - 320px) * 0.7 + 100px);">
+      <div class="cellDiv" style="width:calc((100% - 320px) * 0.4); height:25%;  top:75%; left:calc((100% - 320px) * 0.2 + 100px);">
         <div class="centeredContent" id="FC_FT_quest_info_requires"></div>
       </div>
-      <div class="cellDiv" style="width:calc((100% - 320px) * 0.3); height:50%;  top:50%; left:calc((100% - 320px) * 0.7 + 100px);">
+      <div class="cellDiv" style="width:calc((100% - 320px) * 0.4); height:25%;  top:75%; left:calc((100% - 320px) * 0.6 + 100px);">
         <div class="centeredContent" id="FC_FT_quest_info_unlocks"></div>
       </div>
 
@@ -128,6 +125,8 @@
         <option value="quest_code">By quest code</option>
         <option value="ship_required">By ship required</option>
         <option value="reward">By reward</option>
+        <option value="map_required">By map / expedition</option>
+          <option disabled>=== Filters ===</option>
         <option value="state">By quest state</option>
         <option value="period">By quest period</option>
       </select>
@@ -153,6 +152,11 @@
         <input type="radio" name="QL_RM_search_reward" value="A"> Account<br>
         <br><select id="QL_RM_search_select_reward" style="width:100%;"></select><br>
         <br>Select a reward category, then chose the reward in the list above.
+      </div>
+
+      <div class="QL_RM_select_search_method" id="QL_RM_search_map_required" hidden>
+        <select id="QL_RM_select_required_map"></select><br>
+        <br>Select required map in the list above.
       </div>
 
       <div class="QL_RM_select_search_method" id="QL_RM_search_state" hidden>

@@ -114,6 +114,7 @@ $(function () {
     //load various data in the DOM
     loadRequiredShipList();
     loadRewardList();
+    loadRequiredMapList();
 
     displayAllQuestBoxes(Object.keys(ALL_QUESTS_LIST));
 
@@ -1201,11 +1202,11 @@ function displayQuestRequirements(questList){
 
 function getRibbonColor(period){
   switch (period) {
-    case "once": return "#ffffff";
-    case "daily": return "#ff0000";
-    case "weekly": return "#00ff00";
-    case "monthly": return "#0000ff";
-    case "quarterly": return "#ffff00";
+    case "once": return "#e6e600";
+    case "daily": return "#e60000";
+    case "weekly": return "#0052cc";
+    case "monthly": return "#009900";
+    case "quarterly": return "#ff471a";
   }
 }
 
@@ -1333,6 +1334,26 @@ function loadRequiredShipList(){
 }
 
 // put the list of required ships in the dropdown list
+function loadRequiredMapList(){
+  var requiredMapList = {};
+  Object.keys(ALL_QUESTS_LIST).forEach(quest => {
+    if (has.call(ALL_QUESTS_LIST[quest].needs, 'M')){
+      ALL_QUESTS_LIST[quest].needs.M.forEach(map => {
+        var questArray = (requiredMapList[map] || []);
+        questArray.push(quest);
+        requiredMapList[map] = questArray;
+      });
+    }
+  });
+  var requiredMapListHTML = "<option value='[]'>Select a map</option>";
+  Object.keys(requiredMapList).sort().forEach(map => {
+    requiredMapListHTML += `<option value='${JSON.stringify(requiredMapList[map])}'>${map}</option>`;
+  });
+  $("#QL_RM_select_required_map").html(requiredMapListHTML);
+}
+
+
+// put the list of required ships in the dropdown list
 function loadRewardList(){
   var rewardList = {};
   var rewardType = $(`input[name=QL_RM_search_reward]:checked`).val();
@@ -1419,7 +1440,9 @@ function parseRewardObject(reward){
   });
   //delete the first <br>
   if(output.length >=4){
-    output = output.substring(4);
+    output = "Rewards:<br>" + output.substring(4);
+  } else {
+    output = "No reward"
   }
   return output;
 }
@@ -1663,7 +1686,6 @@ $('#FC_RM_starting_quests, #FC_RM_ending_quests').on('input',function () {
 // write the pending quests in the starting quests textbox
 $("#FC_RM_use_pending_quests, #FC_RM_use_periodic_quests").change(function(){
   $('#FC_RM_select_preset_quests')[0].selectedIndex = 0;
-  $("#FC_RM_use_periodic_quests").prop("disabled",!$("#FC_RM_use_pending_quests").is(":checked"));
   if ($("#FC_RM_use_pending_quests").is(':checked')){
     $("#FC_RM_starting_quests").val(getQuestsInState(ALL_QUEST_STATE,'pending').filter(function(quest){
       if($("#FC_RM_use_periodic_quests").is(':checked')){
@@ -1747,19 +1769,12 @@ $('#QL_RM_searchQuest').on('input',function () {
   updateQuestListDisplay(input);
 });
 
-// display the quests requiring this ship
-$("#QL_RM_select_required_ship").change(function(){
-
+// display the quests requiring this ship/map/reward
+$("#QL_RM_select_required_ship, #QL_RM_select_required_map, #QL_RM_search_select_reward").change(function(){
   var questList = JSON.parse($(this).val());
   updateQuestListDisplay(questList);
 });
 
-// display the quest with the selected reward
-$("#QL_RM_search_select_reward").change(function(){
-
-  var questList = JSON.parse($(this).val());
-  updateQuestListDisplay(questList);
-});
 
 //change the type of displayed rewards
 $(`input[name=QL_RM_search_reward]`).change(function(){
