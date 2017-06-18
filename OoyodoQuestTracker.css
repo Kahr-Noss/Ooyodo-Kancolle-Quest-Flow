@@ -27,6 +27,7 @@ body {
   background-repeat: no-repeat;
   font-size: 30px;
   text-align: right;
+  cursor:pointer;
 }
 
 #HD_option_btn{
@@ -42,6 +43,7 @@ body {
 position:absolute;
   background-color:rgba(0, 0, 0, 0);
   background-repeat: no-repeat;
+  cursor:pointer;
 }
 
 /*    MENU CSS    */
@@ -142,13 +144,15 @@ position:absolute;
   position: absolute;
   top: 60px;
   height: calc(100% - 60px);
-  text-align: center;
+
+    display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
 }
 
 .QL_questBox{
   float:left;
-  min-width: 350px;
-  width:30%;
+  width: 375px;
   height:375px;
   margin:10px;
   border-style:solid;
@@ -160,6 +164,15 @@ position:absolute;
   color: red;
 }
 
+.reward_icon{
+  vertical-align: middle;
+}
+
+.ship_icon{
+  vertical-align: middle;
+  height: 40px;
+  width: 40px;
+}
 
 #IPQ{
   z-index:10;

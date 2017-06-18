@@ -129,7 +129,7 @@ $(function () {
 
 
     loadFlowchart();
-    resizeFlowchart( $(window).height() - 240 - 4, $(window).width() - 175 -20);
+    resizeWindow();
     displayFlowchart();
     updateAllColors();
   }
@@ -1177,6 +1177,9 @@ function displayQuestRequirements(questList){
       <strong>${categoryTxt}</strong><br>
       <div id="requirements_${categoryTxt}">`;
       requirements[category].forEach(item => {
+        if (category === "S"){
+          requirementsHTML += `<span><img class="ship_icon" src="files/ships/${item}.png"></span> &nbsp;`;
+        }
         if(typeof item === 'string'){
           requirementsHTML += `${item}<br>`;
         } else {
@@ -1326,7 +1329,7 @@ function loadRequiredShipList(){
       });
     }
   });
-  var requiredShipListHTML = "<option value='[]'>Select a ship</option>";
+  var requiredShipListHTML = "<option value='[]' disabled>Select a ship</option>";
   Object.keys(requiredShipList).sort().forEach(ship => {
     requiredShipListHTML += `<option value='${JSON.stringify(requiredShipList[ship])}'>${ship}</option>`;
   });
@@ -1345,7 +1348,7 @@ function loadRequiredMapList(){
       });
     }
   });
-  var requiredMapListHTML = "<option value='[]'>Select a map</option>";
+  var requiredMapListHTML = "<option value='[]' disabled>Select a map</option>";
   Object.keys(requiredMapList).sort().forEach(map => {
     requiredMapListHTML += `<option value='${JSON.stringify(requiredMapList[map])}'>${map}</option>`;
   });
@@ -1367,7 +1370,7 @@ function loadRewardList(){
     });
   });
 
-  var rewardListHTML = "<option value='[]'>Select a reward</option>";
+  var rewardListHTML = "<option value='[]' disabled>Select a reward</option>";
   Object.keys(rewardList).sort().forEach(reward => {
     rewardListHTML += `<option value='${JSON.stringify(rewardList[reward])}'>${reward}</option>`;
   });
@@ -1430,17 +1433,20 @@ function parseRewardObject(reward){
   var output = '';
   reward.forEach(loot => {
     // if it's an unique object
-    if(loot[0] === 'A' || loot[0] === 'S' || loot[0] === 'F'){
-      output += `<br>${loot[3] ? loot[3] : ""}${loot[1]}`;
-    } else {
+    output += `<br>${loot[3] ? loot[3] : ""}`;
+    if (has.call(ICONS_LINK, loot[1])){
+      output += `<span><img class="reward_icon" src="${ICONS_LINK[loot[1]]}"></span> &nbsp;`;
+    }
+      output += `${loot[1]}`;
+    if(loot[0] !== 'A' && loot[0] !== 'S' && loot[0] !== 'F' && loot[2] !== 1){
       //show the quantity
-      output += `<br>${loot[3] ? loot[3] : ""}${loot[1]} x ${loot[2]}`;
+      output += ` x ${loot[2]}`;
     }
 
   });
   //delete the first <br>
   if(output.length >=4){
-    output = "Rewards:<br>" + output.substring(4);
+    output =  output.substring(4);
   } else {
     output = "No reward"
   }
@@ -1861,9 +1867,12 @@ $(`#FC_FT_quest_info_complete_btn`).click(function(){
 
 // change the diagram size when the window size is changed
 $( window ).resize(function() {
-  resizeFlowchart( $(window).height() - 240 - 4, $(window).width() - 175 -20);
+resizeWindow();
 });
 
+function resizeWindow(){
+    resizeFlowchart( $(window).height() - 240 - 4, $(window).width() - 175 -20);
+}
 
 });
 

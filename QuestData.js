@@ -1,3 +1,86 @@
+const ICONS_LINK = {
+  "Improvement material":"files/game_icons/Improvement_Material.png",
+  "Development material":"files/game_icons/Development_Material.png",
+    "Instant construction":"files/game_icons/Instant_construction.png",
+      "Instant repair":"files/game_icons/Instant_repair.png",
+      "Repair Team":"files/game_icons/Emergency_repair.png",
+      "Mamiya":"files/game_icons/Mamiya.png",
+        "Type 13 Air Radar Kai":"files/game_icons/Radar.png",
+        "Type 22 Surface RADAR Kai 4":"files/game_icons/Radar.png",
+        "Prototype 35.6cm Triple Gun Mount":"files/game_icons/RedGunHeavy.png",
+        "Searchlight":"files/game_icons/Searchlight.png",
+        "Furniture box small":"files/game_icons/Furniture_box_small.png",
+        "Furniture box medium":"files/game_icons/Furniture_box_medium.png",
+          "Large furniture box":"files/game_icons/Furniture_box_large.png",
+          "Skilled Crew Member":"files/game_icons/Skilled_Crew_Member.png",
+"Irako":"files/game_icons/Irako.png",
+"Combat ration":"files/game_icons/Combat_Ration.png",
+"Furniture Fairy":"files/game_icons/Furniture_fairy.png",
+"Skilled Carrier-based Aircraft Maintenance Personnel":"files/game_icons/SCAMP.png",
+"Type 1 AP Shell":"files/game_icons/AP_Shell.png",
+"Medal":"files/game_icons/Medal.png",
+"Type 93 Passive Sonar":"files/game_icons/Sonar.png",
+"Type 4 Passive Sonar":"files/game_icons/Sonar.png",
+"Type 3 Active Sonar":"files/game_icons/Sonar.png",
+"Type 3 Sonar":"files/game_icons/Sonar.png",
+"Present box":"files/game_icons/Present_box.png",
+"Type 3 Shell":"files/game_icons/T3_Shell.png",
+"25mm Triple Autocannon Mount":"files/game_icons/AA_gun.png",
+"25mm Triple Autocannon Mount (Concentrated Deployment)":"files/game_icons/AA_gun.png",
+"Combat provision":"files/game_icons/Combat_Provisions.png",
+"Daihatsu Landing Craft":"files/game_icons/LandingCraft.png",
+"Underway Replenishment":"files/game_icons/Underway_Replenishment.png",
+"Construction Corps":"files/game_icons/Construction_Corps.png",
+"Reinforcement Expansion":"files/game_icons/Reinforcement_expansion.png",
+"New Model Gun Mount Improvement Material":"files/game_icons/New_Model_Gun_Mount_Improvement_Material.png",
+"350 Ranking points":"files/game_icons/Ranking_point.png",
+"Ju 87C Kai":"files/game_icons/RedPlane.png",
+"Zuiun (634 Air Group)":"files/game_icons/Seaplane.png",
+"Seiran (631 Air Group)":"files/game_icons/Seaplane.png",
+
+
+
+"53cm Submarine Bow Torpedo Mount (8 tubes)":"files/game_icons/Torpedo.png",
+"Prototype 61cm Sextuple (Oxygen) Torpedo Mount":"files/game_icons/Torpedo.png",
+"Late Model Bow Torpedo Mount (6 tubes)":"files/game_icons/Torpedo.png",
+"Type 91 Anti-Aircraft Fire Director":"files/game_icons/Aafd.png",
+"Headquarters Personnel":"files/game_icons/Headquarters_Personnel.png",
+"New Technology Aircraft Blueprint":"files/game_icons/New_Technology_Aircraft_Blueprint.png",
+"Ne Type Engine":"files/game_icons/Ne_Type_Engine.png",
+"Prototype Flight Deck Catapult":"files/game_icons/Prototype_Deck_Catapult.png",
+"Marriage Ring and Documents":"files/game_icons/Marriage_Papers.png",
+"Type 2 Seaplane Fighter Kai (Skilled)":"files/game_icons/Seaplane_Fighter.png",
+"Kikka Kai":"files/game_icons/Jet-powered_Fighter-Bomber.png",
+"Prototype Keiun (Carrier-based Reconnaissance Model)":"files/game_icons/YellowPlane.png",
+"Type 1 Land-based Attack Aircraft Model 22A":"files/game_icons/Land-based_Attack_Aircraft.png",
+"Type 1 Land-based Attack Aircraft":"files/game_icons/Land-based_Attack_Aircraft.png",
+"Type 96 Land-based Attack Aircraft":"files/game_icons/Land-based_Attack_Aircraft.png",
+"Special Type 2 Amphibious Tank":"files/game_icons/Special_Amphibious_Tank.png",
+"Type 0 Fighter Model 53 (Iwamoto Squadron)":"files/game_icons/GreenPlane.png",
+"Zero Fighter Model 52A (w/ Iwamoto Flight)":"files/game_icons/GreenPlane.png",
+"Zero Fighter Model 21 (w/ Iwamoto Flight)":"files/game_icons/GreenPlane.png",
+"Zero Fighter Model 62 (Fighter-bomber / Iwai Squadron)":"files/game_icons/RedPlane.png",
+"Zero Fighter Model 52C (w/ Iwai Flight)":"files/game_icons/GreenPlane.png",
+"Type 0 Fighter Model 52 (Skilled)":"files/game_icons/GreenPlane.png",
+"Type 0 Fighter Model 21 (Skilled)":"files/game_icons/GreenPlane.png",
+"Type 97 Torpedo Bomber (Murata Squadron)":"files/game_icons/BluePlane.png",
+"Reppuu (601 Air Group)":"files/game_icons/GreenPlane.png",
+"Suisei (Egusa Squadron)":"files/game_icons/RedPlane.png",
+"Tenzan Model 12 (Tomonaga Squadron)":"files/game_icons/BluePlane.png",
+"Type 0 Fighter Model 63 (Fighter-bomber)":"files/game_icons/RedPlane.png",
+"Tenzan Model 12 (Murata Squadron)":"files/game_icons/BluePlane.png",
+"Drum Canister (Transport Use)":"files/game_icons/Drum.png",
+"New Kanhon Design Anti-torpedo Bulge (Large)":"files/game_icons/Armor_Bulge.png",
+"8cm High-angle Gun Kai + Additional Machine Guns":"files/game_icons/GreenGun.png",
+"New Kanhon Design Anti-torpedo Bulge (Medium)":"files/game_icons/Armor_Bulge.png",
+"Kyoufuu Kai":"files/game_icons/Seaplane_Fighter.png",
+"Improved Kanhon Type Turbine":"files/game_icons/Engine.png",
+"Enhanced Kanhon Type Boiler":"files/game_icons/Engine.png",
+"Type 2 Seaplane Fighter Kai":"files/game_icons/Seaplane_Fighter.png",
+"PBY-5A Catalina":"files/game_icons/Large_Flying_Boat.png",
+}
+
+
 const ALL_QUESTS_LIST = {
   "A1":{
     "Jp":"はじめての「編成」！",
@@ -656,7 +739,7 @@ const ALL_QUESTS_LIST = {
     "unlocks":["A50", "B24"],
     "period":"once",
     "needs":{
-      "S":["Mutsuki","Kisaragi","Yayoi","Usuki","Mochizuki"]
+      "S":["Mutsuki","Kisaragi","Yayoi","Uzuki","Mochizuki"]
     }
   },
   "A35":{
@@ -1082,7 +1165,7 @@ const ALL_QUESTS_LIST = {
     "unlocks":["B47"],
     "period":"once",
     "needs":{
-      "S":["Abukuma Kai Ni","Hibiki","Yuugumo","Naganam","Akigumo","Shimakaze"]
+      "S":["Abukuma Kai Ni","Hibiki","Yuugumo","Naganami","Akigumo","Shimakaze"]
     }
   },
   "A56":{
@@ -1473,7 +1556,7 @@ const ALL_QUESTS_LIST = {
     "unlocks":["B85"],
     "period":"once",
     "needs":{
-      "S":["Kinu Kai Ni","Kitakami Kai Ni","Ooi Kai Ni","Kuma Kai","Aoba Kai, Uranami Kai, Shikinami Kai"]
+      "S":["Kinu Kai Ni","Kitakami Kai Ni","Ooi Kai Ni","Kuma Kai","Aoba Kai", "Uranami Kai", "Shikinami Kai"]
     }
   },
   "A75":{
@@ -2243,7 +2326,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Development material",2],
-      ["E","Type 3 SONAR",1]
+      ["E","Type 3 Sonar",1]
     ],
     "requires":["A47"],
     "unlocks":[],
@@ -2374,7 +2457,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Development material",3],
-      ["E","Type 93 Passive SONAR",1]
+      ["E","Type 93 Passive Sonar",1]
     ],
     "requires":["A10"],
     "unlocks":["A51", "B45"],
@@ -2440,7 +2523,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Improvement material",2],
-      ["E","Type 93 Passive SONAR",1]
+      ["E","Type 93 Passive Sonar",1]
     ],
     "requires":["A53", "B42"],
     "unlocks":[],
@@ -3361,8 +3444,8 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Improvement material",2],
-      ["E","Type 2 Seaplane Fighter Kai",1,"Choose one : <br>"],
-      ["E","PBY-5A Catalina",1,"or "]
+          ["E","PBY-5A Catalina",1,"Choose one: "],
+      ["E","Type 2 Seaplane Fighter Kai",1,"or "]
     ],
     "requires":["B8", "B87"],
     "unlocks":["F51","D21"],
@@ -3383,7 +3466,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Irako",1],
-      ["E","Improved Kanhon Type Turbine",1,"Choose one : <br>"],
+      ["E","Improved Kanhon Type Turbine",1,"Choose one: "],
       ["E","Enhanced Kanhon Type Boiler",1,"or "]
     ],
     "requires":["B19"],
@@ -3511,7 +3594,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Improvement material",4],
-      ["E","Kyoufuu Kai",1,"Choose one : <br>"],
+      ["E","Kyoufuu Kai",1,"Choose one: "],
       ["E","New Kanhon Design Anti-torpedo Bulge (Medium)",1,"or "]
     ],
     "requires":["B87"],
@@ -3619,7 +3702,7 @@ const ALL_QUESTS_LIST = {
       "B":"0"
     },
     "reward":[
-      ["I","Medal",1,"Choose one : <br>"],
+      ["I","Medal",1,"Choose one: "],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
     "requires":["Bw5","B98"],
@@ -4927,7 +5010,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Development material",2],
-      ["I","Medal",1,"Choose one : <br>"],
+      ["I","Medal",1,"Choose one: "],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
     "requires":["F53"],
@@ -4950,7 +5033,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Development material",3],
-      ["I","Medal",1,"Choose one : <br>"],
+      ["I","Medal",1,"Choose one: "],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
     "requires":["D23"],
