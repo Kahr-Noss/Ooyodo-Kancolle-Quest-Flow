@@ -1091,10 +1091,10 @@ $(function () {
 
     <div class="cellDiv" style="width:25%; height:110px;  bottom:75px; left:0px;">
     <div class="centeredContent" style="text-align:left; overflow-y:hidden; padding-left:10px;">
-    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/fuel.png"></span> &nbsp;${quest.ressources.F} <br>
-    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/ammo.png"></span> &nbsp;${quest.ressources.A} <br>
-    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/steel.png"></span> &nbsp;${quest.ressources.S} <br>
-    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/bauxite.png"></span> &nbsp;${quest.ressources.B}</div>
+    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Fuel.png"></span> &nbsp;${quest.ressources.F} <br>
+    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Ammo.png"></span> &nbsp;${quest.ressources.A} <br>
+    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Steel.png"></span> &nbsp;${quest.ressources.S} <br>
+    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Bauxite.png"></span> &nbsp;${quest.ressources.B}</div>
     </div>
 
     <div class="cellDiv" style="width:75%; height:110px;  bottom:75px; left:25%;">
