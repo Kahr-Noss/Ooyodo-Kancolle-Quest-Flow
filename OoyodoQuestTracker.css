@@ -68,10 +68,9 @@ position:absolute;
   margin-left: 5%;
 }
 
-#QL_RM_reset{
+#QL_RM_reset_quest, #QL_RM_reset_selection{
   width:100%;
   position: absolute;
-  bottom:195px;
   right:0px;
   height:20px;
 }
@@ -159,7 +158,7 @@ position:absolute;
 .QL_questBox{
   float:left;
   width: 350px;
-  height:415px;
+  height:425px;
   margin:10px;
   border-style:solid;
   position: relative;
@@ -180,12 +179,19 @@ position:absolute;
   width: 40px;
 }
 
+.ship_hover{
+  cursor:pointer;
+    color:#0645AD;
+    display: inline-block;
+}
+/*
 .mini_ship_icon{
   vertical-align: middle;
   height: 30px;
   width: 30px;
+  margin-right: 5px;
 }
-
+*/
 #IPQ{
   z-index:10;
   height:280px;

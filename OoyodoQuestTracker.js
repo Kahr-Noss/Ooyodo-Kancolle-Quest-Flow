@@ -1089,15 +1089,15 @@ $(function () {
     <div class="centeredContent">${addShipImageToContent(quest)}</div>
     </div>
 
-    <div class="cellDiv" style="width:25%; height:100px;  bottom:75px; left:0px;">
-    <div class="centeredContent" style="text-align:left;">
+    <div class="cellDiv" style="width:25%; height:110px;  bottom:75px; left:0px;">
+    <div class="centeredContent" style="text-align:left; overflow-y:hidden; padding-left:10px;">
     &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/fuel.png"></span> &nbsp;${quest.ressources.F} <br>
     &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/ammo.png"></span> &nbsp;${quest.ressources.A} <br>
     &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/steel.png"></span> &nbsp;${quest.ressources.S} <br>
     &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/bauxite.png"></span> &nbsp;${quest.ressources.B}</div>
     </div>
 
-    <div class="cellDiv" style="width:75%; height:100px;  bottom:75px; left:25%;">
+    <div class="cellDiv" style="width:75%; height:110px;  bottom:75px; left:25%;">
     <div class="centeredContent">${parseRewardObject(quest.reward)}</div>
     </div>
 
@@ -1444,12 +1444,14 @@ function removeRibbonFromDiv(divJQ){
 function addShipNameHoveringEvents(JqueryText){
   JqueryText.find(".ship_hover").mouseenter(function(){
     var position = $(this).offset();
-    position.top -= 40;
-    var imageTag=`<div class="hovering_icon" style="position:absolute; background-color:pink;z-index:200"><img class="ship_icon" src="files/webpage/ships/${$(this).attr("value")}.png"></span></div>`;
+    position.top -= 70;
+    var imageTag=`<div class="hovering_icon" style="position:absolute;z-index:200"><img src="files/webpage/ships/${$(this).attr("value")}.png"></span></div>`;
     $("body").append(imageTag).find(".hovering_icon").offset(position);
+    $(this).css("text-decoration", "underline");
   });
   JqueryText.find(".ship_hover").mouseleave(function(){
     $(".hovering_icon").remove();
+    $(this).css("text-decoration", "");
   });
 }
 
@@ -1557,19 +1559,20 @@ function addShipImageToContent(quest){
 }
 
 /*
+// version with  image in text
 function addShipImageToContent(quest){
   var contentWithImages = quest.content;
   if (has.call(quest.needs, 'S')){
     quest.needs.S.forEach(ship =>{
       var position = contentWithImages.indexOf(ship);
       if (position !== -1){
-        contentWithImages = `${contentWithImages.substr(0, position)}<span><img class="mini_ship_icon" src="files/webpage/ships/${ship}.png"></span> ${contentWithImages.substr(position)}`;
+        contentWithImages = `${contentWithImages.substr(0, position)}<span><img class="mini_ship_icon" src="files/webpage/ships/${ship}.png"></span>${contentWithImages.substr(position)}`;
       }
     });
   }
   return contentWithImages;
-}*/
-
+}
+*/
 
 // **********  TIME FUNCTIONS  ************
 
@@ -1697,6 +1700,7 @@ $(".HD_main_tab_btn").click(function () {
   $(".main_tab").hide();
   $(".POP").hide("fast");
   $(`#${$(this).val()}`).show("fast");
+  //unselect the selected quests in quest list
 });
 
 //open option panel
@@ -1882,6 +1886,7 @@ $('#IPQ_btn_cancel').click(function () {
 
 // on doubleclick set it as finalquest in the flowchart
 $(".QL_questBox_goToChart_btn").click(function(e){
+  $(`#QL_selected_${$(this).attr("id").split('_')[3]}`).prop("checked",true);
   selectedNodes = [];
   $(".QL_selected_checkbox:checked").each(function(){
     selectedNodes.push($(this).attr("id").split('_')[2]);
@@ -1894,8 +1899,8 @@ $(".QL_questBox_goToChart_btn").click(function(e){
 });
 
 //reset all the research parameters
-$("#QL_RM_reset").click(function(){
-  $(".QL_RM_display_period, #QL_RM_display_period_all").prop("checked",true);
+$("#QL_RM_reset_search").click(function(){
+    $(".QL_RM_display_period, #QL_RM_display_period_all").prop("checked",true);
   $("input[name=QL_RM_display_state]:radio").first().prop("checked",true);
   $(`.QL_RM_select_search_method`).find('select').each(function(){
     $(this)[0].selectedIndex = 0;
@@ -1903,6 +1908,11 @@ $("#QL_RM_reset").click(function(){
   $(`.QL_RM_select_search_method`).find(':text').first().val("");
   updateQuestListDisplay([]);
 });
+
+$("#QL_RM_reset_selection").click(function(){
+$(".QL_selected_checkbox").prop("checked",false);
+});
+
 
 
 // set the quest as completed

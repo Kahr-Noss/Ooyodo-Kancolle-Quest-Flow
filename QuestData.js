@@ -115,13 +115,13 @@ const ICONS_LINK = {
   "Type 0 Fighter Model 21 (Skilled)":"files/webpage/game_icons/GreenPlane.png",
   "Type 0 Fighter Model 52":"files/webpage/game_icons/GreenPlane.png",
   "Type 0 Fighter Model 52 (Skilled)":"files/webpage/game_icons/GreenPlane.png",
-  "Type 0 Fighter Model 62 (Fighter-bomber)":"files/webpage/game_icons/????.png",
+  "Type 0 Fighter Model 62 (Fighter-bomber)":"files/webpage/game_icons/RedPlane.png",
   "Saiun":"files/webpage/game_icons/YellowPlane.png",
   "Type 96 Fighter":"files/webpage/game_icons/GreenPlane.png",
   "Type 99 Dive Bomber":"files/webpage/game_icons/RedPlane.png",
   "Type 0 Reconnaissance Seaplane":"files/webpage/game_icons/Seaplane.png",
-  "Shiden Kai 2":"files/webpage/game_icons/????.png",
-  "Prototype Seiran":"files/webpage/game_icons/????.png",
+  "Shiden Kai 2":"files/webpage/game_icons/GreenPlane.png",
+  "Prototype Seiran":"files/webpage/game_icons/Seaplane.png",
 
 
   //other
@@ -4598,8 +4598,8 @@ const ALL_QUESTS_LIST = {
   "F22":{
     "Jp":"精鋭「艦戦」隊の新編成",
     "En":"Organize the New Elite Fighter Force",
-    "content":"Prepare a Skilled Crew Member in your inventory, have Houshou equipped a rank 7 Type 0 Fighter Model 21 as secretary , then scrap 2 Type 0 Fighter Model 21 and a Type 96 Fighter. One is consumed in the process.",
-    "tips":"※Equipment must be unlocked.",
+    "content":"Prepare a Skilled Crew Member in your inventory, have Houshou equipped a rank 7 Type 0 Fighter Model 21 as secretary , then scrap 2 Type 0 Fighter Model 21 and a Type 96 Fighter.",
+    "tips":"※Equipment must be unlocked.※One is consumed in the process.",
     "ressources":{
       "F":"0",
       "A":"0",
@@ -4682,8 +4682,8 @@ const ALL_QUESTS_LIST = {
   "F26":{
     "Jp":"「艦戦」隊の再編成",
     "En":"Reorganize the Fighter Force: Type 0 Fighter Model 52 (Skilled)",
-    "content":"Equip a rank 7 Type 0 Fighter Model 52 (Skilled) on Zuikaku as secretary, then scrap Zero Fighter Model 52C (601 Air Group) ※Equipment must be unlocked.",
-    "tips":"",
+    "content":"Equip a rank 7 Type 0 Fighter Model 52 (Skilled) on Zuikaku as secretary, then scrap Zero Fighter Model 52C (601 Air Group).",
+    "tips":"※Equipment must be unlocked.",
     "ressources":{
       "F":"0",
       "A":"0",
@@ -5224,8 +5224,8 @@ const ALL_QUESTS_LIST = {
   "F51":{
     "Jp":"精鋭「水戦」隊の新編成",
     "En":"Organize the New Elite Seaplane Group",
-    "content":"Prepare one Skilled Crew Member in your inventory, equip a Type 2 Seaplane Fighter Kai that is both rank 7 and ★max in the first slot of your Secretary Ship, then scrap 2 Type 0 Fighter Model 21 and 2 Zuiun. One Skilled Crew Member is consumed in the process.",
-    "tips":"※Equipment must be unlocked.",
+    "content":"Prepare one Skilled Crew Member in your inventory, equip a Type 2 Seaplane Fighter Kai that is both rank 7 and ★max in the first slot of your Secretary Ship, then scrap 2 Type 0 Fighter Model 21 and 2 Zuiun.",
+    "tips":"※Equipment must be unlocked.※One Skilled Crew Member is consumed in the process.",
     "ressources":{
       "F":"0",
       "A":"0",
@@ -5246,8 +5246,8 @@ const ALL_QUESTS_LIST = {
   "F52":{
     "Jp":"精鋭「水戦」隊の増勢",
     "En":"Expand the New Elite Seaplane Group",
-    "content":"Prepare one Skilled Crew Member in your inventory, equip a Type 2 Seaplane Fighter Kai that is both rank 7 and ★max in the first slot of your Secretary Ship, then scrap 2 Type 0 Fighter Model 21 and 2 Zuiun. One Skilled Crew Member is consumed in the process.",
-    "tips":"※Equipment must be unlocked.",
+    "content":"Prepare one Skilled Crew Member in your inventory, equip a Type 2 Seaplane Fighter Kai that is both rank 7 and ★max in the first slot of your Secretary Ship, then scrap 2 Type 0 Fighter Model 21 and 2 Zuiun.",
+    "tips":"※Equipment must be unlocked.※One Skilled Crew Member is consumed in the process.",
     "ressources":{
       "F":"0",
       "A":"0",
