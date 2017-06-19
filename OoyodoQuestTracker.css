@@ -107,6 +107,12 @@ position:absolute;
   overflow-y: auto;
 }
 
+.QL_questBox_complete_btn, .QL_questBox_goToChart_btn{
+  width:35%;
+  height:100%;
+  float:right;
+}
+
 .complete_btn{
   width:100%;
   position: absolute;
@@ -152,8 +158,8 @@ position:absolute;
 
 .QL_questBox{
   float:left;
-  width: 375px;
-  height:375px;
+  width: 350px;
+  height:415px;
   margin:10px;
   border-style:solid;
   position: relative;
@@ -172,6 +178,12 @@ position:absolute;
   vertical-align: middle;
   height: 40px;
   width: 40px;
+}
+
+.mini_ship_icon{
+  vertical-align: middle;
+  height: 30px;
+  width: 30px;
 }
 
 #IPQ{

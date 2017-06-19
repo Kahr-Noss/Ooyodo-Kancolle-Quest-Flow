@@ -383,7 +383,7 @@ $(function () {
     function setQuestAsCompleted(quest){
       // TODO decommenter les cookies
       //  var questsCookie = JSON.parse(getCookie('user_quests'));
-//questsCookie.timeStamp = moment().utcOffset("+09:00").format();
+      //questsCookie.timeStamp = moment().utcOffset("+09:00").format();
       //set the quest as completed
       ALL_QUEST_STATE[quest] = 'completed';
       updateQuestStateDisplay(quest);
@@ -406,761 +406,777 @@ $(function () {
 
     // reset the periodic quests of the secified period
     function resetPeriodicQuest(period){
-        // TODO decommenter les cookies
-  //  var questsCookie = JSON.parse(getCookie('user_quests'));
-  //questsCookie.timeStamp = moment().utcOffset("+09:00").format();
+      // TODO decommenter les cookies
+      //  var questsCookie = JSON.parse(getCookie('user_quests'));
+      //questsCookie.timeStamp = moment().utcOffset("+09:00").format();
       var periodicQuestsList = Object.keys(ALL_QUESTS_LIST).filter(function(quest){return ALL_QUESTS_LIST[quest].period === period});
       // set all periodic quests to ??? state (to remove any problem to set the pending state)
       periodicQuestsList.forEach(quest =>{
         ALL_QUEST_STATE[quest] = "???";
       });
-        /*    questsCookie.pendingQuests.filter(function(quest){return ALL_QUESTS_LIST[quest].period === period}).forEach(quest =>{
-        questsCookie.pendingQuests.splice(questsCookie.pendingQuests.indexOf(quest),1);
-      });*/
-      periodicQuestsList.forEach(quest =>{
-        if( ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE[requiredQuest] === 'completed';})){
-          ALL_QUEST_STATE[quest] = "pending";
-      //    questsCookie.pendingQuests.push(quest);
-        } else {
-          ALL_QUEST_STATE[quest] = "locked";
-        }
-        updateQuestStateDisplay(quest);
-      });
-      updateQuestListDisplay([]);
-      updateAllColors();
-      console.log(period + " quests reset!");
-      console.log(ALL_QUEST_STATE);
-        //    setCookie('user_quests',JSON.stringify(questsCookie),365);
-    }
-
-    // ******      FLOWCHART CREATION     *********
-
-    // create the flowchart  from all quests data
-    function buildFlowchart(){
-      var questNodeDataArray = [];
-      var questLinkDataArray = [];
-      Object.keys(ALL_QUESTS_LIST).forEach(quest => {
-        //create a node
-        var color = getQuestColor(quest,ALL_QUEST_STATE[quest],true,false);
-        var state = ALL_QUEST_STATE[quest];
-        questNodeDataArray.push({
-          "key": quest,
-          "color": color,
-          "text": quest,
-          "strokeWidth":(state==='pending' ? 25 : 5),
-          "strokeColor": (state==='pending' ? "yellow" : "Black"),
-          "visible": true,
-          "tooltip":formatTextLineBreak(ALL_QUESTS_LIST[quest].content,65),
-          "ribbon_text":state,
-          "ribbon":ALL_QUESTS_LIST[quest].period !== 'once',
-          "ribbon_color":getRibbonColor(ALL_QUESTS_LIST[quest].period),
-          "text_color":tinycolor(color).isLight() ? "#000000" : "#ffffff"
-        });
-        // create its links
-        if (ALL_QUESTS_LIST[quest].requires.length !== 0){
-          ALL_QUESTS_LIST[quest].requires.forEach(requirement => {
-            questLinkDataArray.push({ "from": requirement, "to": quest});
-          });
-        }
-      });
-      displayQuestListSelect(Object.keys(ALL_QUESTS_LIST));
-      return JSON.stringify({nodeDataArray:questNodeDataArray, linkDataArray:questLinkDataArray});
-    };
-
-    // generate and display the quest list select
-    function displayQuestListSelect(questList){
-      var questListHTML = '';
-      questList.forEach(quest => {
-        questListHTML += `<option value="${quest}" style="background-color:${getQuestColor(quest,ALL_QUEST_STATE[quest],true,false)};">${quest}</option>`;
-      });
-      //put the quest list in order
-      var optionsList = $(questListHTML);
-      optionsList.sort(function(a,b) {
-        if (a.text.replace(/[0-9]/g, '') > b.text.replace(/[0-9]/g, '')) return 1;
-        if (a.text.replace(/[0-9]/g, '') < b.text.replace(/[0-9]/g, '')) return -1;
-        if (a.text.replace(/[0-9]/g, '') == b.text.replace(/[0-9]/g, '')) {
-          if (parseInt(a.text.replace( /^\D+/g, ''),10) > parseInt(b.text.replace( /^\D+/g, ''),10)) return 1;
-          if (parseInt(a.text.replace( /^\D+/g, ''),10) < parseInt(b.text.replace( /^\D+/g, ''),10)) return -1;
-        }
-        return 0
-      });
-      $("#FC_FT_select_quest_list").empty().append( optionsList );
-    }
-
-    // sort all the node to display only the one which correspond to starting and ending quests
-    function buildPartialFlowchart(){
-      $("#FC_RM_loading_btn").prop("disabled", true);
-      var partialQuestList = [];
-      var startingQuestsList = questInputToArray($('#FC_RM_starting_quests').val());
-      var endingQuestsList =questInputToArray($('#FC_RM_ending_quests').val());
-      var direction = (endingQuestsList.length === 0) ? "up" : "down" ;
-      var usePending = $("#FC_RM_use_pending_quests").is(":checked");
-      var showPeriodic =  $("#FC_RM_use_periodic_quests").is(":checked");
-
-      $('#FC_RM_starting_quests').val(startingQuestsList.join(', '));
-      $('#FC_RM_ending_quests').val(endingQuestsList.join(', '));
-
-      //loopthrough all unlocks and add them to the list. stop if nothing
-      //if something is already there remove the whole branch that lead to it (it's a quest that reset itself)
-      if(startingQuestsList.length === 0 && endingQuestsList.length === 0){
-        displayPartialTree(Object.keys(ALL_QUESTS_LIST));
-        displayQuestListSelect(Object.keys(ALL_QUESTS_LIST));
+      /*    questsCookie.pendingQuests.filter(function(quest){return ALL_QUESTS_LIST[quest].period === period}).forEach(quest =>{
+      questsCookie.pendingQuests.splice(questsCookie.pendingQuests.indexOf(quest),1);
+    });*/
+    periodicQuestsList.forEach(quest =>{
+      if( ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE[requiredQuest] === 'completed';})){
+        ALL_QUEST_STATE[quest] = "pending";
+        //    questsCookie.pendingQuests.push(quest);
       } else {
-        if(direction === 'up'){
-          startingQuestsList.forEach(quest => {
-            addUnlockedQuests(quest).forEach(qst => {
+        ALL_QUEST_STATE[quest] = "locked";
+      }
+      updateQuestStateDisplay(quest);
+    });
+    updateQuestListDisplay([]);
+    updateAllColors();
+    console.log(period + " quests reset!");
+    console.log(ALL_QUEST_STATE);
+    //    setCookie('user_quests',JSON.stringify(questsCookie),365);
+  }
+
+  // ******      FLOWCHART CREATION     *********
+
+  // create the flowchart  from all quests data
+  function buildFlowchart(){
+    var questNodeDataArray = [];
+    var questLinkDataArray = [];
+    Object.keys(ALL_QUESTS_LIST).forEach(quest => {
+      //create a node
+      var color = getQuestColor(quest,ALL_QUEST_STATE[quest],true,false);
+      var state = ALL_QUEST_STATE[quest];
+      questNodeDataArray.push({
+        "key": quest,
+        "color": color,
+        "text": quest,
+        "strokeWidth":(state==='pending' ? 25 : 5),
+        "strokeColor": (state==='pending' ? "yellow" : "Black"),
+        "visible": true,
+        "tooltip":formatTextLineBreak(ALL_QUESTS_LIST[quest].content,65),
+        "ribbon_text":state,
+        "ribbon":ALL_QUESTS_LIST[quest].period !== 'once',
+        "ribbon_color":getRibbonColor(ALL_QUESTS_LIST[quest].period),
+        "text_color":tinycolor(color).isLight() ? "#000000" : "#ffffff"
+      });
+      // create its links
+      if (ALL_QUESTS_LIST[quest].requires.length !== 0){
+        ALL_QUESTS_LIST[quest].requires.forEach(requirement => {
+          questLinkDataArray.push({ "from": requirement, "to": quest});
+        });
+      }
+    });
+    displayQuestListSelect(Object.keys(ALL_QUESTS_LIST));
+    return JSON.stringify({nodeDataArray:questNodeDataArray, linkDataArray:questLinkDataArray});
+  };
+
+  // generate and display the quest list select
+  function displayQuestListSelect(questList){
+    var questListHTML = '';
+    questList.forEach(quest => {
+      questListHTML += `<option value="${quest}" style="background-color:${getQuestColor(quest,ALL_QUEST_STATE[quest],true,false)};">${quest}</option>`;
+    });
+    //put the quest list in order
+    var optionsList = $(questListHTML);
+    optionsList.sort(function(a,b) {
+      if (a.text.replace(/[0-9]/g, '') > b.text.replace(/[0-9]/g, '')) return 1;
+      if (a.text.replace(/[0-9]/g, '') < b.text.replace(/[0-9]/g, '')) return -1;
+      if (a.text.replace(/[0-9]/g, '') == b.text.replace(/[0-9]/g, '')) {
+        if (parseInt(a.text.replace( /^\D+/g, ''),10) > parseInt(b.text.replace( /^\D+/g, ''),10)) return 1;
+        if (parseInt(a.text.replace( /^\D+/g, ''),10) < parseInt(b.text.replace( /^\D+/g, ''),10)) return -1;
+      }
+      return 0
+    });
+    $("#FC_FT_select_quest_list").empty().append( optionsList );
+  }
+
+  // sort all the node to display only the one which correspond to starting and ending quests
+  function buildPartialFlowchart(){
+    $("#FC_RM_loading_btn").prop("disabled", true);
+    var partialQuestList = [];
+    var startingQuestsList = questInputToArray($('#FC_RM_starting_quests').val());
+    var endingQuestsList =questInputToArray($('#FC_RM_ending_quests').val());
+    var direction = (endingQuestsList.length === 0) ? "up" : "down" ;
+    var usePending = $("#FC_RM_use_pending_quests").is(":checked");
+    var showPeriodic =  $("#FC_RM_use_periodic_quests").is(":checked");
+
+    $('#FC_RM_starting_quests').val(startingQuestsList.join(', '));
+    $('#FC_RM_ending_quests').val(endingQuestsList.join(', '));
+
+    //loopthrough all unlocks and add them to the list. stop if nothing
+    //if something is already there remove the whole branch that lead to it (it's a quest that reset itself)
+    if(startingQuestsList.length === 0 && endingQuestsList.length === 0){
+      displayPartialTree(Object.keys(ALL_QUESTS_LIST));
+      displayQuestListSelect(Object.keys(ALL_QUESTS_LIST));
+    } else {
+      if(direction === 'up'){
+        startingQuestsList.forEach(quest => {
+          addUnlockedQuests(quest).forEach(qst => {
+            if($.inArray(qst,partialQuestList) === -1){
+              partialQuestList.push(qst);
+            }
+          });
+        });
+      } else if (direction == 'down'){
+        if (usePending){
+          endingQuestsList.forEach(quest => {
+            addUncompletedRequiredQuests(quest, showPeriodic).forEach(qst => {
               if($.inArray(qst,partialQuestList) === -1){
                 partialQuestList.push(qst);
               }
             });
           });
-        } else if (direction == 'down'){
-          if (usePending){
-            endingQuestsList.forEach(quest => {
-              addUncompletedRequiredQuests(quest, showPeriodic).forEach(qst => {
-                if($.inArray(qst,partialQuestList) === -1){
-                  partialQuestList.push(qst);
-                }
-              });
+        } else {
+          //if not using pending quests , just go down all quests and sop on starting ones
+          endingQuestsList.forEach(quest => {
+            addRequiredQuests(startingQuestsList, quest).forEach(qst => {
+              if($.inArray(qst,partialQuestList) === -1){
+                partialQuestList.push(qst);
+              }
             });
-          } else {
-            //if not using pending quests , just go down all quests and sop on starting ones
-            endingQuestsList.forEach(quest => {
-              addRequiredQuests(startingQuestsList, quest).forEach(qst => {
-                if($.inArray(qst,partialQuestList) === -1){
-                  partialQuestList.push(qst);
-                }
-              });
-            });
-          }
+          });
         }
-        displayPartialTree(partialQuestList);
-        displayQuestListSelect(partialQuestList);
-
-        //    hightlightQuest()
       }
-    }
+      displayPartialTree(partialQuestList);
+      displayQuestListSelect(partialQuestList);
 
-    // add the quest that are unlocked
-    function addUnlockedQuests(quest){
-      var partialQuestList = [];
-      partialQuestList.push(quest);
-      ALL_QUESTS_LIST[quest].unlocks.forEach(unlockedQuest => {
-        addUnlockedQuests(unlockedQuest).forEach(qst => {
+      //    hightlightQuest()
+    }
+  }
+
+  // add the quest that are unlocked
+  function addUnlockedQuests(quest){
+    var partialQuestList = [];
+    partialQuestList.push(quest);
+    ALL_QUESTS_LIST[quest].unlocks.forEach(unlockedQuest => {
+      addUnlockedQuests(unlockedQuest).forEach(qst => {
+        if($.inArray(qst,partialQuestList) === -1){
+          partialQuestList.push(qst);
+        }
+      });
+    });
+
+    return partialQuestList;
+  }
+
+  // add quest that are required to unlock this quest
+  function addRequiredQuests(startingQuestsList, quest){
+    var partialQuestList = [];
+    partialQuestList.push(quest);
+    //if the quest have requirement qnd isn't listed as a starting quest
+    if($.inArray(quest,startingQuestsList) === -1){
+      ALL_QUESTS_LIST[quest].requires.forEach(requiredQuest => {
+        addRequiredQuests(startingQuestsList, requiredQuest).forEach(qst=>{
           if($.inArray(qst,partialQuestList) === -1){
             partialQuestList.push(qst);
           }
         });
       });
 
-      return partialQuestList;
     }
+    return partialQuestList;
+  }
 
-    // add quest that are required to unlock this quest
-    function addRequiredQuests(startingQuestsList, quest){
-      var partialQuestList = [];
-      partialQuestList.push(quest);
+
+  // add quest that are required to unlock this quest
+  function addUncompletedRequiredQuests(quest, showPeriodic){
+    var partialQuestList = [];
+    if (ALL_QUEST_STATE[quest] !== "completed"){
       //if the quest have requirement qnd isn't listed as a starting quest
-      if($.inArray(quest,startingQuestsList) === -1){
-        ALL_QUESTS_LIST[quest].requires.forEach(requiredQuest => {
-          addRequiredQuests(startingQuestsList, requiredQuest).forEach(qst=>{
-            if($.inArray(qst,partialQuestList) === -1){
-              partialQuestList.push(qst);
-            }
-          });
-        });
-
-      }
-      return partialQuestList;
-    }
-
-
-    // add quest that are required to unlock this quest
-    function addUncompletedRequiredQuests(quest, showPeriodic){
-      var partialQuestList = [];
-      if (ALL_QUEST_STATE[quest] !== "completed"){
-        //if the quest have requirement qnd isn't listed as a starting quest
-        ALL_QUESTS_LIST[quest].requires.forEach(requiredQuest => {
-          addUncompletedRequiredQuests(requiredQuest, showPeriodic).forEach(qst => {
-            if($.inArray(qst,partialQuestList) === -1){
-              partialQuestList.push(qst);
-            }
-          });
-        });
-        if (showPeriodic){
-          partialQuestList.push(quest);
-        } else {
-          if (ALL_QUESTS_LIST[quest].period === 'once'){
-            partialQuestList.push(quest);
-          } else if (partialQuestList.length > 0){
-            partialQuestList.push(quest);
+      ALL_QUESTS_LIST[quest].requires.forEach(requiredQuest => {
+        addUncompletedRequiredQuests(requiredQuest, showPeriodic).forEach(qst => {
+          if($.inArray(qst,partialQuestList) === -1){
+            partialQuestList.push(qst);
           }
+        });
+      });
+      if (showPeriodic){
+        partialQuestList.push(quest);
+      } else {
+        if (ALL_QUESTS_LIST[quest].period === 'once'){
+          partialQuestList.push(quest);
+        } else if (partialQuestList.length > 0){
+          partialQuestList.push(quest);
         }
       }
-      return partialQuestList;
     }
+    return partialQuestList;
+  }
 
-    // using pending quests  list calculate the state of all quests
-    function calculateQuestState(pendingQuests, userDecisionsCookie, setPeriodicQuestCompleted){
-      ALL_QUEST_STATE_TMP = {};
-      // no pending quests input => everything is set to completed and color state mode is disabled
-      if (pendingQuests.length === 0){
-        Object.keys(ALL_QUESTS_LIST).forEach(quest => {
+  // using pending quests  list calculate the state of all quests
+  function calculateQuestState(pendingQuests, userDecisionsCookie, setPeriodicQuestCompleted){
+    ALL_QUEST_STATE_TMP = {};
+    // no pending quests input => everything is set to completed and color state mode is disabled
+    if (pendingQuests.length === 0){
+      Object.keys(ALL_QUESTS_LIST).forEach(quest => {
+        ALL_QUEST_STATE_TMP[quest] = 'completed';
+      });
+      $("#FC_RM_show_state_colors").prop("checked",false);
+      implementQuestsStateUpdated([],{},[],false);
+    } else {
+      //normal procedure
+
+      //reset all states to ???
+      Object.keys(ALL_QUESTS_LIST).forEach(quest=>{
+        ALL_QUEST_STATE_TMP[quest] = '???';
+      });
+
+      // if setPeriodicQuestCompleted is true, we set all the periodic quests to completed
+      if(setPeriodicQuestCompleted){
+        Object.keys(ALL_QUESTS_LIST).filter(function(quest){return ALL_QUESTS_LIST[quest].period !== 'once'}).forEach(quest => {
           ALL_QUEST_STATE_TMP[quest] = 'completed';
         });
-        $("#FC_RM_show_state_colors").prop("checked",false);
-        implementQuestsStateUpdated([],{},[],false);
-      } else {
-        //normal procedure
-
-        //reset all states to ???
-        Object.keys(ALL_QUESTS_LIST).forEach(quest=>{
-          ALL_QUEST_STATE_TMP[quest] = '???';
-        });
-
-        // if setPeriodicQuestCompleted is true, we set all the periodic quests to completed
-        if(setPeriodicQuestCompleted){
-          Object.keys(ALL_QUESTS_LIST).filter(function(quest){return ALL_QUESTS_LIST[quest].period !== 'once'}).forEach(quest => {
-            ALL_QUEST_STATE_TMP[quest] = 'completed';
-          });
-        }
-
-        //set inputed quests to pending
-        pendingQuests.forEach(quest=>{
-          ALL_QUEST_STATE_TMP[quest] = 'pending';
-        });
-        var inconsistenciesList = setQuestStateLinkedToPendingQuests(pendingQuests);
-
-        // there are problems with the inputed quests
-        if(inconsistenciesList.length !== 0){
-          var inconsistencies_msg = "";
-          inconsistenciesList.forEach(inconsistency =>{
-            inconsistencies_msg += `${inconsistency[0]} can't be pending if ${inconsistency[1]} hasn't be completed\n`;
-          });
-          $("#IPQ_error_msg").text(inconsistencies_msg);
-        } else {
-
-          // if it's created from a cookie that have recorded user decisions, implement them
-          Object.keys(userDecisionsCookie).forEach(quest => {
-            var state = userDecisionsCookie[quest];
-            ALL_QUEST_STATE_TMP[quest] = state;
-            ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
-              setUnknowOnceQuestsUpward(nextQuest,state);
-            });
-          });
-
-
-
-          var unknowQuests = setRemainingOnceQuestStateByDeduction();
-          var unknownQuestsGroups = [];
-          unknowQuests.forEach(quest => {
-            unknownQuestsGroups.push(createUnknownOnceQuestGroup(quest,unknowQuests));
-          });
-
-          unknownQuestsGroups = separateGroupDoublons(unknownQuestsGroups, unknowQuests);
-
-          //for the one time quests that were not deductible, ask the user about it by displaying it on the flowchart
-          askForUnknowQuestState(unknownQuestsGroups,{}, [], function(userDecisions, advice){
-            // this is called after the user answerd to all unknowQuests
-            //Now the periodic quests not set yet
-            setPeriodicQuestState();
-
-            // update the ALL_QUEST STATE list with the one just cqlculated if on inconsistencies
-            $("#FC_RM_show_state_colors").prop("checked",true);
-            implementQuestsStateUpdated(pendingQuests,userDecisions, advice, setPeriodicQuestCompleted);
-          });
-        }
       }
-    }
 
-
-    // this function will ask the user if he remember doing one time quests that can't be calculated
-    function askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback){
-      // if there is unknown quests remaining
-      if (unknowQuestsGroup.length > 0){
-
-        var questsGroup = unknowQuestsGroup.shift();
-        //    if (ALL_QUEST_STATE_TMP[quest] === "???"){
-        if (ALL_QUESTS_LIST[questsGroup[0]].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed"})){
-          questsGroup.forEach(quest => {
-            ALL_QUEST_STATE_TMP[quest] = "completed";
-          });
-          askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback);
-        } else if (ALL_QUESTS_LIST[questsGroup[0]].requires.some(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "locked" && ALL_QUESTS_LIST[requiredQuest].period === 'once'})){
-          questsGroup.forEach(quest => {
-            ALL_QUEST_STATE_TMP[quest] = "locked";
-          });
-          askForUnknowQuestState(unknowQuestsGroup,userDecisions, advice, callback);
-        } else {
-          $("#QL").hide();
-          $("#FC").show('fast');
-          var popup = $(`<div class="MSG" id="MSG_ask_quest_state">Admiral, I need some help to<br>
-          complete your progression on the quest flowchart...<br>
-          Do you already completed those quests ?<br>
-          <button type="button" class="MSG_btn" value="completed">Yes !</button>
-          <button type="button" class="MSG_btn idk" value="completed">I don't know</button>
-          <button type="button" class="MSG_btn" value="locked">No, not yet</button>
-          </div>`);
-          $('body').append(popup);
-          displayPartialTree(questsGroup);
-          displayQuestData(questsGroup[0]);
-          $(".MSG_btn").click(function(){
-            $("#MSG_ask_quest_state").hide("fast").remove();
-            questsGroup.forEach(quest => {
-              ALL_QUEST_STATE_TMP[quest] = $(this).val();
-            });
-            userDecisions[questsGroup[0]] =  $(this).val();
-            if ($(this).hasClass("idk")){
-              ALL_QUESTS_LIST[questsGroup[0]].requires.filter(function(quest){return ALL_QUESTS_LIST[quest].period !== 'once'}).forEach(quest =>{
-                if (advice.indexOf(quest) === -1){
-                  advice.push(quest);
-                }
-              });
-            }
-            askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback);
-          });
-        }
-      } else {
-        callback(userDecisions, advice);
-      }
-    }
-
-    //this function is called at the end and implement the newly calculated states if there is no inconsistencies, else error message
-    function implementQuestsStateUpdated(pendingQuests, userDecisions, advice, setPeriodicQuestCompleted){
-      ALL_QUEST_STATE = cloneObject(ALL_QUEST_STATE_TMP);
-
-
-      $(".QL_questBox").removeClass("pending locked completed");
-      Object.keys(ALL_QUEST_STATE).forEach(quest =>{
-        updateQuestStateDisplay(quest);
+      //set inputed quests to pending
+      pendingQuests.forEach(quest=>{
+        ALL_QUEST_STATE_TMP[quest] = 'pending';
       });
-      $("#IPQ_error_msg").text("");
-      $(`#IPQ`).hide("fast");
-      updateAllColors();
-      setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, timeStamp:moment().utcOffset("+09:00").format()}),365);
+      var inconsistenciesList = setQuestStateLinkedToPendingQuests(pendingQuests);
 
-      if (advice.length >0){
-        console.log(advice);
-        // TODO  write the quests that should be completed
-      }
+      // there are problems with the inputed quests
+      if(inconsistenciesList.length !== 0){
+        var inconsistencies_msg = "";
+        inconsistenciesList.forEach(inconsistency =>{
+          inconsistencies_msg += `${inconsistency[0]} can't be pending if ${inconsistency[1]} hasn't be completed\n`;
+        });
+        $("#IPQ_error_msg").text(inconsistencies_msg);
+      } else {
 
-      // display the diagram
-      if(myDiagram){
-        $("#FC_RM_use_pending_quests").prop("checked",true).trigger("change");
-        buildPartialFlowchart();
+        // if it's created from a cookie that have recorded user decisions, implement them
+        Object.keys(userDecisionsCookie).forEach(quest => {
+          var state = userDecisionsCookie[quest];
+          ALL_QUEST_STATE_TMP[quest] = state;
+          ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
+            setUnknowOnceQuestsUpward(nextQuest,state);
+          });
+        });
+
+
+
+        var unknowQuests = setRemainingOnceQuestStateByDeduction();
+        var unknownQuestsGroups = [];
+        unknowQuests.forEach(quest => {
+          unknownQuestsGroups.push(createUnknownOnceQuestGroup(quest,unknowQuests));
+        });
+
+        unknownQuestsGroups = separateGroupDoublons(unknownQuestsGroups, unknowQuests);
+
+        //for the one time quests that were not deductible, ask the user about it by displaying it on the flowchart
+        askForUnknowQuestState(unknownQuestsGroups,{}, [], function(userDecisions, advice){
+          // this is called after the user answerd to all unknowQuests
+          //Now the periodic quests not set yet
+          setPeriodicQuestState();
+
+          // update the ALL_QUEST STATE list with the one just cqlculated if on inconsistencies
+          $("#FC_RM_show_state_colors").prop("checked",true);
+          implementQuestsStateUpdated(pendingQuests,userDecisions, advice, setPeriodicQuestCompleted);
+        });
       }
     }
+  }
 
-    //set quests's state based on link to the inputed pending quests
-    function setQuestStateLinkedToPendingQuests(pendingQuests){
-      var inconsistenciesList = [];
-      // starting by one time (5) quests to daily (1), do for each period
-      for (var i=5; i>0; i--){
-        pendingQuests.forEach(quest=>{
-          //if the quest period match the current loop
-          if(periodNumberEquvalence(ALL_QUESTS_LIST[quest].period) === i) {
-            //check if there is inconsistencies <=> its requiered quest aren't completed
-            setQuestStateDownward(quest,i).forEach(inconsistency => {
-              var isPresent = false;
-              inconsistenciesList.forEach(couple => {
-                isPresent = isPresent || (couple[0] === quest && couple[1] === inconsistency);
-              });
-              if (! isPresent){
-                inconsistenciesList.push([quest,inconsistency]);
-              }
-            });
 
-            //set the following quest to locked
-            // since it's not a periodic quest, the following quests are have to be locked
-            setQuestStateUpward(quest,i).forEach(inconsistency =>{
-              var isPresent = false;
-              inconsistenciesList.forEach(couple => {
-                isPresent = isPresent || (couple[0] === inconsistency && couple[1] === quest);
-              });
-              if (! isPresent){
-                inconsistenciesList.push([inconsistency,quest]);
+  // this function will ask the user if he remember doing one time quests that can't be calculated
+  function askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback){
+    // if there is unknown quests remaining
+    if (unknowQuestsGroup.length > 0){
+
+      var questsGroup = unknowQuestsGroup.shift();
+      //    if (ALL_QUEST_STATE_TMP[quest] === "???"){
+      if (ALL_QUESTS_LIST[questsGroup[0]].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed"})){
+        questsGroup.forEach(quest => {
+          ALL_QUEST_STATE_TMP[quest] = "completed";
+        });
+        askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback);
+      } else if (ALL_QUESTS_LIST[questsGroup[0]].requires.some(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "locked" && ALL_QUESTS_LIST[requiredQuest].period === 'once'})){
+        questsGroup.forEach(quest => {
+          ALL_QUEST_STATE_TMP[quest] = "locked";
+        });
+        askForUnknowQuestState(unknowQuestsGroup,userDecisions, advice, callback);
+      } else {
+        $("#QL").hide();
+        $("#FC").show('fast');
+        var popup = $(`<div class="MSG" id="MSG_ask_quest_state">Admiral, I need some help to<br>
+        complete your progression on the quest flowchart...<br>
+        Do you already completed those quests ?<br>
+        <button type="button" class="MSG_btn" value="completed">Yes !</button>
+        <button type="button" class="MSG_btn idk" value="completed">I don't know</button>
+        <button type="button" class="MSG_btn" value="locked">No, not yet</button>
+        </div>`);
+        $('body').append(popup);
+        displayPartialTree(questsGroup);
+        displayQuestData(questsGroup[0]);
+        $(".MSG_btn").click(function(){
+          $("#MSG_ask_quest_state").hide("fast").remove();
+          questsGroup.forEach(quest => {
+            ALL_QUEST_STATE_TMP[quest] = $(this).val();
+          });
+          userDecisions[questsGroup[0]] =  $(this).val();
+          if ($(this).hasClass("idk")){
+            ALL_QUESTS_LIST[questsGroup[0]].requires.filter(function(quest){return ALL_QUESTS_LIST[quest].period !== 'once'}).forEach(quest =>{
+              if (advice.indexOf(quest) === -1){
+                advice.push(quest);
               }
             });
           }
+          askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback);
         });
       }
-      return inconsistenciesList;
+    } else {
+      callback(userDecisions, advice);
+    }
+  }
+
+  //this function is called at the end and implement the newly calculated states if there is no inconsistencies, else error message
+  function implementQuestsStateUpdated(pendingQuests, userDecisions, advice, setPeriodicQuestCompleted){
+    ALL_QUEST_STATE = cloneObject(ALL_QUEST_STATE_TMP);
+
+
+    $(".QL_questBox").removeClass("pending locked completed");
+    Object.keys(ALL_QUEST_STATE).forEach(quest =>{
+      updateQuestStateDisplay(quest);
+    });
+    $("#IPQ_error_msg").text("");
+    $(`#IPQ`).hide("fast");
+    updateAllColors();
+    setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, timeStamp:moment().utcOffset("+09:00").format()}),365);
+
+    if (advice.length >0){
+      console.log(advice);
+      // TODO  write the quests that should be completed
     }
 
-    //set the state on one time quests that haven't been affected
-    function setRemainingOnceQuestStateByDeduction(){
-      var askForState = [];
-      // set state of unknow quests
-      // first check once quests.
-      getQuestsInState(ALL_QUEST_STATE_TMP,'???').forEach(quest=>{
-        if(periodNumberEquvalence(ALL_QUESTS_LIST[quest].period) === 5){
-          if (ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed";})){
-            //if they have no requierments or if all are completed, means that it's an isolated once chain list.
-            setUnknowOnceQuestsUpward(quest,"completed");
-          } else if (ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return periodNumberEquvalence(ALL_QUESTS_LIST[requiredQuest].period) === 5;})){
-            // if all required quests are one time quests and there is at least one once quest witha ??? state => do nothing, it will be treated when the previous quest turn come
-            // if there is none with ?? it will be treated before
-          } else if (ALL_QUESTS_LIST[quest].requires.length === 1){
-            // if there is only one peridodic quest in the required list , it means that the quest and the one after are already completed
-            // (else they could hqve been completed at different times so didn't unlock the quest)
-            var previousQuest = ALL_QUESTS_LIST[quest].requires[0];
-            if (searchPendingOrCompletedQuestInUnlocks(previousQuest) &&  periodNumberEquvalence(ALL_QUESTS_LIST[previousQuest].period) <= 4){
-              ALL_QUEST_STATE_TMP[quest] = "completed";
-              ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
-                setUnknowOnceQuestsUpward(nextQuest,"completed");
-              });
-            } else {
-              askForState.push(quest);
+    // display the diagram
+    if(myDiagram){
+      $("#FC_RM_use_pending_quests").prop("checked",true).trigger("change");
+      buildPartialFlowchart();
+    }
+  }
+
+  //set quests's state based on link to the inputed pending quests
+  function setQuestStateLinkedToPendingQuests(pendingQuests){
+    var inconsistenciesList = [];
+    // starting by one time (5) quests to daily (1), do for each period
+    for (var i=5; i>0; i--){
+      pendingQuests.forEach(quest=>{
+        //if the quest period match the current loop
+        if(periodNumberEquvalence(ALL_QUESTS_LIST[quest].period) === i) {
+          //check if there is inconsistencies <=> its requiered quest aren't completed
+          setQuestStateDownward(quest,i).forEach(inconsistency => {
+            var isPresent = false;
+            inconsistenciesList.forEach(couple => {
+              isPresent = isPresent || (couple[0] === quest && couple[1] === inconsistency);
+            });
+            if (! isPresent){
+              inconsistenciesList.push([quest,inconsistency]);
             }
+          });
+
+          //set the following quest to locked
+          // since it's not a periodic quest, the following quests are have to be locked
+          setQuestStateUpward(quest,i).forEach(inconsistency =>{
+            var isPresent = false;
+            inconsistenciesList.forEach(couple => {
+              isPresent = isPresent || (couple[0] === inconsistency && couple[1] === quest);
+            });
+            if (! isPresent){
+              inconsistenciesList.push([inconsistency,quest]);
+            }
+          });
+        }
+      });
+    }
+    return inconsistenciesList;
+  }
+
+  //set the state on one time quests that haven't been affected
+  function setRemainingOnceQuestStateByDeduction(){
+    var askForState = [];
+    // set state of unknow quests
+    // first check once quests.
+    getQuestsInState(ALL_QUEST_STATE_TMP,'???').forEach(quest=>{
+      if(periodNumberEquvalence(ALL_QUESTS_LIST[quest].period) === 5){
+        if (ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed";})){
+          //if they have no requierments or if all are completed, means that it's an isolated once chain list.
+          setUnknowOnceQuestsUpward(quest,"completed");
+        } else if (ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return periodNumberEquvalence(ALL_QUESTS_LIST[requiredQuest].period) === 5;})){
+          // if all required quests are one time quests and there is at least one once quest witha ??? state => do nothing, it will be treated when the previous quest turn come
+          // if there is none with ?? it will be treated before
+        } else if (ALL_QUESTS_LIST[quest].requires.length === 1){
+          // if there is only one peridodic quest in the required list , it means that the quest and the one after are already completed
+          // (else they could hqve been completed at different times so didn't unlock the quest)
+          var previousQuest = ALL_QUESTS_LIST[quest].requires[0];
+          if (searchPendingOrCompletedQuestInUnlocks(previousQuest) &&  periodNumberEquvalence(ALL_QUESTS_LIST[previousQuest].period) <= 4){
+            ALL_QUEST_STATE_TMP[quest] = "completed";
+            ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
+              setUnknowOnceQuestsUpward(nextQuest,"completed");
+            });
           } else {
             askForState.push(quest);
           }
-        }
-      });
-      return askForState;
-    }
-
-    // set periodic quests either as pending if all requierments are completed or to locked
-    function setPeriodicQuestState(){
-      getQuestsInState(ALL_QUEST_STATE_TMP,'???').forEach(quest=>{
-        if(periodNumberEquvalence(ALL_QUESTS_LIST[quest].period) <= 4){
-          if (ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed";})){
-            //if they have no requierments or if all are completed, we assume that it means that this one is pending, and the one after are locked
-            ALL_QUEST_STATE_TMP[quest] = "pending";
-          } else {
-            ALL_QUEST_STATE_TMP[quest] = "locked";
-          }
-        }
-      });
-    }
-
-    // return a number depending of the period's string, for loop comparison purposes
-    function periodNumberEquvalence(period){
-      switch (period){
-        case "daily" : return 1;
-        case "weekly" : return 2;
-        case "monthly" : return 3;
-        case "quarterly" : return 4;
-        case "once" : return 5;
-      }
-    }
-
-    // recusrsive function that update the quests state moving upward and check inconsistencies
-    function setQuestStateUpward(quest,period){
-      let inconsistencies = [];
-      ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest=>{
-        if( ALL_QUEST_STATE_TMP[nextQuest] === '???'){
-          // if not yet filled in, update state to 'locked' if period inferior or equal
-          if(periodNumberEquvalence(ALL_QUESTS_LIST[nextQuest].period) <= period){
-            ALL_QUEST_STATE_TMP[nextQuest] = 'locked';
-          }
-          // ... and continue
-          inconsistencies = inconsistencies.concat(setQuestStateUpward(nextQuest,period));
         } else {
-          //il already updated
-          if(periodNumberEquvalence(ALL_QUESTS_LIST[nextQuest].period) <= period){
-            //problem ou stop if period inferior or equal
-            if (ALL_QUEST_STATE_TMP[nextQuest] === 'pending' ){//||  ALL_QUEST_STATE_TMP[nextQuest] === 'completed'){
-              inconsistencies = [nextQuest];
-            }
-            if (ALL_QUEST_STATE_TMP[nextQuest] === 'completed' ){//||  ALL_QUEST_STATE_TMP[previousQuest] === 'locked'){
-              inconsistencies = inconsistencies.concat(setQuestStateUpward(nextQuest,period));
-            }
-            //else no recurence so stopping here
-          } else {
-            //if  period superior continue
+          askForState.push(quest);
+        }
+      }
+    });
+    return askForState;
+  }
+
+  // set periodic quests either as pending if all requierments are completed or to locked
+  function setPeriodicQuestState(){
+    getQuestsInState(ALL_QUEST_STATE_TMP,'???').forEach(quest=>{
+      if(periodNumberEquvalence(ALL_QUESTS_LIST[quest].period) <= 4){
+        if (ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed";})){
+          //if they have no requierments or if all are completed, we assume that it means that this one is pending, and the one after are locked
+          ALL_QUEST_STATE_TMP[quest] = "pending";
+        } else {
+          ALL_QUEST_STATE_TMP[quest] = "locked";
+        }
+      }
+    });
+  }
+
+  // return a number depending of the period's string, for loop comparison purposes
+  function periodNumberEquvalence(period){
+    switch (period){
+      case "daily" : return 1;
+      case "weekly" : return 2;
+      case "monthly" : return 3;
+      case "quarterly" : return 4;
+      case "once" : return 5;
+    }
+  }
+
+  // recusrsive function that update the quests state moving upward and check inconsistencies
+  function setQuestStateUpward(quest,period){
+    let inconsistencies = [];
+    ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest=>{
+      if( ALL_QUEST_STATE_TMP[nextQuest] === '???'){
+        // if not yet filled in, update state to 'locked' if period inferior or equal
+        if(periodNumberEquvalence(ALL_QUESTS_LIST[nextQuest].period) <= period){
+          ALL_QUEST_STATE_TMP[nextQuest] = 'locked';
+        }
+        // ... and continue
+        inconsistencies = inconsistencies.concat(setQuestStateUpward(nextQuest,period));
+      } else {
+        //il already updated
+        if(periodNumberEquvalence(ALL_QUESTS_LIST[nextQuest].period) <= period){
+          //problem ou stop if period inferior or equal
+          if (ALL_QUEST_STATE_TMP[nextQuest] === 'pending' ){//||  ALL_QUEST_STATE_TMP[nextQuest] === 'completed'){
+            inconsistencies = [nextQuest];
+          }
+          if (ALL_QUEST_STATE_TMP[nextQuest] === 'completed' ){//||  ALL_QUEST_STATE_TMP[previousQuest] === 'locked'){
             inconsistencies = inconsistencies.concat(setQuestStateUpward(nextQuest,period));
           }
-        }
-      });
-      return inconsistencies;
-    }
-
-    // recusrsive function that  check inconsistencies moving downward
-    function setQuestStateDownward(quest,period){
-      let inconsistencies = [];
-      ALL_QUESTS_LIST[quest].requires.forEach(previousQuest => {
-        if( ALL_QUEST_STATE_TMP[previousQuest] === '???'){
-
-          // if not yet filled in, update state to 'completed' if period superior or equal
-          if(periodNumberEquvalence(ALL_QUESTS_LIST[previousQuest].period) >= period){
-            ALL_QUEST_STATE_TMP[previousQuest] = 'completed';
-          }
-          // ...and continue
-          inconsistencies = inconsistencies.concat(setQuestStateDownward(previousQuest,period));
+          //else no recurence so stopping here
         } else {
-          //if already updateNodeDisplay
-          if(periodNumberEquvalence(ALL_QUESTS_LIST[previousQuest].period) >= period){
-            //problem ou stop if period superior or equal
-            if (ALL_QUEST_STATE_TMP[previousQuest] === 'pending' ){//||  ALL_QUEST_STATE_TMP[previousQuest] === 'locked'){
-              inconsistencies = [previousQuest];
-            }
-            if (ALL_QUEST_STATE_TMP[previousQuest] === 'locked' ){//||  ALL_QUEST_STATE_TMP[previousQuest] === 'locked'){
-              inconsistencies = inconsistencies.concat(setQuestStateDownward(previousQuest,period));
-            }
-            //else no recurence so stopping here
-          } else {
-            //if  period inferior continue
+          //if  period superior continue
+          inconsistencies = inconsistencies.concat(setQuestStateUpward(nextQuest,period));
+        }
+      }
+    });
+    return inconsistencies;
+  }
+
+  // recusrsive function that  check inconsistencies moving downward
+  function setQuestStateDownward(quest,period){
+    let inconsistencies = [];
+    ALL_QUESTS_LIST[quest].requires.forEach(previousQuest => {
+      if( ALL_QUEST_STATE_TMP[previousQuest] === '???'){
+
+        // if not yet filled in, update state to 'completed' if period superior or equal
+        if(periodNumberEquvalence(ALL_QUESTS_LIST[previousQuest].period) >= period){
+          ALL_QUEST_STATE_TMP[previousQuest] = 'completed';
+        }
+        // ...and continue
+        inconsistencies = inconsistencies.concat(setQuestStateDownward(previousQuest,period));
+      } else {
+        //if already updateNodeDisplay
+        if(periodNumberEquvalence(ALL_QUESTS_LIST[previousQuest].period) >= period){
+          //problem ou stop if period superior or equal
+          if (ALL_QUEST_STATE_TMP[previousQuest] === 'pending' ){//||  ALL_QUEST_STATE_TMP[previousQuest] === 'locked'){
+            inconsistencies = [previousQuest];
+          }
+          if (ALL_QUEST_STATE_TMP[previousQuest] === 'locked' ){//||  ALL_QUEST_STATE_TMP[previousQuest] === 'locked'){
             inconsistencies = inconsistencies.concat(setQuestStateDownward(previousQuest,period));
           }
+          //else no recurence so stopping here
+        } else {
+          //if  period inferior continue
+          inconsistencies = inconsistencies.concat(setQuestStateDownward(previousQuest,period));
         }
-      });
-      return inconsistencies;
-    }
-
-    // set one time quests to 'completed' or "locked" starting form one quest
-    function setUnknowOnceQuestsUpward(quest,state){
-      if ( ALL_QUEST_STATE_TMP[quest] === "???" &&
-      ((state === 'completed'
-      && ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed";})
-      && ALL_QUESTS_LIST[quest].period === "once")
-      || state === 'locked')){
-        ALL_QUEST_STATE_TMP[quest] = state;
-        ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
-          setUnknowOnceQuestsUpward(nextQuest,state);
-        });
       }
-    }
-    // this function take all the quests with the ??? state (unknown) and regroup the by block that are in the same state (completed or lacked)
-    function createUnknownOnceQuestGroup(quest,startingUnknownQuestsList){
-      var unknownQuestGroup = [quest];
+    });
+    return inconsistencies;
+  }
+
+  // set one time quests to 'completed' or "locked" starting form one quest
+  function setUnknowOnceQuestsUpward(quest,state){
+    if ( ALL_QUEST_STATE_TMP[quest] === "???" &&
+    ((state === 'completed'
+    && ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed";})
+    && ALL_QUESTS_LIST[quest].period === "once")
+    || state === 'locked')){
+      ALL_QUEST_STATE_TMP[quest] = state;
       ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
-        if (startingUnknownQuestsList.indexOf(nextQuest) === -1 && ALL_QUEST_STATE_TMP[nextQuest] === "???" && ALL_QUESTS_LIST[nextQuest].period==="once"){
-          unknownQuestGroup = unknownQuestGroup.concat(createUnknownOnceQuestGroup(nextQuest,startingUnknownQuestsList));
-        }
+        setUnknowOnceQuestsUpward(nextQuest,state);
       });
-      return unknownQuestGroup;
     }
+  }
+  // this function take all the quests with the ??? state (unknown) and regroup the by block that are in the same state (completed or lacked)
+  function createUnknownOnceQuestGroup(quest,startingUnknownQuestsList){
+    var unknownQuestGroup = [quest];
+    ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
+      if (startingUnknownQuestsList.indexOf(nextQuest) === -1 && ALL_QUEST_STATE_TMP[nextQuest] === "???" && ALL_QUESTS_LIST[nextQuest].period==="once"){
+        unknownQuestGroup = unknownQuestGroup.concat(createUnknownOnceQuestGroup(nextQuest,startingUnknownQuestsList));
+      }
+    });
+    return unknownQuestGroup;
+  }
 
-    // check if there is any double in the tables and separate them into new groups
-    function separateGroupDoublons(GroupsList, startingUnknownQuestsList){
-      var counter = 0;
-      //clone the array
-      unknowQuestsGroup = GroupsList.slice(0);
-      GroupListOutput = [];
+  // check if there is any double in the tables and separate them into new groups
+  function separateGroupDoublons(GroupsList, startingUnknownQuestsList){
+    var counter = 0;
+    //clone the array
+    unknowQuestsGroup = GroupsList.slice(0);
+    GroupListOutput = [];
 
-      while (unknowQuestsGroup.length > 0 ){
+    while (unknowQuestsGroup.length > 0 ){
 
-        counter ++;
+      counter ++;
 
-        var group = unknowQuestsGroup.shift();
-        var groupOutput = [];
+      var group = unknowQuestsGroup.shift();
+      var groupOutput = [];
 
-        group.forEach(quest => {
-          var listOfGroups = [group];
+      group.forEach(quest => {
+        var listOfGroups = [group];
 
-          //check if there is any double
-          unknowQuestsGroup.forEach(otherGroup =>{
-            if(otherGroup.indexOf(quest) !== -1){
-              listOfGroups.push(otherGroup)
-            }
-          });
-
-          // if any double are found
-          if (listOfGroups.length >1){
-            //create the new group
-            var newGroup= createUnknownOnceQuestGroup(quest,startingUnknownQuestsList);
-            //add the subGroup to the list of group
-            unknowQuestsGroup.push(newGroup);
-            // set the quest as a new starter
-            startingUnknownQuestsList.push(quest);
-            //remove the elements from newGroup from the other groups
-            listOfGroups.forEach(group => {
-              newGroup.forEach(quest =>{
-                group.splice(group.indexOf(quest), 1);
-              });
-            });
-          } else {
-            //just add the quest to the group
-            groupOutput.push(quest);
+        //check if there is any double
+        unknowQuestsGroup.forEach(otherGroup =>{
+          if(otherGroup.indexOf(quest) !== -1){
+            listOfGroups.push(otherGroup)
           }
         });
-        GroupListOutput.push(groupOutput);
-      }
-      return GroupListOutput;
-    }
 
-
-    // serach if there is any "pendind" or "completed" quest in the quests unlocked by this one
-    function searchPendingOrCompletedQuestInUnlocks(quest){
-      var isFound = false;
-      ALL_QUESTS_LIST[quest].unlocks.forEach(unlockedQuest =>{
-        if (ALL_QUEST_STATE_TMP[unlockedQuest] === 'pending' || ALL_QUEST_STATE_TMP[unlockedQuest] === 'completed'){
-          isFound = true;
+        // if any double are found
+        if (listOfGroups.length >1){
+          //create the new group
+          var newGroup= createUnknownOnceQuestGroup(quest,startingUnknownQuestsList);
+          //add the subGroup to the list of group
+          unknowQuestsGroup.push(newGroup);
+          // set the quest as a new starter
+          startingUnknownQuestsList.push(quest);
+          //remove the elements from newGroup from the other groups
+          listOfGroups.forEach(group => {
+            newGroup.forEach(quest =>{
+              group.splice(group.indexOf(quest), 1);
+            });
+          });
         } else {
-          isFound = isFound || searchPendingOrCompletedQuestInUnlocks(unlockedQuest);
+          //just add the quest to the group
+          groupOutput.push(quest);
         }
       });
-      return isFound;
+      GroupListOutput.push(groupOutput);
+    }
+    return GroupListOutput;
+  }
+
+
+  // serach if there is any "pendind" or "completed" quest in the quests unlocked by this one
+  function searchPendingOrCompletedQuestInUnlocks(quest){
+    var isFound = false;
+    ALL_QUESTS_LIST[quest].unlocks.forEach(unlockedQuest =>{
+      if (ALL_QUEST_STATE_TMP[unlockedQuest] === 'pending' || ALL_QUEST_STATE_TMP[unlockedQuest] === 'completed'){
+        isFound = true;
+      } else {
+        isFound = isFound || searchPendingOrCompletedQuestInUnlocks(unlockedQuest);
+      }
+    });
+    return isFound;
+  }
+
+
+
+
+  // calculate the requierments for the selected quest (by analyzing the required quest list)
+  function calculateQuestRequirements(questList){
+    var requirements = {S:[],E:[],M:[],C:[],I:[],Q:[],R:[]};
+    var rewardsList = {};
+
+    // if the "hide quest rewards" is checked, the items got as reward and required in following quests won't be displayed
+    // so all the reward items are saved in the rewardsList object
+    if($("#FC_FT_quest_requirement_hide_quest_rewards").is(':checked')){
+      questList.forEach(quest => {
+        ALL_QUESTS_LIST[quest].reward.forEach(reward => {
+          rewardsList[reward[1]] = (rewardsList[reward[1]] || 0 ) + reward[2];
+        });
+      })
     }
 
-
-
-
-    // calculate the requierments for the selected quest (by analyzing the required quest list)
-    function calculateQuestRequirements(questList){
-      var requirements = {S:[],E:[],M:[],C:[],I:[],Q:[],R:[]};
-      var rewardsList = {};
-
-      // if the "hide quest rewards" is checked, the items got as reward and required in following quests won't be displayed
-      // so all the reward items are saved in the rewardsList object
-      if($("#FC_FT_quest_requirement_hide_quest_rewards").is(':checked')){
-        questList.forEach(quest => {
-          ALL_QUESTS_LIST[quest].reward.forEach(reward => {
-            rewardsList[reward[1]] = (rewardsList[reward[1]] || 0 ) + reward[2];
-          });
-        })
-      }
-
-      // for each quest save the requierments
-      questList.forEach(quest => {
-        Object.keys(ALL_QUESTS_LIST[quest].needs).forEach(category =>{
-          ALL_QUESTS_LIST[quest].needs[category].forEach(item =>{
-            // depending of the category, the data are saved as string or as array, so there are different processes
-            if(typeof item === 'string'){
-              // string are requierments that doesn't need a quentity (ship, maps...)
-              // (so they just need to be in the table once)
-              // if the item is not in the table or in the rewards, add it
-              if ($.inArray(item,requirements[category]) === -1 && !has.call(rewardsList, item)){
-                requirements[category].push(item);
+    // for each quest save the requierments
+    questList.forEach(quest => {
+      Object.keys(ALL_QUESTS_LIST[quest].needs).forEach(category =>{
+        ALL_QUESTS_LIST[quest].needs[category].forEach(item =>{
+          // depending of the category, the data are saved as string or as array, so there are different processes
+          if(typeof item === 'string'){
+            // string are requierments that doesn't need a quentity (ship, maps...)
+            // (so they just need to be in the table once)
+            // if the item is not in the table or in the rewards, add it
+            if ($.inArray(item,requirements[category]) === -1 && !has.call(rewardsList, item)){
+              requirements[category].push(item);
+            }
+          } else {
+            // if the object is an array, it's associated with a quentity (equipemnt, ressources ...)
+            var i=0;
+            var isInArray = false;
+            // for each object in the category array
+            while (i<requirements[category].length && !isInArray){
+              //check if the name of the item to add is the same as one element of the array
+              if (item[0] === requirements[category][i][0]){
+                // if it's the case, it just add its quantity to the quantity saved in array,
+                requirements[category][i][1] += item[1];
+                isInArray = true;
               }
-            } else {
-              // if the object is an array, it's associated with a quentity (equipemnt, ressources ...)
-              var i=0;
-              var isInArray = false;
-              // for each object in the category array
-              while (i<requirements[category].length && !isInArray){
-                //check if the name of the item to add is the same as one element of the array
-                if (item[0] === requirements[category][i][0]){
-                  // if it's the case, it just add its quantity to the quantity saved in array,
-                  requirements[category][i][1] += item[1];
-                  isInArray = true;
+              i++;
+            }
+            //if the object isn't in the array
+            if (!isInArray){
+              //check the quantity of the item get as reward before
+              var quantity = item[1];
+              if(has.call(rewardsList, item[0])){
+                //if it's a reward, substract it's quantity and if there is some left add it to the requierment array
+                quantity = quantity - rewardsList[item[0]];
+                rewardsList[item[0]] = rewardsList[item[0]] - item[1];
+                if (rewardsList[item[0]] <= 0){
+                  //TODO test if this is needed or not
+                  delete rewardsList[item[0]];
                 }
-                i++;
               }
-              //if the object isn't in the array
-              if (!isInArray){
-                //check the quantity of the item get as reward before
-                var quantity = item[1];
-                if(has.call(rewardsList, item[0])){
-                  //if it's a reward, substract it's quantity and if there is some left add it to the requierment array
-                  quantity = quantity - rewardsList[item[0]];
-                  rewardsList[item[0]] = rewardsList[item[0]] - item[1];
-                  if (rewardsList[item[0]] <= 0){
-                    //TODO test if this is needed or not
-                    delete rewardsList[item[0]];
-                  }
-                }
-                if (quantity > 0){
-                  requirements[category].push([item[0],quantity]);
-                }
+              if (quantity > 0){
+                requirements[category].push([item[0],quantity]);
               }
             }
-          });
+          }
         });
       });
-      return requirements;
-    }
+    });
+    return requirements;
+  }
 
-    // create the HTML code for a quest box in the questlist panel
-    function createQuestBox(questCode){
-      let quest = ALL_QUESTS_LIST[questCode];
-      return `<div class="QL_questBox ${quest.period}" id='QL_questBox_${questCode}'>
-      <div class="cellDiv" style=" height:75px;  top:0px; left:0px; ${quest.period !== "once" ? "width: calc(100% - 30px); padding-right:30px":"width:100%;"}">
-      <div class="centeredContent">
-      ${questCode}: ${quest.Jp}
-      <br>${quest.En}
-      </div>
-      </div>
-
-      <div class="cellDiv" style="width:100%; height:148px;  top:75px; left:0px; position:relative">
-      <button type="button" class="complete_btn" id='QL_complete_btn_${questCode}'>set as completed</button>
-
-      <div class="centeredContent">${quest.content}</div>
-      </div>
-
-      <div class="cellDiv" style="width:40%; height:75px;  bottom:75px; left:0px;">
-      <div class="centeredContent">${quest.ressources.F} / ${quest.ressources.A} / ${quest.ressources.S} / ${quest.ressources.B}</div>
-      </div>
-
-      <div class="cellDiv" style="width:60%; height:75px;  bottom:75px; left:40%;">
-      <div class="centeredContent">${parseRewardObject(quest.reward)}</div>
-      </div>
-
-      <div class="cellDiv" style="width:50%; height:75px;  bottom:0px; left:0px;">
-      <div class="centeredContent">${(quest.requires.length !== 0) ? 'Requires: ' : ''}${quest.requires.join(', ')}</div>
-      </div>
-
-      <div class="cellDiv" style="width:50%; height:75px;  bottom:0px; left:50%;">
-      <div class="centeredContent">${(quest.unlocks.length !== 0) ? 'Unlocks: ' : ''}${quest.unlocks.join(', ')}</div>
-      </div>
+  // create the HTML code for a quest box in the questlist panel
+  function createQuestBox(questCode){
+    let quest = ALL_QUESTS_LIST[questCode];
+    return `<div class="QL_questBox ${quest.period}" id='QL_questBox_${questCode}'>
+    <div class="cellDiv" style=" height:40px;  top:0px; left:0px; width: calc(100% - 40px); padding-right:40px; line-height:40px;">
 
 
-      </div>`;
-    }
+    <input type="checkbox" class="QL_selected_checkbox" id="QL_selected_${questCode}">
+    <b> ${questCode}</b>
+
+    <button type="button" class="QL_questBox_goToChart_btn" id='QL_goToChart_btn_${questCode}'>See on flowchart</button>
+    <button type="button" class="QL_questBox_complete_btn" id='QL_complete_btn_${questCode}'>Set as completed</button>
+
+
+    </div>
+    <div class="cellDiv" style=" height:75px;  top:40px; left:0px; width:100%;"}">
+    <div class="centeredContent">
+    ${quest.Jp}
+    <br>${quest.En}
+    </div>
+    </div>
+
+    <div class="cellDiv" style="width:100%; height:123px;  top:115px; left:0px; position:relative">
+
+    <div class="centeredContent">${addShipImageToContent(quest)}</div>
+    </div>
+
+    <div class="cellDiv" style="width:25%; height:100px;  bottom:75px; left:0px;">
+    <div class="centeredContent" style="text-align:left;">
+    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/fuel.png"></span> &nbsp;${quest.ressources.F} <br>
+    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/ammo.png"></span> &nbsp;${quest.ressources.A} <br>
+    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/steel.png"></span> &nbsp;${quest.ressources.S} <br>
+    &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/bauxite.png"></span> &nbsp;${quest.ressources.B}</div>
+    </div>
+
+    <div class="cellDiv" style="width:75%; height:100px;  bottom:75px; left:25%;">
+    <div class="centeredContent">${parseRewardObject(quest.reward)}</div>
+    </div>
+
+    <div class="cellDiv" style="width:50%; height:75px;  bottom:0px; left:0px;">
+    <div class="centeredContent">${(quest.requires.length !== 0) ? 'Requires: ' : ''}${quest.requires.join(', ')}</div>
+    </div>
+
+    <div class="cellDiv" style="width:50%; height:75px;  bottom:0px; left:50%;">
+    <div class="centeredContent">${(quest.unlocks.length !== 0) ? 'Unlocks: ' : ''}${quest.unlocks.join(', ')}</div>
+    </div>
+
+
+    </div>`;
+  }
 
 
 
 
 
-    // **********    DISPLAY FUNCTIONS   ***********
+  // **********    DISPLAY FUNCTIONS   ***********
 
-    // change the colors of a node
-    function updateNodeDisplay(node,fill, state, period){
-      node.findObject("SHAPE").fill = fill;
-      node.findObject("SHAPE").stroke = COLORS[state].border ? COLORS[state].border_color : "#000000";
-      node.findObject("SHAPE").strokeWidth =  COLORS[state].border ? COLORS[state].border_width : 5;
-      node.findObject("TEXT").stroke = tinycolor(fill).isLight() ? "#000000" : "#ffffff";
-      node.findObject("RIBBON").opacity = period !== 'once' ? 1 : 0;
-      node.findObject("RIBBON_TEXT").text = period;
-      node.findObject("RIBBON").fill = getRibbonColor(period);
-    }
+  // change the colors of a node
+  function updateNodeDisplay(node,fill, state, period){
+    node.findObject("SHAPE").fill = fill;
+    node.findObject("SHAPE").stroke = COLORS[state].border ? COLORS[state].border_color : "#000000";
+    node.findObject("SHAPE").strokeWidth =  COLORS[state].border ? COLORS[state].border_width : 5;
+    node.findObject("TEXT").stroke = tinycolor(fill).isLight() ? "#000000" : "#ffffff";
+    node.findObject("RIBBON").opacity = period !== 'once' ? 1 : 0;
+    node.findObject("RIBBON_TEXT").text = period;
+    node.findObject("RIBBON").fill = getRibbonColor(period);
+  }
 
-    // change the display of one quest everywhere depending on its state
-    function updateQuestStateDisplay(quest){
-      var questBox = $(`#QL_questBox_${quest}`);
-      var state = ALL_QUEST_STATE[quest];
-      questBox.removeClass("pending completed locked").addClass(state);
+  // change the display of one quest everywhere depending on its state
+  function updateQuestStateDisplay(quest){
+    var questBox = $(`#QL_questBox_${quest}`);
+    var state = ALL_QUEST_STATE[quest];
+    questBox.removeClass("pending completed locked").addClass(state);
 
-      if(state === 'pending'){
-        $(`#QL_complete_btn_${quest}`).show();
-      } else {
-        $(`#QL_complete_btn_${quest}`).hide();
-      }
-    }
-
-    // display quest data in the footer
-    function displayQuestData(questCode){
-      var quest = ALL_QUESTS_LIST[questCode];
-      var color = getQuestColor(questCode,'default')
-      $('#FC_FT .cellDiv').css('background', color).css('color',tinycolor(color).isLight() ? "#000000" : "#ffffff");
-      $('#FC_FT_quest_info_quest_code').text(questCode);
-      $('#FC_FT_quest_info_name_Japanese').text(quest.Jp);
-      $('#FC_FT_quest_info_name_English').text(quest.En);
-      $('#FC_FT_quest_info_content').text(quest.content);
-      $('#FC_FT_quest_info_ressources').text(`${quest.ressources.F} / ${quest.ressources.A} / ${quest.ressources.S} / ${quest.ressources.B}`);
-      $('#FC_FT_quest_info_reward').html(parseRewardObject(quest.reward));
-      $('#FC_FT_quest_info_requires').html(((quest.requires.length !== 0) ? `Requires: <br>${quest.requires}` : ''));
-      $('#FC_FT_quest_info_unlocks').html(((quest.unlocks.length !== 0) ? `Unlocks: <br>${quest.unlocks}` : ''));
-      if(ALL_QUEST_STATE[questCode] === 'pending'){
-        $(`#FC_FT_quest_info_complete_btn`).show();
-      } else {
-        $(`#FC_FT_quest_info_complete_btn`).hide();
-      }
-      /*
-      if(COLORS[ALL_QUEST_STATE[questCode]].border){
-      $("#FC_FT")
-      .css("border-width",COLORS[ALL_QUEST_STATE[questCode]].border_width)
-      .css("border-color",COLORS[ALL_QUEST_STATE[questCode]].border_color);
+    if(state === 'pending'){
+      $(`#QL_complete_btn_${quest}`).css('visibility', 'visible');
     } else {
-    $("#FC_FT").css("border-width",'2px').css("border-color",'black');
-  }*/
+      $(`#QL_complete_btn_${quest}`).css('visibility', 'hidden');
+    }
+  }
+
+  // display quest data in the footer
+  function displayQuestData(questCode){
+    var quest = ALL_QUESTS_LIST[questCode];
+    var color = getQuestColor(questCode,'default')
+    $('#FC_FT .cellDiv').css('background', color).css('color',tinycolor(color).isLight() ? "#000000" : "#ffffff");
+    $('#FC_FT_quest_info_quest_code').text(questCode);
+    $('#FC_FT_quest_info_name_Japanese').text(quest.Jp);
+    $('#FC_FT_quest_info_name_English').text(quest.En);
+    $('#FC_FT_quest_info_content').html(addShipImageToContent(quest));
+    addShipNameHoveringEvents($('#FC_FT_quest_info_content'));
+    $('#FC_FT_quest_info_ressources').text(`${quest.ressources.F} / ${quest.ressources.A} / ${quest.ressources.S} / ${quest.ressources.B}`);
+    $('#FC_FT_quest_info_reward').html(parseRewardObject(quest.reward));
+    $('#FC_FT_quest_info_requires').html(((quest.requires.length !== 0) ? `Requires: <br>${quest.requires}` : ''));
+    $('#FC_FT_quest_info_unlocks').html(((quest.unlocks.length !== 0) ? `Unlocks: <br>${quest.unlocks}` : ''));
+    if(ALL_QUEST_STATE[questCode] === 'pending'){
+      $(`#FC_FT_quest_info_complete_btn`).show();
+    } else {
+      $(`#FC_FT_quest_info_complete_btn`).hide();
+    }
+    /*
+    if(COLORS[ALL_QUEST_STATE[questCode]].border){
+    $("#FC_FT")
+    .css("border-width",COLORS[ALL_QUEST_STATE[questCode]].border_width)
+    .css("border-color",COLORS[ALL_QUEST_STATE[questCode]].border_color);
+  } else {
+  $("#FC_FT").css("border-width",'2px').css("border-color",'black');
+}*/
 }
 
 // display all the quest boxes listed
 function displayAllQuestBoxes(listQuests){
   listQuests.forEach(quest => {
     $("#QL_quest_boxes").append(createQuestBox(quest));
+    addShipNameHoveringEvents($(`#QL_questBox_${quest}`));
   });
 }
 
@@ -1178,7 +1194,7 @@ function displayQuestRequirements(questList){
       <div id="requirements_${categoryTxt}">`;
       requirements[category].forEach(item => {
         if (category === "S"){
-          requirementsHTML += `<span><img class="ship_icon" src="files/ships/${item}.png"></span> &nbsp;`;
+          requirementsHTML += `<span><img class="ship_icon" src="files/webpage/ships/${item}.png"></span> &nbsp;`;
         }
         if(typeof item === 'string'){
           requirementsHTML += `${item}<br>`;
@@ -1425,6 +1441,18 @@ function removeRibbonFromDiv(divJQ){
   divJQ.removeClass("wrapper").find(".ribbon-wrapper").remove();
 }
 
+function addShipNameHoveringEvents(JqueryText){
+  JqueryText.find(".ship_hover").mouseenter(function(){
+    var position = $(this).offset();
+    position.top -= 40;
+    var imageTag=`<div class="hovering_icon" style="position:absolute; background-color:pink;z-index:200"><img class="ship_icon" src="files/webpage/ships/${$(this).attr("value")}.png"></span></div>`;
+    $("body").append(imageTag).find(".hovering_icon").offset(position);
+  });
+  JqueryText.find(".ship_hover").mouseleave(function(){
+    $(".hovering_icon").remove();
+  });
+}
+
 
 //   *******    TEXT MODIFICATIONS   **********
 
@@ -1437,7 +1465,7 @@ function parseRewardObject(reward){
     if (has.call(ICONS_LINK, loot[1])){
       output += `<span><img class="reward_icon" src="${ICONS_LINK[loot[1]]}"></span> &nbsp;`;
     }
-      output += `${loot[1]}`;
+    output += `${loot[1]}`;
     if(loot[0] !== 'A' && loot[0] !== 'S' && loot[0] !== 'F' && loot[2] !== 1){
       //show the quantity
       output += ` x ${loot[2]}`;
@@ -1512,6 +1540,35 @@ function formatTextLineBreak(text, length){
   });
   return output;
 }
+
+//search for required ship in the content text and put the link to their icon in the text
+function addShipImageToContent(quest){
+  var contentWithImages = quest.content;
+  if (has.call(quest.needs, 'S')){
+    quest.needs.S.forEach(ship =>{
+      var position = contentWithImages.indexOf(ship);
+      if (position !== -1){
+        contentWithImages = `${contentWithImages.substr(0, position)}<span class="ship_hover" value="${ship}">${ship}</span> ${contentWithImages.substr(position + ship.length)}`;
+
+      }
+    });
+  }
+  return contentWithImages;
+}
+
+/*
+function addShipImageToContent(quest){
+  var contentWithImages = quest.content;
+  if (has.call(quest.needs, 'S')){
+    quest.needs.S.forEach(ship =>{
+      var position = contentWithImages.indexOf(ship);
+      if (position !== -1){
+        contentWithImages = `${contentWithImages.substr(0, position)}<span><img class="mini_ship_icon" src="files/webpage/ships/${ship}.png"></span> ${contentWithImages.substr(position)}`;
+      }
+    });
+  }
+  return contentWithImages;
+}*/
 
 
 // **********  TIME FUNCTIONS  ************
@@ -1824,13 +1881,15 @@ $('#IPQ_btn_cancel').click(function () {
 });
 
 // on doubleclick set it as finalquest in the flowchart
-$(".QL_questBox").dblclick(function(e){
-  var quest = $(this).attr("id").split('_')[2];
+$(".QL_questBox_goToChart_btn").click(function(e){
+  selectedNodes = [];
+  $(".QL_selected_checkbox:checked").each(function(){
+    selectedNodes.push($(this).attr("id").split('_')[2]);
+  });
   $("#QL").hide();
   $("#FC").show('fast');
-  $("#FC_RM_ending_quests").val(quest);
+  $("#FC_RM_ending_quests").val(selectedNodes.join(', '));
   buildPartialFlowchart();
-  selectedNodes = [quest];
   hightlightQuest();
 });
 
@@ -1847,7 +1906,7 @@ $("#QL_RM_reset").click(function(){
 
 
 // set the quest as completed
-$(".complete_btn").click(function(){
+$(".complete_btn, .QL_questBox_complete_btn").click(function(){
   var id = $(this).attr("id").split('_');
   var quest = '';
   if(id[0] === 'FC'){
@@ -1867,11 +1926,11 @@ $(`#FC_FT_quest_info_complete_btn`).click(function(){
 
 // change the diagram size when the window size is changed
 $( window ).resize(function() {
-resizeWindow();
+  resizeWindow();
 });
 
 function resizeWindow(){
-    resizeFlowchart( $(window).height() - 240 - 4, $(window).width() - 175 -20);
+  resizeFlowchart( $(window).height() - 240 - 4, $(window).width() - 175 -20);
 }
 
 });
