@@ -176,7 +176,7 @@ $(function () {
   myDiagram.nodeTemplate =
   $(go.Node, "Auto",
   new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
-  $(go.Shape, "Rectangle",
+    $(go.Shape, "Rectangle",
   { portId: "", fromLinkable: true, toLinkable: true, cursor: "pointer",
   toEndSegmentLength: 50, fromEndSegmentLength: 40, name:"SHAPE",
   minSize: new go.Size(200, 150)},
@@ -749,6 +749,12 @@ $(function () {
       $("#FC_RM_use_pending_quests").prop("checked",true).trigger("change");
       buildPartialFlowchart();
     }
+
+    //fire event for tutorial_answer
+    if($("#tuto").is(':visible')){
+        $("#tuto").trigger("tutorial_answer");
+    }
+
   }
 
   //set quests's state based on link to the inputed pending quests
@@ -1465,7 +1471,11 @@ function parseRewardObject(reward){
     // if it's an unique object
     output += `<br>${loot[3] ? loot[3] : ""}`;
     if (has.call(ICONS_LINK, loot[1])){
+      // if the item icon is listed, show it
       output += `<span><img class="reward_icon" src="${ICONS_LINK[loot[1]]}"></span> &nbsp;`;
+    } else if( loot[0] === 'S'){
+      // if it's a ship show the icon
+      output += `<span><img class="ship_icon" src="files/webpage/ships/${loot[1]}.png"></span> &nbsp;`;
     }
     output += `${loot[1]}`;
     if(loot[0] !== 'A' && loot[0] !== 'S' && loot[0] !== 'F' && loot[2] !== 1){
@@ -1910,7 +1920,7 @@ $("#QL_RM_reset_search").click(function(){
 });
 
 $("#QL_RM_reset_selection").click(function(){
-$(".QL_selected_checkbox").prop("checked",false);
+$(".QL_selected_checkbox").prop("checked",false).trigger("change");
 });
 
 
@@ -1933,6 +1943,19 @@ $(".complete_btn, .QL_questBox_complete_btn").click(function(){
 $(`#FC_FT_quest_info_complete_btn`).click(function(){
   $(this).hide();
 });
+
+$(".QL_selected_checkbox").change(function(){
+   var questBox = $(`#QL_questBox_${$(this).attr('id').split("_")[2]}`);
+  if($(this).is(":checked")){
+    questBox.css("border-width",COLORS.selected.border_width)
+    .css("border-color",COLORS.selected.border_color)
+    .css("margin",12 - COLORS.selected.border_width);
+  } else {
+    //TODO put the right size of border
+    questBox.css("border-width",'2px').css("border-color",'black').css("margin",10);
+  }
+});
+
 
 // change the diagram size when the window size is changed
 $( window ).resize(function() {

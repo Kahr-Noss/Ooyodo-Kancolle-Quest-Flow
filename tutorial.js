@@ -8,11 +8,11 @@ $(function () {
     var tutorial = $(`<div id="tuto" style="top:100px; left:100px">
     <img src="files/webpage/Ooyodo.jpg">
     <div id="tuto_content"  style="display:inline-block; height:100%">
-    <center><span id="tuto_text">
+    <center><p id="tuto_text">
     Hello, it seems that's the first time you come here!
     <br>
     Do you want to follow the tutorial?
-    </span>
+    </p>
     <br>
     <button id="tuto_no" style="height:30px; width:80px;">No</button>
     <button id="tuto_yes" style="height:30px; width:80px;">Yes!</button>
@@ -29,7 +29,7 @@ $(function () {
   }
 
   function step_2_acceptCookies(){
-    $("#tuto_text").html(`If you want me to remember your quest progression and your settings,<br>
+    $("#tuto_text").html(`If you want me to remember your quest progression and your settings,
       you have to allow me to use cookies for this website.<br>
       Is that OK with you?`);
       $("#tuto_yes, tuto_no").off("click");
@@ -43,11 +43,12 @@ $(function () {
     }
 
     function step_3_flowchartPresentation(){
-      $("#tuto_text").html(`As you can see, I've already written the flowchart.<br>
-      It might have taken me some time, but there was a lot of data to write.<br>
+      $("#tuto_text").html(`As you can see, I've already written the flowchart.
+      It might have taken me some time, but there was a lot of data to write.
       <br>
-      But right now the display is very messy and it's difficult to find<br>
-      the information you want.<br>
+      But right now the display is very messy and it's difficult to find
+      the information you want.
+      <br>
       Let's tidy it a bit!`);
       $("#tuto_yes, #tuto_no").remove();
       $("#tuto_content").append($(`<button id="tuto_next" style="height:30px; width:80px;">Next =></button>`));
@@ -57,16 +58,14 @@ $(function () {
     }
 
     function   step_4_inputPendingQuests(){
-      $("#tuto_text").html(`Let's firstly input your pending quests, in other words<br>
-      the quests that are waiting to be completed in your<br>
-      in-game quest panel. You can easily find their code on the<br>
-      flowchart tab of KC3 viewer.<br>
-      <br>
-      To input them, click on this button and type their code <b>separated by commas</b>.<br>
-      You only need to input the one-time quests, and not the periodic ones (daily, weekly...).<br>
-      If there is any inconsistencies in what you input, I'll tell you.<br>
-      The case and spacing doesn't matter, I'll always be able to understand what you type, Admiral.<br>
-      <br>
+      $("#tuto_text").html(`Let's firstly input your pending quests, in other words the quests that are waiting to be
+      completed in your in-game quest panel. You can easily find their code on the flowchart tab of KC3 viewer.
+      <br><br>
+      To input them, click on this button and type their code <b>separated by commas</b>.
+      You only need to input the one-time quests, and not the periodic ones (daily, weekly...).
+      If there is any inconsistencies in what you input, I'll tell you.
+      The case and spacing doesn't matter, I'll always be able to understand what you type, Admiral.
+      <br><br>
       For this tutorial, let's input the following quests (you can copy/paste them): <br>
       A29, A46, A65, A71, B12, B32, B44, Bd8, Bw7, D21, D23, F36, F42<br>
       Click on OK when you are done.`);
@@ -96,52 +95,63 @@ $(function () {
     }
 
     function step_4_fail(){
-      $("#tuto_text").html(`That's not what I told you!<br>
+      $("#tuto_text").html(`That's not what I told you!
       Please stay focused Admiral and type the following quests in the box:<br>
-      A22, A29, A31<br>
+      A29, A46, A65, A71, B12, B32, B44, Bd8, Bw7, D21, D23, F36, F42<br>
       Click on OK when you are done.`);
     }
 
     function step_4_2_UnknownQuests(){
       $("#IPQ_btn_OK").unbind("click.tutorial_answer");
       $(".square").remove();
-      $("#tuto_text").html(`Sometimes, just inputing your current quests isn't enough<br>
-      to know all your progression. In that case, I'll ask you to tell me if you completed<br>
+      $("#tuto_text").html(`Sometimes, just inputing your current quests isn't enough
+      to know all your progression. In that case, I'll ask you to tell me if you completed
       or not some group of quests. I'll display them one by one on the flowchart and wait for your answer.<br>
-      If you answer "I don't know", I'll consider that you completed them, and at the end I'll give<br>
+      If you answer "I don't know", I'll consider that you completed them, and at the end I'll give
       you a list of quests to complete to before reinputing your pending quests.<br>
-      For this tutorial your answers don't matter (it's not your real progression), so click whatever you want!`);
+      For this tutorial your answers don't matter (it's not your real progression), so click whatever you want!<br>
+      Click on "Next" when you have finished.`);
         drawSquareAroundElement($("#MSG_ask_quest_state"));
-//TODO
-/*        $("#FC_RM_loading_btn").bind("click.tutorial_answer", function(){
-step_5_startingQuests();
-        });*/
+
+        $("#tuto").bind("tutorial_answer", function(){
+        step_5_startingQuests();
+        });
       }
 
     function step_5_startingQuests(){
-      //TODO
-      $("#IPQ_btn_OK").unbind("click.tutorial_answer");
+      $("#tuto").unbind("tutorial_answer");
       $(".square").remove();
       $("#tuto_text").html(`Perfect!<br>
-        With all these information, I'm able to deduce your progression in the quest tree.<br>
-        Now, let's update the flochart by removing all the quests you have already completed.<br>
-        <br>
-        You can type from which quest you want the flowchart to start with in the "starting quests"<br>
-        box. As usual, separate the quests by commas. You can check the box "Use pending quests as starter"<br>
-        to fill it automatically with the pending quests you have already entered.<br>
-        If you don't want to specify any specific starting quests and see all the quests from the beginning,<br>
-        just leave it blank.<br>
-        <br>
-        For the tutorial, let's input the same quests as before by checking the checkbox,<br>
-        then click on the "LOAD" button.`);
+        With all these information, I'm able to deduce your progression in the quest tree.
+        Now, let's update the flochart by removing all the quests you have already completed.
+        <br><br>
+        You can type from which quest you want the flowchart to start with in the "starting quests"
+        box. As usual, separate the quests by commas. You can check the box "Use pending quests as starter"
+        to fill it automatically with the pending quests you have already entered. If you want to ignore your
+        currently pending periodic quests for starters, uncheck the box "Include periodic quests".<br>
+        If you don't want to specify any specific starting quests and see all the quests from the beginning,
+        just leave it blank.
+        <br><br>
+        For the tutorial, let's input the same quests as before by checking the "Use pending quests" and uncheck "Include periodic quests",  then click on the "LOAD" button.`);
         drawSquareAroundElement($("#FC_RM_starting_quests"));
         drawSquareAroundElement($("#FC_RM_use_pending_quests"));
+        drawSquareAroundElement($("#FC_RM_use_periodic_quests"));
         drawSquareAroundElement($("#FC_RM_loading_btn"));
 
         $("#FC_RM_loading_btn").bind("click.tutorial_answer", function(){
           var inputArray = $("#FC_RM_starting_quests").val().toUpperCase().replace(/\s/g, '').split(',').sort();
-
-          if (inputArray[0] === "A22" && inputArray[1] === "A29" && inputArray[2] === "A31"){
+          console.log(inputArray);
+if (inputArray[0] === "A29"
+&& inputArray[1] === "A46"
+&& inputArray[2] === "A65"
+&& inputArray[3] === "A71"
+&& inputArray[4] === "B12"
+&& inputArray[5] === "B32"
+&& inputArray[6] === "B44"
+&& inputArray[7] === "D21"
+&& inputArray[8] === "D23"
+&& inputArray[9] === "F36"
+&& inputArray[10] === "F42"){
             step_6_endingQuests();
           } else {
             step_5_fail();
@@ -151,7 +161,7 @@ step_5_startingQuests();
 
       function step_5_fail(){
         $("#tuto_text").html(`That's not what I told you!<br>
-        Please stay focused Admiral, check the checkbox and<br>
+        Please stay focused Admiral, check the first checkbox and uncheck the second one,
         then click on the "LOAD" button.`);
       }
 
@@ -161,14 +171,14 @@ step_5_startingQuests();
         $(".square").remove();
 
         $("#tuto_text").html(`Good!<br>
-          You can see that the fowchart's display just changed to show only the quests<br>
-          that will be unlocked by the three specified quests, making it easier to see than earlier.<br>
+          You can see that the fowchart's display just changed to show only the quests
+          that will be unlocked by the three specified quests, making it easier to see than earlier.
           <br>
-          Let's be even more specific and precise which quests we want to unlock. Just type<br>
+          Let's be even more specific and precise which quests we want to unlock. Just type
           the quests in the "Ending quests" box to filter the result.<br>
-          Because it can be bothersome to find which quest is the one you are searching for,<br>
-          there is a list of the most important quest chains that you can select among.<br>
-          <br>
+          Because it can be bothersome to find which quest is the one you are searching for,
+          there is a list of the most important quest chains that you can select among.
+          <br><br>
           Now select the quest chain "Cataplut 2" that unlock the second Prototype Flight Deck Catapult`
         );
         drawSquareAroundElement($("#FC_RM_ending_quests"));
@@ -199,15 +209,15 @@ step_5_startingQuests();
           quests' code is a bit lacking.<br>
           You can select a specific quest to display its information at the bottom of the screen.<br>
           You can do it by clicking on the quest on the flowchart (double click will zoom on it),<br>
-          by selecting one of the quest in the list on the left, or by typing the questr's code in the textbox.<br>
+          by selecting one of the quest in the list on the left, or by typing the quest's code in the textbox.<br>
           <br>
-          Let's try to select quest "A56".`
+          Let's try to select quest "A59".`
         );
 
         drawSquareAroundElement($("#FC_FT_quest_list"));
 
         $('#FC_FT_quest_info_quest_code').on('DOMSubtreeModified',function(){
-          if ( $("#FC_FT_quest_info_quest_code").text() === "A56"){
+          if ( $("#FC_FT_quest_info_quest_code").text() === "A59"){
             step_8_QuestRequierments();
           } else {
             step_7_fail();
@@ -217,7 +227,7 @@ step_5_startingQuests();
 
       function step_7_fail(){
         $("#tuto_text").html(`Not this quest Admiral!
-          I told you to select the quest A56!`
+          I told you to select the quest A59!`
         );
       }
 
@@ -227,21 +237,18 @@ step_5_startingQuests();
         $(".square").remove();
 
         $("#tuto_text").html(`OK!<br>
-          All the information about this quest are now displayed. You can also hover your cursor on one<br>
+          All the information about this quest are now displayed. You can also hover your cursor on one
           of the flowcahrt's quest to see what you should do to complete it.<br>
-          But here is something more intereesting: on the right of the quest data, there is a requierments list.<br>
-          I wrote here all the stuff you need to complete the selected quest (ship, equipment, maps...)<br>
-          considering the quest currently displayed (that's why specifiying the starting quests is important).<br>
-          <br>
-          On the right menu, you have a checkbox option "Hide loots from previous quests". Checking it will hide<br>
-          requiered elements that will be obtained in a previous quest.<br>
-          <br>
+          But here is something more intereesting: on the right of the quest data, there is a requierments list.
+          I wrote here all the stuff you need to complete the selected quest (ship, equipment, maps...)
+          considering the quest currently displayed (that's why specifiying the starting quests is important).
+          <br><br>
+
           You can also right click on multiple quests on the flowchart to add up all their requierments at the same time.<br>
-          Click on the flowchart background to unselect everything.`
+          To unselect everything, just click on the flowchart background.`
         );
 
         drawSquareAroundElement($("#FC_FT_quest_requirement"));
-        drawSquareAroundElement($("#FC_FT_quest_requirement_hide_quest_rewards"));
 
         $("#tuto_content").append($(`<button id="tuto_next" style="height:30px; width:80px;">Next =></button>`));
         $("#tuto_next").click(function(){
@@ -256,16 +263,16 @@ step_5_startingQuests();
         $("#tuto_text").html(`Admiral, you also have some options you can toggle to improve your utilization of this tool.<br>
           The "Highlight downward" option will show all quests needed to unlock the selected one.<br>
           The "Highlight upwrad" option will show all quests unlocked by the selected one.<br>
-          The "Use Use quest state colors" option will change the color of the quests<br>
-          displayed depending if they arecompleted, pending or locked.<br>
-          <br>
-          The colors used can be changed using the color setting panel on top right of the creen.<br>`
+          The "Use Use quest state colors" option will change the color of the quests
+          displayed depending if they are completed, pending or locked.<br>
+          The "Hide loots from previous quests" checkbox will hide requiered elements that will be obtained in a previous quest in the requirement list.`
         );
 
         drawSquareAroundElement($("#FC_RM_highlight_downward"));
         drawSquareAroundElement($("#FC_RM_highlight_upward"));
         drawSquareAroundElement($("#FC_RM_show_state_colors"));
-        drawSquareAroundElement($(".HD_option_btn[value='CP']"));
+        drawSquareAroundElement($("#FC_FT_quest_requirement_hide_quest_rewards"));
+
 
         $("#tuto_content").append($(`<button id="tuto_next" style="height:30px; width:80px;">Next =></button>`));
         $("#tuto_next").click(function(){
@@ -277,10 +284,10 @@ step_5_startingQuests();
         $("#tuto_next").remove();
         $(".square").remove();
 
-        $("#tuto_text").html(`That's it for the flowchart tool.<br>
-        Now let me explain about the quest list tool.<br>
+        $("#tuto_text").html(`That's it for the flowchart use.
+        Now let me explain about the quest research function.<br>
         <br>
-        Click on the button at the top to switch to this tool.`);
+        Click on the "Quest list" button at the top to switch to this tool.`);
 
         drawSquareAroundElement($(".HD_main_tab_btn[value='QL']"));
         $(".HD_main_tab_btn[value='QL']").bind("click.tutorial_answer", function(){
@@ -293,17 +300,17 @@ step_5_startingQuests();
         $(".HD_main_tab_btn[value='QL']").unbind("click.tutorial_answer");
         $(".square").remove();
 
-        $("#tuto_text").html(`Here is a full list of all the quests in the game.<br>
+        $("#tuto_text").html(`Here is a full list of all the quests in the game.
           On the right there is a search menu that will help you to find what you need.<br>
           <br>
           For example let's search in which quests I'm required...<br>
           <br>
-          Select the reserch mode "By ship required" and then select "Ooyodo".`
+          Select the reserch mode "By ship required" and then choose "Ooyodo".`
         );
 
         drawSquareAroundElement($("#QL_RM_select_search_method"));
         $("#QL_RM_select_required_ship").bind("change.tutorial_answer", function(){
-          if ( $("#QL_RM_select_required_ship").text() === "Ooyodo"){
+          if ( $("#QL_RM_select_required_ship option:selected").text() === "Ooyodo"){
             step_12_setQuestAsCompleted();
           } else {
             step_11_fail();
@@ -313,7 +320,7 @@ step_5_startingQuests();
 
       function step_11_fail(){
         $("#tuto_text").html(`A...Admiral!<br>
-          I asked you to choose me, not ${ $("#QL_RM_select_required_ship").text()}!!`
+          I asked you to choose me, not ${ $("#QL_RM_select_required_ship option:selected").text()}!!`
         );
       }
 
@@ -325,16 +332,13 @@ step_5_startingQuests();
           You will need me for those two quests... <br>
           But don't scrap me after please!!<br>
           <br>
-          By the way, you have just finiched quest A69`
+          By the way, you have just finiched quest A69 earlier. Let's update your data and set it as completed.
+          Click on the button "Set quest as completed" for the A69 quest"`
         );
 
-        drawSquareAroundElement($("#QL_RM_select_search_method"));
-        $("#QL_RM_select_required_ship").bind("change.tutorial_answer", function(){
-          if ( $("#QL_RM_select_required_ship").text() === "Ooyodo"){
-            step_12_questCompleted();
-          } else {
-            step_11_fail();
-          }
+        drawSquareAroundElement($("#QL_complete_btn_A65"));
+        $("#QL_complete_btn_A65").bind("click.tutorial_answer", function(){
+            step_13_weeklyQuests();
         });
       }
 
@@ -342,9 +346,9 @@ step_5_startingQuests();
       function step_13_weeklyQuests(){
 
         $(".square").remove();
-
+$("#QL_complete_btn_A65").unbind("click.tutorial_answer");
         $("#tuto_text").html(`
-
+As you can see, the quest has been set to completed, and the next one, B57 is now pending like it should be in your game.
           <br>
           Ah... Admiral... I got a message from Akashi... We are getting low<br>
           on screws and need to replenish our stocks with some weekly and monthly quests.<br>
@@ -382,9 +386,9 @@ step_5_startingQuests();
             drawSquareAroundElement($("#QL_RM_select_search_method"));
             $("#QL_RM_search_select_reward").bind("change.tutorial_answer", function(){
               if ($(this).text() === "Improvement material"){
-                step_14_doubleClick();
+                step_15_selectQuests();
               } else {
-                step_13_fail();
+                step_14_fail();
               }
             });
           }
@@ -397,7 +401,8 @@ step_5_startingQuests();
             );
           }
 
-          function step_15_doubleClick(){
+          function step_15_selectQuests(){
+            //TODO change it
             $("#QL_RM_search_select_reward").unbind("change.tutorial_answer");
             $(".square").remove();
 
@@ -406,7 +411,7 @@ step_5_startingQuests();
             it as a final quest in the flowchart.`);
 
             $(".QL_questBox").bind("dblclick.tutorial_answer", function(){
-              step_15_EndOfTutorial();
+              step_16_EndOfTutorial();
             });
           }
 

@@ -24,7 +24,7 @@
   <div class="main_tab" id="FC">
 
     <!--  Flowchart  -->
-    <div id="myDiagramDiv" style="border: solid 1px black; top: 60px;"></div>
+    <div id="myDiagramDiv" style="border: solid 1px black; top: 60px; "></div>
 
     <!--  Right Menu  -->
     <div class="RM" id="FC_RM">
@@ -71,7 +71,7 @@
     <!--  Footer  -->
     <div class="FT" id="FC_FT">
       <div id="FC_FT_quest_list">
-        Search a quest:
+        <span style="color:#ffffff">Search a quest:<span>
         <br>
         <input type="text" id="FC_FT_search_Quest" style="width:96%;"><br>
         <select id="FC_FT_select_quest_list" size='8' style="width:100%;"></select>
@@ -105,7 +105,7 @@
 
 
 
-      <div id="FC_FT_quest_requirement" style="position:absolute; width:300px; height:100%;  top:0px; right:0px; background-color:red">
+      <div id="FC_FT_quest_requirement" style="position:absolute; width:300px; height:100%;  top:0px; right:0px; color:#ffffff; background-color:rgba(0, 0, 0, 0);">
         <center>Requirements</center>
         <div id="FC_FT_quest_requirement_list" style="overflow:auto;">
         </div>
@@ -193,8 +193,7 @@
 
 <div class="POP" id="IPQ" hidden>
     <center><textarea id="IPQ_txt_area" rows="8" cols="22"></textarea>
-    <br>  Type ALL your <strong>ONE TIME</strong> pending quests.
-    <br> (You can type your periodic quests but it's not necessary)
+    <br>  Type <strong>ALL</strong> your pending quests code separated by commas.
     <br>
     <span id="IPQ_error_msg"></span>
     <br>
@@ -203,6 +202,7 @@
 </center>
 </div>
 
+<div id="background"></div>
 
   <!--  SCRIPTS  -->
   <script src="jquery-3.2.1.min.js"></script>
