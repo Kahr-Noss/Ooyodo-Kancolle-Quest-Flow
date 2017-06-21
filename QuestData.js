@@ -112,7 +112,6 @@ const ICONS_LINK = {
   "Type 97 Torpedo Bomber":"files/webpage/game_icons/BluePlane.png",
   "Type 0 Fighter Model 21":"files/webpage/game_icons/GreenPlane.png",
   "Type 96 Fighter":"files/webpage/game_icons/GreenPlane.png",
-  "Type 0 Fighter Model 21 (Skilled)":"files/webpage/game_icons/GreenPlane.png",
   "Type 0 Fighter Model 52":"files/webpage/game_icons/GreenPlane.png",
   "Type 0 Fighter Model 52 (Skilled)":"files/webpage/game_icons/GreenPlane.png",
   "Type 0 Fighter Model 62 (Fighter-bomber)":"files/webpage/game_icons/RedPlane.png",
@@ -122,8 +121,7 @@ const ICONS_LINK = {
   "Type 0 Reconnaissance Seaplane":"files/webpage/game_icons/Seaplane.png",
   "Shiden Kai 2":"files/webpage/game_icons/GreenPlane.png",
   "Prototype Seiran":"files/webpage/game_icons/Seaplane.png",
-
-
+"Ryuusei":"files/webpage/game_icons/BluePlane.png",
   //other
   "350 Ranking points":"files/webpage/game_icons/Ranking_point.png",
 }
@@ -4933,7 +4931,7 @@ const ALL_QUESTS_LIST = {
     "unlocks":["F38"],
     "period":"once",
     "needs":{
-      "E":[["7.7mm Machine Guns",2],["Type 96 Fighter",2],["Drum Canister",2]]
+      "E":[["7.7mm Machine Gun",2],["Type 96 Fighter",2],["Drum Canister",2]]
     }
   },
   "F38":{
@@ -4954,7 +4952,7 @@ const ALL_QUESTS_LIST = {
     "unlocks":["F39","F43"],
     "period":"once",
     "needs":{
-      "E":[["7.7mm Machine Guns",2],["Type 99 Dive Bomber",2]]
+      "E":[["7.7mm Machine Gun",2],["Type 99 Dive Bomber",2]]
     }
   },
   "F39":{
