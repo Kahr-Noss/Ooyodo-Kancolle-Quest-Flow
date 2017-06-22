@@ -120,8 +120,14 @@ body {
   float:right;
 }
 
-.complete_btn{
+#FC_FT_quest_info_complete_btn{
   width:100%;
+  position: absolute;
+  bottom:0px;
+  left:0px;
+}
+
+#FC_FT_quest_info_state_icon{
   position: absolute;
   top:0px;
   left:0px;

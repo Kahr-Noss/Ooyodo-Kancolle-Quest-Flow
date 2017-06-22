@@ -121,7 +121,7 @@ $(function () {
     //load the pending quests saved in the cookie, or an empty one if no cookie are saved
 
     // load the user quest cookie or create an empty one
-    var questCookie = getCookie('user_quests') || {pendingQuests:[], userDecisions:{}, periodicCompleted:false, timeStamp:moment().utcOffset("+09:00").format()};
+    var questCookie = getCookie('user_quests') || {pendingQuests:[], userDecisions:{}, periodicCompleted:false, timeStamp:moment().format()};
     //TODO change it it to cookie time
     timeVerificationLoop(questCookie.timeStamp);
 
@@ -131,7 +131,7 @@ $(function () {
     loadFlowchart();
     resizeWindow();
     displayFlowchart();
-    updateAllColors();
+    updateFlowchartColors();
   }
 
 
@@ -405,7 +405,7 @@ $(function () {
       });
 
       updateQuestListDisplay(visibleQuests);
-      updateAllColors();
+      updateFlowchartColors();
 
       //    setCookie('user_quests',JSON.stringify(questsCookie),365);
     }
@@ -433,7 +433,7 @@ $(function () {
       updateQuestStateDisplay(quest);
     });
     updateQuestListDisplay([]);
-    updateAllColors();
+    updateFlowchartColors();
     console.log(period + " quests reset!");
     console.log(ALL_QUEST_STATE);
     //    setCookie('user_quests',JSON.stringify(questsCookie),365);
@@ -477,7 +477,7 @@ $(function () {
   function displayQuestListSelect(questList){
     var questListHTML = '';
     questList.forEach(quest => {
-      questListHTML += `<option value="${quest}" style="background-color:${getQuestColor(quest,ALL_QUEST_STATE[quest],true,false)};">${quest}</option>`;
+      questListHTML += `<option value="${quest}" style="background-color:${getQuestColor(quest,"default")};">${quest}</option>`;
     });
     //put the quest list in order
     var optionsList = $(questListHTML);
@@ -683,6 +683,7 @@ $(function () {
   // this function will ask the user if he remember doing one time quests that can't be calculated
   function askForUnknowQuestState(unknowQuestsGroup, userDecisions, advice, callback){
     // if there is unknown quests remaining
+    updateFlowchartColors();
     if (unknowQuestsGroup.length > 0){
 
       var questsGroup = unknowQuestsGroup.shift();
@@ -743,7 +744,7 @@ $(function () {
       });
       $("#IPQ_error_msg").text("");
       $(`#IPQ`).hide("fast");
-      updateAllColors();
+      updateFlowchartColors();
       setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, timeStamp:moment().utcOffset("+09:00").format()}),365);
 
       if (advice.length >0){
@@ -1079,8 +1080,9 @@ $(function () {
 
     // create the HTML code for a quest box in the questlist panel
     function createQuestBox(questCode){
-      let quest = ALL_QUESTS_LIST[questCode];
-      return `<div class="QL_questBox ${quest.period}" id='QL_questBox_${questCode}'>
+      var quest = ALL_QUESTS_LIST[questCode];
+      var color = getQuestColor(questCode,"default");
+      return `<div class="QL_questBox ${quest.period}" id='QL_questBox_${questCode}' style="background-color:${color}; color:${tinycolor(color).isLight() ? "#000000" : "#ffffff"};">
       <div class="cellDiv" style=" height:40px;  top:0px; left:0px; width: calc(100% - 40px); padding-right:40px; line-height:40px;">
 
 
@@ -1150,7 +1152,7 @@ $(function () {
       var questBox = $(`#QL_questBox_${quest}`);
       var state = ALL_QUEST_STATE[quest];
       questBox.removeClass("pending completed locked").addClass(state);
-questBox.find(".quest_state_icon").attr("src",`file/webpage/${state}.png`);
+      questBox.find(".quest_state_icon").attr("src",`file/webpage/${state}.png`);
       if(state === 'pending'){
         $(`#QL_complete_btn_${quest}`).css('visibility', 'visible');
       } else {
@@ -1161,8 +1163,9 @@ questBox.find(".quest_state_icon").attr("src",`file/webpage/${state}.png`);
     // display quest data in the footer
     function displayQuestData(questCode){
       var quest = ALL_QUESTS_LIST[questCode];
-      var color = getQuestColor(questCode,'default')
+      var color = getQuestColor(questCode,'default');
       $('#FC_FT .cellDiv').css('background', color).css('color',tinycolor(color).isLight() ? "#000000" : "#ffffff");
+      $("#FC_FT_quest_info_state_icon").attr("src",`file/webpage/${ALL_QUEST_STATE[questCode]}.png`);
       $('#FC_FT_quest_info_quest_code').text(questCode);
       $('#FC_FT_quest_info_name_Japanese').text(quest.Jp);
       $('#FC_FT_quest_info_name_English').text(quest.En);
@@ -1170,12 +1173,15 @@ questBox.find(".quest_state_icon").attr("src",`file/webpage/${state}.png`);
       addShipNameHoveringEvents($('#FC_FT_quest_info_content'));
       $('#FC_FT_quest_info_ressources').text(`${quest.ressources.F} / ${quest.ressources.A} / ${quest.ressources.S} / ${quest.ressources.B}`);
       $('#FC_FT_quest_info_reward').html(parseRewardObject(quest.reward));
-      $('#FC_FT_quest_info_requires').html(((quest.requires.length !== 0) ? `Requires: <br>${quest.requires}` : ''));
-      $('#FC_FT_quest_info_unlocks').html(((quest.unlocks.length !== 0) ? `Unlocks: <br>${quest.unlocks}` : ''));
+      $('#FC_FT_quest_info_requires').html(((quest.requires.length !== 0) ? `Requires: ${quest.requires.join(", ")}` : ''));
+      $('#FC_FT_quest_info_unlocks').html(((quest.unlocks.length !== 0) ? `Unlocks: ${quest.unlocks.join(", ")}` : ''));
       if(ALL_QUEST_STATE[questCode] === 'pending'){
         $(`#FC_FT_quest_info_complete_btn`).show();
       } else {
         $(`#FC_FT_quest_info_complete_btn`).hide();
+      }
+      if(ALL_QUESTS_LIST[questCode].period !== "once"){
+        addRibbonToDiv($("#FC_FT_ribbon_support"),getRibbonColor(ALL_QUESTS_LIST[questCode].period), ALL_QUESTS_LIST[questCode].period);
       }
       /*
       if(COLORS[ALL_QUEST_STATE[questCode]].border){
@@ -1192,6 +1198,9 @@ function displayAllQuestBoxes(listQuests){
   listQuests.forEach(quest => {
     $("#QL_quest_boxes").append(createQuestBox(quest));
     addShipNameHoveringEvents($(`#QL_questBox_${quest}`));
+    if(ALL_QUESTS_LIST[quest].period !== "once"){
+    addRibbonToDiv($(`#QL_questBox_${quest}`),getRibbonColor(ALL_QUESTS_LIST[quest].period), ALL_QUESTS_LIST[quest].period);
+    }
   });
 }
 
@@ -1299,57 +1308,61 @@ function getQuestColor(quest,state,highlight,selected){
 }
 
 // update all colors everywhere after change in the COLORS object
-function updateAllColors(){
+function updateFlowchartColors(){
+
+  /*     ****************    This is for dispalying state colors on questboxes  *********
+  it's removed because it's replaced with small icons
+
   //diagram nodes
   // quest boxes
   $(".QL_questBox").each(function(){
-    var quest = $(this).attr("id").split('_')[2];
-    var color = getQuestColor(quest,ALL_QUEST_STATE[quest],true,false);
-    var state = ALL_QUEST_STATE[quest];
-    $(this).css("background-color",color)
-    .css("color",tinycolor(color).isLight() ? "#000000" : "#ffffff")
-    .find(".cellDiv").css("border-color", tinycolor(color).isLight() ? "#000000" : "#ffffff");
-    if(COLORS[ALL_QUEST_STATE[quest]].border){
-      $(this).css("border-width",COLORS[ALL_QUEST_STATE[quest]].border_width)
-      .css("border-color",COLORS[ALL_QUEST_STATE[quest]].border_color)
-      .css("margin",12 - COLORS[ALL_QUEST_STATE[quest]].border_width);
-    } else {
-      $(this).css("border-width",'2px').css("border-color",'black').css("margin",10);
-    }
-    if(ALL_QUESTS_LIST[quest].period !== "once"){
-      addRibbonToDiv($(this),getRibbonColor(ALL_QUESTS_LIST[quest].period), ALL_QUESTS_LIST[quest].period);
-    } else {
-      removeRibbonFromDiv($(this));
-    }
+  var quest = $(this).attr("id").split('_')[2];
+  var color = getQuestColor(quest,ALL_QUEST_STATE[quest],true,false);
+  var state = ALL_QUEST_STATE[quest];
+  $(this).css("background-color",color)
+  .css("color",tinycolor(color).isLight() ? "#000000" : "#ffffff")
+  .find(".cellDiv").css("border-color", tinycolor(color).isLight() ? "#000000" : "#ffffff");
+  if(COLORS[ALL_QUEST_STATE[quest]].border){
+  $(this).css("border-width",COLORS[ALL_QUEST_STATE[quest]].border_width)
+  .css("border-color",COLORS[ALL_QUEST_STATE[quest]].border_color)
+  .css("margin",12 - COLORS[ALL_QUEST_STATE[quest]].border_width);
+} else {
+$(this).css("border-width",'2px').css("border-color",'black').css("margin",10);
+}
+if(ALL_QUESTS_LIST[quest].period !== "once"){
+addRibbonToDiv($(this),getRibbonColor(ALL_QUESTS_LIST[quest].period), ALL_QUESTS_LIST[quest].period);
+} else {
+removeRibbonFromDiv($(this));
+}
+});
+//select quest list box
+$("#FC_FT_select_quest_list option").each(function(){
+var quest = $(this).val();
+var color = getQuestColor(quest,ALL_QUEST_STATE[quest],true,false);
+$(this).css("background-color",color).css("color",tinycolor(color).isLight() ? "#000000" : "#ffffff");
+});
+//quest info panel
+var selectedQuest = $("#FC_FT_select_quest_list option:selected").val();
+if (selectedQuest){
+$("#FC_FT_quest_info").css("background-color",getQuestColor(selectedQuest,'default'));
+if(COLORS[ALL_QUEST_STATE[selectedQuest]].border){
+$("#FC_FT_quest_info").css("border-width",COLORS[ALL_QUEST_STATE[selectedQuest]].border_width)
+.css("border-color",COLORS[ALL_QUEST_STATE[selectedQuest]].border_color);
+}else{
+$("#FC_FT_quest_info").css("border-width",'2px').css("border-color",'black');
+}
+}*/
+//nodes on flowchart
+if(myDiagram){
+  var model = myDiagram.model;
+  model.startTransaction("state_color");
+  myDiagram.clearHighlighteds();
+  myDiagram.clearSelection();
+  myDiagram.nodes.each(function(n) {
+    updateNodeDisplay(n, getQuestColor(n.data.key,ALL_QUEST_STATE[n.data.key],true,false),ALL_QUEST_STATE[n.data.key],ALL_QUESTS_LIST[n.data.key].period);
   });
-  //select quest list box
-  $("#FC_FT_select_quest_list option").each(function(){
-    var quest = $(this).val();
-    var color = getQuestColor(quest,ALL_QUEST_STATE[quest],true,false);
-    $(this).css("background-color",color).css("color",tinycolor(color).isLight() ? "#000000" : "#ffffff");
-  });
-  //quest info panel
-  var selectedQuest = $("#FC_FT_select_quest_list option:selected").val();
-  if (selectedQuest){
-    $("#FC_FT_quest_info").css("background-color",getQuestColor(selectedQuest,'default'));
-    if(COLORS[ALL_QUEST_STATE[selectedQuest]].border){
-      $("#FC_FT_quest_info").css("border-width",COLORS[ALL_QUEST_STATE[selectedQuest]].border_width)
-      .css("border-color",COLORS[ALL_QUEST_STATE[selectedQuest]].border_color);
-    }else{
-      $("#FC_FT_quest_info").css("border-width",'2px').css("border-color",'black');
-    }
-  }
-  //nodes on flowchart
-  if(myDiagram){
-    var model = myDiagram.model;
-    model.startTransaction("highlight");
-    myDiagram.clearHighlighteds();
-    myDiagram.clearSelection();
-    myDiagram.nodes.each(function(n) {
-      updateNodeDisplay(n, getQuestColor(n.data.key,ALL_QUEST_STATE[n.data.key],true,false),ALL_QUEST_STATE[n.data.key],ALL_QUESTS_LIST[n.data.key].period);
-    });
-    model.commitTransaction("highlight");
-  }
+  model.commitTransaction("state_color");
+}
 }
 
 // put the list of required ships in the dropdown list
@@ -1624,7 +1637,7 @@ return contentWithImages;
 //check time every minute
 function timeVerificationLoop(lastTime){
   // get the time in Tokyo (place of the servers)
-  var now =  moment().utcOffset("+09:00");
+  var now =  moment();
   var resetTimes = getResetTime(lastTime);
   Object.keys(resetTimes).forEach(period => {
     if(checkQuestReset(now,resetTimes[period])){
@@ -1635,29 +1648,34 @@ function timeVerificationLoop(lastTime){
     displayBubbleMessage(`Admiral, ${Object.keys(resetTimes).join(', ')} quest${Object.keys(resetTimes).length > 1 ? "s" : ""} have just been reset.`
     ,"smiling","MSG_reset_notification",20000);
   }
-  setTimeout(function(){timeVerificationLoop(now);},60000);
+  //send a request next daily reset
+  var millisecondsUntilNextReset = resetTimes.daily.diff( now ) + 10000;
+  setTimeout(function(){timeVerificationLoop(now);},millisecondsUntilNextReset);
 }
 
 function getResetTime(lastTime){
+
   var resetTimes = {};
   //daily
-  // reset every day at 5 AM
-  resetTimes.daily = moment(moment(lastTime).hours() < 5 ? moment(lastTime) : moment(lastTime).add(1,"days")).hour(5).minute(0).second(0);
-
+  // reset every day at 5 AM  <=> 20 PM UTC
+  var dailyReset =  moment(lastTime).utcOffset("+00:00",false).hour(20).minute(0).second(0);
+  resetTimes.daily = moment(lastTime).diff(dailyReset) < 0 ? dailyReset : dailyReset.add(1,"days");
   //weekly
   // reset every monday at 5 AM
-  resetTimes.weekly = moment(moment(lastTime).hours() < 5 && moment(lastTime).isoWeekday() === 1 ? moment(lastTime) : moment(lastTime).add(1,"weeks")).isoWeekday(1).hour(5).minute(0).second(0);
+  var weeklyReset =  moment(lastTime).utcOffset("+00:00",false).isoWeekday(1).hour(20).minute(0).second(0);
+  resetTimes.weekly = moment(lastTime).diff(weeklyReset) < 0 ? weeklyReset : weeklyReset.add(1,"weeks");
   //monthly
   // reset every month at 5 AM
-  resetTimes.monthly = moment(moment(lastTime).hours() < 5 && moment(lastTime).date() === 1 ? moment(lastTime) : moment(lastTime).add(1,"month")).date(1).hour(5).minute(0).second(0);
+  var MonthlyReset =  moment(lastTime).utcOffset("+00:00",false).date(1).hour(20).minute(0).second(0);
+  resetTimes.monthly = moment(lastTime).diff(MonthlyReset) < 0 ? MonthlyReset : MonthlyReset.add(1,"months");
   //quarterly
-  // reset first of march, june, september and December
+  // reset first of march, june, september and December => the day before UTC su substract one day
   // months are 0 indexed
-  var thisYear_March = moment(lastTime).month(2).date(1).hour(5).minute(0).second(0);
-  var thisYear_June = moment(lastTime).month(5).date(1).hour(5).minute(0).second(0);
-  var thisYear_September = moment(lastTime).month(8).date(1).hour(5).minute(0).second(0);
-  var thisYear_December = moment(lastTime).month(11).date(1).hour(5).minute(0).second(0);
-  var nextYear_March = moment(lastTime).add(1,"years").month(2).date(1).hour(5).minute(0).second(0);
+  var thisYear_March = moment(lastTime).utcOffset("+00:00",false).month(2).date(1).hour(20).minute(0).second(0).subtract(1,"days");
+  var thisYear_June = moment(lastTime).utcOffset("+00:00",false).month(5).date(1).hour(20).minute(0).second(0).subtract(1,"days");
+  var thisYear_September = moment(lastTime).utcOffset("+00:00",false).month(8).date(1).hour(20).minute(0).second(0).subtract(1,"days");
+  var thisYear_December =moment(lastTime).utcOffset("+00:00",false).month(11).date(1).hour(20).minute(0).second(0).subtract(1,"days");
+  var nextYear_March = moment(lastTime).utcOffset("+00:00",false).add(1,"years").month(2).date(1).hour(20).minute(0).second(0).subtract(1,"days");
   if (moment(lastTime).diff(thisYear_March)<0){resetTimes.quarterly = thisYear_March;}
   else  if (moment(lastTime).diff(thisYear_June)<0){resetTimes.quarterly = thisYear_June;}
   else  if (moment(lastTime).diff(thisYear_September)<0){resetTimes.quarterly = thisYear_September;}
@@ -1838,7 +1856,7 @@ $('#FC_RM_select_preset_quests').change(function () {
 
 // update all the colors if the shaow state color checkbox change
 $("#FC_RM_show_state_colors").change(function(){
-  updateAllColors();
+  updateFlowchartColors();
 });
 
 // update the flowchart displayed on change
