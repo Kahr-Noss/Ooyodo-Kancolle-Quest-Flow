@@ -1,7 +1,6 @@
 
 body {
   margin:0;
-
 }
 
 #background{
@@ -279,11 +278,29 @@ right:5px;
 color:#3a3a3a;
 font: 15px "Arial Black", sans-serif;
 cursor: pointer;
+padding-left: 5px;
+padding-right: 5px;
 }
 
 .closeBtn:hover{
   color:#ffffff;
 }
+
+
+/* ===========================    TIPS BUTTON    =========================*/
+
+.quest_tips{
+position:absolute;
+bottom:0px;
+right:0px;
+color:#3a3a3a;
+font: 15px "Arial Black", sans-serif;
+cursor: pointer;
+
+}
+
+
+
 
 /*   ==========================  RIBBON CSS  ==============================      */
 

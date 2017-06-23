@@ -144,7 +144,7 @@ $(function () {
 
     var $ = go.GraphObject.make;  // for conciseness in defining templates
 
-    var bigfont = "bold 70pt Helvetica, Arial, sans-serif";
+    var bigfont = "bold 45pt Helvetica, Arial, sans-serif";
 
     //general parameter of diagram
     myDiagram =
@@ -201,10 +201,10 @@ $(function () {
   { opacity: 0,
     alignment: new go.Spot(1, 0, 5, -5),
     alignmentFocus: go.Spot.TopRight,
-    name:"RIBBON"},
+    name:"RIBBON", scale:1.5 },
     $(go.Shape,  // the ribbon itself
       { geometryString: "F1 M0 0 L30 0 70 40 70 70z",
-      stroke: null, strokeWidth: 0 },
+      stroke: null, strokeWidth: 0},
 
       new go.Binding("fill", "ribbon_color")),
       $(go.TextBlock,
@@ -434,8 +434,6 @@ $(function () {
     });
     updateQuestListDisplay([]);
     updateFlowchartColors();
-    console.log(period + " quests reset!");
-    console.log(ALL_QUEST_STATE);
     //    setCookie('user_quests',JSON.stringify(questsCookie),365);
   }
 
@@ -710,7 +708,7 @@ $(function () {
           <button type="button" class="MSG_btn" value="completed">Yes !</button>
           <button type="button" class="MSG_btn idk" value="completed">I don't know</button>
           <button type="button" class="MSG_btn" value="locked">No, not yet</button>`,
-          "writing","MSG_ask_quest_state",-1);
+          "writing","MSG_ask_quest_state",false);
 
           $(".MSG_btn").click(function(){
             $("#MSG_ask_quest_state").remove();
@@ -751,7 +749,7 @@ $(function () {
         displayBubbleMessage(`Admiral, about those quests that you din't know the state, you should complete those quests:<br>
         ${advice.join(', ')}<br>
         Input again your pending quests once you are done.`,
-        "???","MSG_quest_completion_advice",2000);
+        "???","MSG_quest_completion_advice",true);
       }
 
       // display the diagram
@@ -950,6 +948,7 @@ $(function () {
 
     // check if there is any double in the tables and separate them into new groups
     function separateGroupDoublons(GroupsList, startingUnknownQuestsList){
+
       var counter = 0;
       //clone the array
       unknowQuestsGroup = GroupsList.slice(0);
@@ -962,37 +961,44 @@ $(function () {
         var group = unknowQuestsGroup.shift();
         var groupOutput = [];
 
-        group.forEach(quest => {
-          var listOfGroups = [group];
+        //clone the group and iterate through it (because there is index problem if it iterate in the group where we delete the quests and some quests aren't treated)
+        group.slice(0).forEach(quest => {
+          //test if the quest is always in the orginal array or if it has been removed. if it's the case skip an do the next quest
+          if(group.indexOf(quest) !== -1){
 
-          //check if there is any double
-          unknowQuestsGroup.forEach(otherGroup =>{
-            if(otherGroup.indexOf(quest) !== -1){
-              listOfGroups.push(otherGroup)
-            }
-          });
+            var listOfGroups = [group];
 
-          // if any double are found
-          if (listOfGroups.length >1){
-            //create the new group
-            var newGroup= createUnknownOnceQuestGroup(quest,startingUnknownQuestsList);
-            //add the subGroup to the list of group
-            unknowQuestsGroup.push(newGroup);
-            // set the quest as a new starter
-            startingUnknownQuestsList.push(quest);
-            //remove the elements from newGroup from the other groups
-            listOfGroups.forEach(group => {
-              newGroup.forEach(quest =>{
-                group.splice(group.indexOf(quest), 1);
-              });
+            //check if there is any double
+            unknowQuestsGroup.forEach(otherGroup =>{
+              if(otherGroup.indexOf(quest) !== -1){
+                listOfGroups.push(otherGroup)
+              }
             });
-          } else {
-            //just add the quest to the group
-            groupOutput.push(quest);
+
+            // if any double are found
+            if (listOfGroups.length >1){
+              //create the new group
+              var newGroup= createUnknownOnceQuestGroup(quest,startingUnknownQuestsList);
+              //add the subGroup to the list of group
+              unknowQuestsGroup.push(newGroup);
+              // set the quest as a new starter
+              startingUnknownQuestsList.push(quest);
+              //remove the elements from newGroup from the other groups
+              listOfGroups.forEach(grp => {
+                newGroup.forEach(qst =>{
+                  grp.splice(grp.indexOf(qst), 1);
+                });
+              });
+            } else {
+              //just add the quest to the group
+              groupOutput.push(quest);
+            }
+
           }
         });
         GroupListOutput.push(groupOutput);
       }
+
       return GroupListOutput;
     }
 
@@ -1104,6 +1110,7 @@ $(function () {
       <div class="cellDiv" style="width:100%; height:123px;  top:115px; left:0px; position:relative">
 
       <div class="centeredContent">${addShipImageToContent(quest)}</div>
+      <button type="button" class="quest_tips" id='QL_quest_tips_${questCode}'>+</button>
       </div>
 
       <div class="cellDiv" style="width:25%; height:110px;  bottom:75px; left:0px;">
@@ -1175,6 +1182,7 @@ $(function () {
       $('#FC_FT_quest_info_reward').html(parseRewardObject(quest.reward));
       $('#FC_FT_quest_info_requires').html(((quest.requires.length !== 0) ? `Requires: ${quest.requires.join(", ")}` : ''));
       $('#FC_FT_quest_info_unlocks').html(((quest.unlocks.length !== 0) ? `Unlocks: ${quest.unlocks.join(", ")}` : ''));
+      $("#FC_FT").find(".quest_tips").attr("id",`FC_quest_tips_${questCode}`)
       if(ALL_QUEST_STATE[questCode] === 'pending'){
         $(`#FC_FT_quest_info_complete_btn`).show();
       } else {
@@ -1199,7 +1207,7 @@ function displayAllQuestBoxes(listQuests){
     $("#QL_quest_boxes").append(createQuestBox(quest));
     addShipNameHoveringEvents($(`#QL_questBox_${quest}`));
     if(ALL_QUESTS_LIST[quest].period !== "once"){
-    addRibbonToDiv($(`#QL_questBox_${quest}`),getRibbonColor(ALL_QUESTS_LIST[quest].period), ALL_QUESTS_LIST[quest].period);
+      addRibbonToDiv($(`#QL_questBox_${quest}`),getRibbonColor(ALL_QUESTS_LIST[quest].period), ALL_QUESTS_LIST[quest].period);
     }
   });
 }
@@ -1231,7 +1239,7 @@ function displayQuestRequirements(questList){
           }
         }
       });
-      requirementsHTML += "</div>";
+      requirementsHTML += "<br></div>";
     }
   });
   if(requirementsHTML === ''){
@@ -1492,17 +1500,33 @@ function addShipNameHoveringEvents(JqueryText){
 
 //show a message in a bubble speech on the top of bottom right Ooyodo and update the image
 function displayBubbleMessage(html, image, id, timeout){
-  var popup = $(`<div class="bubble" id="${id}">
+  var isOtherBubbleDisplayed = $(".bubble:visible").length > 0;
+  var popup = $(`<div class="bubble" data-timeout=${timeout} id="${id}">
   <div class="closeBtn" id="closeBtn_${id}">X</div>
   ${html}
   </div>`);
   changeOoyodoImage(image);
   $('body').append(popup);
+  if (isOtherBubbleDisplayed){
+    popup.hide();
+  }
   $(`#closeBtn_${id}`).click(function(){
-    $(`#${id}`).remove();
+    closeBubbleMessage($(`#${id}`))
   });
-  if(timeout > 0){
-    setTimeout(function(){  $(`#${id}`).remove();},timeout);
+  // if it's a timing out message and there is no other message start time out
+  if(timeout && !isOtherBubbleDisplayed){
+    setTimeout(function(){ closeBubbleMessage($(`#${id}`));},20000);
+  }
+}
+
+function closeBubbleMessage(idJQ){
+  idJQ.remove();
+  if($(".bubble:hidden").length > 0){
+    var nextBubble = $(".bubble:hidden").first();
+    nextBubble.show("fast");
+    if (nextBubble.attr("data-timeout") === "true"){
+      setTimeout(function(){ closeBubbleMessage(nextBubble);},20000);
+    }
   }
 }
 
@@ -1646,7 +1670,7 @@ function timeVerificationLoop(lastTime){
   });
   if(Object.keys(resetTimes).length >0){
     displayBubbleMessage(`Admiral, ${Object.keys(resetTimes).join(', ')} quest${Object.keys(resetTimes).length > 1 ? "s" : ""} have just been reset.`
-    ,"smiling","MSG_reset_notification",20000);
+    ,"smiling","MSG_reset_notification",true);
   }
   //send a request next daily reset
   var millisecondsUntilNextReset = resetTimes.daily.diff( now ) + 10000;
@@ -1991,6 +2015,19 @@ $(".complete_btn, .QL_questBox_complete_btn").click(function(){
   if (quest !== ''){
     setQuestAsCompleted(quest);
   }
+});
+
+//show the tips in the bubble message when clicked
+$(".quest_tips").click(function(){
+  var quest = $(this).attr("id").split('_')[3];
+  var tipsMsg = ALL_QUESTS_LIST[quest].tips;
+  if(tipsMsg === ""){
+    tipsMsg = `Admiral, there is no tips for the quest ${quest}, sorry.`;
+  } else {
+    tipsMsg = `Tips and avices for quest <b>${quest}</b>:<br>
+    ${tipsMsg.replace(/※/g,"<br>●")}`;
+  }
+  displayBubbleMessage(tipsMsg ,"???", "MSG_tips_quest",false);
 });
 
 //hide the button after clicking on it
