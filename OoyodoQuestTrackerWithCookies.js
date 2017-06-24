@@ -124,7 +124,8 @@ $(function () {
     var questCookie = getCookie('user_quests') || {pendingQuests:[], userDecisions:{}, periodicCompleted:false, timeStamp:moment().format()};
     //TODO change it it to cookie time
     timeVerificationLoop(questCookie.timeStamp);
-console.log(questCookie);
+  displayBubbleMessage(JSON.stringify(questCookie),
+          "writing","MSG_cookie",false);
     calculateQuestState(questCookie.pendingQuests, questCookie.userDecisions, questCookie.periodicCompleted);
 
 
