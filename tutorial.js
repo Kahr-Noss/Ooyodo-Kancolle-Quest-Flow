@@ -325,7 +325,7 @@ $(function () {
       }
 
       function step_8_QuestRequierments(){
-        $("#tuto").hide('fast');.show('slow');
+        $("#tuto").hide('fast').show('slow');
 
         $("#tuto_text").html(`OK!<br>
           All the information about this quest are now displayed. You can also hover your cursor on one
