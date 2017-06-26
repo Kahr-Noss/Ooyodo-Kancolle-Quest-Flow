@@ -121,9 +121,10 @@ $(function () {
     //load the pending quests saved in the cookie, or an empty one if no cookie are saved
 
     // load the user quest cookie or create an empty one
-    var questCookie;
+
     var cookieContent = getCookie('user_quests');
     console.log(cookieContent);
+        var questCookie = {};
     if (cookieContent === ""){
       questCookie =  {pendingQuests:[], userDecisions:{}, periodicCompleted:false, timeStamp:moment().format()};
     } else {
