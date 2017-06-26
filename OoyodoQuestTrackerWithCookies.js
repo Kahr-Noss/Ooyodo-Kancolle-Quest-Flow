@@ -122,7 +122,7 @@ $(function () {
 
     // load the user quest cookie or create an empty one
     var questCookie = getCookie('user_quests') || {pendingQuests:[], userDecisions:{}, periodicCompleted:false, timeStamp:moment().format()};
-    console.log(questCookie);
+    console.log(questCookie.pendingQuests);
   
     timeVerificationLoop(questCookie.timeStamp);
 
