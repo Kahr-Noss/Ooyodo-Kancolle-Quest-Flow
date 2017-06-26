@@ -674,7 +674,7 @@ $(function () {
         unknownQuestsGroups = separateGroupDoublons(unknownQuestsGroups, unknowQuests);
 
         //for the one time quests that were not deductible, ask the user about it by displaying it on the flowchart
-        askForUnknowQuestState(unknownQuestsGroups,{}, [], function(userDecisions, advice){
+        askForUnknowQuestState(unknownQuestsGroups,userDecisionsCookie, [], function(userDecisions, advice){
           // this is called after the user answerd to all unknowQuests
           //Now the periodic quests not set yet
           setPeriodicQuestState();
