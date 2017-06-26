@@ -1,20 +1,3 @@
-$(function () {
-
-  //  *********   GLOBAL VARIABLES   ************
-
-  //default color object
- 
-    // load the user quest cookie or create an empty one
-    var questCookie = getCookie('user_quests') || "coucou";
-    //TODO change it it to cookie time
-   
-  console.log(JSON.stringify(questCookie));
- setCookie('user_quests',"saved",1);
-  
-
-
-});
-
 //create a cookie
 function setCookie(cname, cvalue, exdays) {
   if(getCookie("acceptCookies")){
@@ -40,3 +23,22 @@ function getCookie(cname) {
   }
   return "";
 }
+
+
+$(function () {
+
+  //  *********   GLOBAL VARIABLES   ************
+
+  //default color object
+ 
+    // load the user quest cookie or create an empty one
+    var questCookie = getCookie('user_quests') || "coucou";
+    //TODO change it it to cookie time
+   
+  console.log(JSON.stringify(questCookie));
+ setCookie('user_quests',"saved",1);
+  
+
+
+});
+
