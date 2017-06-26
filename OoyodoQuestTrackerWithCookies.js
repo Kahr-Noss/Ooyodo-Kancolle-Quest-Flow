@@ -1673,13 +1673,15 @@ function timeVerificationLoop(lastTime){
   // get the time in Tokyo (place of the servers)
   var now =  moment();
   var resetTimes = getResetTime(lastTime);
+  var resetPeriods = [];
   Object.keys(resetTimes).forEach(period => {
     if(checkQuestReset(now,resetTimes[period])){
       resetPeriodicQuest(period);
+      resetPeriods.push(period);
     }
   });
-  if(Object.keys(resetTimes).length >0){
-    displayBubbleMessage(`Admiral, ${Object.keys(resetTimes).join(', ')} quest${Object.keys(resetTimes).length > 1 ? "s" : ""} have just been reset.`
+  if(resetPeriods.length >0){
+    displayBubbleMessage(`Admiral, ${resetPeriods.join(', ')} quests have just been reset.`
     ,"smiling","MSG_reset_notification",true);
   }
   //send a request next daily reset
