@@ -126,7 +126,7 @@ $(function () {
     console.log(cookieContent);
         var questCookie = {};
     if (cookieContent === ""){
-      questCookie =  {pendingQuests:[], userDecisions:{}, periodicCompleted:false, timeStamp:moment().format()};
+      questCookie =  {pendingQuests:[], userDecisions:{}, periodicCompleted:false, questAdvice:[], timeStamp:moment().format()};
     } else {
       questCookie = JSON.parse(cookieContent);
     }
@@ -135,7 +135,7 @@ $(function () {
 
     timeVerificationLoop(questCookie.timeStamp);
 
-    calculateQuestState(questCookie.pendingQuests, questCookie.userDecisions, questCookie.periodicCompleted);
+    calculateQuestState(questCookie);
 
 
     loadFlowchart();
@@ -615,10 +615,10 @@ $(function () {
   }
 
   // using pending quests  list calculate the state of all quests
-  function calculateQuestState(pendingQuests, userDecisionsCookie, setPeriodicQuestCompleted){
+  function calculateQuestState(userQuestCookie){
     ALL_QUEST_STATE_TMP = {};
     // no pending quests input => everything is set to completed and color state mode is disabled
-    if (pendingQuests.length === 0){
+    if (userQuestCookie.pendingQuests.length === 0){
       Object.keys(ALL_QUESTS_LIST).forEach(quest => {
         ALL_QUEST_STATE_TMP[quest] = 'completed';
       });
@@ -633,17 +633,17 @@ $(function () {
       });
 
       // if setPeriodicQuestCompleted is true, we set all the periodic quests to completed
-      if(setPeriodicQuestCompleted){
+      if(userQuestCookie.setPeriodicQuestCompleted){
         Object.keys(ALL_QUESTS_LIST).filter(function(quest){return ALL_QUESTS_LIST[quest].period !== 'once'}).forEach(quest => {
           ALL_QUEST_STATE_TMP[quest] = 'completed';
         });
       }
 
       //set inputed quests to pending
-      pendingQuests.forEach(quest=>{
+      userQuestCookie.pendingQuests.forEach(quest=>{
         ALL_QUEST_STATE_TMP[quest] = 'pending';
       });
-      var inconsistenciesList = setQuestStateLinkedToPendingQuests(pendingQuests);
+      var inconsistenciesList = setQuestStateLinkedToPendingQuests(userQuestCookie.pendingQuests);
 
       // there are problems with the inputed quests
       if(inconsistenciesList.length !== 0){
@@ -655,8 +655,8 @@ $(function () {
       } else {
 
         // if it's created from a cookie that have recorded user decisions, implement them
-        Object.keys(userDecisionsCookie).forEach(quest => {
-          var state = userDecisionsCookie[quest];
+        Object.keys(userQuestCookie.userDecisions).forEach(quest => {
+          var state = userQuestCookie.userDecisions[quest];
           ALL_QUEST_STATE_TMP[quest] = state;
           ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
             setUnknowOnceQuestsUpward(nextQuest,state);
@@ -674,14 +674,14 @@ $(function () {
         unknownQuestsGroups = separateGroupDoublons(unknownQuestsGroups, unknowQuests);
 
         //for the one time quests that were not deductible, ask the user about it by displaying it on the flowchart
-        askForUnknowQuestState(unknownQuestsGroups,userDecisionsCookie, [], function(userDecisions, advice){
+        askForUnknowQuestState(unknownQuestsGroups,userQuestCookie.userDecisions, userQuestCookie.questAdvice, function(userDecisions, advice){
           // this is called after the user answerd to all unknowQuests
           //Now the periodic quests not set yet
           setPeriodicQuestState();
 
           // update the ALL_QUEST STATE list with the one just cqlculated if on inconsistencies
           $("#FC_RM_show_state_colors").prop("checked",true);
-          implementQuestsStateUpdated(pendingQuests,userDecisions, advice, setPeriodicQuestCompleted);
+          implementQuestsStateUpdated(userQuestCookie.pendingQuests,userDecisions, advice, userQuestCookie.setPeriodicQuestCompleted);
         });
       }
     }
@@ -753,7 +753,7 @@ console.log(JSON.stringify(userDecisions));
       $("#IPQ_error_msg").text("");
       $(`#IPQ`).hide("fast");
       updateFlowchartColors();
-      setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, timeStamp:moment().utcOffset("+09:00").format()}),365);
+      setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, questAdvice:advice, timeStamp:moment().utcOffset("+09:00").format()}),365);
 
       if (advice.length >0){
         displayBubbleMessage(`Admiral, about those quests that you din't know the state, you should complete those quests:<br>
@@ -1969,10 +1969,10 @@ $('#IPQ_btn_OK').click(function () {
     $('body').append(popup);
     $(".MSG_btn").click(function(){
       $("#MSG_ask_periodic_quests").hide("fast").remove();
-      calculateQuestState(inputedPendingQuests,{},$(this).val() === 'true');
+      calculateQuestState({pendingQuests:inputedPendingQuests,userDecisions:{},setPeriodicQuestCompleted:$(this).val() === 'true',questAdvice:[]});
     });
   } else {
-    calculateQuestState(inputedPendingQuests,{},false);
+    calculateQuestState({pendingQuests:inputedPendingQuests,userDecisions:{},setPeriodicQuestCompleted:false,questAdvice:[]});
   }
 
 });
