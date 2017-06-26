@@ -123,6 +123,7 @@ $(function () {
     // load the user quest cookie or create an empty one
     var questCookie;
     var cookieContent = getCookie('user_quests');
+    console.log(cookieContent);
     if (cookieContent === ""){
       questCookie =  {pendingQuests:[], userDecisions:{}, periodicCompleted:false, timeStamp:moment().format()};
     } else {
