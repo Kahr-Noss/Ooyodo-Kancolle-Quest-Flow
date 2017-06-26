@@ -121,7 +121,7 @@ $(function () {
     //load the pending quests saved in the cookie, or an empty one if no cookie are saved
 
     // load the user quest cookie or create an empty one
-    var questCookie = getCookie('user_quests') || {pendingQuests:[], userDecisions:{}, periodicCompleted:false, timeStamp:moment().format()};
+    var questCookie = JSON.parse(getCookie('user_quests')) || {pendingQuests:[], userDecisions:{}, periodicCompleted:false, timeStamp:moment().format()};
     console.log(questCookie.pendingQuests);
   
     timeVerificationLoop(questCookie.timeStamp);
