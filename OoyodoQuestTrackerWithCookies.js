@@ -32,7 +32,7 @@ $(function () {
   //default color object
  
     // load the user quest cookie or create an empty one
-    var questCookie = getCookie('user_quests') || "coucou";
+    var questCookie = getCookie('user_quests');
     //TODO change it it to cookie time
    
   console.log(JSON.stringify(questCookie));
