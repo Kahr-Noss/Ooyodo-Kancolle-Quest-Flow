@@ -122,8 +122,8 @@ $(function () {
 
     // load the user quest cookie or create an empty one
     var questCookie = getCookie('user_quests') || {pendingQuests:[], userDecisions:{}, periodicCompleted:false, timeStamp:moment().format()};
-    displayBubbleMessage(JSON.stringify(questCookie),
-    "???","MSG_quest_cookie",false);
+    console.log(questCookie);
+  
     timeVerificationLoop(questCookie.timeStamp);
 
     calculateQuestState(questCookie.pendingQuests, questCookie.userDecisions, questCookie.periodicCompleted);
