@@ -205,6 +205,15 @@ body {
   color:#0645AD;
   display: inline-block;
 }
+
+.link{
+  cursor:pointer;
+  color:#0645AD;
+}
+
+.link:hover{
+   text-decoration: underline;
+}
 /*
 .mini_ship_icon{
 vertical-align: middle;

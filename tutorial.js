@@ -4,6 +4,7 @@ $(function () {
 
   if (getCookie("pending_quests") === ""){
     step_1_openningPanel();
+
   }
 
   function step_1_openningPanel(){
@@ -41,7 +42,7 @@ $(function () {
     });
     $("#tuto_yes").click(function(){
       closeStep();
-      step_2_acceptCookies();
+        step_2_acceptCookies();
     });
 
 
@@ -299,7 +300,7 @@ $(function () {
         drawSquareAroundElements([$("#FC_FT_quest_list")]);
 
         closeStep = function(){
-//no hide because the event fire several time
+          //no hide because the event fire several time
           $('#FC_FT_quest_info_quest_code').off('DOMSubtreeModified');
           $(".square").remove();
         };
@@ -420,9 +421,12 @@ $(function () {
         );
 
         drawSquareAroundElements([$("#QL_RM_select_search_method")]);
-
+        $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "ship_required"; }).css("background-color","red");
+        $("#QL_RM_select_required_ship option").filter(function () { return $(this).text() === "Ooyodo"; }).css("background-color","red");
         closeStep = function(){
           $("#tuto").hide('fast');
+          $("#QL_RM_select_required_ship option").filter(function () { return $(this).text() === "Ooyodo"; }).css("background-color","");
+          $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "ship_required"; }).css("background-color","");
           $("#QL_RM_select_required_ship").unbind("change.tutorial_answer");
           $(".square").remove();
         };
@@ -487,10 +491,12 @@ $(function () {
           Choose the search mode "By quest period", then check only "Weekly" and "Monthly".`);
 
           drawSquareAroundElements([$("#QL_RM_select_search_method")]);
+          $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "period"; }).css("background-color","red");
 
           closeStep = function(){
             $("#tuto").hide('fast');
             $(".QL_RM_display_period").unbind("change.tutorial_answer");
+            $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "period"; }).css("background-color","");
             $(".square").remove();
           };
 
@@ -522,10 +528,20 @@ $(function () {
             In the dropdown list choose "Improvement material"`);
 
             drawSquareAroundElements([$("#QL_RM_select_search_method")]);
+            $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "reward"; }).css("background-color","red");
+            $("#QL_RM_select_search_method, input[name=QL_RM_search_reward][value=C]").bind("change.tutorial_answer", function(){
+console.log("plop");
+              $("#QL_RM_search_select_reward option").filter(function () { return $(this).text() === "Improvement material"; }).css("background-color","red");
+            });
+
 
             closeStep = function(){
               $("#tuto").hide('fast');
               $("#QL_RM_search_select_reward").unbind("change.tutorial_answer");
+              $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "reward"; }).css("background-color","");
+              $("#QL_RM_select_search_method,  input[name=QL_RM_search_reward][value=C]").unbind("change.tutorial_answer");
+              $("#QL_RM_search_select_reward option").filter(function () { return $(this).text() === "Improvement material"; }).css("background-color","");
+
               $(".square").remove();
             };
 
