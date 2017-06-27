@@ -122,6 +122,7 @@ const ICONS_LINK = {
   "Shiden Kai 2":"files/webpage/game_icons/GreenPlane.png",
   "Prototype Seiran":"files/webpage/game_icons/Seaplane.png",
 "Ryuusei":"files/webpage/game_icons/BluePlane.png",
+"Zuiun (634 Air Group/Skilled)":"files/webpage/game_icons/Seaplane.png",
   //other
   "350 Ranking points":"files/webpage/game_icons/Ranking_point.png",
 }
@@ -1372,7 +1373,7 @@ const ALL_QUESTS_LIST = {
       ["E","Zuiun (634 Air Group)",1]
     ],
     "requires":["B53"],
-    "unlocks":["A61"],
+    "unlocks":["A61","A77"],
     "period":"once",
     "needs":{
       "S":["Ise Kai","Hyuuga Kai"]
@@ -1724,6 +1725,50 @@ const ALL_QUESTS_LIST = {
       "S":["Kumano Kai Ni", "Suzuya Kai Ni" ,"Mogami Kai", "Mikuma Kai"]
     }
   },
+  "A77":{
+    "Jp":"精鋭「第四航空戦隊」を再編成せよ！",
+    "En":'Reorganize the Elite "Fourth Carrier Division"!',
+    "content":"Have Ise and Hyuuga both above level 50 as flagship and 2nd ship along with 1CL + 2 DD and 1 additional ship in your main fleet.",
+    "tips":"",
+    "ressources":{
+      "F":"0",
+      "A":"0",
+      "S":"0",
+      "B":"400"
+    },
+    "reward":[
+      ["C","Development material",4],
+      ["I","Skilled Crew Member",1]
+    ],
+    "requires":["A60","B14"],
+    "unlocks":["B102"],
+    "period":"once",
+    "needs":{
+      "S":["Ise", "Hyuuga"]
+    }
+  },
+  "A78":{
+    "Jp":"新編「第四水雷戦隊」を編成せよ！",
+    "En":"Organize the New 4th Torpedo Squadron!",
+    "content":"Have Yura Kai Ni as flagship, Murasame, Yuudachi, Harusame, Samidare and 1 DD in your main fleet.",
+    "tips":"",
+    "ressources":{
+      "F":"400",
+      "A":"0",
+      "S":"0",
+      "B":"0"
+    },
+    "reward":[
+      ["C","Instant repair",4],
+      ["I","Repair Team",1]
+    ],
+    "requires":["B15"],
+    "unlocks":["B103"],
+    "period":"once",
+    "needs":{
+      "S":["Yura Kai Ni", "Murasame" ,"Yuudachi", "Harusame", "Samidare"]
+    }
+  },
   "B1":{
     "Jp":"はじめての「出撃」！",
     "En":"The First Sortie",
@@ -1999,7 +2044,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant repair",2]
     ],
     "requires":["A22"],
-    "unlocks":["A44", "A46", "A53"],
+    "unlocks":["A44", "A46", "A53","A77"],
     "period":"once",
     "needs":{
       "M":["2-3"],
@@ -2022,7 +2067,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant repair",2]
     ],
     "requires":["A23"],
-    "unlocks":[],
+    "unlocks":["A78"],
     "period":"once",
     "needs":{
       "M":["3-1"],
@@ -3960,6 +4005,54 @@ const ALL_QUESTS_LIST = {
       "M":["4-5", "6-2"]
     }
   },
+  "B102":{
+    "Jp":"精鋭「第四航空戦隊」、抜錨せよ！",
+    "En":'Elite "Fourth Carrier Division", set sail!',
+    "content":"Sortie Ise and Hyuuga both above level 50 as flagship and 2nd ship along with 1CL + 2 DD and 1 additional ship to World 2-5, 3-5 and obatain at least A rank victory at the boss node.",
+    "tips":"",
+    "ressources":{
+      "F":"500",
+      "A":"0",
+      "S":"500",
+      "B":"0"
+    },
+    "reward":[
+      ["C","Improvement material",4],
+      ["I","Medal",1,"Choose one: "],
+      ["I","Skilled Crew Member",1,"or "]
+    ],
+    "requires":["A77"],
+    "unlocks":["F58"],
+    "period":"once",
+    "needs":{
+      "S":["Ise", "Hyuuga"],
+      "M":["2-5", "3-5"]
+    }
+  },
+  "B103":{
+    "Jp":"旗艦「由良」、抜錨！",
+    "En":"Flagship Yura, set sail!",
+    "content":"Sortie Yura Kai Ni as flagship, with at least 2 of the following ships: Murasame, Yuudachi, Harusame, Samidare, Akizuki, up to 3 additional ships to World 2-3, 5-1 and obtain A rank or above victory at the boss node.",
+    "tips":"",
+    "ressources":{
+      "F":"400",
+      "A":"400",
+      "S":"0",
+      "B":"400"
+    },
+    "reward":[
+      ["I","Skilled Crew Member",1],
+      ["I","Reinforcement Expansion",1,"Choose one: "],
+      ["E","Daihatsu Landing Craft",1,"or "]
+    ],
+    "requires":["A78"],
+    "unlocks":[],
+    "period":"once",
+    "needs":{
+      "S":["Yura Kai Ni", "Murasame", "Yuudachi", "Harusame", "Samidare", "Akizuki"],
+      "M":["2-3", "5-1"]
+    }
+  },
 
 
 
@@ -5334,7 +5427,76 @@ const ALL_QUESTS_LIST = {
       "E":[["Heavy gun",10]]
     }
   },
-
+  "F56":{
+    "Jp":"電探技術の射撃装置への活用",
+    "En":"Utilisation of radar technology as a gun",
+    "content":"Prepare 8000 Ammo and Steel, scrap 10 radars.",
+    "tips":"",
+    "ressources":{
+      "F":"0",
+      "A":"0",
+      "S":"0",
+      "B":"300"
+    },
+    "reward":[
+      ["C","Development material",2],
+      ["I","Medal",1,"Choose one: "],
+      ["I","New Model Gun Mount Improvement Material",1,"or "]
+    ],
+    "requires":["F53"],
+    "unlocks":["F57"],
+    "period":"once",
+    "needs":{
+      "R":[["Ammo",8000]],
+      "E":[["Radar",10]]
+    }
+  },
+  "F57":{
+    "Jp":"民生産業への協力",
+    "En":"Cooperqtion with the civil industry",
+    "content":"Prepare 12000 fuel, scrap 16 small guns.",
+    "tips":"",
+    "ressources":{
+      "F":"0",
+      "A":"0",
+      "S":"600",
+      "B":"0"
+    },
+    "reward":[
+      ["I","Furniture Fairy",1],
+      ["I","Medal",1,"Choose one: "],
+      ["I","New Model Gun Mount Improvement Material",1,"or "]
+    ],
+    "requires":["F56"],
+    "unlocks":[],
+    "period":"once",
+    "needs":{
+      "R":[["Fuel",12000]],
+      "E":[["small gun",16]]
+    }
+  },
+  "F58":{
+    "Jp":"精鋭「瑞雲」隊の編成",
+    "En":"Organize the elite Zuiun Force.",
+    "content":"Prepare 2 Type 99 Dive Bomber, 2 Zuiun and a Skilled Crew Member in your inventory, have Hyuuga Kai equipped a ★max Zuiun (634 Air Group) in her 4th slot as secretary. Scrap 2 Drum Canister (Transport Use).",
+    "tips":"※Equipment must be unlocked.※One Skilled Crew Member Icon is consumed in the process.",
+    "ressources":{
+      "F":"0",
+      "A":"0",
+      "S":"0",
+      "B":"100"
+    },
+    "reward":[
+      ["E","Zuiun (634 Air Group/Skilled)",1]
+    ],
+    "requires":["B102"],
+    "unlocks":[],
+    "period":"once",
+    "needs":{
+      "I":[["Skilled Crew Member",1]],
+      "E":[["Type 99 Dive Bomber",2],["Zuiun",2],["Drum Canister",2]]
+    }
+  },
 
 
 
