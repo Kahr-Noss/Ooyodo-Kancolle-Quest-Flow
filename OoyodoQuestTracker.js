@@ -845,7 +845,7 @@ $(function () {
         questsGroup.forEach(quest => {
           ALL_QUEST_STATE_TMP[quest] = userDecisions[questsGroup[0]];
         });
-
+askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, callback);
     } else {
         console.log("que'est ce qu'on fait de ca? " + questsGroup);
         $("#QL").hide();
@@ -884,6 +884,7 @@ $(function () {
 
   //this function is called at the end and implement the newly calculated states if there is no inconsistencies, else error message
   function implementQuestsStateUpdated(pendingQuests, userDecisions, undeterminedQuests, setPeriodicQuestCompleted){
+    console.log("c'est fini!!");
     ALL_QUEST_STATE = cloneObject(ALL_QUEST_STATE_TMP);
 
     $(".QL_questBox").removeClass("pending locked completed");
