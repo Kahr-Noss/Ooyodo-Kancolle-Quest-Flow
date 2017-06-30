@@ -843,7 +843,7 @@ $(function () {
         questsGroup.forEach(quest => {
           ALL_QUEST_STATE_TMP[quest] = userDecisions(questsGroup[0]);
         });
-      }
+
     } else {
         $("#QL").hide();
         $("#FC").show('fast');
