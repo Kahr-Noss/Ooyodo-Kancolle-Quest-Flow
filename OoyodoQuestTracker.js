@@ -126,8 +126,10 @@ $(function () {
     console.log(cookieContent);
     var questCookie = {};
     if (cookieContent === ""){
+      console.log("pas de cookie");
       questCookie =  {pendingQuests:[], userDecisions:{}, periodicCompleted:false, undeterminedQuests:[], timeStamp:moment().format()};
     } else {
+      console.log("Cookie !");
       questCookie = JSON.parse(cookieContent);
     }
 
@@ -891,7 +893,8 @@ console.log("plop");
     $("#MSG_IPQ_error_msg").text("");
     updateFlowchartColors();
     setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, undeterminedQuests:undeterminedQuests, timeStamp:moment().utcOffset("+09:00").format()}),365);
-
+console.log("saving cookie");
+console.log(getCookie('user_quests'));
     if (undeterminedQuests.length >0){
       displayBubbleMessage(`Admiral, about those quests that you din't know the state, you should complete those quests:<br>
       ${getBlockingPeriodicQuests().join(', ')}<br>
