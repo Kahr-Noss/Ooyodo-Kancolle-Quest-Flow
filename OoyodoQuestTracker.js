@@ -799,9 +799,9 @@ $(function () {
         unknowQuests.forEach(quest => {
           unknownQuestsGroups.push(createUnknownOnceQuestGroup(quest,unknowQuests));
         });
-console.log(unknowQuests);
+
         unknownQuestsGroups = separateGroupDoublons(unknownQuestsGroups, unknowQuests);
-console.log(unknownQuestsGroups);
+
         //for the one time quests that were not deductible, ask the user about it by displaying it on the flowchart
         askForUnknowQuestState(unknownQuestsGroups,userQuestCookie.userDecisions, userQuestCookie.undeterminedQuests, function(userDecisions, undeterminedQuests){
           // this is called after the user answerd to all unknowQuests
@@ -821,21 +821,25 @@ console.log(unknownQuestsGroups);
   function askForUnknowQuestState(unknowQuestsGroup, userDecisions, undeterminedQuests, callback){
     // if there is unknown quests remaining
     //      updateFlowchartColors();
+      console.log(questsGroup);
     if (unknowQuestsGroup.length > 0){
 
       var questsGroup = unknowQuestsGroup.shift();
       //    if (ALL_QUEST_STATE_TMP[quest] === "???"){
       if (ALL_QUESTS_LIST[questsGroup[0]].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed"})){
+console.log(1);
         questsGroup.forEach(quest => {
           ALL_QUEST_STATE_TMP[quest] = "completed";
         });
         askForUnknowQuestState(unknowQuestsGroup, userDecisions, undeterminedQuests, callback);
       } else if (ALL_QUESTS_LIST[questsGroup[0]].requires.some(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "locked" && ALL_QUESTS_LIST[requiredQuest].period === 'once'})){
+console.log(2);
         questsGroup.forEach(quest => {
           ALL_QUEST_STATE_TMP[quest] = "locked";
         });
         askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, callback);
       } else {
+        console.log(3);
         $("#QL").hide();
         $("#FC").show('fast');
         displayPartialTree(questsGroup);
