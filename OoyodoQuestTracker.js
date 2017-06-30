@@ -134,6 +134,7 @@ $(function () {
     loadFlowchart();
     resizeWindow();
     displayFlowchart();
+    console.log(JSON.stringify(ALL_QUEST_STATE));
     updateFlowchartColors();
   }
 
