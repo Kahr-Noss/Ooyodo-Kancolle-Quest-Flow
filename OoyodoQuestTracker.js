@@ -825,6 +825,7 @@ $(function () {
 
       var questsGroup = unknowQuestsGroup.shift();
       //    if (ALL_QUEST_STATE_TMP[quest] === "???"){
+      console.log(questsGroup);
       if (ALL_QUESTS_LIST[questsGroup[0]].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed"})){
 
         questsGroup.forEach(quest => {
