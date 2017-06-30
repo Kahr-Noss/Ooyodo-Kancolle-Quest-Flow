@@ -221,7 +221,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":["A3"],
-    "unlocks":["A7","A8", "B29", "D1"],
+    "unlocks":["A7","A8", "B29", "D1","B67","F11"],
     "period":"once",
     "needs":{}
   },
@@ -1884,7 +1884,7 @@ const ALL_QUESTS_LIST = {
       ["S","Tatsuta",1]
     ],
     "requires":["B5"],
-    "unlocks":["B7", "B30"],
+    "unlocks":["B7", "B30","B67"],
     "period":"once",
     "needs":{}
   },
@@ -1941,7 +1941,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":["B8"],
-    "unlocks":[],
+    "unlocks":["F35"],
     "period":"once",
     "needs":{}
   },
@@ -3234,7 +3234,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["F","3rd Anniversary wallscroll",1]
     ],
-    "requires":[],
+    "requires":["B6","A5"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -4479,7 +4479,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["E","Drum Canister (Transport Use)",3]
     ],
-    "requires":[],
+    "requires":["A5"],
     "unlocks":[],
     "period":"once",
     "needs":{}
@@ -4973,7 +4973,7 @@ const ALL_QUESTS_LIST = {
       ["C","Improvement material",4],
       ["I","Skilled Crew Member",1]
     ],
-    "requires":[],
+    "requires":["B9"],
     "unlocks":[],
     "period":"quarterly",
     "needs":{
@@ -5372,7 +5372,7 @@ const ALL_QUESTS_LIST = {
       ["I","New Model Gun Mount Improvement Material",1]
     ],
     "requires":["F7"],
-    "unlocks":["F54"],
+    "unlocks":["F54","F56"],
     "period":"once",
     "needs":{
       "R":[["Steel",6000]],
@@ -5429,7 +5429,7 @@ const ALL_QUESTS_LIST = {
   },
   "F56":{
     "Jp":"電探技術の射撃装置への活用",
-    "En":"Utilisation of radar technology as a gun",
+    "En":"Utilizing radar technology for shooting equipment",
     "content":"Prepare 8000 Ammo and Steel, scrap 10 radars.",
     "tips":"",
     "ressources":{
@@ -5453,7 +5453,7 @@ const ALL_QUESTS_LIST = {
   },
   "F57":{
     "Jp":"民生産業への協力",
-    "En":"Cooperqtion with the civil industry",
+    "En":"Cooperation with the civil industry",
     "content":"Prepare 12000 fuel, scrap 16 small guns.",
     "tips":"",
     "ressources":{
@@ -5477,7 +5477,7 @@ const ALL_QUESTS_LIST = {
   },
   "F58":{
     "Jp":"精鋭「瑞雲」隊の編成",
-    "En":"Organize the elite Zuiun Force.",
+    "En":"Organize the Elite Zuiun Group.",
     "content":"Prepare 2 Type 99 Dive Bomber, 2 Zuiun and a Skilled Crew Member in your inventory, have Hyuuga Kai equipped a ★max Zuiun (634 Air Group) in her 4th slot as secretary. Scrap 2 Drum Canister (Transport Use).",
     "tips":"※Equipment must be unlocked.※One Skilled Crew Member Icon is consumed in the process.",
     "ressources":{
@@ -5493,6 +5493,7 @@ const ALL_QUESTS_LIST = {
     "unlocks":[],
     "period":"once",
     "needs":{
+      "S":["Hyuuga Kai"],
       "I":[["Skilled Crew Member",1]],
       "E":[["Type 99 Dive Bomber",2],["Zuiun",2],["Drum Canister",2]]
     }
@@ -5590,7 +5591,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[      ],
     "requires":["A5"],
-    "unlocks":[],
+    "unlocks":["D4"],
     "period":"once",
     "needs":{}
   },
@@ -5648,7 +5649,7 @@ const ALL_QUESTS_LIST = {
       ["I","Large furniture box",1],
       ["C","Development material",3]
     ],
-    "requires":[],
+    "requires":["D1"],
     "unlocks":[],
     "period":"weekly",
     "needs":{}
