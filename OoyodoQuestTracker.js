@@ -124,7 +124,6 @@ $(function () {
 
 
     var questCookie = JSON.parse(getCookie('user_quests'));
-    console.log(JSON.stringify(questCookie));
 
     timeVerificationLoop(questCookie.timeStamp);
 
@@ -134,7 +133,6 @@ $(function () {
     loadFlowchart();
     resizeWindow();
     displayFlowchart();
-    console.log(JSON.stringify(ALL_QUEST_STATE));
     updateFlowchartColors();
   }
 
@@ -389,7 +387,6 @@ $(function () {
     var questsCookie = JSON.parse(getCookie('user_quests'));
     var questsToAsk = [];
     var questsUnlocked = [];
-    console.log(questsCookie);
     //get all currently displayed quest to display them again
     var visibleQuests = [];
     $(`.QL_questBox:visible`).each(function(){
@@ -409,8 +406,7 @@ $(function () {
         if ( ALL_QUESTS_LIST[unlockedQuest].requires.every(function(requiredQuest){return ALL_QUEST_STATE[requiredQuest] === 'completed';})){
           // if all requierments for this quest are completed
           //check if it was an undetermined quest or not
-          console.log(questsCookie.undeterminedQuests + "         " + unlockedQuest);
-          if($.inArray(unlockedQuest,questsCookie.undeterminedQuests) === -1){
+            if($.inArray(unlockedQuest,questsCookie.undeterminedQuests) === -1){
             // if not, set is as pending
             ALL_QUEST_STATE[unlockedQuest] = 'pending';
             updateQuestStateDisplay(unlockedQuest);
@@ -783,18 +779,6 @@ $(function () {
       } else {
         closeBubbleMessage($("#MSG_IPQ"));
 
-        // if it's created from a cookie that have recorded user decisions, implement them
-  /*      Object.keys(userQuestCookie.userDecisions).forEach(quest => {
-          console.log(quest);
-          var state = userQuestCookie.userDecisions[quest];
-          ALL_QUEST_STATE_TMP[quest] = state;
-          ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
-            setUnknowOnceQuestsUpward(nextQuest,state);
-          });
-        });*/
-
-
-
         var unknowQuests = setRemainingOnceQuestStateByDeduction();
         var unknownQuestsGroups = [];
         unknowQuests.forEach(quest => {
@@ -826,7 +810,6 @@ $(function () {
 
       var questsGroup = unknowQuestsGroup.shift();
       //    if (ALL_QUEST_STATE_TMP[quest] === "???"){
-      console.log(questsGroup);
       if (ALL_QUESTS_LIST[questsGroup[0]].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed"})){
 
         questsGroup.forEach(quest => {
@@ -841,13 +824,11 @@ $(function () {
         askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, callback);
       } else if (has.call(userDecisions, questsGroup[0])){
         //if the user's decision is already saved in a cookie.
-        console.log("et oui, c'etait dans le cookie !     " + questsGroup);
         questsGroup.forEach(quest => {
           ALL_QUEST_STATE_TMP[quest] = userDecisions[questsGroup[0]];
         });
 askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, callback);
     } else {
-        console.log("que'est ce qu'on fait de ca? " + questsGroup);
         $("#QL").hide();
         $("#FC").show('fast');
         displayPartialTree(questsGroup);
@@ -884,7 +865,7 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
 
   //this function is called at the end and implement the newly calculated states if there is no inconsistencies, else error message
   function implementQuestsStateUpdated(pendingQuests, userDecisions, undeterminedQuests, setPeriodicQuestCompleted){
-    console.log("c'est fini!!");
+
     ALL_QUEST_STATE = cloneObject(ALL_QUEST_STATE_TMP);
 
     $(".QL_questBox").removeClass("pending locked completed");
@@ -894,9 +875,6 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
     $("#MSG_IPQ_error_msg").text("");
     updateFlowchartColors();
     setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, undeterminedQuests:undeterminedQuests, timeStamp:moment().utcOffset("+09:00").format()}),365);
-console.log("saving cookie");
-console.log({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, undeterminedQuests:undeterminedQuests, timeStamp:moment().utcOffset("+09:00").format()});
-console.log(getCookie('user_quests'));
     if (undeterminedQuests.length >0){
       displayBubbleMessage(`Admiral, about those quests that you din't know the state, you should complete those quests:<br>
       ${getBlockingPeriodicQuests().join(', ')}<br>
@@ -1329,8 +1307,7 @@ console.log(getCookie('user_quests'));
 
   // change the colors of a node
   function updateNodeDisplay(node,fill, state, period){
-    console.log(node + "    " + fill + "    " + state + "    " + period);
-    node.findObject("SHAPE").fill = fill;
+      node.findObject("SHAPE").fill = fill;
     node.findObject("SHAPE").stroke = COLORS[state].border ? COLORS[state].border_color : "#000000";
     node.findObject("SHAPE").strokeWidth =  COLORS[state].border ? COLORS[state].border_width : 5;
     node.findObject("TEXT").stroke = tinycolor(fill).isLight() ? "#000000" : "#ffffff";
@@ -2223,7 +2200,6 @@ function getCookie(cname) {
     }
   }
   // if the cookie doesn't exist
-    console.log("cookie not found");
   if (cname === "user_quests"){
     // the empty cookie so the code don't bug if cookies are disabled
     return JSON.stringify({pendingQuests:[], userDecisions:{}, periodicCompleted:false, undeterminedQuests:[], timeStamp:moment().format()});
