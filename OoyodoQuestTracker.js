@@ -781,10 +781,12 @@ $(function () {
           inconsistencies_msg += `${inconsistency[0]} can't be pending if ${inconsistency[1]} hasn't be completed<br>`;
         });
         $("#MSG_IPQ_error_msg").html(inconsistencies_msg);
+
       } else {
+
         closeBubbleMessage($("#MSG_IPQ"));
 
-        var unknowQuests = setRemainingOnceQuestStateByDeduction();
+        var unknowQuests = setRemainingOnceQuestStateByDeduction(userQuestCookie.undeterminedQuests);
         var unknownQuestsGroups = [];
         unknowQuests.forEach(quest => {
           unknownQuestsGroups.push(createUnknownOnceQuestGroup(quest,unknowQuests));
@@ -936,7 +938,7 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
   }
 
   //set the state on one time quests that haven't been affected
-  function setRemainingOnceQuestStateByDeduction(){
+  function setRemainingOnceQuestStateByDeduction(undeterminedQuests){
     var askForState = [];
     // set state of unknow quests
     // first check once quests.
@@ -945,6 +947,7 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
         if (ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed";})){
           //if they have no requierments or if all are completed, means that it's an isolated once chain list.
           setUnknowOnceQuestsUpward(quest,"completed");
+          undeterminedQuests[quest] = "completed";
         } else if (ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return periodNumberEquvalence(ALL_QUESTS_LIST[requiredQuest].period) === 5;})){
           // if all required quests are one time quests and there is at least one once quest witha ??? state => do nothing, it will be treated when the previous quest turn come
           // if there is none with ?? it will be treated before
@@ -957,6 +960,7 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
             ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
               setUnknowOnceQuestsUpward(nextQuest,"completed");
             });
+            undeterminedQuests[quest] = "completed";
           } else {
             askForState.push(quest);
           }
