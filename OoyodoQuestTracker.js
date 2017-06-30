@@ -894,6 +894,7 @@ console.log("plop");
     updateFlowchartColors();
     setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, undeterminedQuests:undeterminedQuests, timeStamp:moment().utcOffset("+09:00").format()}),365);
 console.log("saving cookie");
+console.log({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, undeterminedQuests:undeterminedQuests, timeStamp:moment().utcOffset("+09:00").format()});
 console.log(getCookie('user_quests'));
     if (undeterminedQuests.length >0){
       displayBubbleMessage(`Admiral, about those quests that you din't know the state, you should complete those quests:<br>
