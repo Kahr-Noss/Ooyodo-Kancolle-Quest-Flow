@@ -783,14 +783,14 @@ $(function () {
         closeBubbleMessage($("#MSG_IPQ"));
 
         // if it's created from a cookie that have recorded user decisions, implement them
-        Object.keys(userQuestCookie.userDecisions).forEach(quest => {
+  /*      Object.keys(userQuestCookie.userDecisions).forEach(quest => {
           console.log(quest);
           var state = userQuestCookie.userDecisions[quest];
           ALL_QUEST_STATE_TMP[quest] = state;
           ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
             setUnknowOnceQuestsUpward(nextQuest,state);
           });
-        });
+        });*/
 
 
 
@@ -821,31 +821,33 @@ $(function () {
   function askForUnknowQuestState(unknowQuestsGroup, userDecisions, undeterminedQuests, callback){
     // if there is unknown quests remaining
     //      updateFlowchartColors();
-console.log("liste des groupes     " + unknowQuestsGroup);
-console.log(JSON.stringify(ALL_QUEST_STATE_TMP));
     if (unknowQuestsGroup.length > 0){
 
       var questsGroup = unknowQuestsGroup.shift();
-
-        console.log(questsGroup);
       //    if (ALL_QUEST_STATE_TMP[quest] === "???"){
       if (ALL_QUESTS_LIST[questsGroup[0]].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed"})){
-console.log(1);
+
         questsGroup.forEach(quest => {
           ALL_QUEST_STATE_TMP[quest] = "completed";
         });
         askForUnknowQuestState(unknowQuestsGroup, userDecisions, undeterminedQuests, callback);
       } else if (ALL_QUESTS_LIST[questsGroup[0]].requires.some(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "locked" && ALL_QUESTS_LIST[requiredQuest].period === 'once'})){
-console.log(2);
+
         questsGroup.forEach(quest => {
           ALL_QUEST_STATE_TMP[quest] = "locked";
         });
         askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, callback);
-      } else {
-        console.log(3);
+      } else if(has.call(userDecisions,questsGroup[0])){
+        //if the user's decision is already saved in a cookie.
+        console.log("et oui, c'etait dans le cookie !     " + questsGroup);
+        questsGroup.forEach(quest => {
+          ALL_QUEST_STATE_TMP[quest] = userDecisions(questsGroup[0]);
+        });
+      }
+    } else {
         $("#QL").hide();
         $("#FC").show('fast');
-      //  displayPartialTree(questsGroup);
+        displayPartialTree(questsGroup);
         displayQuestData(questsGroup[0]);
         //TODO  I changed the idk to locked instead of complete it may be a problem
         displayBubbleMessage(`Admiral, I need some help to<br>
