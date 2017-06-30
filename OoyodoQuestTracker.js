@@ -784,7 +784,7 @@ $(function () {
 
         // if it's created from a cookie that have recorded user decisions, implement them
         Object.keys(userQuestCookie.userDecisions).forEach(quest => {
-          cosole.log(quest);
+          console.log(quest);
           var state = userQuestCookie.userDecisions[quest];
           ALL_QUEST_STATE_TMP[quest] = state;
           ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
