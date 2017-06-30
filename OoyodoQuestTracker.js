@@ -127,7 +127,7 @@ $(function () {
     var questCookie = {};
     if (cookieContent === ""){
       console.log("pas de cookie");
-      questCookie =  {pendingQuests:[], userDecisions:{}, periodicCompleted:false, undeterminedQuests:[], timeStamp:moment().format()};
+      questCookie =  {pendingQuests:[], userDecisions:{}, periodicCompleted:false, undeterminedQuests:["A1"], timeStamp:moment().format()};
     } else {
       console.log("Cookie !");
       questCookie = JSON.parse(cookieContent);
