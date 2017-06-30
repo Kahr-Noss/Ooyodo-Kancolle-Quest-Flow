@@ -127,12 +127,12 @@ $(function () {
 
     timeVerificationLoop(questCookie.timeStamp);
 
-    calculateQuestState(questCookie);
-
 
     loadFlowchart();
     resizeWindow();
     displayFlowchart();
+
+      calculateQuestState(questCookie);
     updateFlowchartColors();
   }
 
@@ -586,14 +586,14 @@ $(function () {
     var questLinkDataArray = [];
     Object.keys(ALL_QUESTS_LIST).forEach(quest => {
       //create a node
-      var color = getQuestColor(quest,ALL_QUEST_STATE[quest],true,false);
-      var state = ALL_QUEST_STATE[quest];
+      var color = getQuestColor(quest,"default");
+      var state = "completed";
       questNodeDataArray.push({
         "key": quest,
         "color": color,
         "text": quest,
         "strokeWidth":(state==='pending' ? 25 : 5),
-        "strokeColor": (state==='pending' ? "yellow" : "Black"),
+        "strokeColor": (state==='pending' ? "yellow" : "Black"),  //TODO change color
         "visible": true,
         "tooltip":formatTextLineBreak(ALL_QUESTS_LIST[quest].content,65),
         "ribbon_text":state,
