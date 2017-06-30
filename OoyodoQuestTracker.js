@@ -843,7 +843,7 @@ console.log(2);
         console.log(3);
         $("#QL").hide();
         $("#FC").show('fast');
-        displayPartialTree(questsGroup);
+      //  displayPartialTree(questsGroup);
         displayQuestData(questsGroup[0]);
         //TODO  I changed the idk to locked instead of complete it may be a problem
         displayBubbleMessage(`Admiral, I need some help to<br>
