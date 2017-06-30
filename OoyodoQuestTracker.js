@@ -801,7 +801,7 @@ $(function () {
         });
 console.log(unknowQuests);
         unknownQuestsGroups = separateGroupDoublons(unknownQuestsGroups, unknowQuests);
-
+console.log(unknownQuestsGroups);
         //for the one time quests that were not deductible, ask the user about it by displaying it on the flowchart
         askForUnknowQuestState(unknownQuestsGroups,userQuestCookie.userDecisions, userQuestCookie.undeterminedQuests, function(userDecisions, undeterminedQuests){
           // this is called after the user answerd to all unknowQuests
