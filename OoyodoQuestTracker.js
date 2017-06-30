@@ -122,17 +122,8 @@ $(function () {
 
     // load the user quest cookie or create an empty one
 
-    var cookieContent = getCookie('user_quests');
-    console.log(cookieContent);
-    var questCookie = {};
-    if (cookieContent === ""){
-      console.log("pas de cookie");
-      questCookie =  {pendingQuests:[], userDecisions:{}, periodicCompleted:false, undeterminedQuests:["A1"], timeStamp:moment().format()};
-    } else {
-      console.log("Cookie !");
-      questCookie = JSON.parse(cookieContent);
-    }
 
+    var questCookie = JSON.parse(getCookie('user_quests'));
     console.log(questCookie);
 
     timeVerificationLoop(questCookie.timeStamp);
@@ -2201,12 +2192,10 @@ console.log(getCookie('user_quests'));
 
 //create a cookie
 function setCookie(cname, cvalue, exdays) {
-  if(getCookie("acceptCookies")){
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires="+d.toUTCString();
     document.cookie = `${cname}=${cvalue};${expires};path=/`;
-  }
 }
 
 //get cookie data
@@ -2223,6 +2212,7 @@ function getCookie(cname) {
     }
   }
   // if the cookie doesn't exist
+    console.log("cookie not found");
   if (cname === "user_quests"){
     // the empty cookie so the code don't bug if cookies are disabled
     return JSON.stringify({pendingQuests:[], userDecisions:{}, periodicCompleted:false, undeterminedQuests:[], timeStamp:moment().format()});

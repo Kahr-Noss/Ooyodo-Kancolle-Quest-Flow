@@ -47,7 +47,7 @@ $(function () {
 
 
   }
-
+//TODO edit this
   function step_2_acceptCookies(){
     $("#tuto").show('slow');
     $("#tuto_text").html(`If you want me to remember your quest progression and your settings,
@@ -65,7 +65,6 @@ $(function () {
       });
       $("#tuto_yes").click(function(){
         closeStep();
-        setCookie('acceptCookies', 'true', 365);
         step_3_flowchartPresentation();
       });
 
