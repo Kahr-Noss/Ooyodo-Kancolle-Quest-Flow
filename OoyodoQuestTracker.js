@@ -124,7 +124,7 @@ $(function () {
 
 
     var questCookie = JSON.parse(getCookie('user_quests'));
-    console.log(questCookie);
+    console.log(JSON.stringify(questCookie));
 
     timeVerificationLoop(questCookie.timeStamp);
 
@@ -846,6 +846,7 @@ $(function () {
         });
 
     } else {
+        console.log("que'est ce qu'on fait de ca? " + questsGroup);
         $("#QL").hide();
         $("#FC").show('fast');
         displayPartialTree(questsGroup);
