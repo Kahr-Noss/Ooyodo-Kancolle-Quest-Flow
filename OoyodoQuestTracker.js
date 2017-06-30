@@ -308,7 +308,6 @@ $(function () {
 
   // only display the listed node and recenter the view and the node position
   function displayPartialTree(questList) {
-
     myDiagram.model.startTransaction("displayPartialTree");
     myDiagram.nodes.each(function(n) { n.visible = !($.inArray(n.data.key,questList) === -1) });
     myDiagram.layoutDiagram(true);
@@ -785,6 +784,7 @@ $(function () {
 
         // if it's created from a cookie that have recorded user decisions, implement them
         Object.keys(userQuestCookie.userDecisions).forEach(quest => {
+          cosole.log(quest);
           var state = userQuestCookie.userDecisions[quest];
           ALL_QUEST_STATE_TMP[quest] = state;
           ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
@@ -840,7 +840,7 @@ $(function () {
         $("#FC").show('fast');
         displayPartialTree(questsGroup);
         displayQuestData(questsGroup[0]);
-        //TODO changed the idk to locked instead of complete may be a problem
+        //TODO  I changed the idk to locked instead of complete it may be a problem
         displayBubbleMessage(`Admiral, I need some help to<br>
           complete your progression on the quest flowchart...<br>
           Do you already completed those quests ?<br>
