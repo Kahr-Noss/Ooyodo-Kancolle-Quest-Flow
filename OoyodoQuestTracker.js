@@ -838,11 +838,11 @@ $(function () {
           ALL_QUEST_STATE_TMP[quest] = "locked";
         });
         askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, callback);
-      } else if(has.call(userDecisions,questsGroup[0])){
+      } else if (has.call(userDecisions, questsGroup[0])){
         //if the user's decision is already saved in a cookie.
         console.log("et oui, c'etait dans le cookie !     " + questsGroup);
         questsGroup.forEach(quest => {
-          ALL_QUEST_STATE_TMP[quest] = userDecisions(questsGroup[0]);
+          ALL_QUEST_STATE_TMP[quest] = userDecisions[questsGroup[0]];
         });
 
     } else {
