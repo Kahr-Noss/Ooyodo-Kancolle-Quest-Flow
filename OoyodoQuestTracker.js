@@ -414,7 +414,7 @@ $(function () {
             questsUnlocked.push(unlockedQuest);
           } else {
             //if yes ask the user if the quest is displayed in game or not.
-            askToCheckIfQuestIsPendingInGame(unlockedQuest);
+            askToCheckIfQuestIsPendingInGame(unlockedQuest,visibleQuests);
           }
         } else if (ALL_QUESTS_LIST[unlockedQuest].requires.every(function(requiredQuest){return (ALL_QUESTS_LIST[requiredQuest].period === 'once' && ALL_QUEST_STATE[requiredQuest] === 'completed') || ALL_QUESTS_LIST[requiredQuest].period !== 'once';})){
           // if all once quests are completed and only periodic quests aren't completed, we ask the user if those quests are completed or not (maybe he didn't update them)
@@ -492,7 +492,10 @@ $(function () {
     }
   }
 
-  function askToCheckIfQuestIsPendingInGame(unlockedQuest){
+
+
+
+  function askToCheckIfQuestIsPendingInGame(unlockedQuest,visibleQuests){
     //default function, set it as pending / and update the cookie
     function setAsPending(){
       var questsCookie = JSON.parse(getCookie('user_quests'));
@@ -500,6 +503,8 @@ $(function () {
       updateQuestStateDisplay(unlockedQuest);
       questsCookie.pendingQuests.push(unlockedQuest);
       questsCookie.undeterminedQuests.splice(questsCookie.undeterminedQuests.indexOf(unlockedQuest), 1);
+      updateQuestListDisplay(visibleQuests);
+      updateFlowchartColors();
       setCookie('user_quests',JSON.stringify(questsCookie),365);
     };
 
