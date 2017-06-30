@@ -1327,6 +1327,7 @@ console.log(getCookie('user_quests'));
 
   // change the colors of a node
   function updateNodeDisplay(node,fill, state, period){
+    console.log(node + "    " + fill + "    " + state + "    " + period);
     node.findObject("SHAPE").fill = fill;
     node.findObject("SHAPE").stroke = COLORS[state].border ? COLORS[state].border_color : "#000000";
     node.findObject("SHAPE").strokeWidth =  COLORS[state].border ? COLORS[state].border_width : 5;
