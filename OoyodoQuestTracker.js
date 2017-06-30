@@ -799,7 +799,7 @@ $(function () {
         unknowQuests.forEach(quest => {
           unknownQuestsGroups.push(createUnknownOnceQuestGroup(quest,unknowQuests));
         });
-
+console.log(unknowQuests);
         unknownQuestsGroups = separateGroupDoublons(unknownQuestsGroups, unknowQuests);
 
         //for the one time quests that were not deductible, ask the user about it by displaying it on the flowchart
