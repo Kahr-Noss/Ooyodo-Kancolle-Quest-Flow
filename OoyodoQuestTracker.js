@@ -821,10 +821,11 @@ $(function () {
   function askForUnknowQuestState(unknowQuestsGroup, userDecisions, undeterminedQuests, callback){
     // if there is unknown quests remaining
     //      updateFlowchartColors();
-      console.log(questsGroup);
+
     if (unknowQuestsGroup.length > 0){
 
       var questsGroup = unknowQuestsGroup.shift();
+        console.log(questsGroup);
       //    if (ALL_QUEST_STATE_TMP[quest] === "???"){
       if (ALL_QUESTS_LIST[questsGroup[0]].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed"})){
 console.log(1);
