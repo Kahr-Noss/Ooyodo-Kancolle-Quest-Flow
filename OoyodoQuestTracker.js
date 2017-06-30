@@ -497,8 +497,6 @@ $(function () {
   }
 
   function askToCheckIfQuestIsPendingInGame(unlockedQuest){
-    //TODO ca proc pas
-console.log("plop");
     //default function, set it as pending / and update the cookie
     function setAsPending(){
       var questsCookie = JSON.parse(getCookie('user_quests'));
@@ -542,7 +540,6 @@ console.log("plop");
         //if found, it means that the quest hasn't been completed yet
         setAsPending();
       }
-      askForPeriodicQuestsToUnlock(quest,questsToAsk,questsUnlocked,questsCookie,visibleQuests);
     });
 
     //if closing without answer, set is as pending by default
