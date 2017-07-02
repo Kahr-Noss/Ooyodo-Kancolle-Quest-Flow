@@ -1,7 +1,8 @@
 $(function () {
 
   //  *********   GLOBAL VARIABLES   ************
-
+  //TODO virer ça partout
+var cookieTemp="";
   //default color object
   const COLORS = {
     A:{
@@ -124,8 +125,8 @@ $(function () {
 
 
     var questCookie = JSON.parse(getCookie('user_quests'));
+console.log(getCookie('user_quests'));
 
-    timeVerificationLoop(questCookie.timeStamp);
 
 
     loadFlowchart();
@@ -134,6 +135,7 @@ $(function () {
 
       calculateQuestState(questCookie);
     updateFlowchartColors();
+        timeVerificationLoop(questCookie.timeStamp);
   }
 
 
@@ -384,6 +386,8 @@ $(function () {
 
   // change the state of a quest and update the unlocked ones
   function setQuestAsCompleted(quest){
+
+    //TODO edit the cookie with the updated values
     var questsCookie = JSON.parse(getCookie('user_quests'));
     var questsToAsk = [];
     var questsUnlocked = [];
@@ -430,13 +434,14 @@ $(function () {
     updateQuestListDisplay(visibleQuests);
     updateFlowchartColors();
     setCookie('user_quests',JSON.stringify(questsCookie),365);
-
+cookieTemp = JSON.stringify(questsCookie);
   }
 
   // aske the user if he completed some periodic quests in case of he didn't update them
   function askForPeriodicQuestsToUnlock(quest,questsToAsk,questsUnlocked,questsCookie,visibleQuests){
 
     // TODO bien tester tout ce bordel si ca marche avec plusieurs quetes qui demqndent. pour une ca a l'air OK
+
     function closingProcess(){
       //add all the quests to the undetermined list
 
@@ -449,7 +454,7 @@ $(function () {
       updateQuestListDisplay(visibleQuests);
       updateFlowchartColors();
       setCookie('user_quests',JSON.stringify(questsCookie),365);
-
+cookieTemp = JSON.stringify(questsCookie);
     };
 
     if (questsToAsk.length > 0){
@@ -506,6 +511,7 @@ $(function () {
       updateQuestListDisplay(visibleQuests);
       updateFlowchartColors();
       setCookie('user_quests',JSON.stringify(questsCookie),365);
+      cookieTemp = JSON.stringify(questsCookie);
     };
 
     displayBubbleMessage(`Admiral, just a moment...<br>
@@ -537,6 +543,7 @@ $(function () {
         });
         questsCookie.undeterminedQuests.splice(questsCookie.undeterminedQuests.indexOf(unlockedQuest), 1);
         setCookie('user_quests',JSON.stringify(questsCookie),365);
+        cookieTemp = JSON.stringify(questsCookie);
       } else if ($(this).val()==="locked"){
         //if found, it means that the quest hasn't been completed yet
         setAsPending();
@@ -576,6 +583,7 @@ $(function () {
     updateQuestListDisplay([]);
     updateFlowchartColors();
     setCookie('user_quests',JSON.stringify(questsCookie),365);
+    cookieTemp = JSON.stringify(questsCookie);
   }
 
   // ******      FLOWCHART CREATION     *********
@@ -798,7 +806,7 @@ $(function () {
         askForUnknowQuestState(unknownQuestsGroups,userQuestCookie.userDecisions, userQuestCookie.undeterminedQuests, function(userDecisions, undeterminedQuests){
           // this is called after the user answerd to all unknowQuests
           //Now the periodic quests not set yet
-          setPeriodicQuestState();
+          setPeriodicQuestState(userQuestCookie.pendingQuests);
 
           // update the ALL_QUEST STATE list with the one just cqlculated if on inconsistencies
           $("#FC_RM_show_state_colors").prop("checked",true);
@@ -882,6 +890,7 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
     $("#MSG_IPQ_error_msg").text("");
     updateFlowchartColors();
     setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, undeterminedQuests:undeterminedQuests, timeStamp:moment().utcOffset("+09:00").format()}),365);
+cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, undeterminedQuests:undeterminedQuests, timeStamp:moment().utcOffset("+09:00").format()});
     if (undeterminedQuests.length >0){
       displayBubbleMessage(`Admiral, about those quests that you din't know the state, you should complete those quests:<br>
       ${getBlockingPeriodicQuests().join(', ')}<br>
@@ -969,16 +978,18 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
         }
       }
     });
+    console.log(JSON.stringify(undeterminedQuests));
     return askForState;
   }
 
   // set periodic quests either as pending if all requierments are completed or to locked
-  function setPeriodicQuestState(){
+  function setPeriodicQuestState(pendingQuests){
     getQuestsInState(ALL_QUEST_STATE_TMP,'???').forEach(quest=>{
       if(periodNumberEquvalence(ALL_QUESTS_LIST[quest].period) <= 4){
         if (ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed";})){
           //if they have no requierments or if all are completed, we assume that it means that this one is pending, and the one after are locked
           ALL_QUEST_STATE_TMP[quest] = "pending";
+          pendingQuests.push(quest);
         } else {
           ALL_QUEST_STATE_TMP[quest] = "locked";
         }
@@ -1260,12 +1271,12 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
     var quest = ALL_QUESTS_LIST[questCode];
     var color = getQuestColor(questCode,"default");
     return `<div class="QL_questBox ${quest.period}" id='QL_questBox_${questCode}' style="background-color:${color}; color:${tinycolor(color).isLight() ? "#000000" : "#ffffff"};">
-    <div class="cellDiv" style=" height:40px;  top:0px; left:0px; width: calc(100% - 40px); padding-right:40px; line-height:40px;">
+    <div class="cellDiv" style=" height:40px;  top:0px; left:0px; width: calc(100% - 40px); padding-right:40px; line-height:40px; overflow-y:hidden;">
 
 
     <input type="checkbox" class="QL_selected_checkbox" id="QL_selected_${questCode}">
     <b> ${questCode}</b>
-    <span><img class="quest_state_icon" src="file/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
+    <span><img class="quest_state_icon" src="files/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
     <button type="button" class="QL_questBox_goToChart_btn" id='QL_goToChart_btn_${questCode}'>See on flowchart</button>
     <button type="button" class="QL_questBox_complete_btn" id='QL_complete_btn_${questCode}'>Set as completed</button>
 
@@ -1330,7 +1341,7 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
     var questBox = $(`#QL_questBox_${quest}`);
     var state = ALL_QUEST_STATE[quest];
     questBox.removeClass("pending completed locked").addClass(state);
-    questBox.find(".quest_state_icon").attr("src",`file/webpage/${state}.png`);
+    questBox.find(".quest_state_icon").attr("src",`files/webpage/${state}.png`);
     if(state === 'pending'){
       $(`#QL_complete_btn_${quest}`).css('visibility', 'visible');
     } else {
@@ -1343,7 +1354,7 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
     var quest = ALL_QUESTS_LIST[questCode];
     var color = getQuestColor(questCode,'default');
     $('#FC_FT .cellDiv').css('background', color).css('color',tinycolor(color).isLight() ? "#000000" : "#ffffff");
-    $("#FC_FT_quest_info_state_icon").attr("src",`file/webpage/${ALL_QUEST_STATE[questCode]}.png`);
+    $("#FC_FT_quest_info_state_icon").attr("src",`files/webpage/${ALL_QUEST_STATE[questCode]}.png`);
     $('#FC_FT_quest_info_quest_code').text(questCode);
     $('#FC_FT_quest_info_name_Japanese').text(quest.Jp);
     $('#FC_FT_quest_info_name_English').text(quest.En);
@@ -1564,13 +1575,13 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
     $( ".QL_RM_display_period:checked" ).each(function(){
       displayedPeriod.push($(this).val());
     });
-
     displayedPeriod.forEach(period => {
       displayedState.forEach(state => {
         if (questList.length === 0){
-          $(`.QL_questBox.${period}.${state}`).show();
+                    $(`.QL_questBox.${period}.${state}`).show();
         } else {
           questList.forEach(quest => {
+              console.log("coucou    " + period + "    " + state + "    " + quest);
             $(`#QL_questBox_${quest}.${period}.${state}`).show();
           });
         }
@@ -2185,6 +2196,12 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
     resizeFlowchart( $(window).height() - 240 - 4, $(window).width() - 175 -20);
   }
 
+//TODO virer ça
+FC_RM_Ooyodo
+$(`#FC_RM_Ooyodo`).click(function(){
+console.log(cookieTemp);
+});
+
 });
 
 //create a cookie
@@ -2211,6 +2228,7 @@ function getCookie(cname) {
   // if the cookie doesn't exist
   if (cname === "user_quests"){
     // the empty cookie so the code don't bug if cookies are disabled
+  //  return '{"pendingQuests":["A29","A46","A65","A71","B12","B32","B44","Bd8","Bw7","D21","D23","F36","F42"],"userDecisions":{"B38":"locked","G5":"locked","F51":"locked"},"periodicCompleted":false,"undeterminedQuests":["B38","G5","F51"],"timeStamp":"2017-06-30T23:16:21+09:00"}';
     return JSON.stringify({pendingQuests:[], userDecisions:{}, periodicCompleted:false, undeterminedQuests:[], timeStamp:moment().format()});
   } else {
     return "";

@@ -15,8 +15,8 @@
     <div id="HD_option_btn">
     <button class="HD_option_btn" value="IPQ" style="background-image:url(files/webpage/IPQ_icon.png); top:0px; right:0px;"></button>
 </div>
-    <button class="HD_main_tab_btn" value="QL" style="background-image:url(files/webpage/quest_list_icon.png);"></button>
-    <button class="HD_main_tab_btn" value="FC" style="background-image:url(files/webpage/flowchart_icon.png);"></button>
+    <button class="HD_main_tab_btn" value="QL">Quest List</button>
+    <button class="HD_main_tab_btn" value="FC">Flowchart</button>
 
   </div>
 
@@ -65,7 +65,9 @@
       <input type="checkbox" id="FC_FT_quest_requirement_hide_quest_rewards" checked> &nbsp;Hide loots from previous quests
 
 
-      <div id="FC_RM_Ooyodo"></div>
+
+
+      <div id="FC_RM_Ooyodo"><img src="files/webpage/Ooyodo/smile.png" style="width:195px; height:195px;"></img></div>
     </div>
 
     <!--  Footer  -->
@@ -136,13 +138,13 @@
 
       <div class="QL_RM_select_search_method" id="QL_RM_search_quest_code">
         <input type="text" id="QL_RM_searchQuest"><br>
-        <br>Input quest code.<br>
-        Multiple quests can be inputed, separated by commas.
+        <i><br>Input quest code.<br>
+        Multiple quests can be inputed, separated by commas.</i>
       </div>
 
       <div class="QL_RM_select_search_method" id="QL_RM_search_ship_required" hidden>
         <select id="QL_RM_select_required_ship"></select><br>
-        <br>Select required ship in the list above.
+        <i><br>Select required ship in the list above.</i>
       </div>
 
       <div class="QL_RM_select_search_method" id="QL_RM_search_reward" hidden>
@@ -153,12 +155,12 @@
         <input type="radio" name="QL_RM_search_reward" value="F"> Furniture<br>
         <input type="radio" name="QL_RM_search_reward" value="A"> Account<br>
         <br><select id="QL_RM_search_select_reward" style="width:100%;"></select><br>
-        <br>Select a reward category, then chose the reward in the list above.
+        <i><br>Select a reward category, then chose the reward in the list above.</i>
       </div>
 
       <div class="QL_RM_select_search_method" id="QL_RM_search_map_required" hidden>
         <select id="QL_RM_select_required_map"></select><br>
-        <br>Select required map in the list above.
+        <i><br>Select required map in the list above.</i>
       </div>
 
       <div class="QL_RM_select_search_method" id="QL_RM_search_state" hidden>
@@ -166,8 +168,8 @@
         <input type="radio" name="QL_RM_display_state" value='{"state":["pending"]}'>Pending<br>
         <input type="radio" name="QL_RM_display_state" value='{"state":["pending","locked"]}'>Uncompleted<br>
         <input type="radio" name="QL_RM_display_state" value='{"state":["completed"]}'>Completed<br>
-        <br>Choose the state of displayed quests.
-        <br>(This settings will remain with other search methods)
+        <i><br>Choose the state of displayed quests.
+        <br>(This settings will remain with other search methods)</i>
       </div>
 
       <div class="QL_RM_select_search_method" id="QL_RM_search_period" hidden>
@@ -177,14 +179,14 @@
         <input type="checkbox" class="QL_RM_display_period" value="monthly" checked> &nbsp;Monthly<br>
         <input type="checkbox" class="QL_RM_display_period" value="weekly" checked> &nbsp;Weekly<br>
         <input type="checkbox" class="QL_RM_display_period" value="daily" checked> &nbsp;Daily<br>
-        <br>  Choose the perdiod(s) of displayed quests.
-        <br>(This settings will remain with other search methods)
+        <i><br>  Choose the perdiod(s) of displayed quests.
+        <br>(This settings will remain with other search methods)</i>
       </div>
       <br>
       <span>State displayed:<br><b><span id="QL_RM_displayed_state">All</span></b></span>
       <br><br>
       <span>Period diplayed:<br><b><span id="QL_RM_displayed_period">All</span></b></span>
-      <button type="button" id='QL_RM_reset_quest' style="bottom:215px;">Clear search parameters</button>
+      <button type="button" id='QL_RM_reset_search' style="bottom:225px;">Clear search parameters</button>
       <button type="button" id='QL_RM_reset_selection' style="bottom:195px;">Unselect all quests</button>
 
       <div id="QL_RM_Ooyodo"></div>
@@ -195,7 +197,7 @@
 
 <div class="POP" id="IPQ" hidden>
     <center><textarea id="IPQ_txt_area" rows="8" cols="22">A29, A46, A65, A71, B12, B32, B44, Bd8, Bw7, D21, D23, F36, F42</textarea>
-    <br>  Type <strong>ALL</strong> your pending quests code separated by commas.
+    <i><br>  Type <strong>ALL</strong> your pending quests code separated by commas.</i>
     <br>
     <span id="IPQ_error_msg"></span>
     <br>
