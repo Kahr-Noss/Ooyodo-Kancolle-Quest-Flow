@@ -1233,7 +1233,7 @@ centerView();
 
     <input type="checkbox" class="QL_selected_checkbox" id="QL_selected_${questCode}">
     <b> ${questCode}</b>
-    <span><img class="quest_state_icon" src="file/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
+    <span><img class="quest_state_icon" src="files/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
     <button type="button" class="QL_questBox_goToChart_btn" id='QL_goToChart_btn_${questCode}'>See on flowchart</button>
     <button type="button" class="QL_questBox_complete_btn" id='QL_complete_btn_${questCode}'>Set as completed</button>
 
@@ -1295,7 +1295,7 @@ centerView();
     var questBox = $(`#QL_questBox_${quest}`);
     var state = ALL_QUEST_STATE[quest];
     questBox.removeClass("pending completed locked").addClass(state);
-    questBox.find(".quest_state_icon").attr("src",`file/webpage/${state}.png`);
+    questBox.find(".quest_state_icon").attr("src",`files/webpage/${state}.png`);
     if(state === 'pending'){
       $(`#QL_complete_btn_${quest}`).css('visibility', 'visible');
     } else {
@@ -1306,7 +1306,7 @@ centerView();
   function updateFlowchartStateIcons(){
     myDiagram.startTransaction("update_icons");
       myDiagram.nodes.each(function(node) {
-    node.findObject("STATE_ICON").source = `file/webpage/${ALL_QUEST_STATE[node.data.key]}.png`;
+    node.findObject("STATE_ICON").source = `files/webpage/${ALL_QUEST_STATE[node.data.key]}.png`;
     node.findObject("STATE_ICON").visible =questStateCalculated ? 1 :0;
 });
   myDiagram.commitTransaction("update_icons");
@@ -1317,7 +1317,7 @@ centerView();
     var quest = ALL_QUESTS_LIST[questCode];
     var color = getQuestColor(questCode);
     $('#FC_FT .cellDiv').css('background', color).css('color',tinycolor(color).isLight() ? "#000000" : "#ffffff");
-    $("#FC_FT_quest_info_state_icon").attr("src",`file/webpage/${ALL_QUEST_STATE[questCode]}.png`);
+    $("#FC_FT_quest_info_state_icon").attr("src",`files/webpage/${ALL_QUEST_STATE[questCode]}.png`);
     $('#FC_FT_quest_info_quest_code').text(questCode);
     $('#FC_FT_quest_info_name_Japanese').text(quest.Jp);
     $('#FC_FT_quest_info_name_English').text(quest.En);
