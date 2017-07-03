@@ -118,8 +118,7 @@ var diagramAnimationCompleteFunction = function(){};
     $(go.Panel, "Horizontal",
     $(go.Picture,
       { margin: 2, name: "STATE_ICON" },
-      new go.Binding("source", "source"),
-      new go.Binding("opacity", "visible")
+      new go.Binding("source", "source")
     ),
     $(go.TextBlock, "Page",
     { margin: 6,
@@ -379,7 +378,6 @@ centerView();
 
     //display all changes except those where you ask (if the user doesn't eanswer, no changes are made)
     updateQuestListDisplay(visibleQuests);
-    updateFlowchartStateIcons();
     setCookie('user_quests',JSON.stringify(questsCookie),365);
     cookieTemp = JSON.stringify(questsCookie);
   }
@@ -829,12 +827,22 @@ centerView();
 
     ALL_QUEST_STATE = cloneObject(ALL_QUEST_STATE_TMP);
 
-
+// affect a function to be runned after the animation is compleetd
+  diagramAnimationCompleteFunction = function(){
     $(".QL_questBox").removeClass("pending locked completed");
    Object.keys(ALL_QUEST_STATE).forEach(quest =>{
       updateQuestStateDisplay(quest);
     });
+  };
 
+
+      // display the diagram
+      if(myDiagram){
+        if (questStateCalculated){
+          $("#FC_RM_use_pending_quests").prop("checked",true).trigger("change");
+        }
+        buildPartialFlowchart();
+      }
 
 
     $("#MSG_IPQ_error_msg").text("");
@@ -847,18 +855,7 @@ centerView();
       "???","MSG_quest_completion_advice",true,false);
     }
 
-// affect a function to be runned after the animation is compleetd
-    diagramAnimationCompleteFunction = function(){
-      updateFlowchartStateIcons();
-    };
 
-    // display the diagram
-    if(myDiagram){
-      if (questStateCalculated){
-        $("#FC_RM_use_pending_quests").prop("checked",true).trigger("change");
-      }
-      buildPartialFlowchart();
-    }
 
 
 
@@ -1154,7 +1151,7 @@ centerView();
       }
     });
 
-    return blockingQuests;
+    return removeDoublonFromArray(blockingQuests);
   }
 
 
@@ -1233,7 +1230,7 @@ centerView();
 
     <input type="checkbox" class="QL_selected_checkbox" id="QL_selected_${questCode}">
     <b> ${questCode}</b>
-    <span><img class="quest_state_icon" src="files/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
+    <span><img class="quest_state_icon" src="file/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
     <button type="button" class="QL_questBox_goToChart_btn" id='QL_goToChart_btn_${questCode}'>See on flowchart</button>
     <button type="button" class="QL_questBox_complete_btn" id='QL_complete_btn_${questCode}'>Set as completed</button>
 
@@ -1295,29 +1292,24 @@ centerView();
     var questBox = $(`#QL_questBox_${quest}`);
     var state = ALL_QUEST_STATE[quest];
     questBox.removeClass("pending completed locked").addClass(state);
-    questBox.find(".quest_state_icon").attr("src",`files/webpage/${state}.png`);
+    questBox.find(".quest_state_icon").attr("src",`file/webpage/${state}.png`);
     if(state === 'pending'){
       $(`#QL_complete_btn_${quest}`).css('visibility', 'visible');
     } else {
       $(`#QL_complete_btn_${quest}`).css('visibility', 'hidden');
     }
+var icon = myDiagram.findNodeForKey(quest).findObject("STATE_ICON");
+    icon.source = questStateCalculated ? `file/webpage/${ALL_QUEST_STATE[quest]}.png` : "";
     }
 
-  function updateFlowchartStateIcons(){
-    myDiagram.startTransaction("update_icons");
-      myDiagram.nodes.each(function(node) {
-    node.findObject("STATE_ICON").source = `files/webpage/${ALL_QUEST_STATE[node.data.key]}.png`;
-    node.findObject("STATE_ICON").visible =questStateCalculated ? 1 :0;
-});
-  myDiagram.commitTransaction("update_icons");
-  }
+
 
   // display quest data in the footer
   function displayQuestData(questCode){
     var quest = ALL_QUESTS_LIST[questCode];
     var color = getQuestColor(questCode);
     $('#FC_FT .cellDiv').css('background', color).css('color',tinycolor(color).isLight() ? "#000000" : "#ffffff");
-    $("#FC_FT_quest_info_state_icon").attr("src",`files/webpage/${ALL_QUEST_STATE[questCode]}.png`);
+    $("#FC_FT_quest_info_state_icon").attr("src",`file/webpage/${ALL_QUEST_STATE[questCode]}.png`);
     $('#FC_FT_quest_info_quest_code').text(questCode);
     $('#FC_FT_quest_info_name_Japanese').text(quest.Jp);
     $('#FC_FT_quest_info_name_English').text(quest.En);
@@ -1687,7 +1679,15 @@ centerView();
     return contentWithImages;
   }
 
-
+function removeDoublonFromArray(array){
+  var output = [];
+  array.forEach(elt => {
+    if($.inArray(elt,output) === -1){
+      output.push(elt);
+    }
+  });
+  return output;
+}
 
   // **********  TIME FUNCTIONS  ************
 
