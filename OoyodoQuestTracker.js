@@ -542,6 +542,8 @@ cookieTemp = JSON.stringify(questsCookie);
           updateQuestStateDisplay(qst);
         });
         questsCookie.undeterminedQuests.splice(questsCookie.undeterminedQuests.indexOf(unlockedQuest), 1);
+        updateQuestListDisplay(visibleQuests);
+        updateFlowchartColors();
         setCookie('user_quests',JSON.stringify(questsCookie),365);
         cookieTemp = JSON.stringify(questsCookie);
       } else if ($(this).val()==="locked"){
