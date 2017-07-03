@@ -2,112 +2,41 @@ $(function () {
 
   //  *********   GLOBAL VARIABLES   ************
   //TODO virer ça partout
-var cookieTemp="";
+  var cookieTemp="";
   //default color object
   const COLORS = {
-    A:{
-      pending_color:"#43C769",
-      completed_color:"#8cf28c",
-      locked_color:"#43C769"
-    },
-    B:{
-      pending_color:"#EC6063",
-      completed_color:"#f7baba",
-      locked_color:"#EC6063"
-    },
-    C:{
-      pending_color:"#93CE67",
-      completed_color:"#f7d3ba",
-      locked_color:"#93CE67"
-    },
-    D:{
-      pending_color:"#4EBBD4",
-      completed_color:"#e8e8fc",
-      locked_color:"#4EBBD4"
-    },
-    E:{
-      pending_color:"#DEC772",
-      completed_color:"#f7d3ba",
-      locked_color:"#DEC772"
-    },
-    F:{
-      pending_color:"#BA8F79",
-      completed_color:"#eda65e",
-      locked_color:"#BA8F79"
-    },
-    G:{
-      pending_color:"#CAA6DD",
-      completed_color:"#eda65e",
-      locked_color:"#CAA6DD"
-    },
-    S:{
-      pending_color:"#EC6063",
-      completed_color:"#f7baba",
-      locked_color:"#EC6063"
-    },
-    W:{
-      pending_color:"#FDD0F0",
-      completed_color:"#fce8f7",
-      locked_color:"#FDD0F0"
-    },
-    nightMode:false,
-    pending:{
-      border:false,
-      border_color:'#000000',
-      border_width:5,
-      background:false,
-      background_mode:'Manual',
-      background_light:100,
-      background_saturation:0,
-      background_color:'#ff0000'
-    },
-    completed:{
-      border:true,
-      border_color:'#000000',
-      border_width:5,
-      background:true,
-      background_mode:'Auto',
-      background_light:-100,
-      background_saturation:-20,
-      background_color:'#ffffff'
-    },
-    locked:{
-      border:false,
-      border_color:'#000000',
-      border_width:5,
-      background:true,
-      background_mode:'Auto',
-      background_light:100,
-      background_saturation:-75,
-      background_color:'#ffffff'
+    A:"#43C769",
+    B:"#EC6063",
+    C:"#93CE67",
+    D:"#4EBBD4",
+    E:"#DEC772",
+    F:"#BA8F79",
+    G:"#CAA6DD",
+    S:"#EC6063",
+    W:"#FDD0F0",
+    selected:{
+      border_color:"#ff0000",
+      border_width:10,
     },
     notHighlighted:{
-      border:false,
-      border_color:'#000000',
-      border_width:3,
-      background:true,
-      background_mode:'Manual',
-      background_light:100,
-      background_saturation:100,
-      background_color:'#ffffff'
+      background_color:"#ffffff",
+      border_color:"#000000",
+      border_width:5,
     },
-    selected:{
-      border:true,
-      border_color:'#00ff00',
-      border_width:25,
-      background:true,
-      background_mode:'Auto',
-      background_light:0,
-      background_saturation:0,
-      background_color:'#ffffff'
+    default:{
+      border_width:5,
+      border_color:"#000000",
     }
+
+
   };
 
-
+var questStateCalculated = false;
   var ALL_QUEST_STATE = {};                     // current quests state
   var ALL_QUEST_STATE_TMP = {};                 // temporary object used to calculate quests state, global because multiple functions use it
   var myDiagram;                                // the GOJS diagram
   var selectedNodes = [];                       // array of nodes selected on the diagram
+var diagramAnimationCompleteFunction = function(){};
 
   // function used at the loading of the page
   function initialisation(){
@@ -125,7 +54,7 @@ var cookieTemp="";
 
 
     var questCookie = JSON.parse(getCookie('user_quests'));
-console.log(getCookie('user_quests'));
+    console.log(getCookie('user_quests'));
 
 
 
@@ -133,9 +62,9 @@ console.log(getCookie('user_quests'));
     resizeWindow();
     displayFlowchart();
 
-      calculateQuestState(questCookie);
-    updateFlowchartColors();
-        timeVerificationLoop(questCookie.timeStamp);
+    calculateQuestState(questCookie);
+
+    timeVerificationLoop(questCookie.timeStamp);
   }
 
 
@@ -186,14 +115,21 @@ console.log(getCookie('user_quests'));
     new go.Binding("fill", "color"),
     new go.Binding("stroke", "strokeColor"),
     new go.Binding("strokeWidth", "strokeWidth")),
+    $(go.Panel, "Horizontal",
+    $(go.Picture,
+      { margin: 2, name: "STATE_ICON" },
+      new go.Binding("source", "source"),
+      new go.Binding("opacity", "visible")
+    ),
     $(go.TextBlock, "Page",
     { margin: 6,
       font: bigfont,
       editable: false,
+      column:1,
       name:"TEXT"
     },
     new go.Binding("text", "text").makeTwoWay(),
-    new go.Binding("stroke", "text_color")),
+    new go.Binding("stroke", "text_color"))),
 
     new go.Binding("visible", "visible"),
 
@@ -254,7 +190,7 @@ console.log(getCookie('user_quests'));
       myDiagram.startTransaction("no highlighteds");
       myDiagram.clearHighlighteds();
       myDiagram.nodes.each(function(n) {
-        updateNodeDisplay(n, getQuestColor(n.data.key,ALL_QUEST_STATE[n.data.key],true,false), ALL_QUEST_STATE[n.data.key], ALL_QUESTS_LIST[n.data.key].period);
+        updateNodeDisplay(n, getQuestColor(n.data.key),"default", ALL_QUESTS_LIST[n.data.key].period);
       });
       myDiagram.commitTransaction("no highlighteds");
     };
@@ -286,6 +222,11 @@ console.log(getCookie('user_quests'));
         hightlightQuest();
       }
     });
+
+    myDiagram.addDiagramListener('AnimationFinished',function(e){
+      diagramAnimationCompleteFunction();
+      diagramAnimationCompleteFunction = function(){};
+    });
   }
 
   // read in the JSON-format data from the and display it
@@ -309,13 +250,19 @@ console.log(getCookie('user_quests'));
 
   // only display the listed node and recenter the view and the node position
   function displayPartialTree(questList) {
+
     myDiagram.model.startTransaction("displayPartialTree");
     myDiagram.nodes.each(function(n) { n.visible = !($.inArray(n.data.key,questList) === -1) });
     myDiagram.layoutDiagram(true);
     myDiagram.model.commitTransaction("displayPartialTree");
+centerView();
+
+  }
+
+  function centerView(){
     myDiagram.zoomToFit();
     myDiagram.alignDocument(go.Spot.Center, go.Spot.Center);
-    $("#FC_RM_loading_btn").prop("disabled", false);
+
   }
 
   // highlight the quests linked to the selected quests
@@ -331,7 +278,7 @@ console.log(getCookie('user_quests'));
     myDiagram.clearHighlighteds();
     myDiagram.clearSelection();
     myDiagram.nodes.each(function(n) {
-      updateNodeDisplay(n, getQuestColor(n.data.key,ALL_QUEST_STATE[n.data.key],false,false),"notHighlighted",ALL_QUESTS_LIST[n.data.key].period);
+      updateNodeDisplay(n, COLORS.notHighlighted.background_color,"notHighlighted",ALL_QUESTS_LIST[n.data.key].period);
     });
 
     selectedNodes.forEach(quest => {
@@ -341,7 +288,7 @@ console.log(getCookie('user_quests'));
       }
       //for requirements calculation purposes, the highlight downward will always be run, but only displayed is the checkbox is checked
       highlightDownward(node, requieredQuestList);
-      updateNodeDisplay(node, getQuestColor(node.data.key, ALL_QUEST_STATE[node.data.key],true,true), "selected",ALL_QUESTS_LIST[node.data.key].period);
+      updateNodeDisplay(node, getQuestColor(node.data.key), "selected",ALL_QUESTS_LIST[node.data.key].period);
     });
     model.commitTransaction("highlight");
     // delete doubles
@@ -353,7 +300,7 @@ console.log(getCookie('user_quests'));
 
   // recrusive function that highlight unlocked quests
   function highlightUpward(node){
-    updateNodeDisplay(node, getQuestColor(node.data.key,ALL_QUEST_STATE[node.data.key],true,false),ALL_QUEST_STATE[node.data.key],ALL_QUESTS_LIST[node.data.key].period);
+    updateNodeDisplay(node, getQuestColor(node.data.key),"default",ALL_QUESTS_LIST[node.data.key].period);
     node.findLinksOutOf().each(function(link) {
       link.isHighlighted = true;
       if(link.toNode.visible){
@@ -370,7 +317,7 @@ console.log(getCookie('user_quests'));
       }
       // display only if highlight_downward is checked
       if($("#FC_RM_highlight_downward").is(':checked')){
-        updateNodeDisplay(node, getQuestColor(node.data.key,ALL_QUEST_STATE[node.data.key],true,false), ALL_QUEST_STATE[node.data.key],ALL_QUESTS_LIST[node.data.key].period);
+        updateNodeDisplay(node, getQuestColor(node.data.key),"default",ALL_QUESTS_LIST[node.data.key].period);
       }
       node.findLinksInto().each(function(link) {
         // display only if highlight_downward is checked
@@ -410,7 +357,7 @@ console.log(getCookie('user_quests'));
         if ( ALL_QUESTS_LIST[unlockedQuest].requires.every(function(requiredQuest){return ALL_QUEST_STATE[requiredQuest] === 'completed';})){
           // if all requierments for this quest are completed
           //check if it was an undetermined quest or not
-            if($.inArray(unlockedQuest,questsCookie.undeterminedQuests) === -1){
+          if($.inArray(unlockedQuest,questsCookie.undeterminedQuests) === -1){
             // if not, set is as pending
             ALL_QUEST_STATE[unlockedQuest] = 'pending';
             updateQuestStateDisplay(unlockedQuest);
@@ -432,9 +379,9 @@ console.log(getCookie('user_quests'));
 
     //display all changes except those where you ask (if the user doesn't eanswer, no changes are made)
     updateQuestListDisplay(visibleQuests);
-    updateFlowchartColors();
+    updateFlowchartStateIcons();
     setCookie('user_quests',JSON.stringify(questsCookie),365);
-cookieTemp = JSON.stringify(questsCookie);
+    cookieTemp = JSON.stringify(questsCookie);
   }
 
   // aske the user if he completed some periodic quests in case of he didn't update them
@@ -452,9 +399,8 @@ cookieTemp = JSON.stringify(questsCookie);
         );
       }
       updateQuestListDisplay(visibleQuests);
-      updateFlowchartColors();
       setCookie('user_quests',JSON.stringify(questsCookie),365);
-cookieTemp = JSON.stringify(questsCookie);
+      cookieTemp = JSON.stringify(questsCookie);
     };
 
     if (questsToAsk.length > 0){
@@ -509,7 +455,6 @@ cookieTemp = JSON.stringify(questsCookie);
       questsCookie.pendingQuests.push(unlockedQuest);
       questsCookie.undeterminedQuests.splice(questsCookie.undeterminedQuests.indexOf(unlockedQuest), 1);
       updateQuestListDisplay(visibleQuests);
-      updateFlowchartColors();
       setCookie('user_quests',JSON.stringify(questsCookie),365);
       cookieTemp = JSON.stringify(questsCookie);
     };
@@ -543,7 +488,6 @@ cookieTemp = JSON.stringify(questsCookie);
         });
         questsCookie.undeterminedQuests.splice(questsCookie.undeterminedQuests.indexOf(unlockedQuest), 1);
         updateQuestListDisplay(visibleQuests);
-        updateFlowchartColors();
         setCookie('user_quests',JSON.stringify(questsCookie),365);
         cookieTemp = JSON.stringify(questsCookie);
       } else if ($(this).val()==="locked"){
@@ -583,7 +527,6 @@ cookieTemp = JSON.stringify(questsCookie);
       updateQuestStateDisplay(quest);
     });
     updateQuestListDisplay([]);
-    updateFlowchartColors();
     setCookie('user_quests',JSON.stringify(questsCookie),365);
     cookieTemp = JSON.stringify(questsCookie);
   }
@@ -596,7 +539,7 @@ cookieTemp = JSON.stringify(questsCookie);
     var questLinkDataArray = [];
     Object.keys(ALL_QUESTS_LIST).forEach(quest => {
       //create a node
-      var color = getQuestColor(quest,"default");
+      var color = getQuestColor(quest);
       var state = "completed";
       questNodeDataArray.push({
         "key": quest,
@@ -606,7 +549,7 @@ cookieTemp = JSON.stringify(questsCookie);
         "strokeColor": (state==='pending' ? "yellow" : "Black"),  //TODO change color
         "visible": true,
         "tooltip":formatTextLineBreak(ALL_QUESTS_LIST[quest].content,65),
-        "ribbon_text":state,
+        "ribbon_text":ALL_QUESTS_LIST[quest].period,
         "ribbon":ALL_QUESTS_LIST[quest].period !== 'once',
         "ribbon_color":getRibbonColor(ALL_QUESTS_LIST[quest].period),
         "text_color":tinycolor(color).isLight() ? "#000000" : "#ffffff"
@@ -626,7 +569,7 @@ cookieTemp = JSON.stringify(questsCookie);
   function displayQuestListSelect(questList){
     var questListHTML = '';
     questList.forEach(quest => {
-      questListHTML += `<option value="${quest}" style="background-color:${getQuestColor(quest,"default")};">${quest}</option>`;
+      questListHTML += `<option value="${quest}" style="background-color:${getQuestColor(quest)};">${quest}</option>`;
     });
     //put the quest list in order
     var optionsList = $(questListHTML);
@@ -644,12 +587,12 @@ cookieTemp = JSON.stringify(questsCookie);
 
   // sort all the node to display only the one which correspond to starting and ending quests
   function buildPartialFlowchart(){
-    $("#FC_RM_loading_btn").prop("disabled", true);
+    console.log("coucou");
     var partialQuestList = [];
     var startingQuestsList = questInputToArray($('#FC_RM_starting_quests').val());
     var endingQuestsList =questInputToArray($('#FC_RM_ending_quests').val());
     var direction = (endingQuestsList.length === 0) ? "up" : "down" ;
-    var usePending = $("#FC_RM_use_pending_quests").is(":checked");
+    var usePending = $("#FC_RM_use_pending_quests").is(":checked") && questStateCalculated;
     var showPeriodic =  $("#FC_RM_use_periodic_quests").is(":checked");
 
     $('#FC_RM_starting_quests').val(startingQuestsList.join(', '));
@@ -689,6 +632,7 @@ cookieTemp = JSON.stringify(questsCookie);
           });
         }
       }
+        console.log("plop" + JSON.stringify(partialQuestList));
       displayPartialTree(partialQuestList);
       displayQuestListSelect(partialQuestList);
 
@@ -755,13 +699,14 @@ cookieTemp = JSON.stringify(questsCookie);
 
   // using pending quests  list calculate the state of all quests
   function calculateQuestState(userQuestCookie){
-    $("#FC_RM_show_state_colors").prop("checked",false).trigger("change");
+
     ALL_QUEST_STATE_TMP = {};
     // no pending quests input => everything is set to completed and color state mode is disabled
     if (userQuestCookie.pendingQuests.length === 0){
       Object.keys(ALL_QUESTS_LIST).forEach(quest => {
         ALL_QUEST_STATE_TMP[quest] = 'completed';
       });
+          questStateCalculated = false;
       implementQuestsStateUpdated([],{},[],false);
     } else {
       //normal procedure
@@ -811,7 +756,7 @@ cookieTemp = JSON.stringify(questsCookie);
           setPeriodicQuestState(userQuestCookie.pendingQuests);
 
           // update the ALL_QUEST STATE list with the one just cqlculated if on inconsistencies
-          $("#FC_RM_show_state_colors").prop("checked",true);
+    questStateCalculated = true;
           implementQuestsStateUpdated(userQuestCookie.pendingQuests,userDecisions, undeterminedQuests, userQuestCookie.setPeriodicQuestCompleted);
         });
       }
@@ -822,7 +767,6 @@ cookieTemp = JSON.stringify(questsCookie);
   // this function will ask the user if he remember doing one time quests that can't be calculated
   function askForUnknowQuestState(unknowQuestsGroup, userDecisions, undeterminedQuests, callback){
     // if there is unknown quests remaining
-    //      updateFlowchartColors();
     if (unknowQuestsGroup.length > 0){
 
       var questsGroup = unknowQuestsGroup.shift();
@@ -844,8 +788,8 @@ cookieTemp = JSON.stringify(questsCookie);
         questsGroup.forEach(quest => {
           ALL_QUEST_STATE_TMP[quest] = userDecisions[questsGroup[0]];
         });
-askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, callback);
-    } else {
+        askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, callback);
+      } else {
         $("#QL").hide();
         $("#FC").show('fast');
         displayPartialTree(questsGroup);
@@ -885,14 +829,17 @@ askForUnknowQuestState(unknowQuestsGroup,userDecisions, undeterminedQuests, call
 
     ALL_QUEST_STATE = cloneObject(ALL_QUEST_STATE_TMP);
 
+
     $(".QL_questBox").removeClass("pending locked completed");
-    Object.keys(ALL_QUEST_STATE).forEach(quest =>{
+   Object.keys(ALL_QUEST_STATE).forEach(quest =>{
       updateQuestStateDisplay(quest);
     });
+
+
+
     $("#MSG_IPQ_error_msg").text("");
-    updateFlowchartColors();
     setCookie('user_quests',JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, undeterminedQuests:undeterminedQuests, timeStamp:moment().utcOffset("+09:00").format()}),365);
-cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, undeterminedQuests:undeterminedQuests, timeStamp:moment().utcOffset("+09:00").format()});
+    cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, undeterminedQuests:undeterminedQuests, timeStamp:moment().utcOffset("+09:00").format()});
     if (undeterminedQuests.length >0){
       displayBubbleMessage(`Admiral, about those quests that you din't know the state, you should complete those quests:<br>
       ${getBlockingPeriodicQuests().join(', ')}<br>
@@ -900,11 +847,20 @@ cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDeci
       "???","MSG_quest_completion_advice",true,false);
     }
 
+// affect a function to be runned after the animation is compleetd
+    diagramAnimationCompleteFunction = function(){
+      updateFlowchartStateIcons();
+    };
+
     // display the diagram
     if(myDiagram){
-      $("#FC_RM_use_pending_quests").prop("checked",true).trigger("change");
+      if (questStateCalculated){
+        $("#FC_RM_use_pending_quests").prop("checked",true).trigger("change");
+      }
       buildPartialFlowchart();
     }
+
+
 
     //fire event for tutorial_answer
     if($("#tuto").is(':visible')){
@@ -980,7 +936,6 @@ cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDeci
         }
       }
     });
-    console.log(JSON.stringify(undeterminedQuests));
     return askForState;
   }
 
@@ -1054,7 +1009,7 @@ cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDeci
         // ...and continue
         inconsistencies = inconsistencies.concat(setQuestStateDownward(previousQuest,period));
       } else {
-        //if already updateNodeDisplay
+        //if already updated
         if(periodNumberEquvalence(ALL_QUESTS_LIST[previousQuest].period) >= period){
           //problem ou stop if period superior or equal
           if (ALL_QUEST_STATE_TMP[previousQuest] === 'pending' ){//||  ALL_QUEST_STATE_TMP[previousQuest] === 'locked'){
@@ -1271,14 +1226,14 @@ cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDeci
   // create the HTML code for a quest box in the questlist panel
   function createQuestBox(questCode){
     var quest = ALL_QUESTS_LIST[questCode];
-    var color = getQuestColor(questCode,"default");
+    var color = getQuestColor(questCode);
     return `<div class="QL_questBox ${quest.period}" id='QL_questBox_${questCode}' style="background-color:${color}; color:${tinycolor(color).isLight() ? "#000000" : "#ffffff"};">
     <div class="cellDiv" style=" height:40px;  top:0px; left:0px; width: calc(100% - 40px); padding-right:40px; line-height:40px; overflow-y:hidden;">
 
 
     <input type="checkbox" class="QL_selected_checkbox" id="QL_selected_${questCode}">
     <b> ${questCode}</b>
-    <span><img class="quest_state_icon" src="files/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
+    <span><img class="quest_state_icon" src="file/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
     <button type="button" class="QL_questBox_goToChart_btn" id='QL_goToChart_btn_${questCode}'>See on flowchart</button>
     <button type="button" class="QL_questBox_complete_btn" id='QL_complete_btn_${questCode}'>Set as completed</button>
 
@@ -1327,15 +1282,12 @@ cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDeci
 
   // **********    DISPLAY FUNCTIONS   ***********
 
-  // change the colors of a node
-  function updateNodeDisplay(node,fill, state, period){
-      node.findObject("SHAPE").fill = fill;
-    node.findObject("SHAPE").stroke = COLORS[state].border ? COLORS[state].border_color : "#000000";
-    node.findObject("SHAPE").strokeWidth =  COLORS[state].border ? COLORS[state].border_width : 5;
+  // change the colors of a node on flowchart
+  function updateNodeDisplay(node,fill, displayMode, period){
+    node.findObject("SHAPE").fill = fill;
+    node.findObject("SHAPE").stroke = COLORS[displayMode].border_color;
+    node.findObject("SHAPE").strokeWidth =  COLORS[displayMode].border_width;
     node.findObject("TEXT").stroke = tinycolor(fill).isLight() ? "#000000" : "#ffffff";
-    node.findObject("RIBBON").opacity = period !== 'once' ? 1 : 0;
-    node.findObject("RIBBON_TEXT").text = period;
-    node.findObject("RIBBON").fill = getRibbonColor(period);
   }
 
   // change the display of one quest everywhere depending on its state
@@ -1343,20 +1295,29 @@ cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDeci
     var questBox = $(`#QL_questBox_${quest}`);
     var state = ALL_QUEST_STATE[quest];
     questBox.removeClass("pending completed locked").addClass(state);
-    questBox.find(".quest_state_icon").attr("src",`files/webpage/${state}.png`);
+    questBox.find(".quest_state_icon").attr("src",`file/webpage/${state}.png`);
     if(state === 'pending'){
       $(`#QL_complete_btn_${quest}`).css('visibility', 'visible');
     } else {
       $(`#QL_complete_btn_${quest}`).css('visibility', 'hidden');
     }
+    }
+
+  function updateFlowchartStateIcons(){
+    myDiagram.startTransaction("update_icons");
+      myDiagram.nodes.each(function(node) {
+    node.findObject("STATE_ICON").source = `file/webpage/${ALL_QUEST_STATE[node.data.key]}.png`;
+    node.findObject("STATE_ICON").visible =questStateCalculated ? 1 :0;
+});
+  myDiagram.commitTransaction("update_icons");
   }
 
   // display quest data in the footer
   function displayQuestData(questCode){
     var quest = ALL_QUESTS_LIST[questCode];
-    var color = getQuestColor(questCode,'default');
+    var color = getQuestColor(questCode);
     $('#FC_FT .cellDiv').css('background', color).css('color',tinycolor(color).isLight() ? "#000000" : "#ffffff");
-    $("#FC_FT_quest_info_state_icon").attr("src",`files/webpage/${ALL_QUEST_STATE[questCode]}.png`);
+    $("#FC_FT_quest_info_state_icon").attr("src",`file/webpage/${ALL_QUEST_STATE[questCode]}.png`);
     $('#FC_FT_quest_info_quest_code').text(questCode);
     $('#FC_FT_quest_info_name_Japanese').text(quest.Jp);
     $('#FC_FT_quest_info_name_English').text(quest.En);
@@ -1442,70 +1403,13 @@ cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDeci
     }
   }
 
-  function getQuestColor(quest,state,highlight,selected){
-    //get the base color
+  function getQuestColor(quest){
+
     var questLetter = quest.charAt(0);
-
-
-    //if the state is "default", it will just retrun the pending color of quest without modifications
-    if(state === 'default' ){
-      color = tinycolor(COLORS[questLetter].pending_color);
-    } else {
-      if( $("#FC_RM_show_state_colors").is(':checked')){
-
-        // return the quest colors depending its state
-        var color = tinycolor(COLORS[questLetter][`${state}_color`]);
-        // if the background is activated for this state, update the color
-        // manual will set the color to manual color
-        if(COLORS[state].background){
-          if(COLORS[state].background_mode === 'Manual'){
-            color = tinycolor(COLORS[state].background_color);
-          }
-          // auto will apply change to the pending color
-          if(COLORS[state].background_mode === 'Auto'){
-            color = lightSaturationModifications(COLORS[questLetter].pending_color,COLORS[state].background_light,COLORS[state].background_saturation);
-          }
-        }
-      } else {
-        color = tinycolor(COLORS[questLetter].pending_color);
-      }
-      //after the definition of base color depending quest and state,
-      // the selected and highlighted parameter are considered if they have background modificators
-      //selected option take priorioty on highlight
-
-      if(selected && COLORS.selected.background){
-        if(COLORS.selected.background_mode === 'Auto'){
-          color = lightSaturationModifications(color,COLORS.selected.background_light,COLORS.selected.background_saturation);
-        } else if(COLORS.selected.background_mode === 'Manual') {
-          color = tinycolor(COLORS.selected.background_color);
-        }
-      } else if(!highlight && COLORS.notHighlighted.background){
-        if(COLORS.notHighlighted.background_mode === 'Auto'){
-          color = lightSaturationModifications(color,COLORS.notHighlighted.background_light,COLORS.notHighlighted.background_saturation);
-        } else if(COLORS.notHighlighted.background_mode === 'Manual'){
-          color = tinycolor(COLORS.notHighlighted.background_color);
-        }
-      }
-    }
-
-    return color.toHexString();
+    return COLORS[questLetter];
   }
 
-  // update all colors everywhere after change in the COLORS object
-  function updateFlowchartColors(){
 
-    //nodes on flowchart
-    if(myDiagram){
-      var model = myDiagram.model;
-      model.startTransaction("state_color");
-      myDiagram.clearHighlighteds();
-      myDiagram.clearSelection();
-      myDiagram.nodes.each(function(n) {
-        updateNodeDisplay(n, getQuestColor(n.data.key,ALL_QUEST_STATE[n.data.key],true,false),ALL_QUEST_STATE[n.data.key],ALL_QUESTS_LIST[n.data.key].period);
-      });
-      model.commitTransaction("state_color");
-    }
-  }
 
   // put the list of required ships in the dropdown list
   function loadRequiredShipList(){
@@ -1580,10 +1484,9 @@ cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDeci
     displayedPeriod.forEach(period => {
       displayedState.forEach(state => {
         if (questList.length === 0){
-                    $(`.QL_questBox.${period}.${state}`).show();
+          $(`.QL_questBox.${period}.${state}`).show();
         } else {
           questList.forEach(quest => {
-              console.log("coucou    " + period + "    " + state + "    " + quest);
             $(`#QL_questBox_${quest}.${period}.${state}`).show();
           });
         }
@@ -2044,15 +1947,7 @@ cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDeci
     }
   });
 
-  // update all the colors if the shaow state color checkbox change
-  $("#FC_RM_show_state_colors").change(function(){
-    updateFlowchartColors();
-  });
 
-  // update the flowchart displayed on change
-  $("#FC_RM_show_state_colors").change(function(){
-    buildPartialFlowchart();
-  });
 
   // **********   QUEST LIST PANEL MENU LISTENNERS    ***************
 
@@ -2198,20 +2093,20 @@ cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDeci
     resizeFlowchart( $(window).height() - 240 - 4, $(window).width() - 175 -20);
   }
 
-//TODO virer ça
-FC_RM_Ooyodo
-$(`#FC_RM_Ooyodo`).click(function(){
-console.log(cookieTemp);
-});
+  //TODO virer ça
+  FC_RM_Ooyodo
+  $(`#FC_RM_Ooyodo`).click(function(){
+    console.log(cookieTemp);
+  });
 
 });
 
 //create a cookie
 function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = `${cname}=${cvalue};${expires};path=/`;
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = `${cname}=${cvalue};${expires};path=/`;
 }
 
 //get cookie data
@@ -2230,7 +2125,7 @@ function getCookie(cname) {
   // if the cookie doesn't exist
   if (cname === "user_quests"){
     // the empty cookie so the code don't bug if cookies are disabled
-  //  return '{"pendingQuests":["A29","A46","A65","A71","B12","B32","B44","Bd8","Bw7","D21","D23","F36","F42"],"userDecisions":{"B38":"locked","G5":"locked","F51":"locked"},"periodicCompleted":false,"undeterminedQuests":["B38","G5","F51"],"timeStamp":"2017-06-30T23:16:21+09:00"}';
+    //  return '{"pendingQuests":["A29","A46","A65","A71","B12","B32","B44","Bd8","Bw7","D21","D23","F36","F42"],"userDecisions":{"B38":"locked","G5":"locked","F51":"locked"},"periodicCompleted":false,"undeterminedQuests":["B38","G5","F51"],"timeStamp":"2017-06-30T23:16:21+09:00"}';
     return JSON.stringify({pendingQuests:[], userDecisions:{}, periodicCompleted:false, undeterminedQuests:[], timeStamp:moment().format()});
   } else {
     return "";
