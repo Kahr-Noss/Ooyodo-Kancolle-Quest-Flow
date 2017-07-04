@@ -335,7 +335,6 @@ $(function () {
 
   // change the state of a quest and update the unlocked ones
   function setQuestAsCompleted(quest){
-
     var questsCookie = JSON.parse(getCookie('user_quests'));
     var questsToAsk = [];
     var questsUnlocked = [];
@@ -366,7 +365,7 @@ $(function () {
             questsUnlocked.push(unlockedQuest);
           } else {
             //if yes ask the user if the quest is displayed in game or not.
-            console.log("petit message");
+
             askToCheckIfQuestIsPendingInGame(unlockedQuest,visibleQuests);
           }
         } else if (ALL_QUESTS_LIST[unlockedQuest].requires.every(function(requiredQuest){return (ALL_QUESTS_LIST[requiredQuest].period === 'once' && ALL_QUEST_STATE[requiredQuest] === 'completed') || ALL_QUESTS_LIST[requiredQuest].period !== 'once';})){
@@ -387,7 +386,7 @@ $(function () {
 
   // aske the user if he completed some periodic quests in case of he didn't update them
   function askForPeriodicQuestsToUnlock(quest,questsToAsk,questsUnlocked,questsCookie,visibleQuests){
-console.log("start");
+
     // TODO bien tester tout ce bordel si ca marche avec plusieurs quetes qui demqndent. pour une ca a l'air OK
 
     function closingProcess(){
@@ -411,13 +410,13 @@ console.log("start");
 
       displayBubbleMessage(`Admiral, just a question, since you achieved quest ${quest}, did you complete those periodic quests without notifying me?<br>
         <span class="link" id="MSG_completed_quest_display_${unlockedQuest}">${periodicQuestsList.join(", ")}</span><br>
-        <button type="button" class="MSG_btn" value="pending">Yes</button>
-        <button type="button" class="MSG_btn" value="locked">I don't know</button>
-        <button type="button" class="MSG_btn" value="locked">No</button>`,
+        <button type="button" class="MSG_completed_quest_${quest}_btn" value="pending">Yes</button>
+        <button type="button" class="MSG_completed_quest_${quest}_btn" value="locked">I don't know</button>
+        <button type="button" class="MSG_completed_quest_${quest}_btn" value="locked">No</button>`,
         "writing",`MSG_completed_quest_${quest}`,false,true
       );
 
-      $(".MSG_btn").click(function(){
+      $(`.MSG_completed_quest_${quest}_btn`).click(function(){
         closeBubbleMessage( $(`#MSG_completed_quest_${quest}`));
         if($(this).val()==="pending"){
           ALL_QUEST_STATE[unlockedQuest] ="pending";
@@ -469,8 +468,8 @@ console.log("start");
       With the quest you just completed, we can settle this question. Go in the quest tab of your game and tell me if the quest
       <span class="link" id="MSG_check_unknown_quest_display_${unlockedQuest}">${unlockedQuest}</span><br>
       is present or not.
-      <button type="button" class="MSG_btn" value="locked">Yes, it's here</button>
-      <button type="button" class="MSG_btn" value="completed">No, I can't found it</button>`,
+      <button type="button" class="MSG_check_unknown_quest_${unlockedQuest}_btn" value="locked">Yes, it's here</button>
+      <button type="button" class="MSG_check_unknown_quest_${unlockedQuest}_btn" value="completed">No, I can't found it</button>`,
       "writing",`MSG_check_unknown_quest_${unlockedQuest}`,false,false
     );
 
@@ -482,7 +481,7 @@ console.log("start");
       displayQuestData(unlockedQuest);
     });
 
-    $(".MSG_btn").click(function(){
+    $(`.MSG_check_unknown_quest_${unlockedQuest}_btn`).click(function(){
       closeBubbleMessage( $(`#MSG_check_unknown_quest_${unlockedQuest}`));
       if($(this).val()==="completed"){
         //if not found it means it was already comnpleted so set all quest after to completed and remove the quest from teh undertermined in the cookie
