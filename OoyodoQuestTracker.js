@@ -43,7 +43,7 @@ $(function () {
   function initialisation(){
 
     //load various data in the DOM
-    loadRequiredShipList();
+   loadRequiredShipList();
     loadRewardList();
     loadRequiredMapList();
 
@@ -66,6 +66,7 @@ $(function () {
     calculateQuestState(questCookie);
 
     timeVerificationLoop(questCookie.timeStamp);
+
 
   }
 
@@ -395,7 +396,7 @@ $(function () {
       if(questsUnlocked.length > 0){
         displayBubbleMessage(`Admiral, you have unlocked the following quests:<br>
           <span id="MSG_quest_unlocked_quests">${questsUnlocked.join(', ')}</span>`,
-          "???","MSG_quest_unlocked",true,false,function(){$("#MSG_quest_unlocked_quests").text($("#MSG_quest_unlocked_quests").text() + questsUnlocked.join(', '));}
+          "???","MSG_quest_unlocked",true,false,function(){$("#MSG_quest_unlocked_quests").text(`${$("#MSG_quest_unlocked_quests").text()}, ${questsUnlocked.join(', ')}`);}
         );
       }
       updateQuestListDisplay(visibleQuests);
@@ -459,7 +460,7 @@ $(function () {
       cookieTemp = JSON.stringify(questsCookie);
       displayBubbleMessage(`Admiral, you have unlocked the following quests:<br>
         <span id="MSG_quest_unlocked_quests">${unlockedQuest}</span>`,
-        "???","MSG_quest_unlocked",true,false,function(){$("#MSG_quest_unlocked_quests").text($("#MSG_quest_unlocked_quests").text() + unlockedQuest);}
+        "???","MSG_quest_unlocked",true,false,function(){$("#MSG_quest_unlocked_quests").text(`${$("#MSG_quest_unlocked_quests").text()}, ${unlockedQuest}`);}
       );
     };
 
@@ -1566,7 +1567,7 @@ $(function () {
       // if priority, hide all other bubble
       if (priority){
         // if priority, delete the timeout for the previous bubbles
-        clearTimeout(bubbleTimeout);
+
         $(".bubble:visible").hide();
         $(`#${id}`).show();
             changeOoyodoImage(image);
@@ -1580,6 +1581,8 @@ $(function () {
 
     // if it's a timing out message and the message is displayed start time out
     if(timeout && $(`#${id}`).is(":visible")){
+      console.log("youpi!");
+        clearTimeout(bubbleTimeout);
       bubbleTimeout = setTimeout(function(){
         //only close if displayed
         closeBubbleMessage($(`#${id}`));
