@@ -2,9 +2,8 @@ $(function () {
 
   var closeStep;
 
-  if (getCookie("pending_quests") === ""){
+  if (document.cookie.match(/^(.*;)?\s*user_quests\s*=\s*[^;]+(.*)?$/)){
     step_1_openningPanel();
-
   }
 
   function step_1_openningPanel(){
