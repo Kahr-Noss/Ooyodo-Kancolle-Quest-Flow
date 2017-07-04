@@ -2,7 +2,7 @@ $(function () {
 
   var closeStep;
 
-  if (document.cookie.match(/^(.*;)?\s*user_quests\s*=\s*[^;]+(.*)?$/)){
+  if (document.cookie.indexOf('user_quests=') === -1){
     step_1_openningPanel();
   }
 
