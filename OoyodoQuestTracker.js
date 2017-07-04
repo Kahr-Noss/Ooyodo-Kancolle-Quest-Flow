@@ -470,7 +470,7 @@ $(function () {
       is present or not.
       <button type="button" class="MSG_check_unknown_quest_${unlockedQuest}_btn" value="locked">Yes, it's here</button>
       <button type="button" class="MSG_check_unknown_quest_${unlockedQuest}_btn" value="completed">No, I can't found it</button>`,
-      "writing",`MSG_check_unknown_quest_${unlockedQuest}`,false,false
+      "writing",`MSG_check_unknown_quest_${unlockedQuest}`,false,true
     );
 
     //display the quest on flowchart when clicking on the link
@@ -1580,7 +1580,6 @@ $(function () {
 
     // if it's a timing out message and the message is displayed start time out
     if(timeout && $(`#${id}`).is(":visible")){
-      console.log("youpi!");
         clearTimeout(bubbleTimeout);
       bubbleTimeout = setTimeout(function(){
         //only close if displayed
