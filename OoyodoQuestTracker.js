@@ -457,6 +457,10 @@ $(function () {
       updateQuestListDisplay(visibleQuests);
       setCookie('user_quests',JSON.stringify(questsCookie),365);
       cookieTemp = JSON.stringify(questsCookie);
+      displayBubbleMessage(`Admiral, you have unlocked the following quests:<br>
+        <span id="MSG_quest_unlocked_quests">${questsUnlocked.join(', ')}</span>`,
+        "???","MSG_quest_unlocked",true,false,function(){$("#MSG_quest_unlocked_quests").text($("#MSG_quest_unlocked_quests").text() + unlockedQuest);}
+      );
     };
 
     displayBubbleMessage(`Admiral, just a moment...<br>
@@ -587,7 +591,6 @@ $(function () {
 
   // sort all the node to display only the one which correspond to starting and ending quests
   function buildPartialFlowchart(){
-    console.log("coucou");
     var partialQuestList = [];
     var startingQuestsList = questInputToArray($('#FC_RM_starting_quests').val());
     var endingQuestsList =questInputToArray($('#FC_RM_ending_quests').val());
@@ -632,7 +635,6 @@ $(function () {
           });
         }
       }
-      console.log("plop" + JSON.stringify(partialQuestList));
       displayPartialTree(partialQuestList);
       displayQuestListSelect(partialQuestList);
 
@@ -1541,7 +1543,6 @@ $(function () {
     // else create the popup
     if($(`#${id}`).length > 0){
       if (updateFunction){
-        console.log("update");
           updateFunction();
       } else {
         $(`#${id}`).remove();
@@ -1550,7 +1551,6 @@ $(function () {
         } else {
           $('#BBL').append(popup);
         }
-        console.log("remove");
       }
     } else {
       if(priority){
@@ -1558,12 +1558,10 @@ $(function () {
       } else {
         $('#BBL').append(popup);
       }
-          console.log("add");
     }
 
 
   var isOtherBubble = $(".bubble").length > 1;
-  console.log(isOtherBubble);
     if (isOtherBubble){
       // if priority, hide all other bubble
       if (priority){
