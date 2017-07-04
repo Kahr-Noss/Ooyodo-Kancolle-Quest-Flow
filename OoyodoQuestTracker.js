@@ -336,7 +336,6 @@ $(function () {
   // change the state of a quest and update the unlocked ones
   function setQuestAsCompleted(quest){
 
-    //TODO edit the cookie with the updated values
     var questsCookie = JSON.parse(getCookie('user_quests'));
     var questsToAsk = [];
     var questsUnlocked = [];
@@ -367,6 +366,7 @@ $(function () {
             questsUnlocked.push(unlockedQuest);
           } else {
             //if yes ask the user if the quest is displayed in game or not.
+            console.log("petit message");
             askToCheckIfQuestIsPendingInGame(unlockedQuest,visibleQuests);
           }
         } else if (ALL_QUESTS_LIST[unlockedQuest].requires.every(function(requiredQuest){return (ALL_QUESTS_LIST[requiredQuest].period === 'once' && ALL_QUEST_STATE[requiredQuest] === 'completed') || ALL_QUESTS_LIST[requiredQuest].period !== 'once';})){
@@ -387,7 +387,7 @@ $(function () {
 
   // aske the user if he completed some periodic quests in case of he didn't update them
   function askForPeriodicQuestsToUnlock(quest,questsToAsk,questsUnlocked,questsCookie,visibleQuests){
-
+console.log("start");
     // TODO bien tester tout ce bordel si ca marche avec plusieurs quetes qui demqndent. pour une ca a l'air OK
 
     function closingProcess(){
