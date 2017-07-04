@@ -458,7 +458,7 @@ $(function () {
       setCookie('user_quests',JSON.stringify(questsCookie),365);
       cookieTemp = JSON.stringify(questsCookie);
       displayBubbleMessage(`Admiral, you have unlocked the following quests:<br>
-        <span id="MSG_quest_unlocked_quests">${questsUnlocked.join(', ')}</span>`,
+        <span id="MSG_quest_unlocked_quests">${unlockedQuest}</span>`,
         "???","MSG_quest_unlocked",true,false,function(){$("#MSG_quest_unlocked_quests").text($("#MSG_quest_unlocked_quests").text() + unlockedQuest);}
       );
     };
