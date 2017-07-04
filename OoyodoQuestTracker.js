@@ -31,12 +31,13 @@ $(function () {
 
   };
 
-var questStateCalculated = false;
+  var questStateCalculated = false;
   var ALL_QUEST_STATE = {};                     // current quests state
   var ALL_QUEST_STATE_TMP = {};                 // temporary object used to calculate quests state, global because multiple functions use it
   var myDiagram;                                // the GOJS diagram
   var selectedNodes = [];                       // array of nodes selected on the diagram
-var diagramAnimationCompleteFunction = function(){};
+  var diagramAnimationCompleteFunction = function(){};
+  var bubbleTimeout;
 
   // function used at the loading of the page
   function initialisation(){
@@ -65,6 +66,7 @@ var diagramAnimationCompleteFunction = function(){};
     calculateQuestState(questCookie);
 
     timeVerificationLoop(questCookie.timeStamp);
+
   }
 
 
@@ -254,7 +256,7 @@ var diagramAnimationCompleteFunction = function(){};
     myDiagram.nodes.each(function(n) { n.visible = !($.inArray(n.data.key,questList) === -1) });
     myDiagram.layoutDiagram(true);
     myDiagram.model.commitTransaction("displayPartialTree");
-centerView();
+    centerView();
 
   }
 
@@ -392,8 +394,8 @@ centerView();
 
       if(questsUnlocked.length > 0){
         displayBubbleMessage(`Admiral, you have unlocked the following quests:<br>
-          ${questsUnlocked.join(', ')}`,
-          "???","MSG_quest_completion_advice",true,false
+          <span id="MSG_quest_unlocked_quests">${questsUnlocked.join(', ')}</span>`,
+          "???","MSG_quest_unlocked",true,false,function(){$("#MSG_quest_unlocked_quests").text($("#MSG_quest_unlocked_quests").text() + questsUnlocked.join(', '));}
         );
       }
       updateQuestListDisplay(visibleQuests);
@@ -630,7 +632,7 @@ centerView();
           });
         }
       }
-        console.log("plop" + JSON.stringify(partialQuestList));
+      console.log("plop" + JSON.stringify(partialQuestList));
       displayPartialTree(partialQuestList);
       displayQuestListSelect(partialQuestList);
 
@@ -704,7 +706,7 @@ centerView();
       Object.keys(ALL_QUESTS_LIST).forEach(quest => {
         ALL_QUEST_STATE_TMP[quest] = 'completed';
       });
-          questStateCalculated = false;
+      questStateCalculated = false;
       implementQuestsStateUpdated([],{},[],false);
     } else {
       //normal procedure
@@ -754,7 +756,7 @@ centerView();
           setPeriodicQuestState(userQuestCookie.pendingQuests);
 
           // update the ALL_QUEST STATE list with the one just cqlculated if on inconsistencies
-    questStateCalculated = true;
+          questStateCalculated = true;
           implementQuestsStateUpdated(userQuestCookie.pendingQuests,userDecisions, undeterminedQuests, userQuestCookie.setPeriodicQuestCompleted);
         });
       }
@@ -827,22 +829,22 @@ centerView();
 
     ALL_QUEST_STATE = cloneObject(ALL_QUEST_STATE_TMP);
 
-// affect a function to be runned after the animation is compleetd
-  diagramAnimationCompleteFunction = function(){
-    $(".QL_questBox").removeClass("pending locked completed");
-   Object.keys(ALL_QUEST_STATE).forEach(quest =>{
-      updateQuestStateDisplay(quest);
-    });
-  };
+    // affect a function to be runned after the animation is compleetd
+    diagramAnimationCompleteFunction = function(){
+      $(".QL_questBox").removeClass("pending locked completed");
+      Object.keys(ALL_QUEST_STATE).forEach(quest =>{
+        updateQuestStateDisplay(quest);
+      });
+    };
 
 
-      // display the diagram
-      if(myDiagram){
-        if (questStateCalculated){
-          $("#FC_RM_use_pending_quests").prop("checked",true).trigger("change");
-        }
-        buildPartialFlowchart();
+    // display the diagram
+    if(myDiagram){
+      if (questStateCalculated){
+        $("#FC_RM_use_pending_quests").prop("checked",true).trigger("change");
       }
+      buildPartialFlowchart();
+    }
 
 
     $("#MSG_IPQ_error_msg").text("");
@@ -850,9 +852,9 @@ centerView();
     cookieTemp = JSON.stringify({pendingQuests:pendingQuests, userDecisions:userDecisions, periodicCompleted:setPeriodicQuestCompleted, undeterminedQuests:undeterminedQuests, timeStamp:moment().utcOffset("+09:00").format()});
     if (undeterminedQuests.length >0){
       displayBubbleMessage(`Admiral, about those quests that you din't know the state, you should complete those quests:<br>
-      ${getBlockingPeriodicQuests().join(', ')}<br>
+      <span id="MSG_quest_completion_advice_quests">${getBlockingPeriodicQuests().join(', ')}</span><br>
       Input again your pending quests once you are done.`,
-      "???","MSG_quest_completion_advice",true,false);
+      "???","MSG_quest_completion_advice",true,false,function(){$("#MSG_quest_completion_advice_quests").text($("#MSG_quest_completion_advice_quests").text() + questsUnlocked.join(', '));});
     }
 
 
@@ -1298,9 +1300,9 @@ centerView();
     } else {
       $(`#QL_complete_btn_${quest}`).css('visibility', 'hidden');
     }
-var icon = myDiagram.findNodeForKey(quest).findObject("STATE_ICON");
+    var icon = myDiagram.findNodeForKey(quest).findObject("STATE_ICON");
     icon.source = questStateCalculated ? `file/webpage/${ALL_QUEST_STATE[quest]}.png` : "";
-    }
+  }
 
 
 
@@ -1528,46 +1530,77 @@ var icon = myDiagram.findNodeForKey(quest).findObject("STATE_ICON");
   }
 
   //show a message in a bubble speech on the top of bottom right Ooyodo and update the image
-  function displayBubbleMessage(html, image, id, timeout, priority){
-    var isOtherBubbleDisplayed = $(".bubble:visible").length > 0;
-    var popup = $(`<div class="bubble" data-timeout=${timeout} id="${id}">
+  function displayBubbleMessage(html, image, id, timeout, priority, updateFunction){
+
+    var popup = $(`<div class="bubble" data-timeout=${timeout} data-img="${image}" id="${id}">
     <div class="closeBtn" id="closeBtn_${id}">X</div>
     ${html}
     </div>`);
-    changeOoyodoImage(image);
-    //remove existing messages with same id
+    // if existing messages with same id call the update function instead of doing a new message
+    // if no update function, remove the popup and create the new popup
+    // else create the popup
     if($(`#${id}`).length > 0){
-      $(`#${id}`).remove();
+      if (updateFunction){
+        console.log("update");
+          updateFunction();
+      } else {
+        $(`#${id}`).remove();
+        if(priority){
+          $('#BBL').prepend(popup);
+        } else {
+          $('#BBL').append(popup);
+        }
+        console.log("remove");
+      }
+    } else {
+      if(priority){
+        $('#BBL').prepend(popup);
+      } else {
+        $('#BBL').append(popup);
+      }
+          console.log("add");
     }
-    $('body').append(popup);
-    if (isOtherBubbleDisplayed){
+
+
+  var isOtherBubble = $(".bubble").length > 1;
+  console.log(isOtherBubble);
+    if (isOtherBubble){
       // if priority, hide all other bubble
       if (priority){
+        // if priority, delete the timeout for the previous bubbles
+        clearTimeout(bubbleTimeout);
         $(".bubble:visible").hide();
-        popup.show();
+        $(`#${id}`).show();
+            changeOoyodoImage(image);
       } else {
-        popup.hide();
+        $(`#${id}`).hide();
       }
     }
     $(`#closeBtn_${id}`).click(function(){
       closeBubbleMessage($(`#${id}`))
     });
-    // if it's a timing out message and there is no other message start time out
-    if(timeout && !isOtherBubbleDisplayed){
-      setTimeout(function(){ closeBubbleMessage($(`#${id}`));},20000);
+
+    // if it's a timing out message and the message is displayed start time out
+    if(timeout && $(`#${id}`).is(":visible")){
+      bubbleTimeout = setTimeout(function(){
+        //only close if displayed
+        closeBubbleMessage($(`#${id}`));
+      },20000);
     }
   }
 
   function closeBubbleMessage(idJQ){
+      clearTimeout(bubbleTimeout);
     idJQ.remove();
     if($(".bubble:hidden").length > 0){
       var nextBubble = $(".bubble:hidden").first();
       nextBubble.show("fast");
+      changeOoyodoImage(nextBubble.attr("data-img"));
       if (nextBubble.attr("data-timeout") === "true"){
-        setTimeout(function(){ closeBubbleMessage(nextBubble);},20000);
+        bubbleTimeout = setTimeout(function(){ closeBubbleMessage(nextBubble);},20000);
       }
     }
-  }
+    }
 
   function changeOoyodoImage(image){
     //TODO
@@ -1679,15 +1712,15 @@ var icon = myDiagram.findNodeForKey(quest).findObject("STATE_ICON");
     return contentWithImages;
   }
 
-function removeDoublonFromArray(array){
-  var output = [];
-  array.forEach(elt => {
-    if($.inArray(elt,output) === -1){
-      output.push(elt);
-    }
-  });
-  return output;
-}
+  function removeDoublonFromArray(array){
+    var output = [];
+    array.forEach(elt => {
+      if($.inArray(elt,output) === -1){
+        output.push(elt);
+      }
+    });
+    return output;
+  }
 
   // **********  TIME FUNCTIONS  ************
 

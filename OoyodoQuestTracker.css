@@ -253,16 +253,6 @@ width: 30px;
 margin-right: 5px;
 }
 */
-#IPQ{
-  z-index:10;
-  height:280px;
-  width:175px;
-  padding:10px;
-  background-color:orange;
-  position:absolute;
-  top:110px;
-  right:20px;
-}
 
 
 /*    TUTORIAL      */
