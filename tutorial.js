@@ -118,9 +118,9 @@ $(function () {
         $("#IPQ_btn_OK").unbind("click.tutorial_answer");
         $(".square").remove();
       };
-
-      $("#IPQ_btn_OK").bind("click.tutorial_answer", function(){
-        var inputArray = $("#IPQ_txt_area").val().toUpperCase().replace(/\s/g, '').split(',').sort();
+//TODO changer ca, le boutton est pas encore la quand on cree le event listenner
+      $("#MSG_IPQ_btn_OK").bind("click.tutorial_answer", function(){
+        var inputArray = $("#MSG_IPQ_txt_area").val().toUpperCase().replace(/\s/g, '').split(',').sort();
 
         if (inputArray[0] === "A29"
         && inputArray[1] === "A46"
