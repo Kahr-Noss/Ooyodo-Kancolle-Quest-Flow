@@ -104,13 +104,14 @@ button:focus {
    outline: none;
  }
 
-#QL_RM_Ooyodo, #FC_RM_Ooyodo{
+#Ooyodo{
   height:195px;
   width:195px;
   position:absolute;
   right:0px;
   bottom: 0px;
   background-color:rgba(0, 0, 0, 0);
+  z-index: 10;
 }
 
 /*    FOOTER CSS    */

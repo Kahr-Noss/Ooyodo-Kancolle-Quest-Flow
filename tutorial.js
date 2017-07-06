@@ -1,10 +1,12 @@
 $(function () {
 
-  var closeStep;
+  var closeStep = function(){};
 
-  if (document.cookie.indexOf('user_quests=') === -1){
+$(document).bind("start_tutorial", function(){
+  closeStep();
     step_1_openningPanel();
-  }
+});
+
 
   function step_1_openningPanel(){
     var tutorial = $(`<div id="tuto" style="top:100px; left:100px">
