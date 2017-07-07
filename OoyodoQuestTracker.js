@@ -43,38 +43,45 @@ $(function () {
 
 
 
-    $(document).bind("bubble_displayed",function(){
-      $(document).unbind("bubble_displayed");
-      //load various data in the DOM
-      loadRequiredShipList();
-      loadRewardList();
-      loadRequiredMapList();
-      displayAllQuestBoxes(Object.keys(ALL_QUESTS_LIST));
+    $(document).on("bubble_displayed",function(e,bubble){
+      if(bubble === "MSG_welcome"){
+        $(document).off("bubble_displayed");
+        //load various data in the DOM
+        loadRequiredShipList();
+        loadRewardList();
+        loadRequiredMapList();
+        displayAllQuestBoxes(Object.keys(ALL_QUESTS_LIST));
 
-      var questCookie = JSON.parse(getCookie('user_quests'));
-      console.log(getCookie('user_quests'));
-      loadFlowchart();
-      resizeWindow();
-      displayFlowchart();
-      calculateQuestState(questCookie);
-      timeVerificationLoop(questCookie.timeStamp);
+        var questCookie = JSON.parse(getCookie('user_quests'));
+        console.log(getCookie('user_quests'));
+        loadFlowchart();
+        resizeWindow();
+        displayFlowchart();
+        calculateQuestState(questCookie);
+        timeVerificationLoop(questCookie.timeStamp);
 
-      displayBubbleMessage(`Preparation complete!`
-        ,"similing","MSG_welcome",true, true);
+        displayBubbleMessage(`<span id="MSG_welcome_progress">Flowchart generation complete!</span>`
+          ,"similing","MSG_welcome",true, true, true, function(){
+            $("#MSG_welcome_progress").text("Flowchart generation complete!");
+          });
 
-        if(!questStateCalculated){
-          $(document).trigger("start_tutorial");
+          if(!questStateCalculated){
+            $(document).trigger("start_tutorial");
+          }
         }
       });
 
 
       // welcome message
       if (document.cookie.indexOf('user_quests=') === -1){
-        displayBubbleMessage(`Nice to meet you, it seems that's the first time you are coming here. Let me just a moment to write all the flowchart. Please follow the tutorial to learn how to use this application.`
-        ,"writing","MSG_welcome",true, true);
+        displayBubbleMessage(`Nice to meet you, it seems that's the first time you are coming here. Let me just a moment to write all the flowchart. Please follow the tutorial to learn how to use this application.<br>
+<br>
+    <i><span id="MSG_welcome_progress">Flowchart generation in progress...</span></i>`
+        ,"writing","MSG_welcome",true, true,true);
       } else {
-        displayBubbleMessage(`Admiral, welcome back! Let me just a moment to prepare everything.`
-          ,"writing","MSG_welcome",true, true);
+        displayBubbleMessage(`Admiral, welcome back! Let me just a moment to prepare everything.<br>
+          <span id="MSG_welcome_progress">Flowchart generation in progress...</span>`
+          ,"writing","MSG_welcome",true, true,true);
         }
 
       }
@@ -400,7 +407,7 @@ $(function () {
           if(questsUnlocked.length > 0){
             displayBubbleMessage(`Admiral, you have unlocked the following quests:<br>
               <span id="MSG_quest_unlocked_quests">${questsUnlocked.join(', ')}</span>`,
-              "???","MSG_quest_unlocked",true,false,function(){$("#MSG_quest_unlocked_quests").text(`${$("#MSG_quest_unlocked_quests").text()}, ${questsUnlocked.join(', ')}`);}
+              "???","MSG_quest_unlocked",true,false,true,function(){$("#MSG_quest_unlocked_quests").text(`${$("#MSG_quest_unlocked_quests").text()}, ${questsUnlocked.join(', ')}`);}
             );
           }
           updateQuestListDisplay(visibleQuests);
@@ -417,7 +424,7 @@ $(function () {
             <button type="button" class="MSG_completed_quest_${quest}_btn" value="pending">Yes</button>
             <button type="button" class="MSG_completed_quest_${quest}_btn" value="locked">I don't know</button>
             <button type="button" class="MSG_completed_quest_${quest}_btn" value="locked">No</button>`,
-            "writing",`MSG_completed_quest_${quest}`,false,true
+            "writing",`MSG_completed_quest_${quest}`,false,true,false
           );
 
           $(`.MSG_completed_quest_${quest}_btn`).click(function(){
@@ -462,7 +469,7 @@ $(function () {
           setCookie('user_quests',JSON.stringify(questsCookie),365);
           displayBubbleMessage(`Admiral, you have unlocked the following quests:<br>
             <span id="MSG_quest_unlocked_quests">${unlockedQuest}</span>`,
-            "???","MSG_quest_unlocked",true,false,function(){$("#MSG_quest_unlocked_quests").text(`${$("#MSG_quest_unlocked_quests").text()}, ${unlockedQuest}`);}
+            "???","MSG_quest_unlocked",true,false,true,function(){$("#MSG_quest_unlocked_quests").text(`${$("#MSG_quest_unlocked_quests").text()}, ${unlockedQuest}`);}
           );
         };
 
@@ -473,7 +480,7 @@ $(function () {
           is present or not.
           <button type="button" class="MSG_check_unknown_quest_${unlockedQuest}_btn" value="locked">Yes, it's here</button>
           <button type="button" class="MSG_check_unknown_quest_${unlockedQuest}_btn" value="completed">No, I can't found it</button>`,
-          "writing",`MSG_check_unknown_quest_${unlockedQuest}`,false,true
+          "writing",`MSG_check_unknown_quest_${unlockedQuest}`,false,true,false
         );
 
         //display the quest on flowchart when clicking on the link
@@ -718,12 +725,7 @@ $(function () {
           Object.keys(ALL_QUESTS_LIST).forEach(quest=>{
             ALL_QUEST_STATE_TMP[quest] = '???';
           });
-          /*
-          // if periodicCompleted is n, we set all the periodic quests to completed
-          userQuestCookie.periodicCompleted.forEach(period => {
-          Object.keys(ALL_QUESTS_LIST).filter(function(quest){return ALL_QUESTS_LIST[quest].period === period}).forEach(quest => {
-          ALL_QUEST_STATE_TMP[quest] = 'completed';    });  });
-          */
+
 
           //set inputed quests to pending
           userQuestCookie.pendingQuests.forEach(quest=>{
@@ -740,7 +742,7 @@ $(function () {
             $("#MSG_IPQ_error_msg").html(inconsistencies_msg);
 
           } else {
-
+// if no problem, close the input bubble and proceed the next calculations
             closeBubbleMessage($("#MSG_IPQ"));
 
             var unknowQuests = setRemainingOnceQuestStateByDeduction(userQuestCookie.undeterminedQuests);
@@ -805,7 +807,7 @@ $(function () {
               <button type="button" class="MSG_btn" value="completed">Yes !</button>
               <button type="button" class="MSG_btn idk" value="locked">I don't know</button>
               <button type="button" class="MSG_btn" value="locked">No, not yet</button>`,
-              "writing","MSG_ask_quest_state",false,true
+              "writing","MSG_ask_quest_state",false,true,false
             );
 
             $(".MSG_btn").click(function(){
@@ -867,7 +869,7 @@ $(function () {
           displayBubbleMessage(`Admiral, about those quests that you din't know the state, you should complete those quests:<br>
           <span id="MSG_quest_completion_advice_quests">${getBlockingPeriodicQuests().join(', ')}</span><br>
           Update your progress once you are done.`,
-          "???","MSG_quest_completion_advice",true,false,function(){$("#MSG_quest_completion_advice_quests").text($("#MSG_quest_completion_advice_quests").text() + questsUnlocked.join(', '));});
+          "???","MSG_quest_completion_advice",true,false,true,function(){$("#MSG_quest_completion_advice_quests").text($("#MSG_quest_completion_advice_quests").text() + questsUnlocked.join(', '));});
         }
 
 
@@ -918,9 +920,8 @@ $(function () {
         var askForState = [];
         // set state of unknow quests
         // first check once quests.
-        getQuestsInState(ALL_QUEST_STATE_TMP,'???').forEach(quest=>{
-          if(periodNumberEquvalence(ALL_QUESTS_LIST[quest].period) === 5){
-            if (ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed";})){
+        getQuestsInState(ALL_QUEST_STATE_TMP,'???').filter(function(q){return ALL_QUESTS_LIST[q].period === "once"}).forEach(quest=>{
+          if (ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed";})){
               //if they have no requierments or if all are completed, means that it's an isolated once chain list.
               setUnknownQuestsUpward(quest,"completed","once");
               undeterminedQuests[quest] = "completed";
@@ -943,7 +944,6 @@ $(function () {
             } else {
               askForState.push(quest);
             }
-          }
         });
         return askForState;
       }
@@ -1072,7 +1072,6 @@ $(function () {
         && ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE_TMP[requiredQuest] === "completed";})
         && ALL_QUESTS_LIST[quest].period === period)
         || state === 'locked')){
-          console.log("recursive  " + quest + "    " + state);
           ALL_QUEST_STATE_TMP[quest] = state;
           ALL_QUESTS_LIST[quest].unlocks.forEach(nextQuest => {
             setUnknownQuestsUpward(nextQuest,state,period);
@@ -1170,7 +1169,7 @@ $(function () {
           return (ALL_QUEST_STATE[q] === 'completed' && ALL_QUESTS_LIST[q].period === 'once') ||  ALL_QUESTS_LIST[q].period !== 'once';
         });});
 
-
+console.log(unknownQuests);
         function checkIfQuestIsLockedOnlyByPeriodicQuests(quest){
           var result = true;
           ALL_QUESTS_LIST[quest].requires.forEach(req =>{
@@ -1187,11 +1186,12 @@ $(function () {
 
         var blockingQuests = []
         unknownQuests.forEach(quest => {
+          console.log(quest + "      " + checkIfQuestIsLockedOnlyByPeriodicQuests(quest));
           if (checkIfQuestIsLockedOnlyByPeriodicQuests(quest)){
             blockingQuests = blockingQuests.concat(ALL_QUESTS_LIST[quest].requires.filter(function(qst){return ALL_QUESTS_LIST[qst].period !== "once" && ALL_QUEST_STATE[qst] !== "completed"}));
           }
         });
-
+console.log(blockingQuests);
         return removeDoublonFromArray(blockingQuests);
       }
 
@@ -1344,7 +1344,6 @@ $(function () {
 
       // display quest data in the footer
       function displayQuestData(questCode){
-        console.log("coucou");
         var quest = ALL_QUESTS_LIST[questCode];
         var color = getQuestColor(questCode);
         $('#FC_FT .cellDiv').css('background', color).css('color',tinycolor(color).isLight() ? "#000000" : "#ffffff");
@@ -1566,9 +1565,9 @@ $(function () {
       }
 
       //show a message in a bubble speech on the top of bottom right Ooyodo and update the image
-      function displayBubbleMessage(html, image, id, timeout, priority, updateFunction){
+      function displayBubbleMessage(html, image, id, timeout, priority, oneTime, updateFunction){
 
-        var popup = $(`<div class="bubble" data-timeout=${timeout} data-img="${image}" id="${id}" hidden>
+        var popup = $(`<div class="bubble" data-timeout=${timeout} data-img="${image}" data-oneTime="${oneTime}" id="${id}" hidden>
         <div class="closeBtn" id="closeBtn_${id}">X</div>
         ${html}
         </div>`);
@@ -1595,34 +1594,28 @@ $(function () {
         }
 
         $(`#closeBtn_${id}`).click(function(){
-          closeBubbleMessage($(`#${id}`))
+          closeBubbleMessage($(`#${id}`));
         });
 
-        // if it's a timing out message and the message is displayed start time out
-        if(timeout && $(`#${id}`).is(":visible")){
-          clearTimeout(bubbleTimeout);
-          bubbleTimeout = setTimeout(function(){
-            //only close if displayed
-            closeBubbleMessage($(`#${id}`));
-          },20000);
-        }
-
-
-
         var isOtherBubble = $(".bubble").length > 1;
-        if (isOtherBubble){
+        if ( (isOtherBubble && priority) || !isOtherBubble){
           // if priority, hide all other bubble
           if (priority){
             // if priority, delete the timeout for the previous bubbles
-
+            $(`.bubble:visible[data-oneTime='true'][id!='${id}']`).remove();
             $(".bubble:visible").hide();
-            $(`#${id}`).show("fast",function(){$(document).trigger("bubble_displayed");});
-            changeOoyodoImage(image);
-            $(document).trigger("bubble_displayed");
+            clearTimeout(bubbleTimeout);
           }
-        } else {
-          $(`#${id}`).show("fast",function(){$(document).trigger("bubble_displayed");});
+          $(`#${id}`).show("fast",function(){$(document).trigger("bubble_displayed",[id]);});
           changeOoyodoImage(image);
+          // if it's a timing out message and the message is displayed start time out
+          if(timeout){
+            clearTimeout(bubbleTimeout);
+            bubbleTimeout = setTimeout(function(){
+              //only close if displayed
+              closeBubbleMessage($(`#${id}`));
+            },20000);
+          }
         }
 
       }
@@ -1782,7 +1775,7 @@ $(function () {
         });
         if(resetPeriods.length >0){
           displayBubbleMessage(`Admiral, ${resetPeriods.join(', ')} quests have just been reset.`
-          ,"smiling","MSG_reset_notification",true, false);
+          ,"smiling","MSG_reset_notification",true, false, true);
         }
         //send a request next daily reset
         var millisecondsUntilNextReset = resetTimes.daily.diff( now ) + 10000;
@@ -1915,7 +1908,7 @@ $(function () {
           <button type="button" id='MSG_IPQ_btn_OK' style="width:40%;">OK</button>
           <button type="button" id='MSG_IPQ_btn_cancel' style="width:40%;">Cancel</button>
           </center>`
-          ,"smiling","MSG_IPQ",false, true);
+          ,"smiling","MSG_IPQ",false, true, false);
 
           $('#MSG_IPQ_txt_area').focus();
 
@@ -1927,7 +1920,6 @@ $(function () {
           // validate the input of pending quests
           $('#MSG_IPQ_btn_OK').click(function () {
             var inputedPendingQuests = questInputToArray($("#MSG_IPQ_txt_area").val());
-            console.log("plop")
 
             var periodNotInputed = [];
             // if no periodic quests are inputed
@@ -1951,7 +1943,7 @@ $(function () {
               <button type="button" class="MSG_ask_periodic_quests_btn">I've finished!</button>`;
 
               displayBubbleMessage(MSG_HTML,
-                "???","MSG_ask_periodic_quests",false,true);
+                "???","MSG_ask_periodic_quests",false,true,false);
 
                 $(".MSG_ask_periodic_quests_btn").click(function(){
 
@@ -2165,7 +2157,7 @@ $(function () {
             tipsMsg = `Tips and avices for quest <b>${quest}</b>:<br>
             ${tipsMsg.replace(/※/g,"<br>●")}`;
           }
-          displayBubbleMessage(tipsMsg ,"???", "MSG_tips_quest",false, true);
+          displayBubbleMessage(tipsMsg ,"???", "MSG_tips_quest",false, true, true);
         });
 
         //hide the button after clicking on it
@@ -2202,7 +2194,7 @@ $(function () {
             <button type="button" class="MSG_click_Ooyodo_btn" value="reddit">I would like to make some feedback.</button>
             <button type="button" class="MSG_click_Ooyodo_btn" value="tutorial">Can you explain me again the application?</button>
             <button type="button" class="MSG_click_Ooyodo_btn" value="teasing">Just teasing you...</button>`,
-            "smiling",`MSG_click_Ooyodo`,true,true
+            "smiling",`MSG_click_Ooyodo`,true,true,true
           );
 
           $(".MSG_click_Ooyodo_btn").click(function(){
@@ -2212,16 +2204,16 @@ $(function () {
                 var blockingQuests = getBlockingPeriodicQuests().join(', ');
                 if (!questStateCalculated){
                   displayBubbleMessage(`Admiral... You didn't asked me to track your progression so I have no clue...`,
-                  "disappointed",`MSG_click_Ooyodo_advice`,true,true );
+                  "disappointed",`MSG_click_Ooyodo_advice`,true,true,true );
                 } else if (blockingQuests !== ""){
                   displayBubbleMessage(`Oh yes, there are some periodic quests you still need to complete...<br>
                     ${blockingQuests}<br>
                     Please set each quest as completed when you have done it so I can finish your progress calculation.`,
-                    "???",`MSG_click_Ooyodo_advice`,true,true
+                    "???",`MSG_click_Ooyodo_advice`,true,true,true
                   );
                 } else {
                   displayBubbleMessage(`You don't need to do anything. I've recorded everything from your progression.`,
-                  "???",`MSG_click_Ooyodo_advice`,true,true );
+                  "???",`MSG_click_Ooyodo_advice`,true,true,true );
                 }
                 break;
               }
@@ -2229,14 +2221,14 @@ $(function () {
                 displayBubbleMessage(`Thanks a lot, feedbacks are always welcomed!<br>
                   <a href="TODO">Here is the link to the reddit thread.</a> <br>
                   Just post in the comments.`,
-                  "???",`MSG_click_Ooyodo_reddit`,true,true );
+                  "???",`MSG_click_Ooyodo_reddit`,true,true,true );
                   break;
                 }
                 case "teasing":{
                   messageList = ["Admiral!! Really?? Do you have nothing better to do?",
                   "Please focus on the mission..."];
                   displayBubbleMessage(getOneMsgRandom(messageList),
-                  "pouting",`MSG_click_Ooyodo_teasing`,true,true );
+                  "pouting",`MSG_click_Ooyodo_teasing`,true,true,true );
                   break;
                 }
                 case "tutorial":{

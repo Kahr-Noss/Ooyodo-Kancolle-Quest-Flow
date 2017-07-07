@@ -114,6 +114,10 @@ button:focus {
   z-index: 10;
 }
 
+#Ooyodo:hover{
+cursor: pointer;
+}
+
 /*    FOOTER CSS    */
 
 .FT{
