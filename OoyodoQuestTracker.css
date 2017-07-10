@@ -250,23 +250,16 @@ cursor: pointer;
 .link:hover{
    text-decoration: underline;
 }
-/*
-.mini_ship_icon{
-vertical-align: middle;
-height: 30px;
-width: 30px;
-margin-right: 5px;
-}
-*/
 
 
 /*    TUTORIAL      */
 
 #tuto{
   z-index:50;
-  position: absolute;
-  width:500px;
+  position: fixed;
   background-color: orange;
+
+vertical-align: top;
 }
 
 .square{

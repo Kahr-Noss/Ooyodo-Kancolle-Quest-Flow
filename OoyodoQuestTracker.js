@@ -741,9 +741,10 @@ $(function () {
 
         } else {
           // if no problem, close the input bubble and proceed the next calculations
-          closeBubbleMessage($("#MSG_IPQ"));
+
 
           completeRemainingQuestsLoop(function(){
+            closeBubbleMessage($("#MSG_IPQ"));
             questStateCalculated = true;
             implementQuestsStateUpdated();
           });
@@ -1786,7 +1787,7 @@ $(function () {
     $(".HD_option_btn").click(function () {
 
       if($(this).val() === "IPQ"){
-        displayBubbleMessage(`<center><textarea id="MSG_IPQ_txt_area" rows="8" cols="22">A29, A46, A65, A71, B12, B32, B44, Bd8, Bw7, D21, D23, F36, F42</textarea>
+        displayBubbleMessage(`<center><textarea id="MSG_IPQ_txt_area" rows="8" cols="22">A29, A46, A65, A71, B12, B32, B44, Bd1, Bw7, D21, D23, F36, F42</textarea>
         <br>  Type <strong>ALL</strong> your pending quests code separated by commas.
         <br>
         <span id="MSG_IPQ_error_msg" style="color:red;"></span>
@@ -1806,355 +1807,317 @@ $(function () {
         // validate the input of pending quests
         $('#MSG_IPQ_btn_OK').click(function () {
           var inputedPendingQuests = questInputToArray($("#MSG_IPQ_txt_area").val());
-
-          var periodNotInputed = [];
-          // if no periodic quests are inputed
-          ["daily","weekly","monthly","quarterly"].forEach(period =>{
-            if (!inputedPendingQuests.some(function(quest){return ALL_QUESTS_LIST[quest].period === period})){
-              periodNotInputed.push(period);
-            }
-          });
-
-          if (periodNotInputed.length === 0){
-            calculateQuestState({pendingQuests:inputedPendingQuests,userDecisions:{},periodicCompleted:[],undeterminedQuests:[]});
-
-          } else {
-            var MSG_HTML = `Admiral, it seems that you didn't input ${periodNotInputed.join(", ")} quests...<br>
-            Do that mean you have completed all of them right now? Or do you have forgotten them?<br>
-            Please check the quests you have already completed:<br>`;
-            periodNotInputed.forEach(p => {
-              MSG_HTML += `<input type="checkbox" class="MSG_ask_periodic_quests_checkbox" value="${p}"> &nbsp;${p}<br>`;
-            })
-            MSG_HTML += `Care, it may change my calculation's result of your progression!!<br>
-            <button type="button" class="MSG_ask_periodic_quests_btn">I've finished!</button>`;
-
-            displayBubbleMessage(MSG_HTML,
-              "???","MSG_ask_periodic_quests",false,true,false);
-
-              $(".MSG_ask_periodic_quests_btn").click(function(){
-
-                var periodicCompleted = $(".MSG_ask_periodic_quests_checkbox:checked").map(function(){
-                  return $(this).val();
-                }).get();
-                closeBubbleMessage($("#MSG_ask_periodic_quests"));
-                calculateQuestState({pendingQuests:inputedPendingQuests,userDecisions:{},periodicCompleted:periodicCompleted,undeterminedQuests:[]});
-              });
-            }
-
-
-
-
-
-          });
-        }
-      });
-
-      // **********   FLOWCHART PANEL RIGHT MENU LISTENNERS    ***************
-
-      //input a quest code to search
-      $('#FC_FT_search_Quest').on('input',function () {
-        var input = questInputToArray($('#FC_FT_search_Quest').val());
-        if(input[0]){
-          $(this).css('outline-color','');
-          zoom(input.slice(-1)[0]);
-          selectedNodes = input;
-          hightlightQuest();
-        } else {
-          $(this).css('outline-color','red');
-        }
-      });
-
-      //select a quest in the list
-      $('#FC_FT_select_quest_list').change(function () {
-        let quest = $( "#FC_FT_select_quest_list option:selected" ).val();
-        selectedNodes = [quest];
-        zoom(quest);
-        hightlightQuest();
-      });
-
-      //apply the changes to the flowchart
-      $('#FC_RM_loading_btn').click(function () {
-        buildPartialFlowchart();
-      });
-
-      //recenter the flowchart viewport
-      $('#FC_RM_center_btn').click(function () {
-        centerView();
-      });
-
-      // GUI changes on manual inputs
-      $('#FC_RM_starting_quests, #FC_RM_ending_quests').on('input',function () {
-        $('#FC_RM_select_preset_quests')[0].selectedIndex = 0;
-      });
-
-      // write the pending quests in the starting quests textbox
-      $("#FC_RM_use_pending_quests, #FC_RM_use_periodic_quests").change(function(){
-        $('#FC_RM_select_preset_quests')[0].selectedIndex = 0;
-        if ($("#FC_RM_use_pending_quests").is(':checked')){
-          $("#FC_RM_starting_quests").val(getQuestsInState(ALL_QUEST_STATE,'pending').filter(function(quest){
-            if($("#FC_RM_use_periodic_quests").is(':checked')){
-              return true;
-            } else {
-              return ALL_QUESTS_LIST[quest].period === "once";
-            }
-          }).toString()).prop("disabled",true);
-        } else {
-          $("#FC_RM_starting_quests").prop("disabled",false).focus();
-        }
-      });
-
-      //when typing on enter launch the loading of flowchart
-      $('#FC_RM_starting_quests, #FC_RM_ending_quests').keydown(function (e) {
-        if(e.which === 13){
-          e.preventDefault();
-          buildPartialFlowchart();
-        }
-      });
-
-      // when selecting a quest chain in the drop list, will write the ending quests and load the flowchart
-      $('#FC_RM_select_preset_quests').change(function () {
-        var endingQuests = $( "#FC_RM_select_preset_quests option:selected" ).val();
-        if (endingQuests !== ''){
-          $("#FC_RM_highlight_downward").prop('checked', true);
-          if (endingQuests !== 'all'){
-            $("#FC_RM_ending_quests").val(endingQuests);
-            $("#FC_RM_highlight_upward").prop('checked', false);
-          } else {
-            $("#FC_RM_ending_quests").val('');
-            $("#FC_RM_highlight_upward").prop('checked', true);
-          }
-          buildPartialFlowchart();
-        }
-      });
-
-
-
-      // **********   QUEST LIST PANEL MENU LISTENNERS    ***************
-
-      // switch between the differents search methods
-      $("#QL_RM_select_search_method").change(function(){
-        $(".QL_RM_select_search_method").hide();
-        $(`#QL_RM_search_${$(this).val()}`).find('select').each(function(){
-          $(this)[0].selectedIndex = 0;
+          calculateQuestState({pendingQuests:inputedPendingQuests,userDecisions:{},undeterminedQuests:[]});
         });
-        $(`#QL_RM_search_${$(this).val()}`).show("fast").find(':text').first().val("").focus();
-
-      });
-
-      // update quest display on period change
-      $( ".QL_RM_display_period" ).change(function(){  $
-        updateQuestListDisplay([]);
-        // enable or disable the All checkbox depending on the number of box checked
-        $("#QL_RM_display_period_all").prop('checked', ($( ".QL_RM_display_period:checked" ).length === 5));
-      });
-
-      // check or uncheck all period boxes
-      $( "#QL_RM_display_period_all" ).change(function(){
-        $(".QL_RM_display_period").prop('checked', $("#QL_RM_display_period_all").is(':checked'));
-        updateQuestListDisplay([]);
-      });
-
-      // display the quests with corresponding codes
-      $('#QL_RM_searchQuest').on('input',function () {
-        var input = questInputToArray($(this).val());
-        if(input.length > 0){
-          $(this).css('outline-color','');
-        } else {
-          $(this).css('outline-color','red');
-        }
-        updateQuestListDisplay(input);
-      });
-
-      // display the quests requiring this ship/map/reward
-      $("#QL_RM_select_required_ship, #QL_RM_select_required_map, #QL_RM_search_select_reward").change(function(){
-        var questList = JSON.parse($(this).val());
-        updateQuestListDisplay(questList);
-      });
-
-
-      //change the type of displayed rewards
-      $(`input[name=QL_RM_search_reward]`).change(function(){
-        $('body').scrollTop(0);
-        loadRewardList();
-      });
-
-      //change the state of displayed quests
-      $( "input[name=QL_RM_display_state]:radio" ).change(function(){
-        updateQuestListDisplay([]);
-      });
-
-
-
-
-
-
-      // on doubleclick set it as finalquest in the flowchart
-      $(".QL_questBox_goToChart_btn").click(function(e){
-        $(`#QL_selected_${$(this).attr("id").split('_')[3]}`).prop("checked",true).trigger("change");
-        selectedNodes = [];
-        $(".QL_selected_checkbox:checked").each(function(){
-          selectedNodes.push($(this).attr("id").split('_')[2]);
-        });
-        $("#QL").hide();
-        $("#FC").show('fast');
-        $("#FC_RM_ending_quests").val(selectedNodes.join(', ')).trigger("change");
-        buildPartialFlowchart();
-        hightlightQuest();
-      });
-
-      //reset all the research parameters
-      $("#QL_RM_reset_search").click(function(){
-        $(".QL_RM_display_period, #QL_RM_display_period_all").prop("checked",true);
-        $("input[name=QL_RM_display_state]:radio").first().prop("checked",true);
-        $(`.QL_RM_select_search_method`).find('select').each(function(){
-          $(this)[0].selectedIndex = 0;
-        });
-        $(`.QL_RM_select_search_method`).find(':text').first().val("");
-        updateQuestListDisplay([]);
-      });
-
-      $("#QL_RM_reset_selection").click(function(){
-        $(".QL_selected_checkbox").prop("checked",false).trigger("change");
-      });
-
-
-
-      // set the quest as completed
-      $(".complete_btn, .QL_questBox_complete_btn").click(function(){
-        var id = $(this).attr("id").split('_');
-        var quest = '';
-        if(id[0] === 'FC'){
-          quest = $("#FC_FT_quest_info_quest_code").text();
-        } else if (id[0] === 'QL'){
-          quest = id[3];
-        }
-        if (quest !== ''){
-          setQuestAsCompleted(quest);
-        }
-      });
-
-      //show the tips in the bubble message when clicked
-      $(".quest_tips").click(function(){
-        var quest = $(this).attr("id").split('_')[3];
-        var tipsMsg = ALL_QUESTS_LIST[quest].tips;
-        if(tipsMsg === ""){
-          tipsMsg = `Admiral, there is no tips for the quest ${quest}, sorry.`;
-        } else {
-          tipsMsg = `Tips and avices for quest <b>${quest}</b>:<br>
-          ${tipsMsg.replace(/※/g,"<br>●")}`;
-        }
-        displayBubbleMessage(tipsMsg ,"???", "MSG_tips_quest",false, true, true);
-      });
-
-      //hide the button after clicking on it
-      $(`#FC_FT_quest_info_complete_btn`).click(function(){
-        $(this).hide();
-      });
-
-      $(".QL_selected_checkbox").change(function(){
-        var questBox = $(`#QL_questBox_${$(this).attr('id').split("_")[2]}`);
-        if($(this).is(":checked")){
-          questBox.css("border-width",COLORS.selected.border_width)
-          .css("border-color",COLORS.selected.border_color)
-          .css("margin",12 - COLORS.selected.border_width);
-        } else {
-          //TODO put the right size of border
-          questBox.css("border-width",'2px').css("border-color",'black').css("margin",10);
-        }
-      });
-
-
-      // change the diagram size when the window size is changed
-      $( window ).resize(function() {
-        resizeWindow();
-      });
-
-      function resizeWindow(){
-        resizeFlowchart( $(window).height() - 240 - 4, $(window).width() - 175 -20);
       }
+    });
 
-      // a click on Ooyodo display a bubble with different interactions
-      $(`#Ooyodo`).click(function(){
-        displayBubbleMessage(`Yes Admiral, do you need something?<br>
-          <button type="button" class="MSG_click_Ooyodo_btn" value="advice">What quests do you need me to do to complete my progression calculation?</button>
-          <button type="button" class="MSG_click_Ooyodo_btn" value="reddit">I would like to make some feedback.</button>
-          <button type="button" class="MSG_click_Ooyodo_btn" value="tutorial">Can you explain me again the application?</button>
-          <button type="button" class="MSG_click_Ooyodo_btn" value="teasing">Just teasing you...</button>`,
-          "smiling",`MSG_click_Ooyodo`,true,true,true
-        );
+    // **********   FLOWCHART PANEL RIGHT MENU LISTENNERS    ***************
 
-        $(".MSG_click_Ooyodo_btn").click(function(){
-          closeBubbleMessage($("#MSG_click_Ooyodo"));
-          switch ($(this).val()){
-            case "advice":{
-              var blockingQuests = getBlockingPeriodicQuests().join(', ');
-              if (!questStateCalculated){
-                displayBubbleMessage(`Admiral... You didn't asked me to track your progression so I have no clue...`,
-                "disappointed",`MSG_click_Ooyodo_advice`,true,true,true );
-              } else if (blockingQuests !== ""){
-                displayBubbleMessage(`Oh yes, there are some periodic quests you still need to complete...<br>
-                  ${blockingQuests}<br>
-                  Please set each quest as completed when you have done it so I can finish your progress calculation.`,
-                  "???",`MSG_click_Ooyodo_advice`,true,true,true
-                );
-              } else {
-                displayBubbleMessage(`You don't need to do anything. I've recorded everything from your progression.`,
-                "???",`MSG_click_Ooyodo_advice`,true,true,true );
-              }
+    //input a quest code to search
+    $('#FC_FT_search_Quest').on('input',function () {
+      var input = questInputToArray($('#FC_FT_search_Quest').val());
+      if(input[0]){
+        $(this).css('outline-color','');
+        zoom(input.slice(-1)[0]);
+        selectedNodes = input;
+        hightlightQuest();
+      } else {
+        $(this).css('outline-color','red');
+      }
+    });
+
+    //select a quest in the list
+    $('#FC_FT_select_quest_list').change(function () {
+      let quest = $( "#FC_FT_select_quest_list option:selected" ).val();
+      selectedNodes = [quest];
+      zoom(quest);
+      hightlightQuest();
+    });
+
+    //apply the changes to the flowchart
+    $('#FC_RM_loading_btn').click(function () {
+      buildPartialFlowchart();
+    });
+
+    //recenter the flowchart viewport
+    $('#FC_RM_center_btn').click(function () {
+      centerView();
+    });
+
+    // GUI changes on manual inputs
+    $('#FC_RM_starting_quests, #FC_RM_ending_quests').on('input',function () {
+      $('#FC_RM_select_preset_quests')[0].selectedIndex = 0;
+    });
+
+    // write the pending quests in the starting quests textbox
+    $("#FC_RM_use_pending_quests, #FC_RM_use_periodic_quests").change(function(){
+      $('#FC_RM_select_preset_quests')[0].selectedIndex = 0;
+      if ($("#FC_RM_use_pending_quests").is(':checked')){
+        $("#FC_RM_starting_quests").val(getQuestsInState(ALL_QUEST_STATE,'pending').filter(function(quest){
+          if($("#FC_RM_use_periodic_quests").is(':checked')){
+            return true;
+          } else {
+            return ALL_QUESTS_LIST[quest].period === "once";
+          }
+        }).toString()).prop("disabled",true);
+      } else {
+        $("#FC_RM_starting_quests").prop("disabled",false).focus();
+      }
+    });
+
+    //when typing on enter launch the loading of flowchart
+    $('#FC_RM_starting_quests, #FC_RM_ending_quests').keydown(function (e) {
+      if(e.which === 13){
+        e.preventDefault();
+        buildPartialFlowchart();
+      }
+    });
+
+    // when selecting a quest chain in the drop list, will write the ending quests and load the flowchart
+    $('#FC_RM_select_preset_quests').change(function () {
+      var endingQuests = $( "#FC_RM_select_preset_quests option:selected" ).val();
+      if (endingQuests !== ''){
+        $("#FC_RM_highlight_downward").prop('checked', true);
+        if (endingQuests !== 'all'){
+          $("#FC_RM_ending_quests").val(endingQuests);
+          $("#FC_RM_highlight_upward").prop('checked', false);
+        } else {
+          $("#FC_RM_ending_quests").val('');
+          $("#FC_RM_highlight_upward").prop('checked', true);
+        }
+        buildPartialFlowchart();
+      }
+    });
+
+
+
+    // **********   QUEST LIST PANEL MENU LISTENNERS    ***************
+
+    // switch between the differents search methods
+    $("#QL_RM_select_search_method").change(function(){
+      $(".QL_RM_select_search_method").hide();
+      $(`#QL_RM_search_${$(this).val()}`).find('select').each(function(){
+        $(this)[0].selectedIndex = 0;
+      });
+      $(`#QL_RM_search_${$(this).val()}`).show("fast").find(':text').first().val("").focus();
+
+    });
+
+    // update quest display on period change
+    $( ".QL_RM_display_period" ).change(function(){  $
+      updateQuestListDisplay([]);
+      // enable or disable the All checkbox depending on the number of box checked
+      $("#QL_RM_display_period_all").prop('checked', ($( ".QL_RM_display_period:checked" ).length === 5));
+    });
+
+    // check or uncheck all period boxes
+    $( "#QL_RM_display_period_all" ).change(function(){
+      $(".QL_RM_display_period").prop('checked', $("#QL_RM_display_period_all").is(':checked'));
+      updateQuestListDisplay([]);
+    });
+
+    // display the quests with corresponding codes
+    $('#QL_RM_searchQuest').on('input',function () {
+      var input = questInputToArray($(this).val());
+      if(input.length > 0){
+        $(this).css('outline-color','');
+      } else {
+        $(this).css('outline-color','red');
+      }
+      updateQuestListDisplay(input);
+    });
+
+    // display the quests requiring this ship/map/reward
+    $("#QL_RM_select_required_ship, #QL_RM_select_required_map, #QL_RM_search_select_reward").change(function(){
+      var questList = JSON.parse($(this).val());
+      updateQuestListDisplay(questList);
+    });
+
+
+    //change the type of displayed rewards
+    $(`input[name=QL_RM_search_reward]`).change(function(){
+      $('body').scrollTop(0);
+      loadRewardList();
+    });
+
+    //change the state of displayed quests
+    $( "input[name=QL_RM_display_state]:radio" ).change(function(){
+      updateQuestListDisplay([]);
+    });
+
+
+
+
+
+
+    // on doubleclick set it as finalquest in the flowchart
+    $(".QL_questBox_goToChart_btn").click(function(e){
+      $(`#QL_selected_${$(this).attr("id").split('_')[3]}`).prop("checked",true).trigger("change");
+      selectedNodes = [];
+      $(".QL_selected_checkbox:checked").each(function(){
+        selectedNodes.push($(this).attr("id").split('_')[2]);
+      });
+      $("#QL").hide();
+      $("#FC").show('fast');
+      $("#FC_RM_ending_quests").val(selectedNodes.join(', ')).trigger("change");
+      buildPartialFlowchart();
+      hightlightQuest();
+    });
+
+    //reset all the research parameters
+    $("#QL_RM_reset_search").click(function(){
+      $(".QL_RM_display_period, #QL_RM_display_period_all").prop("checked",true);
+      $("input[name=QL_RM_display_state]:radio").first().prop("checked",true);
+      $(`.QL_RM_select_search_method`).find('select').each(function(){
+        $(this)[0].selectedIndex = 0;
+      });
+      $(`.QL_RM_select_search_method`).find(':text').first().val("");
+      updateQuestListDisplay([]);
+    });
+
+    $("#QL_RM_reset_selection").click(function(){
+      $(".QL_selected_checkbox").prop("checked",false).trigger("change");
+    });
+
+
+
+    // set the quest as completed
+    $(".complete_btn, .QL_questBox_complete_btn").click(function(){
+      var id = $(this).attr("id").split('_');
+      var quest = '';
+      if(id[0] === 'FC'){
+        quest = $("#FC_FT_quest_info_quest_code").text();
+      } else if (id[0] === 'QL'){
+        quest = id[3];
+      }
+      if (quest !== ''){
+        setQuestAsCompleted(quest);
+      }
+    });
+
+    //show the tips in the bubble message when clicked
+    $(".quest_tips").click(function(){
+      var quest = $(this).attr("id").split('_')[3];
+      var tipsMsg = ALL_QUESTS_LIST[quest].tips;
+      if(tipsMsg === ""){
+        tipsMsg = `Admiral, there is no tips for the quest ${quest}, sorry.`;
+      } else {
+        tipsMsg = `Tips and avices for quest <b>${quest}</b>:<br>
+        ${tipsMsg.replace(/※/g,"<br>●")}`;
+      }
+      displayBubbleMessage(tipsMsg ,"???", "MSG_tips_quest",false, true, true);
+    });
+
+    //hide the button after clicking on it
+    $(`#FC_FT_quest_info_complete_btn`).click(function(){
+      $(this).hide();
+    });
+
+    $(".QL_selected_checkbox").change(function(){
+      var questBox = $(`#QL_questBox_${$(this).attr('id').split("_")[2]}`);
+      if($(this).is(":checked")){
+        questBox.css("border-width",COLORS.selected.border_width)
+        .css("border-color",COLORS.selected.border_color)
+        .css("margin",12 - COLORS.selected.border_width);
+      } else {
+        //TODO put the right size of border
+        questBox.css("border-width",'2px').css("border-color",'black').css("margin",10);
+      }
+    });
+
+
+    // change the diagram size when the window size is changed
+    $( window ).resize(function() {
+      resizeWindow();
+    });
+
+    function resizeWindow(){
+      resizeFlowchart( $(window).height() - 240 - 4, $(window).width() - 175 -20);
+    }
+
+    // a click on Ooyodo display a bubble with different interactions
+    $(`#Ooyodo`).click(function(){
+      displayBubbleMessage(`Yes Admiral, do you need something?<br>
+        <button type="button" class="MSG_click_Ooyodo_btn" value="advice">What quests do you need me to do to complete my progression calculation?</button>
+        <button type="button" class="MSG_click_Ooyodo_btn" value="reddit">I would like to make some feedback.</button>
+        <button type="button" class="MSG_click_Ooyodo_btn" value="tutorial">Can you explain me again the application?</button>
+        <button type="button" class="MSG_click_Ooyodo_btn" value="teasing">Just teasing you...</button>`,
+        "smiling",`MSG_click_Ooyodo`,true,true,true
+      );
+
+      $(".MSG_click_Ooyodo_btn").click(function(){
+        closeBubbleMessage($("#MSG_click_Ooyodo"));
+        switch ($(this).val()){
+          case "advice":{
+            var blockingQuests = getBlockingPeriodicQuests().join(', ');
+            if (!questStateCalculated){
+              displayBubbleMessage(`Admiral... You didn't asked me to track your progression so I have no clue...`,
+              "disappointed",`MSG_click_Ooyodo_advice`,true,true,true );
+            } else if (blockingQuests !== ""){
+              displayBubbleMessage(`Oh yes, there are some periodic quests you still need to complete...<br>
+                ${blockingQuests}<br>
+                Please set each quest as completed when you have done it so I can finish your progress calculation.`,
+                "???",`MSG_click_Ooyodo_advice`,true,true,true
+              );
+            } else {
+              displayBubbleMessage(`You don't need to do anything. I've recorded everything from your progression.`,
+              "???",`MSG_click_Ooyodo_advice`,true,true,true );
+            }
+            break;
+          }
+          case "reddit":{
+            displayBubbleMessage(`Thanks a lot, feedbacks are always welcomed!<br>
+              <a href="TODO">Here is the link to the reddit thread.</a> <br>
+              Just post in the comments.`,
+              "???",`MSG_click_Ooyodo_reddit`,true,true,true );
               break;
             }
-            case "reddit":{
-              displayBubbleMessage(`Thanks a lot, feedbacks are always welcomed!<br>
-                <a href="TODO">Here is the link to the reddit thread.</a> <br>
-                Just post in the comments.`,
-                "???",`MSG_click_Ooyodo_reddit`,true,true,true );
-                break;
-              }
-              case "teasing":{
-                messageList = ["Admiral!! Really?? Do you have nothing better to do?",
-                "Please focus on the mission..."];
-                displayBubbleMessage(getOneMsgRandom(messageList),
-                "pouting",`MSG_click_Ooyodo_teasing`,true,true,true );
-                break;
-              }
-              case "tutorial":{
-                $(document).trigger("start_tutorial");
-                break;
-              }
-
+            case "teasing":{
+              messageList = ["Admiral!! Really?? Do you have nothing better to do?",
+              "Please focus on the mission..."];
+              displayBubbleMessage(getOneMsgRandom(messageList),
+              "pouting",`MSG_click_Ooyodo_teasing`,true,true,true );
+              break;
             }
-          });
-        });
+            case "tutorial":{
+              $(document).trigger("start_tutorial");
+              break;
+            }
 
+          }
+        });
       });
 
-      //create a cookie
-      function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        var expires = "expires="+d.toUTCString();
-        document.cookie = `${cname}=${cvalue};${expires};path=/`;
-      }
+    });
 
-      //get cookie data
-      function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
-        for(var i = 0; i < ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-          }
+    //create a cookie
+    function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires="+d.toUTCString();
+      document.cookie = `${cname}=${cvalue};${expires};path=/`;
+    }
+
+    //get cookie data
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
         }
-        // if the cookie doesn't exist
-        if (cname === "user_quests"){
-          // the empty cookie so the code don't bug if cookies are disabled
-          //  return '{"pendingQuests":["A29","A46","A65","A71","B12","B32","B44","Bd8","Bw7","D21","D23","F36","F42"],"userDecisions":{"B38":"locked","G5":"locked","F51":"locked"},"periodicCompleted":[],"undeterminedQuests":["B38","G5","F51"],"timeStamp":"2017-06-30T23:16:21+09:00"}';
-          return JSON.stringify({pendingQuests:[], userDecisions:{}, periodicCompleted:[], undeterminedQuests:[], timeStamp:moment().format()});
-        } else {
-          return "";
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
         }
       }
+      // if the cookie doesn't exist
+      if (cname === "user_quests"){
+        // the empty cookie so the code don't bug if cookies are disabled
+        //  return '{"pendingQuests":["A29","A46","A65","A71","B12","B32","B44","Bd8","Bw7","D21","D23","F36","F42"],"userDecisions":{"B38":"locked","G5":"locked","F51":"locked"},"undeterminedQuests":["B38","G5","F51"],"timeStamp":"2017-06-30T23:16:21+09:00"}';
+        return JSON.stringify({pendingQuests:[], userDecisions:{}, undeterminedQuests:[], timeStamp:moment().format()});
+      } else {
+        return "";
+      }
+    }

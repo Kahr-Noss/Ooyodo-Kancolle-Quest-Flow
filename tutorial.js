@@ -9,21 +9,24 @@ $(function () {
 
 
   function step_1_openningPanel(){
-    var tutorial = $(`<div id="tuto" style="top:100px; left:100px">
+    var tutorial = $(`<div id="tuto" hidden>
     <div class="closeBtn" id="closeBtn_tuto">X</div>
-    <img id="Ooyodo_tuto" src="files/webpage/Ooyodo.jpg" width="195px" height="195px">
-    <div id="tuto_content"  style="display:inline-block; width:calc(100% - 200px)">
-    <center><p id="tuto_text">
+    <img id="Ooyodo_tuto" src="files/webpage/Ooyodo.jpg" width="195px" height="195px" style="position:absolute; top:0px; left:0px;" >
+    <div id="tuto_content"  style="display:inline-block;">
+    <p id="tuto_text" style="padding:15px; margin-left:200px;">
     Hello, welcome to the Ooyodo Quest Tracker admiral!
     I'll explain to you step by step how to use this application. Follow me!
     </p>
-    <br>
+    <center>
     <button id="tuto_next" style="height:30px; width:80px;">Next =></button>
     </center>
     </div>
     </div>`);
-    $("body").append(tutorial)
-    $("#tuto").hide().show('slow');
+    $("body").append(tutorial);
+
+$("#tuto").width(400).offset({top:100,left:($(window).width() - 400)/2});
+
+    $("#tuto").show('slow');
     closeStep = function(){
       $("#tuto").hide();
       $("#tuto_next").off("click");
@@ -42,7 +45,11 @@ $(function () {
   }
 
   function step_2_acceptCookies(){
-    $("#tuto").show('slow');
+
+
+    $("#tuto").width(600).css("left",`${($(window).width() - 600)/2}px`);
+
+  $("#tuto").show('slow');
     $("#tuto_text").html(`This tracker offer an interactive flowchart with all the quests available in the game.
       There are filters to adapt the content displayed to your needs.
       <br> If you want, I can also calculate your current progression and recording it in your browser's cookies,
@@ -62,7 +69,10 @@ $(function () {
 
 
   function step_3_flowchartPresentation(){
-    $("#tuto").show('slow');
+
+  $("#tuto").width(600).css("left",`${($(window).width() - 600)/2}px`);
+$("#tuto").show('slow');
+
     $("#tuto_text").html(`As you can see, I've already written the flowchart.
     It might have taken me some time, but there was a lot of data to write, sorry.
     <br>
@@ -70,15 +80,17 @@ $(function () {
     the information you want.
     <br>
     Let's tidy it a bit by affecting a progression state to each quest among those three:<br>
+    <hr>
     <div style="text-align:left">
-    <span><img class="quest_state_icon" src="file/webpage/completed.png"></span> Completed: You have already cleared this quest.<br>
-    <span><img class="quest_state_icon" src="file/webpage/pending.png"></span> Pending: This quest is waiting for completion, and is visible in your in-game quest menu.<br>
-    <span><img class="quest_state_icon" src="file/webpage/locked.png"></span>Locked: This quest is unavailable because some of its required quests haven't been completed yet.
+    <div><span><img class="quest_state_icon" src="file/webpage/completed.png" style="float:left;"></span><br><span> &nbsp;<b>Completed:</b> You have already cleared this quest.</span></div><hr>
+    <div><span><img class="quest_state_icon" src="file/webpage/pending.png" style="float:left;"></span><span> &nbsp;<b>Pending:</b> This quest is waiting for completion, and is visible in your in-game quest menu.</span></div><hr>
+    <div><span><img class="quest_state_icon" src="file/webpage/locked.png" style="float:left;"></span><span> &nbsp;<b>Locked:</b> This quest is unavailable because some of its required quests haven't been completed yet.</span></div>
+<hr>
     </div>`);
 
     closeStep = function(){
       $("#tuto").hide();
-      $("#tuto_next").remove();
+      $("#tuto_next").off("click").hide();
     };
 
     $("#tuto_next").click(function(){
@@ -88,6 +100,7 @@ $(function () {
   }
 
   function   step_4_inputPendingQuests(){
+    $("#tuto").width(500).css("left","50px");
     $("#tuto").show('slow');
     $("#tuto_text").html(`Let's firstly input your pending quests, in other words the quests that are waiting to be
     completed in your in-game quest panel. You can easily find their code on the flowchart tab of KC3 viewer.
@@ -106,7 +119,7 @@ $(function () {
       $("#MSG_IPQ_btn_OK").off("click.tutorial_answer");
       $(".square").remove();
     };
-    //TODO changer ca, le boutton est pas encore la quand on cree le event listenner
+
     $(document).on("bubble_displayed", function(e,bubble){
       if(bubble === "MSG_IPQ"){
         $(document).off("bubble_displayed");
@@ -120,7 +133,7 @@ $(function () {
           && inputArray[4] === "B12"
           && inputArray[5] === "B32"
           && inputArray[6] === "B44"
-          && inputArray[7] === "BD8"
+          && inputArray[7] === "BD1"
           && inputArray[8] === "BW7"
           && inputArray[9] === "D21"
           && inputArray[10] === "D23"
@@ -145,7 +158,7 @@ $(function () {
   }
 
   function step_4_2_UnknownQuests(){
-
+  $("#tuto").css("max-width","1000px").css("width","").css("top","").css("left","0px").css("bottom","0px").css("height","195px");
     $("#tuto").show('slow');
     $("#tuto_text").html(`Sometimes, just inputing your current quests isn't enough
     to know all your progression. In that case, I'll ask you to tell me if you completed
@@ -153,7 +166,12 @@ $(function () {
     If you answer "I don't know", I'll consider that you didn't completed them yet. At the end I'll give
     you a list of quests to complete to clarify the state of those unknown quests.<br><br>
     For this tutorial your answers don't matter (it's not your real progression), so click whatever you want!`);
+    $(document).on("bubble_displayed", function(e,bubble){
+      if(bubble === "MSG_ask_quest_state"){
+        $(document).off("bubble_displayed");
     drawSquareAroundElements([$("#MSG_ask_quest_state")]);
+  }
+});
 
     closeStep = function(){
       $("#tuto").hide();
@@ -169,13 +187,13 @@ $(function () {
 
 
   function step_5_startingQuests(){
+    $("#tuto").css("max-width","");
 
     $("#tuto").show('slow');
 
-    $("#tuto_text").html(`Perfect!<br>
-      With all these information, I'm able to deduce your progression in the quest tree.
+    $("#tuto_text").html(`Perfect! With all these information, I'm able to deduce your progression in the quest tree.
       Now, let's update the flochart by removing all the quests you have already completed.
-      <br><br>
+      <br>
       You can type from which quest you want the flowchart to start with in the "starting quests"
       box. As usual, separate the quests by commas. You can check the box "Use pending quests as starter"
       to fill it automatically with the pending quests you have already entered. If you want to ignore your
@@ -267,11 +285,11 @@ $(function () {
 
 
   function step_7_selectingQuests(){
+    $("#tuto").css("left","120px");
 
     $("#tuto").show('slow');
 
-    $("#tuto_text").html(`Good!<br>
-      Now it's way easier to check your progression admiral, but seeing only quests' code is a bit lacking.
+    $("#tuto_text").html(`Good! Now it's way easier to check your progression admiral, but seeing only quests' code is a bit lacking.
       You can select a specific quest to display its information at the bottom of the screen.
       You can do it by clicking on the quest on the flowchart (double click will zoom on it),
       by selecting one of the quest in the list on the left, or by typing the quest's code in the textbox.<br>
@@ -308,10 +326,11 @@ $(function () {
   }
 
   function step_8_QuestRequierments(){
+  //  $("#tuto").css("left","200px").css("top","200px");
+      $("#tuto_next").show();
     $("#tuto").hide().show('slow');
 
-    $("#tuto_text").html(`OK!<br>
-      All the information about this quest are now displayed. You can also hover your cursor on one
+    $("#tuto_text").html(`OK! All the information about this quest are now displayed. You can also hover your cursor on one
       of the flowcahrt's quest to see what you should do to complete it.<br>
       But here is something more interesting: on the right of the quest data, there is a requierments list.
       I wrote here all the stuff you need to obtain in order to complete the selected quest (ship, equipment, maps...)
@@ -326,7 +345,7 @@ $(function () {
 
     closeStep = function(){
       $("#tuto").hide();
-      $("#tuto_next").remove();
+      $("#tuto_next").off("click");
       $(".square").remove();
     };
 
@@ -351,11 +370,10 @@ $(function () {
 
     closeStep = function(){
       $("#tuto").hide();
-      $("#tuto_next").remove();
+      $("#tuto_next").off("click").hide();
       $(".square").remove();
     };
 
-    $("#tuto_content").append($(`<button id="tuto_next" style="height:30px; width:80px;">Next =></button>`));
     $("#tuto_next").click(function(){
       closeStep();
       step_10_openQuestList();
