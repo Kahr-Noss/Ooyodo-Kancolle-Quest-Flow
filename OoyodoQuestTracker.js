@@ -50,7 +50,7 @@ $(function () {
         loadRewardList();
         loadRequiredMapList();
         displayAllQuestBoxes(Object.keys(ALL_QUESTS_LIST));
-
+activateQuestBoxesEventListenners();
         var questCookie = JSON.parse(getCookie('user_quests'));
         console.log(getCookie('user_quests'));
         loadFlowchart();
@@ -999,7 +999,24 @@ $(function () {
         $("#MSG_quest_unlocked").remove();
         ALL_QUEST_STATE = cloneObject(ALL_QUEST_STATE_TMP);
 
-        // affect a function to be runned after the animation is compleetd
+
+        $("#MSG_IPQ_error_msg").text("");
+        //TODO
+        setCookie('user_quests',JSON.stringify(userQuestCookie),365);
+        console.log(userQuestCookie);
+        if (userQuestCookie.undeterminedQuests.length >0){
+          displayBubbleMessage(`Admiral, about those quests that you didn't know the state, you should complete those quests:<br>
+          <span id="MSG_quest_completion_advice_quests">${getBlockingPeriodicQuests().join(', ')}</span><br>
+          Update your progress once you are done.`,
+          "???","MSG_quest_completion_advice",true,false,true,function(){$("#MSG_quest_completion_advice_quests").text($("#MSG_quest_completion_advice_quests").text() + questsUnlocked.join(', '));});
+        }
+
+        //fire event for tutorial_answer
+        if($("#tuto").is(':visible')){
+          $("#tuto").trigger("tutorial_answer");
+        }
+
+        // affect a function to be runned after the animation is completed
         diagramAnimationCompleteFunction = function(){
           $(".QL_questBox").removeClass("pending locked completed");
           Object.keys(ALL_QUEST_STATE).forEach(quest =>{
@@ -1017,21 +1034,7 @@ $(function () {
         }
 
 
-        $("#MSG_IPQ_error_msg").text("");
-        //TODO
-        setCookie('user_quests',JSON.stringify(userQuestCookie),365);
-        console.log(userQuestCookie);
-        if (userQuestCookie.undeterminedQuests.length >0){
-          displayBubbleMessage(`Admiral, about those quests that you didn't know the state, you should complete those quests:<br>
-          <span id="MSG_quest_completion_advice_quests">${getBlockingPeriodicQuests().join(', ')}</span><br>
-          Update your progress once you are done.`,
-          "???","MSG_quest_completion_advice",true,false,true,function(){$("#MSG_quest_completion_advice_quests").text($("#MSG_quest_completion_advice_quests").text() + questsUnlocked.join(', '));});
-        }
 
-        //fire event for tutorial_answer
-        if($("#tuto").is(':visible')){
-          $("#tuto").trigger("tutorial_answer");
-        }
       }
 
     }
@@ -1265,6 +1268,64 @@ $(function () {
         }
       });
     }
+
+function activateQuestBoxesEventListenners(){
+  // set the quest as completed
+  $(".complete_btn, .QL_questBox_complete_btn").click(function(){
+    var id = $(this).attr("id").split('_');
+    var quest = '';
+    if(id[0] === 'FC'){
+      quest = $("#FC_FT_quest_info_quest_code").text();
+    } else if (id[0] === 'QL'){
+      quest = id[3];
+    }
+    if (quest !== ''){
+      setQuestAsCompleted(quest);
+    }
+  });
+
+
+      //show the tips in the bubble message when clicked
+      $(".quest_tips").click(function(){
+        console.log("plop")
+        var quest = $(this).attr("id").split('_')[3];
+        var tipsMsg = ALL_QUESTS_LIST[quest].tips;
+        if(tipsMsg === ""){
+          tipsMsg = `Admiral, there is no tips for the quest ${quest}, sorry.`;
+        } else {
+          tipsMsg = `Tips and avices for quest <b>${quest}</b>:<br>
+          ${tipsMsg.replace(/※/g,"<br>●")}`;
+        }
+        displayBubbleMessage(tipsMsg ,"???", "MSG_tips_quest",false, true, true);
+      });
+
+      $(".QL_selected_checkbox").change(function(){
+        var questBox = $(`#QL_questBox_${$(this).attr('id').split("_")[2]}`);
+        if($(this).is(":checked")){
+          questBox.css("border-width",COLORS.selected.border_width)
+          .css("border-color",COLORS.selected.border_color)
+          .css("margin",12 - COLORS.selected.border_width);
+        } else {
+          //TODO put the right size of border
+          questBox.css("border-width",'2px').css("border-color",'black').css("margin",10);
+        }
+      });
+
+      // on click set all the selected quests  as final quest in the flowchart (will also select the box where the button has been clicked)
+      $(".QL_questBox_goToChart_btn").click(function(e){
+        $(`#QL_selected_${$(this).attr("id").split('_')[3]}`).prop("checked",true).trigger("change");
+        selectedNodes = [];
+        $(".QL_selected_checkbox:checked").each(function(){
+          selectedNodes.push($(this).attr("id").split('_')[2]);
+        });
+        $("#QL").hide();
+        $("#FC").show('fast');
+        $("#FC_RM_ending_quests").val(selectedNodes.join(', ')).trigger("change");
+        buildPartialFlowchart();
+        hightlightQuest();
+      });
+}
+
 
     // display selected quest requirements in the footer
     function displayQuestRequirements(questList){
@@ -1947,24 +2008,6 @@ $(function () {
     });
 
 
-
-
-
-
-    // on doubleclick set it as finalquest in the flowchart
-    $(".QL_questBox_goToChart_btn").click(function(e){
-      $(`#QL_selected_${$(this).attr("id").split('_')[3]}`).prop("checked",true).trigger("change");
-      selectedNodes = [];
-      $(".QL_selected_checkbox:checked").each(function(){
-        selectedNodes.push($(this).attr("id").split('_')[2]);
-      });
-      $("#QL").hide();
-      $("#FC").show('fast');
-      $("#FC_RM_ending_quests").val(selectedNodes.join(', ')).trigger("change");
-      buildPartialFlowchart();
-      hightlightQuest();
-    });
-
     //reset all the research parameters
     $("#QL_RM_reset_search").click(function(){
       $(".QL_RM_display_period, #QL_RM_display_period_all").prop("checked",true);
@@ -1982,49 +2025,13 @@ $(function () {
 
 
 
-    // set the quest as completed
-    $(".complete_btn, .QL_questBox_complete_btn").click(function(){
-      var id = $(this).attr("id").split('_');
-      var quest = '';
-      if(id[0] === 'FC'){
-        quest = $("#FC_FT_quest_info_quest_code").text();
-      } else if (id[0] === 'QL'){
-        quest = id[3];
-      }
-      if (quest !== ''){
-        setQuestAsCompleted(quest);
-      }
-    });
-
-    //show the tips in the bubble message when clicked
-    $(".quest_tips").click(function(){
-      var quest = $(this).attr("id").split('_')[3];
-      var tipsMsg = ALL_QUESTS_LIST[quest].tips;
-      if(tipsMsg === ""){
-        tipsMsg = `Admiral, there is no tips for the quest ${quest}, sorry.`;
-      } else {
-        tipsMsg = `Tips and avices for quest <b>${quest}</b>:<br>
-        ${tipsMsg.replace(/※/g,"<br>●")}`;
-      }
-      displayBubbleMessage(tipsMsg ,"???", "MSG_tips_quest",false, true, true);
-    });
 
     //hide the button after clicking on it
     $(`#FC_FT_quest_info_complete_btn`).click(function(){
       $(this).hide();
     });
 
-    $(".QL_selected_checkbox").change(function(){
-      var questBox = $(`#QL_questBox_${$(this).attr('id').split("_")[2]}`);
-      if($(this).is(":checked")){
-        questBox.css("border-width",COLORS.selected.border_width)
-        .css("border-color",COLORS.selected.border_color)
-        .css("margin",12 - COLORS.selected.border_width);
-      } else {
-        //TODO put the right size of border
-        questBox.css("border-width",'2px').css("border-color",'black').css("margin",10);
-      }
-    });
+
 
 
     // change the diagram size when the window size is changed

@@ -248,7 +248,7 @@ $("#tuto").show('slow');
     $("#tuto").show('slow');
 
     $("#tuto_text").html(`Good!<br>
-      You can see that the fowchart's display just changed to show only the quests
+      You can see that the flowchart's display just changed to show only the quests
       that you haven't completed yet, making it easier to see than earlier.
       <br>
       Let's be even more specific and precise which quests we want to unlock. Just type
@@ -306,10 +306,11 @@ $("#tuto").show('slow');
     };
 
     $('#FC_FT_quest_info_quest_code').on('DOMSubtreeModified',function(){
+
       if ( $("#FC_FT_quest_info_quest_code").text() === "A59"){
         closeStep();
         step_8_QuestRequierments();
-      } else {
+      } else if($("#FC_FT_quest_info_quest_code").text() !== ""){
         step_7_fail();
       }
     });
@@ -317,7 +318,6 @@ $("#tuto").show('slow');
 
 
   function step_7_fail(){
-
     $("#tuto").hide().show('slow');
     $("#tuto_text").html(`Not this quest Admiral!
       I told you to select the quest A59!`
@@ -326,20 +326,41 @@ $("#tuto").show('slow');
   }
 
   function step_8_QuestRequierments(){
-  //  $("#tuto").css("left","200px").css("top","200px");
-      $("#tuto_next").show();
-    $("#tuto").hide().show('slow');
+      $("#tuto").remove();
+      var tutorial = $(`<div id="tuto" hidden>
+      <div class="closeBtn" id="closeBtn_tuto">X</div>
+      <img id="Ooyodo_tuto" src="files/webpage/Ooyodo.jpg" width="195px" height="195px" style="position:absolute; top:0px; left:0px;" >
+      <div id="tuto_content"  style="display:inline-block;">
+      <p id="tuto_text" style="padding:15px; margin-left:200px;">
+      OK! All the information about this quest are now displayed. You can also hover your cursor on one
+        of the flowcahrt's quest to see what you should do to complete it.<br>
+        But here is something more interesting: on the right of the quest data, there is a requierments list.
+        I wrote here all the stuff you need to obtain in order to complete the selected quest (ship, equipment, maps...)
+        considering the quest currently displayed on the flowchart (that's why specifiying the starting quests is important).
+        <br><br>
 
-    $("#tuto_text").html(`OK! All the information about this quest are now displayed. You can also hover your cursor on one
-      of the flowcahrt's quest to see what you should do to complete it.<br>
-      But here is something more interesting: on the right of the quest data, there is a requierments list.
-      I wrote here all the stuff you need to obtain in order to complete the selected quest (ship, equipment, maps...)
-      considering the quest currently displayed on the flowchart (that's why specifiying the starting quests is important).
-      <br><br>
+        You can also right click on multiple quests on the flowchart to add up all their requierments at the same time.<br>
+        To unselect everything, just click on the flowchart background.
+      </p>
+      <center>
+      <button id="tuto_next" style="height:30px; width:80px;">Next =></button>
+      </center>
+      </div>
+      </div>`);
+      $("body").append(tutorial);
 
-      You can also right click on multiple quests on the flowchart to add up all their requierments at the same time.<br>
-      To unselect everything, just click on the flowchart background.`
-    );
+  $("#tuto").width(600).offset({top:100,left:($(window).width() - 600)/2});
+
+      $("#tuto").show('slow');
+      closeStep = function(){
+        $("#tuto").hide();
+        $("#tuto_next").off("click");
+      };
+
+      $("#closeBtn_tuto").click(function(){
+        closeStep();
+        $("#tuto").remove();
+      });
 
     drawSquareAroundElements([$("#FC_FT_quest_requirement")]);
 
@@ -349,7 +370,6 @@ $("#tuto").show('slow');
       $(".square").remove();
     };
 
-    $("#tuto_content").append($(`<button id="tuto_next" style="height:30px; width:80px;">Next =></button>`));
     $("#tuto_next").click(function(){
       closeStep();
       step_9_FlowchartOptions();
@@ -406,6 +426,7 @@ $("#tuto").show('slow');
 
   function step_11_shipRequired(){
     $("#tuto").show('slow');
+    $("#tuto").css("right",'200px').css("left","");
 
     $("#tuto_text").html(`Here is a full list of all the quests in the game.
       On the right there is a search menu that will help you to find what you need using different filters.<br>
@@ -447,7 +468,7 @@ $("#tuto").show('slow');
   }
 
   function step_12_setQuestAsCompleted(){
-
+  $("#tuto").css("right",'200px').css("left","150px").css("bottom","0px").css("top","");
     $("#tuto").show('slow');
 
     $("#tuto_text").html(`Do you see?<br>
@@ -596,8 +617,8 @@ $("#tuto").show('slow');
 
       closeStep = function(){};
 
-      $("#tuto_content").append($(`<button id="tuto_end" style="height:30px; width:80px;">Close</button>`));
-      $("#tuto_end").click(function(){
+      $("#tuto_next").text("Close").show();
+      $("#tuto_next").click(function(){
         $("#tuto").remove();
       });
     }

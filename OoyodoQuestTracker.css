@@ -258,7 +258,7 @@ cursor: pointer;
   z-index:50;
   position: fixed;
   background-color: orange;
-
+min-height: 195px;
 vertical-align: top;
 }
 
