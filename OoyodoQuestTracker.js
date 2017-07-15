@@ -60,7 +60,7 @@ activateQuestBoxesEventListenners();
         timeVerificationLoop(questCookie.timeStamp);
 
         displayBubbleMessage(`<span id="MSG_welcome_progress">Flowchart generation complete!</span>`
-        ,"similing","MSG_welcome",true, true, true, function(){
+        ,"complete","MSG_welcome",true, true, true, function(){
           $("#MSG_welcome_progress").text("Flowchart generation complete!");
         });
 
@@ -406,7 +406,7 @@ activateQuestBoxesEventListenners();
         if(questsUnlocked.length > 0){
           displayBubbleMessage(`Admiral, you have unlocked the following quests:<br>
             <span id="MSG_quest_unlocked_quests">${questsUnlocked.join(', ')}</span>`,
-            "???","MSG_quest_unlocked",true,false,true,function(){$("#MSG_quest_unlocked_quests").text(`${$("#MSG_quest_unlocked_quests").text()}, ${questsUnlocked.join(', ')}`);}
+            "welcome","MSG_quest_unlocked",true,false,true,function(){$("#MSG_quest_unlocked_quests").text(`${$("#MSG_quest_unlocked_quests").text()}, ${questsUnlocked.join(', ')}`);}
           );
         }
         updateQuestListDisplay(visibleQuests);
@@ -468,7 +468,7 @@ activateQuestBoxesEventListenners();
         setCookie('user_quests',JSON.stringify(questsCookie),365);
         displayBubbleMessage(`Admiral, you have unlocked the following quests:<br>
           <span id="MSG_quest_unlocked_quests">${unlockedQuest}</span>`,
-          "???","MSG_quest_unlocked",true,false,true,function(){$("#MSG_quest_unlocked_quests").text(`${$("#MSG_quest_unlocked_quests").text()}, ${unlockedQuest}`);}
+          "welcome","MSG_quest_unlocked",true,false,true,function(){$("#MSG_quest_unlocked_quests").text(`${$("#MSG_quest_unlocked_quests").text()}, ${unlockedQuest}`);}
         );
       };
 
@@ -1008,7 +1008,7 @@ activateQuestBoxesEventListenners();
           displayBubbleMessage(`Admiral, about those quests that you didn't know the state, you should complete those quests:<br>
           <span id="MSG_quest_completion_advice_quests">${getBlockingPeriodicQuests().join(', ')}</span><br>
           Update your progress once you are done.`,
-          "???","MSG_quest_completion_advice",true,false,true,function(){$("#MSG_quest_completion_advice_quests").text($("#MSG_quest_completion_advice_quests").text() + questsUnlocked.join(', '));});
+          "explaining","MSG_quest_completion_advice",true,false,true,function(){$("#MSG_quest_completion_advice_quests").text($("#MSG_quest_completion_advice_quests").text() + questsUnlocked.join(', '));});
         }
 
         //fire event for tutorial_answer
@@ -1160,7 +1160,7 @@ activateQuestBoxesEventListenners();
 
       <input type="checkbox" class="QL_selected_checkbox" id="QL_selected_${questCode}">
       <b> ${questCode}</b>
-      <span><img class="quest_state_icon" src="file/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
+      <span><img class="quest_state_icon" src="files/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
       <button type="button" class="QL_questBox_goToChart_btn" id='QL_goToChart_btn_${questCode}'>See on flowchart</button>
       <button type="button" class="QL_questBox_complete_btn" id='QL_complete_btn_${questCode}'>Set as completed</button>
 
@@ -1222,14 +1222,14 @@ activateQuestBoxesEventListenners();
       var questBox = $(`#QL_questBox_${quest}`);
       var state = ALL_QUEST_STATE[quest];
       questBox.removeClass("pending completed locked").addClass(state);
-      questBox.find(".quest_state_icon").attr("src",`file/webpage/${state}.png`);
+      questBox.find(".quest_state_icon").attr("src",`files/webpage/${state}.png`);
       if(state === 'pending'){
         $(`#QL_complete_btn_${quest}`).css('visibility', 'visible');
       } else {
         $(`#QL_complete_btn_${quest}`).css('visibility', 'hidden');
       }
       var icon = myDiagram.findNodeForKey(quest).findObject("STATE_ICON");
-      icon.source = questStateCalculated ? `file/webpage/${ALL_QUEST_STATE[quest]}.png` : "file/webpage/transparent.png";
+      icon.source = questStateCalculated ? `files/webpage/${ALL_QUEST_STATE[quest]}.png` : "files/webpage/transparent.png";
     }
 
     // display quest data in the footer
@@ -1237,7 +1237,7 @@ activateQuestBoxesEventListenners();
       var quest = ALL_QUESTS_LIST[questCode];
       var color = getQuestColor(questCode);
       $('#FC_FT .cellDiv').css('background', color).css('color',tinycolor(color).isLight() ? "#000000" : "#ffffff");
-      $("#FC_FT_quest_info_state_icon").attr("src",`file/webpage/${ALL_QUEST_STATE[questCode]}.png`);
+      $("#FC_FT_quest_info_state_icon").attr("src",`files/webpage/${ALL_QUEST_STATE[questCode]}.png`);
       $('#FC_FT_quest_info_quest_code').text(questCode);
       $('#FC_FT_quest_info_name_Japanese').text(quest.Jp);
       $('#FC_FT_quest_info_name_English').text(quest.En);
@@ -1296,7 +1296,7 @@ function activateQuestBoxesEventListenners(){
           tipsMsg = `Tips and avices for quest <b>${quest}</b>:<br>
           ${tipsMsg.replace(/※/g,"<br>●")}`;
         }
-        displayBubbleMessage(tipsMsg ,"???", "MSG_tips_quest",false, true, true);
+        displayBubbleMessage(tipsMsg ,"explaining", "MSG_tips_quest",false, true, true);
       });
 
       $(".QL_selected_checkbox").change(function(){
@@ -1856,7 +1856,7 @@ function activateQuestBoxesEventListenners(){
         <button type="button" id='MSG_IPQ_btn_OK' style="width:40%;">OK</button>
         <button type="button" id='MSG_IPQ_btn_cancel' style="width:40%;">Cancel</button>
         </center>`
-        ,"smiling","MSG_IPQ",false, true, false);
+        ,"complete","MSG_IPQ",false, true, false);
 
         $('#MSG_IPQ_txt_area').focus();
 
@@ -2050,7 +2050,7 @@ function activateQuestBoxesEventListenners(){
         <button type="button" class="MSG_click_Ooyodo_btn" value="reddit">I would like to make some feedback.</button>
         <button type="button" class="MSG_click_Ooyodo_btn" value="tutorial">Can you explain me again the application?</button>
         <button type="button" class="MSG_click_Ooyodo_btn" value="teasing">Just teasing you...</button>`,
-        "smiling",`MSG_click_Ooyodo`,true,true,true
+        "welcome",`MSG_click_Ooyodo`,true,true,true
       );
 
       $(".MSG_click_Ooyodo_btn").click(function(){
@@ -2060,16 +2060,16 @@ function activateQuestBoxesEventListenners(){
             var blockingQuests = getBlockingPeriodicQuests().join(', ');
             if (!questStateCalculated){
               displayBubbleMessage(`Admiral... You didn't asked me to track your progression so I have no clue...`,
-              "disappointed",`MSG_click_Ooyodo_advice`,true,true,true );
+              "shamed",`MSG_click_Ooyodo_advice`,true,true,true );
             } else if (blockingQuests !== ""){
               displayBubbleMessage(`Oh yes, there are some periodic quests you still need to complete...<br>
                 ${blockingQuests}<br>
                 Please set each quest as completed when you have done it so I can finish your progress calculation.`,
-                "???",`MSG_click_Ooyodo_advice`,true,true,true
+                "explaining",`MSG_click_Ooyodo_advice`,true,true,true
               );
             } else {
               displayBubbleMessage(`You don't need to do anything. I've recorded everything from your progression.`,
-              "???",`MSG_click_Ooyodo_advice`,true,true,true );
+              "complete",`MSG_click_Ooyodo_advice`,true,true,true );
             }
             break;
           }
@@ -2077,14 +2077,14 @@ function activateQuestBoxesEventListenners(){
             displayBubbleMessage(`Thanks a lot, feedbacks are always welcomed!<br>
               <a href="TODO">Here is the link to the reddit thread.</a> <br>
               Just post in the comments.`,
-              "???",`MSG_click_Ooyodo_reddit`,true,true,true );
+              "welcome",`MSG_click_Ooyodo_reddit`,true,true,true );
               break;
             }
             case "teasing":{
               messageList = ["Admiral!! Really?? Do you have nothing better to do?",
               "Please focus on the mission..."];
               displayBubbleMessage(getOneMsgRandom(messageList),
-              "pouting",`MSG_click_Ooyodo_teasing`,true,true,true );
+              "bored",`MSG_click_Ooyodo_teasing`,true,true,true );
               break;
             }
             case "tutorial":{

@@ -106,9 +106,9 @@ button:focus {
 
 #Ooyodo{
   height:195px;
-  width:195px;
+  width:143px;
   position:absolute;
-  right:0px;
+  right:26px;
   bottom: 0px;
   background-color:rgba(0, 0, 0, 0);
   z-index: 10;
