@@ -3,6 +3,10 @@ body {
   margin:0;
 }
 
+button{
+  cursor: pointer;
+}
+
 #background{
   background: linear-gradient(#b4e5e8 , #4ca7ad);
   position: fixed;
@@ -24,7 +28,7 @@ body {
   z-index:10;
 }
 
-.HD_main_tab_btn{
+.HD_main_tab_btn, .HD_option_btn{
   height: 100%;
   width: 250px;
   float: right;
@@ -39,21 +43,6 @@ body {
   background-image:url(files/webpage/hexagon_button_HD.png);
 }
 
-#HD_option_btn{
-  height: 100%;
-  width: 60px;
-  float: right;
-  position: relative;
-}
-
-.HD_option_btn{
-  height: 60px;
-  width: 60px;
-  position:absolute;
-  background-color:rgba(0, 0, 0, 0);
-  background-repeat: no-repeat;
-  cursor:pointer;
-}
 
 /*    MENU CSS    */
 
@@ -100,15 +89,26 @@ body {
   background-repeat: no-repeat;
 }
 
+#QL_display_mode{
+    position: fixed;
+    top:70px;
+    left:0px;
+    width: calc(100% - 195px);
+    height:20px;
+    background-color: #0c938f;
+    color: #ffffff;
+    z-index: 40;
+}
+
 button:focus {
    outline: none;
  }
 
 #Ooyodo{
-  height:195px;
-  width:143px;
+  height:266px;
+  width:195px;
   position:absolute;
-  right:26px;
+  right:0px;
   bottom: 0px;
   background-color:rgba(0, 0, 0, 0);
   z-index: 10;
@@ -117,6 +117,16 @@ button:focus {
 #Ooyodo:hover{
 cursor: pointer;
 }
+
+#Ooyodo_text{
+  color:#ffffff;
+  z-index: 40;
+  position: fixed;
+  bottom: 10px;
+  right: 5px;
+  pointer-events: none;
+}
+
 
 /*    FOOTER CSS    */
 
@@ -167,6 +177,11 @@ cursor: pointer;
   left:0px;
 }
 
+#FC_FT_select_quest_list{
+  width:100%;
+  background-color: #3a3a3a;
+}
+
 .range_indicator{
   width:30px;
   display: inline-block;
@@ -196,8 +211,8 @@ cursor: pointer;
 #QL_quest_boxes{
   width: calc(100% - 195px);
   position: absolute;
-  top: 60px;
-  height: calc(100% - 60px);
+  top: 80px;
+  height: calc(100% - 80px);
 
   display:flex;
   flex-wrap:wrap;
@@ -251,15 +266,26 @@ cursor: pointer;
    text-decoration: underline;
 }
 
+.QL_selected_checkbox{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
+
 
 /*    TUTORIAL      */
 
 #tuto{
   z-index:50;
   position: fixed;
-  background-color: orange;
+  background-color: #3a3a3a;
 min-height: 195px;
 vertical-align: top;
+color: #ffffff;
+border: 5px solid #0c938f;
 }
 
 .square{
@@ -267,14 +293,51 @@ vertical-align: top;
   border: dotted 5px #f00;
   z-index:100;
   position:fixed;
+   animation: borderBlink 1s step-end infinite;
 }
+
+@keyframes borderBlink {
+    from, to {
+        border-color: transparent
+    }
+    50% {
+        border-color: #f00
+    }
+}
+
+#Ooyodo_tuto{
+  height:266px;
+  width:195px;
+  position:absolute;
+  left:0px;
+  bottom:0px;
+  background-color:rgba(0, 0, 0, 0);
+  z-index: 10;
+  pointer-events: none;
+}
+
+#closeBtn_tuto{
+position:absolute;
+top:0px;
+right:5px;
+color:#b8b8b8;
+font: 15px "Arial Black", sans-serif;
+cursor: pointer;
+padding-left: 5px;
+padding-right: 5px;
+}
+
+#closeBtn_tuto:hover{
+  color:#ffffff;
+}
+
 
 /* ========== SPEECH BUBBLES ============= */
 
 
 .bubble {
   position:absolute;
-  bottom: 210px;
+  bottom: 280px;
   right:50px;
   width:250px;
   padding:15px;
@@ -295,6 +358,10 @@ vertical-align: top;
   /* reduce the damage in FF3.0 */
   display:block;
   width:0;
+}
+
+.MSG_click_Ooyodo_btn{
+  width: 100%;
 }
 
 /* ===========================    CLOSING BUTTON    =========================*/

@@ -12,9 +12,7 @@
   <div id="HD" style="background-image:url(files/webpage/header_background.jpg);">
     <img src="files/webpage/logo_kancolle.png" style="width:63px; height:60px;">
     <img src="files/webpage/header_title.png">
-    <div id="HD_option_btn">
-    <button class="HD_option_btn" value="IPQ" style="background-image:url(files/webpage/IPQ_icon.png); top:0px; right:0px;"></button>
-</div>
+    <button class="HD_option_btn" value="IPQ" style="font-size:25px">Calculate progress</button>
     <button class="HD_main_tab_btn" value="QL">Quest List</button>
     <button class="HD_main_tab_btn" value="FC">Flowchart</button>
 
@@ -32,8 +30,8 @@
       <br>
       <input type="text" id="FC_RM_starting_quests" onfocus="this.select();">
       <br><br>
-      <input type="checkbox" id="FC_RM_use_pending_quests"> &nbsp;Use pending quests as starter.
-      <br><input type="checkbox" id="FC_RM_use_periodic_quests" checked> &nbsp;Include periodic quests
+      <input type="checkbox" id="FC_RM_use_pending_quests"> &nbsp;Use pending quests
+      <br><input type="checkbox" id="FC_RM_use_periodic_quests" checked> &nbsp;Show periodic quests
   <br><hr>
       Ending quests:
       <br>
@@ -69,7 +67,7 @@
         <span style="color:#ffffff">Search a quest:<span>
         <br>
         <input type="text" id="FC_FT_search_Quest" style="width:96%;"><br>
-        <select id="FC_FT_select_quest_list" size='8' style="width:100%;"></select>
+        <select id="FC_FT_select_quest_list" size='8'></select>
       </div>
       <div class="cellDiv" style="width:calc((100% - 400px) * 0.1); height:75%;  top:0px; left:100px;">
         <div class="centeredContent" id="FC_FT_quest_info_quest_code"></div>
@@ -87,23 +85,23 @@
         <div class="centeredContent" id="FC_FT_quest_info_content"></div>
         <button type="button" class="quest_tips" id=''>+</button>
       </div>
-      <div class="cellDiv" style="width:calc((100% - 400px) * 0.2); height:25%;  top:75%; left:100px;">
+      <div class="cellDiv" style="width:calc((100% - 400px) * 0.3); height:25%;  top:75%; left:100px;">
         <div class="centeredContent" id="FC_FT_quest_info_ressources"></div>
       </div>
       <div class="cellDiv" style="width:calc((100% - 400px) * 0.3); height:75%;  top:0px; left:calc((100% - 400px) * 0.7 + 100px);">
         <div class="centeredContent" id="FC_FT_quest_info_reward"></div>
       </div>
-      <div class="cellDiv" style="width:calc((100% - 400px) * 0.4); height:25%;  top:75%; left:calc((100% - 400px) * 0.2 + 100px);">
+      <div class="cellDiv" style="width:calc((100% - 400px) * 0.35); height:25%;  top:75%; left:calc((100% - 400px) * 0.3 + 100px);">
         <div class="centeredContent" id="FC_FT_quest_info_requires"></div>
       </div>
-      <div class="cellDiv" style="width:calc((100% - 400px) * 0.4); height:25%;  top:75%; left:calc((100% - 400px) * 0.6 + 100px);">
+      <div class="cellDiv" style="width:calc((100% - 400px) * 0.35); height:25%;  top:75%; left:calc((100% - 400px) * 0.65 + 100px);">
         <div class="centeredContent" id="FC_FT_quest_info_unlocks"></div>
       </div>
 <div id="FC_FT_ribbon_support" style="position:absolute; width:20px; height:20px;  top:0px; right:300px; "></div>
 
 
       <div id="FC_FT_quest_requirement" style="position:absolute; width:300px; height:100%;  top:0px; right:0px; color:#ffffff; background-color:rgba(0, 0, 0, 0); ">
-        <center>Requirements</center>
+        <b><center>REQUIREMENTS</center></b>
         <div id="FC_FT_quest_requirement_list" style="overflow:auto;padding-left:15px;">
         </div>
       </div>
@@ -119,13 +117,13 @@
       Choose a search method:
       <br>
       <select id="QL_RM_select_search_method">
-        <option value="quest_code">By quest code</option>
+        <option value="quest_code">By code</option>
         <option value="ship_required">By ship required</option>
         <option value="reward">By reward</option>
         <option value="map_required">By map / expedition</option>
           <option disabled>=== Filters ===</option>
-        <option value="state">By quest state</option>
-        <option value="period">By quest period</option>
+        <option value="state">By state</option>
+        <option value="period">By period</option>
       </select>
       <br><br>
 
@@ -175,17 +173,19 @@
         <i><br>  Choose the perdiod(s) of displayed quests.
         <br>(This settings will remain with other search methods)</i>
       </div>
-      <br>
-      <span>State displayed:<br><b><span id="QL_RM_displayed_state">All</span></b></span>
-      <br><br>
-      <span>Period diplayed:<br><b><span id="QL_RM_displayed_period">All</span></b></span>
-      <button type="button" id='QL_RM_reset_search' style="bottom:225px;">Clear search parameters</button>
-      <button type="button" id='QL_RM_reset_selection' style="bottom:195px;">Unselect all quests</button>
+
+      <button type="button" id='QL_RM_reset_search' style="bottom:310px;">Clear search parameters</button>
+      <button type="button" id='QL_RM_reset_selection' style="bottom:280px;">Unselect all quests</button>
+    </div>
+    <div id="QL_display_mode" class="centeredContent">
+      <span>State displayed: &nbsp; <b><span id="QL_displayed_state">All</span></b></span> &nbsp; &nbsp; &nbsp;
+      <span>Period displayed: &nbsp; <b><span id="QL_displayed_period">All</span></b></span>
     </div>
   </div>
 
   <!--  the little Ooyodo on right menus  -->
         <img id="Ooyodo" src="files/webpage/Ooyodo/welcome.png"></img>
+        <span id="Ooyodo_text">Click<br>on me!</span>
 
   <!--  the div containing the messages  -->
 <div id="BBL"></div>

@@ -185,7 +185,7 @@ activateQuestBoxesEventListenners();
       myDiagram.linkTemplate =
       $(go.Link,  // the whole link panel
         new go.Binding("points").makeTwoWay(),
-        { curve: go.Link.None , toShortLength: 13, curviness: 1 },
+        { curve: go.Link.None , toShortLength: 13, curviness: 1 , layerName: "Background"},
         $(go.Shape,  // the link shape
           { stroke: "#000000", strokeWidth:4},
           new go.Binding("stroke", "isHighlighted",
@@ -202,13 +202,7 @@ activateQuestBoxesEventListenners();
 
       //event listenner on click on the background to unselect all
       myDiagram.click = function(e) {
-        selectedNodes = [];
-        myDiagram.startTransaction("no highlighteds");
-        myDiagram.clearHighlighteds();
-        myDiagram.nodes.each(function(n) {
-          updateNodeDisplay(n, getQuestColor(n.data.key),"default", ALL_QUESTS_LIST[n.data.key].period);
-        });
-        myDiagram.commitTransaction("no highlighteds");
+        clearHighlights();
       };
 
       // event listenner that highlight on click on a node
@@ -346,6 +340,16 @@ activateQuestBoxesEventListenners();
         });
       }
     }
+
+function clearHighlights(){
+  selectedNodes = [];
+  myDiagram.startTransaction("no highlighteds");
+  myDiagram.clearHighlighteds();
+  myDiagram.nodes.each(function(n) {
+    updateNodeDisplay(n, getQuestColor(n.data.key),"default", ALL_QUESTS_LIST[n.data.key].period);
+  });
+  myDiagram.commitTransaction("no highlighteds");
+}
 
     // change the state of a quest and update the unlocked ones
     function setQuestAsCompleted(quest){
@@ -742,7 +746,7 @@ activateQuestBoxesEventListenners();
         } else {
           // if no problem, close the input bubble and proceed the next calculations
 
-
+clearHighlights();
           completeRemainingQuestsLoop(function(){
             closeBubbleMessage($("#MSG_IPQ"));
             questStateCalculated = true;
@@ -1001,9 +1005,9 @@ activateQuestBoxesEventListenners();
 
 
         $("#MSG_IPQ_error_msg").text("");
-        //TODO
+
         setCookie('user_quests',JSON.stringify(userQuestCookie),365);
-        console.log(userQuestCookie);
+
         if (userQuestCookie.undeterminedQuests.length >0){
           displayBubbleMessage(`Admiral, about those quests that you didn't know the state, you should complete those quests:<br>
           <span id="MSG_quest_completion_advice_quests">${getBlockingPeriodicQuests().join(', ')}</span><br>
@@ -1030,13 +1034,10 @@ activateQuestBoxesEventListenners();
           if (questStateCalculated){
             $("#FC_RM_use_pending_quests").prop("checked",true).trigger("change");
           }
+          $("#FC_RM_ending_quests").val("");
           buildPartialFlowchart();
         }
-
-
-
       }
-
     }
 
     // return the quests that require the completion of a periodic quest to became pending
@@ -1156,8 +1157,7 @@ activateQuestBoxesEventListenners();
       var color = getQuestColor(questCode);
       return `<div class="QL_questBox ${quest.period}" id='QL_questBox_${questCode}' style="background-color:${color}; color:${tinycolor(color).isLight() ? "#000000" : "#ffffff"};">
       <div class="cellDiv" style=" height:40px;  top:0px; left:0px; width: calc(100% - 40px); padding-right:40px; line-height:40px; overflow-y:hidden;">
-
-
+ &nbsp;
       <input type="checkbox" class="QL_selected_checkbox" id="QL_selected_${questCode}">
       <b> ${questCode}</b>
       <span><img class="quest_state_icon" src="files/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
@@ -1173,9 +1173,9 @@ activateQuestBoxesEventListenners();
       </div>
       </div>
 
-      <div class="cellDiv" style="width:100%; height:123px;  top:115px; left:0px; position:relative">
+      <div class="cellDiv" style="width:100%; height:123px;  top:115px; left:0px; position:relative;">
 
-      <div class="centeredContent">${addShipImageToContent(quest)}</div>
+      <div class="centeredContent" style="padding:5px;">${addShipImageToContent(quest)}</div>
       <button type="button" class="quest_tips" id='QL_quest_tips_${questCode}'>+</button>
       </div>
 
@@ -1243,7 +1243,7 @@ activateQuestBoxesEventListenners();
       $('#FC_FT_quest_info_name_English').text(quest.En);
       $('#FC_FT_quest_info_content').html(addShipImageToContent(quest));
       addShipNameHoveringEvents($('#FC_FT_quest_info_content'));
-      $('#FC_FT_quest_info_ressources').text(`${quest.ressources.F} / ${quest.ressources.A} / ${quest.ressources.S} / ${quest.ressources.B}`);
+      $('#FC_FT_quest_info_ressources').html(`<span><img class="reward_icon" src="files/webpage/game_icons/Fuel.png"></span> &nbsp;${quest.ressources.F} / <span><img class="reward_icon" src="files/webpage/game_icons/Ammo.png"></span> &nbsp;${quest.ressources.A} / <span><img class="reward_icon" src="files/webpage/game_icons/Steel.png"></span> &nbsp;${quest.ressources.S} / <span><img class="reward_icon" src="files/webpage/game_icons/Bauxite.png"></span> &nbsp;${quest.ressources.B}`);
       $('#FC_FT_quest_info_reward').html(parseRewardObject(quest.reward));
       $('#FC_FT_quest_info_requires').html(((quest.requires.length !== 0) ? `Requires: ${quest.requires.join(", ")}` : ''));
       $('#FC_FT_quest_info_unlocks').html(((quest.unlocks.length !== 0) ? `Unlocks: ${quest.unlocks.join(", ")}` : ''));
@@ -1291,12 +1291,13 @@ function activateQuestBoxesEventListenners(){
         var quest = $(this).attr("id").split('_')[3];
         var tipsMsg = ALL_QUESTS_LIST[quest].tips;
         if(tipsMsg === ""){
-          tipsMsg = `Admiral, there is no tips for the quest ${quest}, sorry.`;
+            displayBubbleMessage(`Admiral, there is no tips for the quest ${quest}, sorry.` ,"shamed", "MSG_tips_quest",false, true, true);
         } else {
           tipsMsg = `Tips and avices for quest <b>${quest}</b>:<br>
           ${tipsMsg.replace(/※/g,"<br>●")}`;
+            displayBubbleMessage(tipsMsg ,"explaining", "MSG_tips_quest",false, true, true);
         }
-        displayBubbleMessage(tipsMsg ,"explaining", "MSG_tips_quest",false, true, true);
+
       });
 
       $(".QL_selected_checkbox").change(function(){
@@ -1306,8 +1307,7 @@ function activateQuestBoxesEventListenners(){
           .css("border-color",COLORS.selected.border_color)
           .css("margin",12 - COLORS.selected.border_width);
         } else {
-          //TODO put the right size of border
-          questBox.css("border-width",'2px').css("border-color",'black').css("margin",10);
+          questBox.css("border-width",'3px').css("border-color",'black').css("margin",10);
         }
       });
 
@@ -1470,9 +1470,9 @@ function activateQuestBoxesEventListenners(){
         });
       });
 
-      $("#QL_RM_displayed_state").text(displayedState.length === 3 ? "All" : displayedState);
-      $("#QL_RM_displayed_period").text(displayedPeriod.length === 5 ? "All" :
-      displayedPeriod.length === 0 ? "None" : formatTextLineBreak(displayedPeriod.toString().replace(/,/g,", "),25) );
+      $("#QL_displayed_state").text(displayedState.length === 3 ? "All" : displayedState.join(", "));
+      $("#QL_displayed_period").text(displayedPeriod.length === 5 ? "All" :
+      displayedPeriod.length === 0 ? "None" : displayedPeriod.join(", "));
     }
 
     // change the size of the flowchart
@@ -1584,7 +1584,7 @@ function activateQuestBoxesEventListenners(){
 
     // change the display of Ooyodo
     function changeOoyodoImage(image){
-      //TODO
+      $("#Ooyodo").attr("src",`files/webpage/Ooyodo/${image}.png`);
     }
 
     //   *******    TEXT MODIFICATIONS   **********
@@ -1848,7 +1848,7 @@ function activateQuestBoxesEventListenners(){
     $(".HD_option_btn").click(function () {
 
       if($(this).val() === "IPQ"){
-        displayBubbleMessage(`<center><textarea id="MSG_IPQ_txt_area" rows="8" cols="22">A29, A46, A65, A71, B12, B32, B44, Bd1, Bw7, D21, D23, F36, F42</textarea>
+        displayBubbleMessage(`<center><textarea id="MSG_IPQ_txt_area" rows="8" cols="22">A42,A65,B53,B62,F25,Bw1</textarea>
         <br>  Type <strong>ALL</strong> your pending quests code separated by commas.
         <br>
         <span id="MSG_IPQ_error_msg" style="color:red;"></span>
@@ -1921,7 +1921,7 @@ function activateQuestBoxesEventListenners(){
           } else {
             return ALL_QUESTS_LIST[quest].period === "once";
           }
-        }).toString()).prop("disabled",true);
+        }).join(", ")).prop("disabled",true);
       } else {
         $("#FC_RM_starting_quests").prop("disabled",false).focus();
       }

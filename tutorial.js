@@ -10,8 +10,8 @@ $(function () {
 
   function step_1_openningPanel(){
     var tutorial = $(`<div id="tuto" hidden>
-    <div class="closeBtn" id="closeBtn_tuto">X</div>
-    <img id="Ooyodo_tuto" src="files/webpage/Ooyodo.jpg" width="195px" height="195px" style="position:absolute; top:0px; left:0px;" >
+    <div id="closeBtn_tuto">X</div>
+    <img id="Ooyodo_tuto" src="files/webpage/Ooyodo/welcome.png">
     <div id="tuto_content"  style="display:inline-block;">
     <p id="tuto_text" style="padding:15px; margin-left:200px;">
     Hello, welcome to the Ooyodo Quest Tracker admiral!
@@ -23,7 +23,6 @@ $(function () {
     </div>
     </div>`);
     $("body").append(tutorial);
-
 $("#tuto").width(400).offset({top:100,left:($(window).width() - 400)/2});
 
     $("#tuto").show('slow');
@@ -48,7 +47,7 @@ $("#tuto").width(400).offset({top:100,left:($(window).width() - 400)/2});
 
 
     $("#tuto").width(600).css("left",`${($(window).width() - 600)/2}px`);
-
+  $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/smiling.png`);
   $("#tuto").show('slow');
     $("#tuto_text").html(`This tracker offer an interactive flowchart with all the quests available in the game.
       There are filters to adapt the content displayed to your needs.
@@ -71,6 +70,7 @@ $("#tuto").width(400).offset({top:100,left:($(window).width() - 400)/2});
   function step_3_flowchartPresentation(){
 
   $("#tuto").width(600).css("left",`${($(window).width() - 600)/2}px`);
+    $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/explaining.png`);
 $("#tuto").show('slow');
 
     $("#tuto_text").html(`As you can see, I've already written the flowchart.
@@ -82,9 +82,9 @@ $("#tuto").show('slow');
     Let's tidy it a bit by affecting a progression state to each quest among those three:<br>
     <hr>
     <div style="text-align:left">
-    <div><span><img class="quest_state_icon" src="file/webpage/completed.png" style="float:left;"></span><br><span> &nbsp;<b>Completed:</b> You have already cleared this quest.</span></div><hr>
-    <div><span><img class="quest_state_icon" src="file/webpage/pending.png" style="float:left;"></span><span> &nbsp;<b>Pending:</b> This quest is waiting for completion, and is visible in your in-game quest menu.</span></div><hr>
-    <div><span><img class="quest_state_icon" src="file/webpage/locked.png" style="float:left;"></span><span> &nbsp;<b>Locked:</b> This quest is unavailable because some of its required quests haven't been completed yet.</span></div>
+    <div><span><img class="quest_state_icon" src="files/webpage/completed.png" style="float:left;"></span><br><span> &nbsp;<b>Completed:</b> You have already cleared this quest.</span></div><hr>
+    <div><span><img class="quest_state_icon" src="files/webpage/pending.png" style="float:left;"></span><span> &nbsp;<b>Pending:</b> This quest is waiting for completion, and is visible in your in-game quest menu.</span></div><hr>
+    <div><span><img class="quest_state_icon" src="files/webpage/locked.png" style="float:left;"></span><span> &nbsp;<b>Locked:</b> This quest is unavailable because some of its required quests haven't been completed yet.</span></div>
 <hr>
     </div>`);
 
@@ -101,6 +101,7 @@ $("#tuto").show('slow');
 
   function   step_4_inputPendingQuests(){
     $("#tuto").width(500).css("left","50px");
+      $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/complete.png`);
     $("#tuto").show('slow');
     $("#tuto_text").html(`Let's firstly input your pending quests, in other words the quests that are waiting to be
     completed in your in-game quest panel. You can easily find their code on the flowchart tab of KC3 viewer.
@@ -110,7 +111,7 @@ $("#tuto").show('slow');
     The case and spacing doesn't matter, I'll always be able to understand what you type, Admiral.
     <br><br>
     For this tutorial, let's input the following quests (you can copy/paste them): <br>
-    //TODO      A29, A46, A65, A71, B12, B32, B44, Bd8, Bw7, D21, D23, F36, F42<br>
+  A42, A65, B53, B62, F25, Bw1<br>
     Click on OK when you are done.`);
     drawSquareAroundElements([$(".HD_option_btn[value='IPQ']")]);
 
@@ -125,22 +126,10 @@ $("#tuto").show('slow');
         $(document).off("bubble_displayed");
 
         $("#MSG_IPQ_btn_OK").on("click.tutorial_answer", function(){
-          var inputArray = $("#MSG_IPQ_txt_area").val().toUpperCase().replace(/\s/g, '').split(',').sort();
-          if (inputArray[0] === "A29"
-          && inputArray[1] === "A46"
-          && inputArray[2] === "A65"
-          && inputArray[3] === "A71"
-          && inputArray[4] === "B12"
-          && inputArray[5] === "B32"
-          && inputArray[6] === "B44"
-          && inputArray[7] === "BD1"
-          && inputArray[8] === "BW7"
-          && inputArray[9] === "D21"
-          && inputArray[10] === "D23"
-          && inputArray[11] === "F36"
-          && inputArray[12] === "F42"){
+          if ($("#FC_RM_starting_quests").val() === "A42, A65, B53, B62, F25, Bw1"){
             closeStep();
-            step_4_2_UnknownQuests();
+            step_5_startingQuests();
+          //  step_4_2_UnknownQuests();
           } else {
             step_4_fail();
           }
@@ -151,14 +140,16 @@ $("#tuto").show('slow');
 
   function step_4_fail(){
     $("#tuto").hide().show('slow');
+      $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/bored.png`);
     $("#tuto_text").html(`That's not what I told you!
     Please stay focused Admiral and type the following quests in the box:<br>
-    A29, A46, A65, A71, B12, B32, B44, Bd8, Bw7, D21, D23, F36, F42<br>
+    A42, A65, B53, B62, F25, Bw1<br>
     Click on OK when you are done.`);
   }
 
   function step_4_2_UnknownQuests(){
   $("#tuto").css("max-width","1000px").css("width","").css("top","").css("left","0px").css("bottom","0px").css("height","195px");
+  $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/explaining.png`);
     $("#tuto").show('slow');
     $("#tuto_text").html(`Sometimes, just inputing your current quests isn't enough
     to know all your progression. In that case, I'll ask you to tell me if you completed
@@ -188,7 +179,7 @@ $("#tuto").show('slow');
 
   function step_5_startingQuests(){
     $("#tuto").css("max-width","");
-
+  $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/writing.png`);
     $("#tuto").show('slow');
 
     $("#tuto_text").html(`Perfect! With all these information, I'm able to deduce your progression in the quest tree.
@@ -212,21 +203,9 @@ $("#tuto").show('slow');
       $("#FC_RM_loading_btn").off("click.tutorial_answer");
       $(".square").remove();
     };
-    //TODO
+
     $("#FC_RM_loading_btn").on("click.tutorial_answer", function(){
-      var inputArray = $("#FC_RM_starting_quests").val().toUpperCase().replace(/\s/g, '').split(',').sort();
-      console.log(inputArray);
-      if (inputArray[0] === "A29"
-      && inputArray[1] === "A46"
-      && inputArray[2] === "A65"
-      && inputArray[3] === "A71"
-      && inputArray[4] === "B12"
-      && inputArray[5] === "B32"
-      && inputArray[6] === "B44"
-      && inputArray[7] === "D21"
-      && inputArray[8] === "D23"
-      && inputArray[9] === "F36"
-      && inputArray[10] === "F42"){
+  if ($("#FC_RM_starting_quests").val() === "A42, A65, B53, B62"){
         closeStep();
         step_6_endingQuests();
       } else {
@@ -237,6 +216,7 @@ $("#tuto").show('slow');
 
   function step_5_fail(){
     $("#tuto").hide().show('slow');
+      $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/bored.png`);
     $("#tuto_text").html(`That's not what I told you!<br>
     Please stay focused Admiral, check the first checkbox and uncheck the second one,
     then click on the "LOAD" button.`);
@@ -244,7 +224,7 @@ $("#tuto").show('slow');
 
 
   function step_6_endingQuests(){
-
+  $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/smiling.png`);
     $("#tuto").show('slow');
 
     $("#tuto_text").html(`Good!<br>
@@ -255,7 +235,7 @@ $("#tuto").show('slow');
       the quests in the "Ending quests" box to filter the result.<br>
       To make it easier, there is also a list of the most important quests chains that you can select among.
       <br><br>
-      //TODO          Now select the quest chain "Catapult 2" that unlock the second Prototype Flight Deck Catapult`
+    Now select the quest chain "Jets" that rewards the jet planes.`
     );
     drawSquareAroundElements([$("#FC_RM_ending_quests"),$("#FC_RM_select_preset_quests")]);
 
@@ -267,7 +247,7 @@ $("#tuto").show('slow');
 
     $("#FC_RM_select_preset_quests").on("change.tutorial_answer", function(){
 
-      if ($("#FC_RM_select_preset_quests").val() === "F23"){
+      if ($("#FC_RM_ending_quests").val() === "F45, F46"){
         closeStep();
         step_7_selectingQuests();
       } else {
@@ -277,14 +257,16 @@ $("#tuto").show('slow');
   }
 
   function step_6_fail(){
+      $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/bored.png`);
     $("#tuto").hide().show('slow');
     $("#tuto_text").html(`Not this quest Admiral!
-      //TODO          I told you to select the Catapult 2!`
+    I told you to select Jet questline!!`
     );
   }
 
 
   function step_7_selectingQuests(){
+      $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/explaining.png`);
     $("#tuto").css("left","120px");
 
     $("#tuto").show('slow');
@@ -294,7 +276,7 @@ $("#tuto").show('slow');
       You can do it by clicking on the quest on the flowchart (double click will zoom on it),
       by selecting one of the quest in the list on the left, or by typing the quest's code in the textbox.<br>
       <br>
-      //TODO        Let's try to select quest "A59".`
+    Let's try to select quest "A62".`
     );
 
     drawSquareAroundElements([$("#FC_FT_quest_list")]);
@@ -307,7 +289,7 @@ $("#tuto").show('slow');
 
     $('#FC_FT_quest_info_quest_code').on('DOMSubtreeModified',function(){
 
-      if ( $("#FC_FT_quest_info_quest_code").text() === "A59"){
+      if ( $("#FC_FT_quest_info_quest_code").text() === "A62"){
         closeStep();
         step_8_QuestRequierments();
       } else if($("#FC_FT_quest_info_quest_code").text() !== ""){
@@ -318,9 +300,10 @@ $("#tuto").show('slow');
 
 
   function step_7_fail(){
+      $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/bored.png`);
     $("#tuto").hide().show('slow');
     $("#tuto_text").html(`Not this quest Admiral!
-      I told you to select the quest A59!`
+      I told you to select the quest A62!`
     );
 
   }
@@ -329,7 +312,7 @@ $("#tuto").show('slow');
       $("#tuto").remove();
       var tutorial = $(`<div id="tuto" hidden>
       <div class="closeBtn" id="closeBtn_tuto">X</div>
-      <img id="Ooyodo_tuto" src="files/webpage/Ooyodo.jpg" width="195px" height="195px" style="position:absolute; top:0px; left:0px;" >
+      <img id="Ooyodo_tuto" src="files/webpage/Ooyodo/welcome.png">
       <div id="tuto_content"  style="display:inline-block;">
       <p id="tuto_text" style="padding:15px; margin-left:200px;">
       OK! All the information about this quest are now displayed. You can also hover your cursor on one
@@ -348,7 +331,6 @@ $("#tuto").show('slow');
       </div>
       </div>`);
       $("body").append(tutorial);
-
   $("#tuto").width(600).offset({top:100,left:($(window).width() - 600)/2});
 
       $("#tuto").show('slow');
@@ -378,6 +360,7 @@ $("#tuto").show('slow');
 
 
   function step_9_FlowchartOptions(){
+      $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/explaining.png`);
     $("#tuto").show('slow');
 
     $("#tuto_text").html(`Admiral, you also have some options you can toggle to improve your utilization of this tool.<br>
@@ -403,7 +386,7 @@ $("#tuto").show('slow');
 
   function step_10_openQuestList(){
     $("#tuto").show('slow');
-
+  $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/complete.png`);
 
     $("#tuto_text").html(`That's it for the flowchart use.
     Now let me explain about the quest research function.<br>
@@ -425,6 +408,7 @@ $("#tuto").show('slow');
   }
 
   function step_11_shipRequired(){
+      $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/smiling.png`);
     $("#tuto").show('slow');
     $("#tuto").css("right",'200px').css("left","");
 
@@ -459,7 +443,7 @@ $("#tuto").show('slow');
   }
 
   function step_11_fail(){
-
+  $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/shamed.png`);
     $("#tuto").hide().show('slow');
     $("#tuto_text").html(`A...Admiral!<br>
       I asked you to choose me, not ${ $("#QL_RM_select_required_ship option:selected").text()}!!`
@@ -468,6 +452,7 @@ $("#tuto").show('slow');
   }
 
   function step_12_setQuestAsCompleted(){
+      $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/complete.png`);
   $("#tuto").css("right",'200px').css("left","150px").css("bottom","0px").css("top","");
     $("#tuto").show('slow');
 
@@ -489,42 +474,36 @@ $("#tuto").show('slow');
 
     $("#QL_complete_btn_A65").on("click.tutorial_answer", function(){
       closeStep();
-      step_13_weeklyQuests();
+      step_13_uncompletedQuest();
     });
   }
 
 
 
-  function step_13_weeklyQuests(){
-
+  function step_13_uncompletedQuest(){
+  $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/welcome.png`);
     $("#tuto").show('slow');
     $("#tuto_text").html(`
       As you can see, the quest has been set to completed, and the next one, B57 is now pending like it should be in your game.
       <br>
       Ah... Admiral... I got a message from Akashi... We are getting low
-      on screws and need to replenish our stocks doing some weekly and monthly quests. Let plan out our action.<br>
+      on screws and need to replenish our stocks. Let's plan out our action.<br>
       <br>
-      Choose the search mode "By quest period", then check only "Weekly" and "Monthly".`
+      Choose the search mode "By state", then click on "Uncompleted".`
     );
 
     drawSquareAroundElements([$("#QL_RM_select_search_method")]);
-    $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "period"; }).css("background-color","red");
+    $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "state"; }).css("background-color","red");
 
     closeStep = function(){
       $("#tuto").hide();
-      $(".QL_RM_display_period").off("change.tutorial_answer");
-      $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "period"; }).css("background-color","");
+      $("input[type=radio][name=QL_RM_display_state]").off("change.tutorial_answer");
+      $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "state"; }).css("background-color","");
       $(".square").remove();
     };
 
-    $(".QL_RM_display_period").on("change.tutorial_answer", function(){
-      var checkBoxesSelected = [];
-      $('.QL_RM_display_period').each(function() {
-        if ($(this).is(":checked")) {
-          checkBoxesSelected.push($(this).val());
-        }
-      });
-      if (checkBoxesSelected.sort()[0] === "monthly" &&  checkBoxesSelected.sort()[1] === "weekly" && checkBoxesSelected.length === 2){
+    $("input[type=radio][name=QL_RM_display_state]").on("change.tutorial_answer", function(){
+    if ($(this).val() === '{"state":["pending","locked"]}'){
         closeStep();
         step_14_selectRewardScrews();
       }
@@ -534,6 +513,7 @@ $("#tuto").show('slow');
 
 
   function step_14_selectRewardScrews(){
+      $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/explaining.png`);
     $("#tuto").show('slow');
 
     $("#tuto_text").html(`OK! Only monthly and weekly quests will be displayed.<br>
@@ -575,7 +555,7 @@ $("#tuto").show('slow');
 
 
   function step_14_fail(){
-
+  $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/bored.png`);
     $("#tuto").hide().show('slow');
     $("#tuto_text").html(`Admiral!<br>
       We need Improvement materials, <br>
@@ -586,6 +566,7 @@ $("#tuto").show('slow');
   }
 
   function step_15_selectQuests(){
+      $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/smiling.png`);
     $("#tuto").show('slow');
 
     $("#tuto_text").html(`That's it!<br>
@@ -606,7 +587,7 @@ $("#tuto").show('slow');
 
 
   function step_16_EndOfTutorial(){
-
+  $("#Ooyodo_tuto").attr("src",`files/webpage/Ooyodo/complete.png`);
     $("#tuto").show('slow');
 
     $("#tuto_text").html(`Perfect Admiral!<br>
