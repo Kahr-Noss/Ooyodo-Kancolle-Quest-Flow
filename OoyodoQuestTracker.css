@@ -7,6 +7,10 @@ button{
   cursor: pointer;
 }
 
+i{
+   font-style: italic;
+}
+
 #background{
   background: linear-gradient(#b4e5e8 , #4ca7ad);
   position: fixed;
