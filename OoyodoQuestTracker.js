@@ -1,5 +1,5 @@
 $(function () {
-
+console.log("V 1.0");
   //  *********   GLOBAL VARIABLES   ************
 
   //default color object
@@ -877,7 +877,7 @@ $(function () {
           });
           unknownQuestNbAft = getQuestsInState(ALL_QUEST_STATE_TMP,"???").length;
         }
-console.log(unknownQuestNbAft);
+console.log(JSON.stringify(unknownQuestNbAft);
         // once all the quest that could have been determined are set, check if there are still unknown quests
         if(unknownQuestNbAft > 0){
           //get the undefined quests, ask the user about their state  and rerun the loop
@@ -902,12 +902,12 @@ console.log(unknownQuestNbAft);
 
             console.log("asking     " + startingQuest);
 
-      /*      if(has.call(userQuestCookie.userDecisions, startingQuest)){
+          if(has.call(userQuestCookie.userDecisions, startingQuest)){
               console.log("saved     " + startingQuest);
 
               ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions;
                 askForUnknowQuestState();
-            } else {*/
+            } else {
               console.log("ask     " + startingQuest);
 
               $("#QL").hide();
@@ -944,7 +944,7 @@ console.log(unknownQuestNbAft);
                 displayPartialTree(startingQuest);
                 displayQuestData(startingQuest);
               });
-        //    }
+            }
           } else {
             //when all the quest have been answered, rerun the loop
             completeRemainingQuestsLoop(callback);
