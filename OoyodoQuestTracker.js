@@ -1,5 +1,5 @@
 $(function () {
-console.log("V 1.4");
+console.log("V 1.5");
   //  *********   GLOBAL VARIABLES   ************
 
   //default color object
@@ -905,7 +905,7 @@ console.log(JSON.stringify(unknownQuestNbAft));
           if(has.call(userQuestCookie.userDecisions, startingQuest)){
               console.log("saved     " + startingQuest);
 
-              ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions;
+              ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions[startingQuest];
                 askForUnknowQuestState();
             } else {
               console.log("ask     " + startingQuest);
