@@ -58,10 +58,10 @@ $(function () {
         displayFlowchart();
         calculateQuestState(questCookie);
         timeVerificationLoop(questCookie.timeStamp);
-//TODO
+
         displayBubbleMessage(`<span id="MSG_welcome_progress">Flowchart generation complete!</span>`
         ,"complete","MSG_welcome",true, true, true, function(){
-          $("#MSG_welcome_progress").text("Flowchart generation complete! 1");
+          $("#MSG_welcome_progress").text("Flowchart generation complete!");
         });
 
         if(!questStateCalculated){
@@ -902,12 +902,12 @@ console.log(unknownQuestNbAft);
 
             console.log("asking     " + startingQuest);
 
-            if(has.call(userQuestCookie.userDecisions, startingQuest)){
+      /*      if(has.call(userQuestCookie.userDecisions, startingQuest)){
               console.log("saved     " + startingQuest);
 
               ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions;
                 askForUnknowQuestState();
-            } else {
+            } else {*/
               console.log("ask     " + startingQuest);
 
               $("#QL").hide();
@@ -944,7 +944,7 @@ console.log(unknownQuestNbAft);
                 displayPartialTree(startingQuest);
                 displayQuestData(startingQuest);
               });
-            }
+        //    }
           } else {
             //when all the quest have been answered, rerun the loop
             completeRemainingQuestsLoop(callback);
@@ -976,11 +976,11 @@ console.log(unknownQuestNbAft);
               ALL_QUEST_STATE_TMP[quest] = "completed";
             }
 
-          }/* else if(has.call(userQuestCookie.userDecisions,quest)){
+          } else if(has.call(userQuestCookie.userDecisions,quest)){
             console.log("saved   " + quest);
             //if the quest can't be determined but the user already answered about its state before
             ALL_QUEST_STATE_TMP[quest] = userQuestCookie.userDecisions[quest];
-          }*/
+          }
         });
 
         //  ######################     RECUSRSIVE SEARCH FUNCTION   ###################
