@@ -1,5 +1,5 @@
 $(function () {
-console.log("V 1.0");
+console.log("V 1.1");
   //  *********   GLOBAL VARIABLES   ************
 
   //default color object
@@ -909,7 +909,7 @@ console.log(JSON.stringify(unknownQuestNbAft));
                 askForUnknowQuestState();
             } else {
               console.log("ask     " + startingQuest);
-
+console.log(ALL_QUESTS_LIST[startingQuest].requires);
               $("#QL").hide();
               $("#FC").show('fast');
               displayPartialTree([startingQuest]);
