@@ -1,5 +1,5 @@
 $(function () {
-console.log("V 1.1");
+console.log("V 1.2");
   //  *********   GLOBAL VARIABLES   ************
 
   //default color object
@@ -976,11 +976,11 @@ console.log(ALL_QUESTS_LIST[startingQuest].requires);
               ALL_QUEST_STATE_TMP[quest] = "completed";
             }
 
-          } else if(has.call(userQuestCookie.userDecisions,quest)){
+          } /*else if(has.call(userQuestCookie.userDecisions,quest)){
             console.log("saved   " + quest);
             //if the quest can't be determined but the user already answered about its state before
             ALL_QUEST_STATE_TMP[quest] = userQuestCookie.userDecisions[quest];
-          }
+          }*/
         });
 
         //  ######################     RECUSRSIVE SEARCH FUNCTION   ###################
