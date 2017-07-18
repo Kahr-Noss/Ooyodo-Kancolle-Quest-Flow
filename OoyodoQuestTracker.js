@@ -1,5 +1,5 @@
 $(function () {
-console.log("V 1.2");
+console.log("V 1.3");
   //  *********   GLOBAL VARIABLES   ************
 
   //default color object
@@ -900,7 +900,7 @@ console.log(JSON.stringify(unknownQuestNbAft));
           if (startingUnknownQuestsList.length > 0){
             var startingQuest = startingUnknownQuestsList.shift();
 
-            console.log("asking     " + startingQuest);
+            console.log("unknow     " + startingQuest);
 
           if(has.call(userQuestCookie.userDecisions, startingQuest)){
               console.log("saved     " + startingQuest);
@@ -909,7 +909,9 @@ console.log(JSON.stringify(unknownQuestNbAft));
                 askForUnknowQuestState();
             } else {
               console.log("ask     " + startingQuest);
-console.log(ALL_QUESTS_LIST[startingQuest].requires);
+ALL_QUESTS_LIST[startingQuest].requires.forEach(q => {
+  console.log(ALL_QUEST_STATE_TMP[q]);
+});
               $("#QL").hide();
               $("#FC").show('fast');
               displayPartialTree([startingQuest]);
