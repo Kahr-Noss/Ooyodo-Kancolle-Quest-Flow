@@ -58,10 +58,10 @@ $(function () {
         displayFlowchart();
         calculateQuestState(questCookie);
         timeVerificationLoop(questCookie.timeStamp);
-
+//TODO
         displayBubbleMessage(`<span id="MSG_welcome_progress">Flowchart generation complete!</span>`
         ,"complete","MSG_welcome",true, true, true, function(){
-          $("#MSG_welcome_progress").text("Flowchart generation complete!");
+          $("#MSG_welcome_progress").text("Flowchart generation complete! 1");
         });
 
         if(!questStateCalculated){
