@@ -905,7 +905,8 @@ console.log(unknownQuestNbAft);
             if(has.call(userQuestCookie.userDecisions, startingQuest)){
               console.log("saved     " + startingQuest);
 
-              ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions
+              ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions;
+                askForUnknowQuestState();
             } else {
               console.log("ask     " + startingQuest);
 
