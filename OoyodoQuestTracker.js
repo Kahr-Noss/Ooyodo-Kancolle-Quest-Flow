@@ -1,5 +1,5 @@
 $(function () {
-console.log("V 1.3");
+console.log("V 1.4");
   //  *********   GLOBAL VARIABLES   ************
 
   //default color object
@@ -910,7 +910,7 @@ console.log(JSON.stringify(unknownQuestNbAft));
             } else {
               console.log("ask     " + startingQuest);
 ALL_QUESTS_LIST[startingQuest].requires.forEach(q => {
-  console.log(ALL_QUEST_STATE_TMP[q]);
+  console.log(q + "     " + ALL_QUEST_STATE_TMP[q]);
 });
               $("#QL").hide();
               $("#FC").show('fast');
