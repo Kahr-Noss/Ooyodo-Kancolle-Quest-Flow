@@ -899,7 +899,7 @@ clearHighlights();
           if (startingUnknownQuestsList.length > 0){
             var startingQuest = startingUnknownQuestsList.shift();
 
-            console.log(startingQuest);
+            console.log("ask     " + startingQuest);
 /*
 if(has.call(userQuestCookie.userDecisions, startingQuest)){
   ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions
