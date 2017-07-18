@@ -899,11 +899,14 @@ clearHighlights();
           if (startingUnknownQuestsList.length > 0){
             var startingQuest = startingUnknownQuestsList.shift();
 
-            console.log("ask     " + startingQuest);
-/*
+            console.log("asking     " + startingQuest);
+
 if(has.call(userQuestCookie.userDecisions, startingQuest)){
+  console.log("saved     " + startingQuest);
+
   ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions
-} else {*/
+} else {
+  console.log("ask     " + startingQuest);
 
             $("#QL").hide();
             $("#FC").show('fast');
@@ -939,7 +942,7 @@ if(has.call(userQuestCookie.userDecisions, startingQuest)){
               displayPartialTree(startingQuest);
               displayQuestData(startingQuest);
             });
-
+}
           } else {
             //when all the quest have been answered, rerun the loop
             completeRemainingQuestsLoop(callback);
@@ -971,11 +974,11 @@ if(has.call(userQuestCookie.userDecisions, startingQuest)){
               ALL_QUEST_STATE_TMP[quest] = "completed";
             }
 
-          } else if(has.call(userQuestCookie.userDecisions,quest)){
+          }/* else if(has.call(userQuestCookie.userDecisions,quest)){
             console.log("saved   " + quest);
             //if the quest can't be determined but the user already answered about its state before
             ALL_QUEST_STATE_TMP[quest] = userQuestCookie.userDecisions[quest];
-          }
+          }*/
         });
 
         //  ######################     RECUSRSIVE SEARCH FUNCTION   ###################
