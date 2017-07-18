@@ -877,7 +877,7 @@ console.log("V 1.0");
           });
           unknownQuestNbAft = getQuestsInState(ALL_QUEST_STATE_TMP,"???").length;
         }
-console.log(JSON.stringify(unknownQuestNbAft);
+console.log(JSON.stringify(unknownQuestNbAft));
         // once all the quest that could have been determined are set, check if there are still unknown quests
         if(unknownQuestNbAft > 0){
           //get the undefined quests, ask the user about their state  and rerun the loop
