@@ -50,7 +50,7 @@ $(function () {
         loadRewardList();
         loadRequiredMapList();
         displayAllQuestBoxes(Object.keys(ALL_QUESTS_LIST));
-activateQuestBoxesEventListenners();
+        activateQuestBoxesEventListenners();
         var questCookie = JSON.parse(getCookie('user_quests'));
         console.log(getCookie('user_quests'));
         loadFlowchart();
@@ -341,15 +341,15 @@ activateQuestBoxesEventListenners();
       }
     }
 
-function clearHighlights(){
-  selectedNodes = [];
-  myDiagram.startTransaction("no highlighteds");
-  myDiagram.clearHighlighteds();
-  myDiagram.nodes.each(function(n) {
-    updateNodeDisplay(n, getQuestColor(n.data.key),"default", ALL_QUESTS_LIST[n.data.key].period);
-  });
-  myDiagram.commitTransaction("no highlighteds");
-}
+    function clearHighlights(){
+      selectedNodes = [];
+      myDiagram.startTransaction("no highlighteds");
+      myDiagram.clearHighlighteds();
+      myDiagram.nodes.each(function(n) {
+        updateNodeDisplay(n, getQuestColor(n.data.key),"default", ALL_QUESTS_LIST[n.data.key].period);
+      });
+      myDiagram.commitTransaction("no highlighteds");
+    }
 
     // change the state of a quest and update the unlocked ones
     function setQuestAsCompleted(quest){
@@ -746,7 +746,7 @@ function clearHighlights(){
         } else {
           // if no problem, close the input bubble and proceed the next calculations
 
-clearHighlights();
+          clearHighlights();
           completeRemainingQuestsLoop(function(){
             closeBubbleMessage($("#MSG_IPQ"));
             questStateCalculated = true;
@@ -877,7 +877,7 @@ clearHighlights();
           });
           unknownQuestNbAft = getQuestsInState(ALL_QUEST_STATE_TMP,"???").length;
         }
-
+console.log(unknownQuestNbAft);
         // once all the quest that could have been determined are set, check if there are still unknown quests
         if(unknownQuestNbAft > 0){
           //get the undefined quests, ask the user about their state  and rerun the loop
@@ -896,53 +896,54 @@ clearHighlights();
         // this function will ask the user if he remember doing one time quests that can't be calculated
         function askForUnknowQuestState(){
           // if there is unknown quests remaining
+          console.log(startingUnknownQuestsList);
           if (startingUnknownQuestsList.length > 0){
             var startingQuest = startingUnknownQuestsList.shift();
 
             console.log("asking     " + startingQuest);
 
-if(has.call(userQuestCookie.userDecisions, startingQuest)){
-  console.log("saved     " + startingQuest);
+            if(has.call(userQuestCookie.userDecisions, startingQuest)){
+              console.log("saved     " + startingQuest);
 
-  ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions
-} else {
-  console.log("ask     " + startingQuest);
+              ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions
+            } else {
+              console.log("ask     " + startingQuest);
 
-            $("#QL").hide();
-            $("#FC").show('fast');
-            displayPartialTree([startingQuest]);
-            displayQuestData(startingQuest);
-
-            displayBubbleMessage(`Admiral, I need some help to<br>
-              complete your progression on the quest flowchart...<br>
-              Do you already completed this quest?<br>
-              <span class="link" id="MSG_ask_quest_state_display">${startingQuest}</span><br>
-              <button type="button" class="MSG_btn" value="completed">Yes !</button>
-              <button type="button" class="MSG_btn idk" value="locked">I don't know</button>
-              <button type="button" class="MSG_btn" value="locked">No, not yet</button>`,
-              "writing","MSG_ask_quest_state",false,true,false
-            );
-
-            $(".MSG_btn").click(function(){
-              closeBubbleMessage($("#MSG_ask_quest_state"));
-              ALL_QUEST_STATE_TMP[startingQuest] = $(this).val();
-              userQuestCookie.userDecisions[startingQuest] =  $(this).val();
-              if ($(this).hasClass("idk")){
-                if (userQuestCookie.undeterminedQuests.indexOf(startingQuest) === -1){
-                  userQuestCookie.undeterminedQuests.push(startingQuest);
-                }
-              }
-              askForUnknowQuestState();
-            });
-
-            //display the quest on flowchart when clicking on the link
-            $(`#MSG_ask_quest_state_display`).click(function(){
               $("#QL").hide();
               $("#FC").show('fast');
-              displayPartialTree(startingQuest);
+              displayPartialTree([startingQuest]);
               displayQuestData(startingQuest);
-            });
-}
+
+              displayBubbleMessage(`Admiral, I need some help to<br>
+                complete your progression on the quest flowchart...<br>
+                Do you already completed this quest?<br>
+                <span class="link" id="MSG_ask_quest_state_display">${startingQuest}</span><br>
+                <button type="button" class="MSG_btn" value="completed">Yes !</button>
+                <button type="button" class="MSG_btn idk" value="locked">I don't know</button>
+                <button type="button" class="MSG_btn" value="locked">No, not yet</button>`,
+                "writing","MSG_ask_quest_state",false,true,false
+              );
+
+              $(".MSG_btn").click(function(){
+                closeBubbleMessage($("#MSG_ask_quest_state"));
+                ALL_QUEST_STATE_TMP[startingQuest] = $(this).val();
+                userQuestCookie.userDecisions[startingQuest] =  $(this).val();
+                if ($(this).hasClass("idk")){
+                  if (userQuestCookie.undeterminedQuests.indexOf(startingQuest) === -1){
+                    userQuestCookie.undeterminedQuests.push(startingQuest);
+                  }
+                }
+                askForUnknowQuestState();
+              });
+
+              //display the quest on flowchart when clicking on the link
+              $(`#MSG_ask_quest_state_display`).click(function(){
+                $("#QL").hide();
+                $("#FC").show('fast');
+                displayPartialTree(startingQuest);
+                displayQuestData(startingQuest);
+              });
+            }
           } else {
             //when all the quest have been answered, rerun the loop
             completeRemainingQuestsLoop(callback);
@@ -1166,7 +1167,7 @@ if(has.call(userQuestCookie.userDecisions, startingQuest)){
       var color = getQuestColor(questCode);
       return `<div class="QL_questBox ${quest.period}" id='QL_questBox_${questCode}' style="background-color:${color}; color:${tinycolor(color).isLight() ? "#000000" : "#ffffff"};">
       <div class="cellDiv" style=" height:40px;  top:0px; left:0px; width: calc(100% - 40px); padding-right:40px; line-height:40px; overflow-y:hidden;">
- &nbsp;
+      &nbsp;
       <input type="checkbox" class="QL_selected_checkbox" id="QL_selected_${questCode}">
       <b> ${questCode}</b>
       <span><img class="quest_state_icon" src="files/webpage/${ALL_QUEST_STATE[questCode]}.png"></span>
@@ -1278,20 +1279,20 @@ if(has.call(userQuestCookie.userDecisions, startingQuest)){
       });
     }
 
-function activateQuestBoxesEventListenners(){
-  // set the quest as completed
-  $(".complete_btn, .QL_questBox_complete_btn").click(function(){
-    var id = $(this).attr("id").split('_');
-    var quest = '';
-    if(id[0] === 'FC'){
-      quest = $("#FC_FT_quest_info_quest_code").text();
-    } else if (id[0] === 'QL'){
-      quest = id[3];
-    }
-    if (quest !== ''){
-      setQuestAsCompleted(quest);
-    }
-  });
+    function activateQuestBoxesEventListenners(){
+      // set the quest as completed
+      $(".complete_btn, .QL_questBox_complete_btn").click(function(){
+        var id = $(this).attr("id").split('_');
+        var quest = '';
+        if(id[0] === 'FC'){
+          quest = $("#FC_FT_quest_info_quest_code").text();
+        } else if (id[0] === 'QL'){
+          quest = id[3];
+        }
+        if (quest !== ''){
+          setQuestAsCompleted(quest);
+        }
+      });
 
 
       //show the tips in the bubble message when clicked
@@ -1300,11 +1301,11 @@ function activateQuestBoxesEventListenners(){
         var quest = $(this).attr("id").split('_')[3];
         var tipsMsg = ALL_QUESTS_LIST[quest].tips;
         if(tipsMsg === ""){
-            displayBubbleMessage(`Admiral, there is no tips for the quest ${quest}, sorry.` ,"shamed", "MSG_tips_quest",false, true, true);
+          displayBubbleMessage(`Admiral, there is no tips for the quest ${quest}, sorry.` ,"shamed", "MSG_tips_quest",false, true, true);
         } else {
           tipsMsg = `Tips and avices for quest <b>${quest}</b>:<br>
           ${tipsMsg.replace(/※/g,"<br>●")}`;
-            displayBubbleMessage(tipsMsg ,"explaining", "MSG_tips_quest",false, true, true);
+          displayBubbleMessage(tipsMsg ,"explaining", "MSG_tips_quest",false, true, true);
         }
 
       });
@@ -1333,7 +1334,7 @@ function activateQuestBoxesEventListenners(){
         buildPartialFlowchart();
         hightlightQuest();
       });
-}
+    }
 
 
     // display selected quest requirements in the footer
