@@ -876,7 +876,6 @@ clearHighlights();
             setRemainingQuestState(period);
           });
           unknownQuestNbAft = getQuestsInState(ALL_QUEST_STATE_TMP,"???").length;
-          console.log(unknownQuestNbAft);
         }
 
         // once all the quest that could have been determined are set, check if there are still unknown quests
@@ -901,6 +900,10 @@ clearHighlights();
             var startingQuest = startingUnknownQuestsList.shift();
 
             console.log(startingQuest);
+/*
+if(has.call(userQuestCookie.userDecisions, startingQuest)){
+  ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions
+} else {*/
 
             $("#QL").hide();
             $("#FC").show('fast');
@@ -936,12 +939,14 @@ clearHighlights();
               displayPartialTree(startingQuest);
               displayQuestData(startingQuest);
             });
+
           } else {
             //when all the quest have been answered, rerun the loop
             completeRemainingQuestsLoop(callback);
           }
         }
       }
+
 
 
       // set periodic quests either as pending if all requierments are completed or to locked
@@ -967,6 +972,7 @@ clearHighlights();
             }
 
           } else if(has.call(userQuestCookie.userDecisions,quest)){
+            console.log("saved   " + quest);
             //if the quest can't be determined but the user already answered about its state before
             ALL_QUEST_STATE_TMP[quest] = userQuestCookie.userDecisions[quest];
           }
