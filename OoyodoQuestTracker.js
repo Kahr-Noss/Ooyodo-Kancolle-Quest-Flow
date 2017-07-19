@@ -1,5 +1,4 @@
 $(function () {
-console.log("V 1.5");
   //  *********   GLOBAL VARIABLES   ************
 
   //default color object
@@ -877,7 +876,6 @@ console.log("V 1.5");
           });
           unknownQuestNbAft = getQuestsInState(ALL_QUEST_STATE_TMP,"???").length;
         }
-console.log(JSON.stringify(unknownQuestNbAft));
         // once all the quest that could have been determined are set, check if there are still unknown quests
         if(unknownQuestNbAft > 0){
           //get the undefined quests, ask the user about their state  and rerun the loop
@@ -889,29 +887,20 @@ console.log(JSON.stringify(unknownQuestNbAft));
         } else {
           // end
           callback();
-          console.log('fini');
         }
 
 
         // this function will ask the user if he remember doing one time quests that can't be calculated
         function askForUnknowQuestState(){
           // if there is unknown quests remaining
-          console.log(startingUnknownQuestsList);
           if (startingUnknownQuestsList.length > 0){
             var startingQuest = startingUnknownQuestsList.shift();
 
-            console.log("unknow     " + startingQuest);
-
           if(has.call(userQuestCookie.userDecisions, startingQuest)){
-              console.log("saved     " + startingQuest);
-
               ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions[startingQuest];
                 askForUnknowQuestState();
             } else {
-              console.log("ask     " + startingQuest);
-ALL_QUESTS_LIST[startingQuest].requires.forEach(q => {
-  console.log(q + "     " + ALL_QUEST_STATE_TMP[q]);
-});
+
               $("#QL").hide();
               $("#FC").show('fast');
               displayPartialTree([startingQuest]);
@@ -978,11 +967,7 @@ ALL_QUESTS_LIST[startingQuest].requires.forEach(q => {
               ALL_QUEST_STATE_TMP[quest] = "completed";
             }
 
-          } /*else if(has.call(userQuestCookie.userDecisions,quest)){
-            console.log("saved   " + quest);
-            //if the quest can't be determined but the user already answered about its state before
-            ALL_QUEST_STATE_TMP[quest] = userQuestCookie.userDecisions[quest];
-          }*/
+          }
         });
 
         //  ######################     RECUSRSIVE SEARCH FUNCTION   ###################
@@ -1018,7 +1003,7 @@ ALL_QUESTS_LIST[startingQuest].requires.forEach(q => {
 
 
         $("#MSG_IPQ_error_msg").text("");
-
+userQuestCookie.timeStamp = moment().utcOffset("+09:00").format();
         setCookie('user_quests',JSON.stringify(userQuestCookie),365);
 
         if (userQuestCookie.undeterminedQuests.length >0){
@@ -1300,7 +1285,6 @@ ALL_QUESTS_LIST[startingQuest].requires.forEach(q => {
 
       //show the tips in the bubble message when clicked
       $(".quest_tips").click(function(){
-        console.log("plop")
         var quest = $(this).attr("id").split('_')[3];
         var tipsMsg = ALL_QUESTS_LIST[quest].tips;
         if(tipsMsg === ""){
