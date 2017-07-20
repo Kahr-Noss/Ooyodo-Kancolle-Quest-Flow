@@ -1255,6 +1255,7 @@ $(function () {
       } else {
         $(`#FC_FT_quest_info_complete_btn`).hide();
       }
+      removeRibbonFromDiv($("#FC_FT_ribbon_support"));
       if(ALL_QUESTS_LIST[questCode].period !== "once"){
         addRibbonToDiv($("#FC_FT_ribbon_support"),getRibbonColor(ALL_QUESTS_LIST[questCode].period), ALL_QUESTS_LIST[questCode].period);
       }
