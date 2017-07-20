@@ -55,7 +55,7 @@ $(function () {
         loadFlowchart();
         resizeWindow();
         displayFlowchart();
-        calculateQuestState(questCookie);
+        calculateQuestState(questCookie,true);
         timeVerificationLoop(questCookie.timeStamp);
 
         displayBubbleMessage(`<span id="MSG_welcome_progress">Flowchart generation complete!</span>`
@@ -708,7 +708,7 @@ $(function () {
     }
 
     // using pending quests  list calculate the state of all quests
-    function calculateQuestState(userQuestCookie){
+    function calculateQuestState(userQuestCookie, fromCookie){
 
       var ALL_QUEST_STATE_TMP = {};
       // no pending quests input => everything is set to completed
@@ -1003,7 +1003,11 @@ $(function () {
 
 
         $("#MSG_IPQ_error_msg").text("");
-userQuestCookie.timeStamp = moment().utcOffset("+09:00").format();
+        // reset the last updated timestamp only if not comming from a cookie
+        if (!fromCookie){
+          userQuestCookie.timeStamp = moment().utcOffset("+09:00").format();
+        }
+
         setCookie('user_quests',JSON.stringify(userQuestCookie),365);
 
         if (userQuestCookie.undeterminedQuests.length >0){
@@ -1865,7 +1869,7 @@ userQuestCookie.timeStamp = moment().utcOffset("+09:00").format();
         // validate the input of pending quests
         $('#MSG_IPQ_btn_OK').click(function () {
           var inputedPendingQuests = questInputToArray($("#MSG_IPQ_txt_area").val());
-          calculateQuestState({pendingQuests:inputedPendingQuests,userDecisions:{},undeterminedQuests:[]});
+          calculateQuestState({pendingQuests:inputedPendingQuests,userDecisions:{},undeterminedQuests:[]},false);
         });
       }
     });
