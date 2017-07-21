@@ -1903,6 +1903,11 @@ $(function () {
       buildPartialFlowchart();
     });
 
+    // displqy only the remaining quests
+    $('#FC_RM_remaining_btn').click(function () {
+    displayQuestListSelect(getQuestsInState(ALL_QUEST_STATE,"pending").concat(getQuestsInState(ALL_QUEST_STATE,"locked")));
+    });
+
     //recenter the flowchart viewport
     $('#FC_RM_center_btn').click(function () {
       centerView();
