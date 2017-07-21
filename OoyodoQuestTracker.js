@@ -1905,7 +1905,9 @@ $(function () {
 
     // displqy only the remaining quests
     $('#FC_RM_remaining_btn').click(function () {
-    displayQuestListSelect(getQuestsInState(ALL_QUEST_STATE,"pending").concat(getQuestsInState(ALL_QUEST_STATE,"locked")));
+      var remainingQuestsList =  getQuestsInState(ALL_QUEST_STATE,"pending").concat(getQuestsInState(ALL_QUEST_STATE,"locked"));
+    displayQuestListSelect(remainingQuestsList);
+displayPartialTree(remainingQuestsList);
     });
 
     //recenter the flowchart viewport
