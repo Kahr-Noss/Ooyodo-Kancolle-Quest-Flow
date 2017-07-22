@@ -58,7 +58,14 @@ $(function () {
         resizeWindow();
         displayFlowchart();
         loadQuestStateFromCookie(questCookie);
-        timeVerificationLoop(questCookie.timeStamp);
+        // if the cookie had a save
+        if (getQuestsInState(ALL_QUEST_STATE,"completed").length !== Object.keys(ALL_QUEST_STATE).length){
+          questStateCalculated = true;
+            timeVerificationLoop(questCookie.timeStamp);
+                  displayRemainingQuests();
+
+                }
+
 
         displayBubbleMessage(`<span id="MSG_welcome_progress">Flowchart generation complete!</span>`
         ,"complete","MSG_welcome",true, true, true, function(){
@@ -760,10 +767,7 @@ $(function () {
             });
           };
 
-if (getQuestsInState(ALL_QUEST_STATE,"completed").length !== Object.keys(ALL_QUEST_STATE).length){
-  questStateCalculated = true;
-          displayRemainingQuests();
-        }
+
     }
 
     function displayRemainingQuests(){
