@@ -51,7 +51,7 @@ $(function () {
         displayAllQuestBoxes(Object.keys(ALL_QUESTS_LIST));
         activateQuestBoxesEventListenners();
         var questCookie = JSON.parse(getCookie('user_quests'));
-        questCookie.timeStamp = moment().subtract(1,"days");
+        questCookie.timeStamp = moment().subtract(3,"months");
 
         console.log(questCookie);
         console.log(questCookie.pendingQuests.join(","));
