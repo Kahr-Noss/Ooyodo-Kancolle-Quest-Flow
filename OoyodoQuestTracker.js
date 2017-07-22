@@ -51,7 +51,6 @@ $(function () {
         displayAllQuestBoxes(Object.keys(ALL_QUESTS_LIST));
         activateQuestBoxesEventListenners();
         var questCookie = JSON.parse(getCookie('user_quests'));
-        questCookie.timeStamp = moment().subtract(3,"months");
 
         console.log(questCookie);
         loadFlowchart();
@@ -63,9 +62,7 @@ $(function () {
           questStateCalculated = true;
             timeVerificationLoop(questCookie.timeStamp);
                   displayRemainingQuests();
-
                 }
-
 
         displayBubbleMessage(`<span id="MSG_welcome_progress">Flowchart generation complete!</span>`
         ,"complete","MSG_welcome",true, true, true, function(){
