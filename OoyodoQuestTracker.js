@@ -53,7 +53,8 @@ $(function () {
         var questCookie = JSON.parse(getCookie('user_quests'));
         questCookie.timeStamp = moment().subtract(1,"days");
 
-        console.log(JSON.stringify(questCookie));
+        console.log(questCookie);
+        console.log(questCookie.pendingQuests.join(","));
         loadFlowchart();
         resizeWindow();
         displayFlowchart();
