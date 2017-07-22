@@ -735,12 +735,10 @@ $(function () {
         if (has.call(progress, key)){
           Object.keys(progress[key]).forEach(category=>{
             progress[key][category].split(",").forEach(questNB=>{
-              console.log(`${category}${questNB}   =>  ${state}`);
               ALL_QUEST_STATE_TMP[`${category}${questNB}`] = state;
             });
           });
         } else {
-          console.log("missing state     " + state);
           missingState = state;
         }
       });
@@ -1096,8 +1094,6 @@ var undeterminedQuests = [];
           buildPartialFlowchart();
         }
 
-        loadQuestStateFromCookie({progress:getSaveStringForCookie()});
-
       }
     }
 
@@ -1128,7 +1124,6 @@ var undeterminedQuests = [];
       outputString.forEach(string => {
         output[string.charAt(0)] = JSON.parse(string.substr(2));
       });
-      console.log( JSON.stringify(output));
       return JSON.stringify(output);
     }
 
