@@ -54,11 +54,10 @@ $(function () {
         questCookie.timeStamp = moment().subtract(3,"months");
 
         console.log(questCookie);
-        console.log(questCookie.pendingQuests.join(","));
         loadFlowchart();
         resizeWindow();
         displayFlowchart();
-        calculateQuestState(questCookie,true);
+        loadQuestStateFromCookie(questCookie);
         timeVerificationLoop(questCookie.timeStamp);
 
         displayBubbleMessage(`<span id="MSG_welcome_progress">Flowchart generation complete!</span>`
@@ -69,6 +68,7 @@ $(function () {
         if(!questStateCalculated){
           $(document).trigger("start_tutorial");
         }
+
       }
     });
 
@@ -368,7 +368,6 @@ $(function () {
       //set the quest as completed
       ALL_QUEST_STATE[quest] = 'completed';
       updateQuestStateDisplay(quest);
-      questsCookie.pendingQuests.splice(questsCookie.pendingQuests.indexOf(quest),1);
 
       //set the following quests to pending if all other requierments are completed
       ALL_QUESTS_LIST[quest].unlocks.forEach(unlockedQuest => {
@@ -381,8 +380,6 @@ $(function () {
               // if not, set is as pending
               ALL_QUEST_STATE[unlockedQuest] = 'pending';
               updateQuestStateDisplay(unlockedQuest);
-              questsCookie.pendingQuests.push(unlockedQuest);
-              delete questsCookie.userDecisions[unlockedQuest];
               questsUnlocked.push(unlockedQuest);
             } else {
               //if yes ask the user if the quest is displayed in game or not.
@@ -401,6 +398,7 @@ $(function () {
 
       //display all changes except those where you ask (if the user doesn't eanswer, no changes are made)
       updateQuestListDisplay(visibleQuests);
+      questsCookie.progress = getSaveStringForCookie();
       setCookie('user_quests',JSON.stringify(questsCookie),365);
     }
 
@@ -417,6 +415,7 @@ $(function () {
           );
         }
         updateQuestListDisplay(visibleQuests);
+        questsCookie.progress = getSaveStringForCookie();
         setCookie('user_quests',JSON.stringify(questsCookie),365);
       };
 
@@ -533,24 +532,17 @@ $(function () {
       periodicQuestsList.forEach(quest =>{
         ALL_QUEST_STATE[quest] = "???";
       });
-      questsCookie.pendingQuests.filter(function(quest){return ALL_QUESTS_LIST[quest].period === period}).forEach(quest =>{
-        questsCookie.pendingQuests.splice(questsCookie.pendingQuests.indexOf(quest),1);
-      });
+
       periodicQuestsList.forEach(quest =>{
         if( ALL_QUESTS_LIST[quest].requires.every(function(requiredQuest){return ALL_QUEST_STATE[requiredQuest] === 'completed';})){
           ALL_QUEST_STATE[quest] = "pending";
-          questsCookie.pendingQuests.push(quest);
         } else {
           ALL_QUEST_STATE[quest] = "locked";
         }
         updateQuestStateDisplay(quest);
       });
       updateQuestListDisplay([]);
-      //save the stqte of quests thqt might be unknown after the reset in the cookie
-      console.log(getBlockedQuests());
-getBlockedQuests().forEach(quest => {
-  questsCookie.userDecisions[quest] = ALL_QUEST_STATE[quest];
-});
+    questsCookie.progress = getSaveStringForCookie();
 
       setCookie('user_quests',JSON.stringify(questsCookie),365);
     }
@@ -717,19 +709,77 @@ getBlockedQuests().forEach(quest => {
       return partialQuestList;
     }
 
-    // using pending quests  list calculate the state of all quests
-    function calculateQuestState(userQuestCookie, fromCookie){
+// load the cookie with the saved state
+    function loadQuestStateFromCookie(userQuestCookie){
+      ALL_QUEST_STATE_TMP = {};
+      Object.keys(ALL_QUESTS_LIST).forEach(quest=>{
+        ALL_QUEST_STATE_TMP[quest] = '???';
+      });
 
+      var progress = JSON.parse(userQuestCookie.progress);
+      var missingState = "";
+
+      ["c","p","l"].forEach(key => {
+        var state = "";
+        switch (key) {
+          case "l":
+          state = "locked";
+          break;
+          case "c":
+          state = "completed";
+          break;
+          case "p":
+          state = "pending";
+          break;
+        }
+        if (has.call(progress, key)){
+          Object.keys(progress[key]).forEach(category=>{
+            progress[key][category].split(",").forEach(questNB=>{
+              console.log(`${category}${questNB}   =>  ${state}`);
+              ALL_QUEST_STATE_TMP[`${category}${questNB}`] = state;
+            });
+          });
+        } else {
+          console.log("missing state     " + state);
+          missingState = state;
+        }
+      });
+
+      getQuestsInState(ALL_QUEST_STATE_TMP,"???").forEach(quest => {
+        ALL_QUEST_STATE_TMP[quest] = missingState;
+      });
+
+//implement the states
+  ALL_QUEST_STATE = cloneObject(ALL_QUEST_STATE_TMP);
+  $("#MSG_quest_unlocked").remove();
+
+
+          // affect a function to be runned after the animation is completed
+          diagramAnimationCompleteFunction = function(){
+            $(".QL_questBox").removeClass("pending locked completed");
+            Object.keys(ALL_QUEST_STATE).forEach(quest =>{
+              updateQuestStateDisplay(quest);
+            });
+          };
+
+if (getQuestsInState(ALL_QUEST_STATE,"completed").length !== Object.keys(ALL_QUEST_STATE).length){
+  questStateCalculated = true;
+          displayRemainingQuests();
+        }
+    }
+
+    function displayRemainingQuests(){
+      var remainingQuestsList =  getQuestsInState(ALL_QUEST_STATE,"pending").concat(getQuestsInState(ALL_QUEST_STATE,"locked"));
+      displayQuestListSelect(remainingQuestsList);
+      displayPartialTree(remainingQuestsList);
+    }
+
+
+    // using pending quests  list calculate the state of all quests
+    function calculateQuestState(pendingQuests){
+
+var undeterminedQuests = [];
       var ALL_QUEST_STATE_TMP = {};
-      // no pending quests input => everything is set to completed
-      if (userQuestCookie.pendingQuests.length === 0){
-        Object.keys(ALL_QUESTS_LIST).forEach(quest => {
-          ALL_QUEST_STATE_TMP[quest] = 'completed';
-        });
-        questStateCalculated = false;
-        implementQuestsStateUpdated();
-      } else {
-        //normal procedure
 
         //reset all states to ???
         Object.keys(ALL_QUESTS_LIST).forEach(quest=>{
@@ -737,7 +787,7 @@ getBlockedQuests().forEach(quest => {
         });
 
         //set inputed quests to pending
-        userQuestCookie.pendingQuests.forEach(quest=>{
+        pendingQuests.forEach(quest=>{
           ALL_QUEST_STATE_TMP[quest] = 'pending';
         });
 
@@ -762,7 +812,7 @@ getBlockedQuests().forEach(quest => {
             implementQuestsStateUpdated();
           });
         }
-      }
+
 
       //  -------- FUNCTIONS NESTED FOR CALCULATE QUEST STATE ------------
 
@@ -771,7 +821,7 @@ getBlockedQuests().forEach(quest => {
         var inconsistenciesList = [];
         // starting by one time (5) quests to daily (1), do for each period
         for (var i=5; i>0; i--){
-          userQuestCookie.pendingQuests.forEach(quest=>{
+          pendingQuests.forEach(quest=>{
             //if the quest period match the current loop
             if(periodNumberEquivalence(ALL_QUESTS_LIST[quest].period) === i) {
               //check if there is inconsistencies <=> its requiered quest aren't completed
@@ -906,11 +956,6 @@ getBlockedQuests().forEach(quest => {
           if (startingUnknownQuestsList.length > 0){
             var startingQuest = startingUnknownQuestsList.shift();
 
-          if(has.call(userQuestCookie.userDecisions, startingQuest)){
-              ALL_QUEST_STATE_TMP[startingQuest] = userQuestCookie.userDecisions[startingQuest];
-                askForUnknowQuestState();
-            } else {
-
               $("#QL").hide();
               $("#FC").show('fast');
               displayPartialTree([startingQuest]);
@@ -929,10 +974,9 @@ getBlockedQuests().forEach(quest => {
               $(".MSG_btn").click(function(){
                 closeBubbleMessage($("#MSG_ask_quest_state"));
                 ALL_QUEST_STATE_TMP[startingQuest] = $(this).val();
-                userQuestCookie.userDecisions[startingQuest] =  $(this).val();
                 if ($(this).hasClass("idk")){
-                  if (userQuestCookie.undeterminedQuests.indexOf(startingQuest) === -1){
-                    userQuestCookie.undeterminedQuests.push(startingQuest);
+                  if (undeterminedQuests.indexOf(startingQuest) === -1){
+                    undeterminedQuests.push(startingQuest);
                   }
                 }
                 askForUnknowQuestState();
@@ -945,7 +989,7 @@ getBlockedQuests().forEach(quest => {
                 displayPartialTree(startingQuest);
                 displayQuestData(startingQuest);
               });
-            }
+
           } else {
             //when all the quest have been answered, rerun the loop
             completeRemainingQuestsLoop(callback);
@@ -1013,16 +1057,18 @@ getBlockedQuests().forEach(quest => {
 
 
         $("#MSG_IPQ_error_msg").text("");
-        // reset the last updated timestamp only if not comming from a cookie
-        if (!fromCookie){
-          userQuestCookie.timeStamp = moment().utcOffset("+09:00").format();
-        }
+
+        var userQuestCookie = {};
+        // reset the last updated timestamp
+              userQuestCookie.timeStamp = moment().utcOffset("+09:00").format();
+        userQuestCookie.progress = getSaveStringForCookie();
+        userQuestCookie.undeterminedQuests = undeterminedQuests;
 
         setCookie('user_quests',JSON.stringify(userQuestCookie),365);
 
-        if (userQuestCookie.undeterminedQuests.length >0){
+        if (undeterminedQuests.length >0){
           displayBubbleMessage(`Admiral, about those quests that you didn't know the state, you should complete those quests:<br>
-          <span id="MSG_quest_completion_advice_quests">${getBlockingPeriodicQuests(getBlockedQuests()).join(', ')}</span><br>
+          <span id="MSG_quest_completion_advice_quests">${getBlockingPeriodicQuests(undeterminedQuests).join(', ')}</span><br>
           Update your progress once you are done.`,
           "explaining","MSG_quest_completion_advice",true,false,true,function(){$("#MSG_quest_completion_advice_quests").text($("#MSG_quest_completion_advice_quests").text() + questsUnlocked.join(', '));});
         }
@@ -1049,7 +1095,41 @@ getBlockedQuests().forEach(quest => {
           $("#FC_RM_ending_quests").val("");
           buildPartialFlowchart();
         }
+
+        loadQuestStateFromCookie({progress:getSaveStringForCookie()});
+
       }
+    }
+
+
+    function getSaveStringForCookie(){
+      var output_tmp = {};
+
+      ["pending","completed","locked"].forEach(state => {
+        output_tmp[state] = {};
+        getQuestsInState(ALL_QUEST_STATE,state).forEach(quest => {
+          if (output_tmp[state][quest.charAt(0)] === undefined){
+            output_tmp[state][quest.charAt(0)] = quest.substr(1);
+          }  else {
+            output_tmp[state][quest.charAt(0)] += "," + quest.substr(1) ;
+          }
+        });
+      });
+
+      var outputString = [];
+      Object.keys(output_tmp).forEach(state => {
+        outputString.push(state.charAt(0) + ":" + JSON.stringify(output_tmp[state]));
+      });
+      outputString = outputString.sort(function (a, b) { return b.length - a.length; })
+      outputString.shift();
+
+      var output = {};
+
+      outputString.forEach(string => {
+        output[string.charAt(0)] = JSON.parse(string.substr(2));
+      });
+      console.log( JSON.stringify(output));
+      return JSON.stringify(output);
     }
 
     // return the quests that require the completion of a periodic quest to became pending
@@ -1246,7 +1326,7 @@ getBlockedQuests().forEach(quest => {
         $(`#QL_complete_btn_${quest}`).css('visibility', 'hidden');
       }
       var icon = myDiagram.findNodeForKey(quest).findObject("STATE_ICON");
-      icon.source = questStateCalculated ? `files/webpage/${ALL_QUEST_STATE[quest]}.png` : "files/webpage/transparent.png";
+      icon.source = questStateCalculated ? `files/webpage/${ALL_QUEST_STATE[quest]}.png` : "files/webpage/undefined.png";
     }
 
     // display quest data in the footer
@@ -1254,7 +1334,7 @@ getBlockedQuests().forEach(quest => {
       var quest = ALL_QUESTS_LIST[questCode];
       var color = getQuestColor(questCode);
       $('#FC_FT .cellDiv').css('background', color).css('color',tinycolor(color).isLight() ? "#000000" : "#ffffff");
-      $("#FC_FT_quest_info_state_icon").attr("src",`files/webpage/${ALL_QUEST_STATE[questCode]}.png`);
+      $("#FC_FT_quest_info_state_icon").attr("src",`files/webpage/${questStateCalculated ? ALL_QUEST_STATE[questCode] : "undefined"}.png`);
       $('#FC_FT_quest_info_quest_code').text(questCode);
       $('#FC_FT_quest_info_name_Japanese').text(quest.Jp);
       $('#FC_FT_quest_info_name_English').text(quest.En);
@@ -1885,7 +1965,7 @@ getBlockedQuests().forEach(quest => {
         // validate the input of pending quests
         $('#MSG_IPQ_btn_OK').click(function () {
           var inputedPendingQuests = questInputToArray($("#MSG_IPQ_txt_area").val());
-          calculateQuestState({pendingQuests:inputedPendingQuests,userDecisions:{},undeterminedQuests:[]},false);
+          calculateQuestState(inputedPendingQuests);
         });
       }
     });
@@ -1920,9 +2000,7 @@ getBlockedQuests().forEach(quest => {
 
     // displqy only the remaining quests
     $('#FC_RM_remaining_btn').click(function () {
-      var remainingQuestsList =  getQuestsInState(ALL_QUEST_STATE,"pending").concat(getQuestsInState(ALL_QUEST_STATE,"locked"));
-    displayQuestListSelect(remainingQuestsList);
-displayPartialTree(remainingQuestsList);
+displayRemainingQuests();
     });
 
     //recenter the flowchart viewport
@@ -2146,8 +2224,7 @@ displayPartialTree(remainingQuestsList);
       // if the cookie doesn't exist
       if (cname === "user_quests"){
         // the empty cookie so the code don't bug if cookies are disabled
-        //  return '{"pendingQuests":["A29","A46","A65","A71","B12","B32","B44","Bd8","Bw7","D21","D23","F36","F42"],"userDecisions":{"B38":"locked","G5":"locked","F51":"locked"},"undeterminedQuests":["B38","G5","F51"],"timeStamp":"2017-06-30T23:16:21+09:00"}';
-        return JSON.stringify({pendingQuests:[], userDecisions:{}, undeterminedQuests:[], timeStamp:moment().format()});
+          return JSON.stringify({progress:'{"p":{},"l":{}}', undeterminedQuests:[], timeStamp:moment().format()});
       } else {
         return "";
       }
