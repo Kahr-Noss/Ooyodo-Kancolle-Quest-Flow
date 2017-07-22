@@ -51,6 +51,7 @@ $(function () {
         displayAllQuestBoxes(Object.keys(ALL_QUESTS_LIST));
         activateQuestBoxesEventListenners();
         var questCookie = JSON.parse(getCookie('user_quests'));
+        questCookie.timeStamp = moment().subtract(1,"days");
         console.log(getCookie('user_quests'));
         loadFlowchart();
         resizeWindow();
@@ -379,6 +380,7 @@ $(function () {
               ALL_QUEST_STATE[unlockedQuest] = 'pending';
               updateQuestStateDisplay(unlockedQuest);
               questsCookie.pendingQuests.push(unlockedQuest);
+              delete questsCookie.userDecisions[unlockedQuest];
               questsUnlocked.push(unlockedQuest);
             } else {
               //if yes ask the user if the quest is displayed in game or not.
@@ -542,6 +544,12 @@ $(function () {
         updateQuestStateDisplay(quest);
       });
       updateQuestListDisplay([]);
+      //save the stqte of quests thqt might be unknown after the reset in the cookie
+      console.log(getBlockedQuests());
+getBlockedQuests().forEach(quest => {
+  questsCookie.userDecisions[quest] = ALL_QUEST_STATE[quest];
+});
+
       setCookie('user_quests',JSON.stringify(questsCookie),365);
     }
 
@@ -1012,7 +1020,7 @@ $(function () {
 
         if (userQuestCookie.undeterminedQuests.length >0){
           displayBubbleMessage(`Admiral, about those quests that you didn't know the state, you should complete those quests:<br>
-          <span id="MSG_quest_completion_advice_quests">${getBlockingPeriodicQuests().join(', ')}</span><br>
+          <span id="MSG_quest_completion_advice_quests">${getBlockingPeriodicQuests(getBlockedQuests()).join(', ')}</span><br>
           Update your progress once you are done.`,
           "explaining","MSG_quest_completion_advice",true,false,true,function(){$("#MSG_quest_completion_advice_quests").text($("#MSG_quest_completion_advice_quests").text() + questsUnlocked.join(', '));});
         }
@@ -1043,13 +1051,16 @@ $(function () {
     }
 
     // return the quests that require the completion of a periodic quest to became pending
-    function getBlockingPeriodicQuests(){
+    function getBlockedQuests(){
       //get all the once quests in locked state, with all once quests completed and periodic uncompleted
-      var unknownQuests = getQuestsInState(ALL_QUEST_STATE,"locked")
+      return getQuestsInState(ALL_QUEST_STATE,"locked")
       .filter(function(qst){return ALL_QUEST_STATE[qst] === "locked" && ALL_QUESTS_LIST[qst].period === "once";})
       .filter(function(qst){return ALL_QUESTS_LIST[qst].requires.every(function(q){
         return (ALL_QUEST_STATE[q] === 'completed' && ALL_QUESTS_LIST[q].period === 'once') ||  ALL_QUESTS_LIST[q].period !== 'once';
       });});
+    }
+
+    function getBlockingPeriodicQuests(blockedQuests){
 
       function checkIfQuestIsLockedOnlyByPeriodicQuests(quest){
         var result = true;
@@ -1066,13 +1077,15 @@ $(function () {
       };
 
       var blockingQuests = []
-      unknownQuests.forEach(quest => {
+      blockedQuests.forEach(quest => {
         if (checkIfQuestIsLockedOnlyByPeriodicQuests(quest)){
           blockingQuests = blockingQuests.concat(ALL_QUESTS_LIST[quest].requires.filter(function(qst){return ALL_QUESTS_LIST[qst].period !== "once" && ALL_QUEST_STATE[qst] !== "completed"}));
         }
       });
       return removeDoublonFromArray(blockingQuests);
     }
+
+
 
 
     // return a number depending of the period's string, for loop comparison purposes
@@ -2066,7 +2079,7 @@ displayPartialTree(remainingQuestsList);
         closeBubbleMessage($("#MSG_click_Ooyodo"));
         switch ($(this).val()){
           case "advice":{
-            var blockingQuests = getBlockingPeriodicQuests().join(', ');
+            var blockingQuests = getBlockingPeriodicQuests(getBlockedQuests()).join(', ');
             if (!questStateCalculated){
               displayBubbleMessage(`Admiral... You didn't asked me to track your progression so I have no clue...`,
               "shamed",`MSG_click_Ooyodo_advice`,true,true,true );
