@@ -52,7 +52,7 @@ $(function () {
         activateQuestBoxesEventListenners();
         var questCookie = JSON.parse(getCookie('user_quests'));
         questCookie.timeStamp = moment().subtract(1,"days");
-        console.log(gquestCookie);
+        console.log(questCookie);
         loadFlowchart();
         resizeWindow();
         displayFlowchart();
