@@ -1,3 +1,10 @@
+/*QUESTS TO VERIFY
+B83 req
+B93 req
+B97 req
+F45 req
+
+*/
 const ICONS_LINK = {
 
   //consummables
@@ -14,7 +21,8 @@ const ICONS_LINK = {
   "Large furniture box":"files/webpage/game_icons/Furniture_box_large.png",
   "Skilled Crew Member":"files/webpage/game_icons/Skilled_Crew_Member.png",
   "Irako":"files/webpage/game_icons/Irako.png",
-  "Combat ration":"files/webpage/game_icons/Combat_Ration.png",
+  "Combat Ration":"files/webpage/game_icons/Combat_Ration.png",
+  "Combat Ration (Special Onigiri)":"files/webpage/game_icons/Combat_Ration.png",
   "Furniture Fairy":"files/webpage/game_icons/Furniture_fairy.png",
   "Medal":"files/webpage/game_icons/Medal.png",
   "Present box":"files/webpage/game_icons/Present_box.png",
@@ -72,6 +80,7 @@ const ICONS_LINK = {
   "12.7cm Main Gun":"files/webpage/game_icons/GreenGun.png",
   "Secondary gun":"files/webpage/game_icons/YellowGun.png",
   "Heavy gun":"files/webpage/game_icons/RedGunHeavy.png",
+  "Anti-Air gun":"files/webpage/game_icons/AA_gun.png",
 
 
   // planes
@@ -202,7 +211,7 @@ const ALL_QUESTS_LIST = {
       ["A","Unlocks the expeditions tab",1]
     ],
     "requires":["A3"],
-    "unlocks":["A6", "A9"],
+    "unlocks":["A6", "A9","A69"],
     "period":"once",
     "needs":{}
   },
@@ -259,7 +268,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant construction",1]
     ],
     "requires":["A5"],
-    "unlocks":["A14"],
+    "unlocks":["A14","A12"],
     "period":"once",
     "needs":{}
   },
@@ -299,7 +308,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":["A4"],
-    "unlocks":["A10", "A45", "A69"],
+    "unlocks":["A10", "A45","B87"],
     "period":"once",
     "needs":{}
   },
@@ -318,7 +327,7 @@ const ALL_QUESTS_LIST = {
       ["I","Repair Team",1]
     ],
     "requires":["A9"],
-    "unlocks":["A28", "B12", "B42","B87"],
+    "unlocks":["A28", "B12", "B42"],
     "period":"once",
     "needs":{
       "S":["Akatsuki","Hibiki","Ikazuchi","Inazuma"]
@@ -339,7 +348,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant construction",2]
     ],
     "requires":["B3"],
-    "unlocks":["B10","A12"],
+    "unlocks":["B10"],
     "period":"once",
     "needs":{}
   },
@@ -357,7 +366,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Development material",1]
     ],
-    "requires":["A11"],
+    "requires":["A7"],
     "unlocks":["A13"],
     "period":"once",
     "needs":{}
@@ -377,7 +386,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant construction",2]
     ],
     "requires":["A12"],
-    "unlocks":["A19", "A20"],
+    "unlocks":["A19", "A20","F32"],
     "period":"once",
     "needs":{}
   },
@@ -418,7 +427,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":["A14"],
-    "unlocks":["A16"],
+    "unlocks":["A16","F42"],
     "period":"once",
     "needs":{
       "S":["Myoukou", "Nachi", "Ashigara", "Haguro"]
@@ -483,7 +492,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",2]
     ],
     "requires":["A17"],
-    "unlocks":["A51"],
+    "unlocks":[],
     "period":"once",
     "needs":{
       "S":["Ise","Hyuuga"]
@@ -526,7 +535,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant repair",3]
     ],
     "requires":["A13"],
-    "unlocks":["A21","B11"],
+    "unlocks":["A21","B11","A58"],
     "period":"once",
     "needs":{
       "S":["Choukai","Aoba","Kako","Furutaka","Tenryuu"]
@@ -752,7 +761,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",3]
     ],
     "requires":["A25"],
-    "unlocks":["A33", "B20"],
+    "unlocks":["A33", "B20","A67"],
     "period":"once",
     "needs":{
       "S":["Asashio","Michishio","Ooshio","Arashio"]
@@ -782,7 +791,7 @@ const ALL_QUESTS_LIST = {
   },
   "A33":{
     "Jp":"「第三十駆逐隊（第一次）」を編成せよ！",
-    "En":"Organize the 30th Destroyer Division (First Generation)",
+    "En":"Organize the 30th Destroyer Division (First GeneRation)",
     "content":"Have ONLY Mutsuki, Kisaragi, Yayoi, and Mochizuki in your main fleet",
     "tips":"",
     "ressources":{
@@ -804,7 +813,7 @@ const ALL_QUESTS_LIST = {
   },
   "A34":{
     "Jp":"「第三十駆逐隊(第二次)」を編成せよ！",
-    "En":"Organize the 30th Destroyer Division (Second Generation)",
+    "En":"Organize the 30th Destroyer Division (Second GeneRation)",
     "content":"Have ONLY Mutsuki, Yayoi, Uzuki, and Mochizuki in your main fleet",
     "tips":"",
     "ressources":{
@@ -924,7 +933,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant construction",2]
     ],
     "requires":["B25"],
-    "unlocks":["B26", "F24"],
+    "unlocks":["B26"],
     "period":"once",
     "needs":{
       "S":["Souryuu Kai Ni"]
@@ -1049,7 +1058,7 @@ const ALL_QUESTS_LIST = {
       ["C","Improvement material",5]
     ],
     "requires":["A9"],
-    "unlocks":["Bw10","F17"],
+    "unlocks":["Bw10","F17","F54"],
     "period":"once",
     "needs":{
       "S":["Akashi"]
@@ -1070,8 +1079,8 @@ const ALL_QUESTS_LIST = {
       ["C","Instant repair",2],
       ["C","Development material",2]
     ],
-    "requires":["A23", "B14"],
-    "unlocks":["Bm7", "B58"],
+    "requires":["A23"],
+    "unlocks":["Bm7","A65"],
     "period":"once",
     "needs":{
       "S":["Kasumi","Ashigara"]
@@ -1176,7 +1185,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Development material",2]
     ],
-    "requires":["A18", "B42"],
+    "requires":["B42"],
     "unlocks":["B43"],
     "period":"once",
     "needs":{
@@ -1242,7 +1251,7 @@ const ALL_QUESTS_LIST = {
       ["I","Furniture box medium",1]
     ],
     "requires":["B21", "Bd1"],
-    "unlocks":["B46"],
+    "unlocks":["B46","A78"],
     "period":"once",
     "needs":{
       "S":["Abukuma","Hibiki","Hatsushimo","Wakaba","Samidare","Shimakaze"]
@@ -1263,7 +1272,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant repair",3],
       ["I","Large furniture box",1]
     ],
-    "requires":["C7", "B46"],
+    "requires":["C7"],
     "unlocks":["B47"],
     "period":"once",
     "needs":{
@@ -1315,7 +1324,7 @@ const ALL_QUESTS_LIST = {
   },
   "A58":{
     "Jp":"「第十六戦隊(第一次)」を編成せよ！",
-    "En":"Organize the 16th Squadron (First Generation)",
+    "En":"Organize the 16th Squadron (First GeneRation)",
     "content":"Have Ashigara as flagship with Kuma and Nagara in your main fleet",
     "tips":"",
     "ressources":{
@@ -1328,7 +1337,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",2],
       ["C","Instant repair",2]
     ],
-    "requires":["Bd2"],
+    "requires":["A20"],
     "unlocks":["B52"],
     "period":"once",
     "needs":{
@@ -1351,7 +1360,7 @@ const ALL_QUESTS_LIST = {
       ["I","Skilled Crew Member",1]
     ],
     "requires":["Bm6", "F21"],
-    "unlocks":["B53", "F24"],
+    "unlocks":["B53", "F24","F23"],
     "period":"once",
     "needs":{
       "S":["Zuikaku","Zuihou","Chitose Carrier","Chiyoda Carrier"]
@@ -1416,7 +1425,7 @@ const ALL_QUESTS_LIST = {
       ["I","Skilled Crew Member",1],
       ["I","Irako",1]
     ],
-    "requires":["F29"],
+    "requires":["F29","F23"],
     "unlocks":["F30","F45"],
     "period":"once",
     "needs":{
@@ -1426,7 +1435,7 @@ const ALL_QUESTS_LIST = {
   },
   "A63":{
     "Jp":"「第十六戦隊(第二次)」を編成せよ！",
-    "En":"Organize the 16th Squadron (Second Generation)",
+    "En":"Organize the 16th Squadron (Second GeneRation)",
     "content":"Have Natori as flagship, Isuzu and Kinu in your fleet",
     "tips":"",
     "ressources":{
@@ -1480,7 +1489,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Instant repair",3]
     ],
-    "requires":["B56"],
+    "requires":["B56","A46"],
     "unlocks":["B57"],
     "period":"once",
     "needs":{
@@ -1489,7 +1498,7 @@ const ALL_QUESTS_LIST = {
   },
   "A66":{
     "Jp":"「第三十一戦隊(第一次)」を編成せよ！",
-    "En":"Organize the 31st Division (First Generation)",
+    "En":"Organize the 31st Division (First GeneRation)",
     "content":"Have Isuzu Kai Ni as flagship, Satsuki Kai Ni and Uzuki Kai in your fleet",
     "tips":"",
     "ressources":{
@@ -1524,7 +1533,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",2],
       ["C","Instant repair",2]
     ],
-    "requires":["Bd2"],
+    "requires":["A31","Bd2"],
     "unlocks":["B61"],
     "period":"once",
     "needs":{
@@ -1545,7 +1554,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Instant repair",2]
     ],
-    "requires":["B53", "Bd1"],
+    "requires":["B53"],
     "unlocks":["B68"],
     "period":"once",
     "needs":{
@@ -1566,7 +1575,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Instant repair",2]
     ],
-    "requires":["A9"],
+    "requires":["A4","B53"],
     "unlocks":["B70"],
     "period":"once",
     "needs":{}
@@ -1608,7 +1617,7 @@ const ALL_QUESTS_LIST = {
       ["C","Improvement material",3],
       ["I","Irako",1]
     ],
-    "requires":["B72","Bw5"],
+    "requires":["B72"],
     "unlocks":["B74"],
     "period":"once",
     "needs":{
@@ -1628,7 +1637,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["C","Instant repair",2],
-      ["I","Combat ration",1]
+      ["I","Combat Ration",1]
     ],
     "requires":["B21", "Bd1"],
     "unlocks":["B78"],
@@ -1639,7 +1648,7 @@ const ALL_QUESTS_LIST = {
   },
   "A73":{
     "Jp":"「第十六戦隊(第三次)」を編成せよ！",
-    "En":"Form the 16th Cruiser Division (Third Generation)!",
+    "En":"Form the 16th Cruiser Division (Third GeneRation)!",
     "content":"Have Kinu, Aoba, Kitakami and Ooi in your fleet.",
     "tips":"",
     "ressources":{
@@ -1696,7 +1705,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant repair",2],
       ["I","Irako",1]
     ],
-    "requires":["B31"],
+    "requires":["B31","B52"],
     "unlocks":["B99"],
     "period":"once",
     "needs":{
@@ -1718,7 +1727,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant repair",2],
       ["I","Irako",1]
     ],
-    "requires":["B95","C2","Bm7"],
+    "requires":["B95","C2"],
     "unlocks":["B101"],
     "period":"once",
     "needs":{
@@ -1762,7 +1771,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant repair",4],
       ["I","Repair Team",1]
     ],
-    "requires":["B15"],
+    "requires":["A54","B15"],
     "unlocks":["B103"],
     "period":"once",
     "needs":{
@@ -1784,7 +1793,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant repair",1]
     ],
     "requires":[],
-    "unlocks":[],
+    "unlocks":["B2"],
     "period":"once",
     "needs":{}
   },
@@ -1802,8 +1811,8 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Instant repair",1]
     ],
-    "requires":[],
-    "unlocks":["E1", "E2"],
+    "requires":["B1"],
+    "unlocks":["E1", "E2","B4","F16"],
     "period":"once",
     "needs":{}
   },
@@ -1840,8 +1849,8 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Instant repair",1]
     ],
-    "requires":[],
-    "unlocks":["Bd1"],
+    "requires":["B2"],
+    "unlocks":["Bd1","B5"],
     "period":"once",
     "needs":{
       "M":["1-2"]
@@ -1862,8 +1871,8 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1],
       ["S","Miyuki",1]
     ],
-    "requires":[],
-    "unlocks":["B6"],
+    "requires":["B4"],
+    "unlocks":["B6","B48"],
     "period":"once",
     "needs":{
       "M":["1-2"]
@@ -1884,7 +1893,7 @@ const ALL_QUESTS_LIST = {
       ["S","Tatsuta",1]
     ],
     "requires":["B5"],
-    "unlocks":["B7", "B30","B67"],
+    "unlocks":["B7", "B30","B67","B82"],
     "period":"once",
     "needs":{}
   },
@@ -1941,7 +1950,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":["B8"],
-    "unlocks":["F35"],
+    "unlocks":["F35","B76"],
     "period":"once",
     "needs":{}
   },
@@ -1960,7 +1969,7 @@ const ALL_QUESTS_LIST = {
       ["S","Akagi",1]
     ],
     "requires":["A11"],
-    "unlocks":[],
+    "unlocks":["Bq3"],
     "period":"once",
     "needs":{}
   },
@@ -2044,7 +2053,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant repair",2]
     ],
     "requires":["A22"],
-    "unlocks":["A44", "A46", "A53","A77"],
+    "unlocks":["A44", "A53","A77"],
     "period":"once",
     "needs":{
       "M":["2-3"],
@@ -2209,7 +2218,7 @@ const ALL_QUESTS_LIST = {
   },
   "B22":{
     "Jp":"「第三十駆逐隊(第一次)」出撃せよ！",
-    "En":"Sortie the 30th Destroyer Division (First Generation)",
+    "En":"Sortie the 30th Destroyer Division (First GeneRation)",
     "content":"Sortie Mutsuki, Kisaragi, Mochizuki, Yayoi and 2 additional Destroyers (or Destroyer and Light Cruiser flagship) to World 3-2 and obtain a C-Rank or better at the boss",
     "tips":"",
     "ressources":{
@@ -2748,7 +2757,7 @@ const ALL_QUESTS_LIST = {
   },
   "B46":{
     "Jp":"「第一水雷戦隊」ケ号作戦、突入せよ！",
-    "En":"Rush the 1st Torpedo Squadron to Operation KE",
+    "En":"Rush the 1st Torpedo Squadron to OpeRation KE",
     "content":"Sortie Abukuma as flagship with Hibiki (Верный is ok), Hatsushimo, Wakaba, Samidare and Shimakaze to World 3-2 and obtain a victory (B-Rank or better) at the boss",
     "tips":"",
     "ressources":{
@@ -2762,7 +2771,7 @@ const ALL_QUESTS_LIST = {
       ["I","Furniture Fairy",1]
     ],
     "requires":["A54"],
-    "unlocks":["C7", "F33", "A55"],
+    "unlocks":["C7", "F33"],
     "period":"once",
     "needs":{
       "M":["3-2"],
@@ -2771,7 +2780,7 @@ const ALL_QUESTS_LIST = {
   },
   "B47":{
     "Jp":"「第一水雷戦隊」北方ケ号作戦、再突入！",
-    "En":"Rush the 1st Torpedo Squadron to Operation KE Again",
+    "En":"Rush the 1st Torpedo Squadron to OpeRation KE Again",
     "content":"Sortie Abukuma Kai Ni as flagship with Hibiki (Верный is ok), Yuugumo, Naganami, Akigumo and Shimakaze to World 3-2 and obtain an S-Rank at the boss",
     "tips":"",
     "ressources":{
@@ -2784,7 +2793,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",4],
       ["C","Improvement material",4]
     ],
-    "requires":["A55"],
+    "requires":["A55","C7"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -2806,7 +2815,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["I","Furniture Fairy",1]
     ],
-    "requires":["Bd2"],
+    "requires":["Bd2","B5"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -2851,7 +2860,7 @@ const ALL_QUESTS_LIST = {
       ["I","Irako",1]
     ],
     "requires":["A56"],
-    "unlocks":["A64", "F19", "F20", "D19"],
+    "unlocks":["A64", "F19", "F20", "D19","B95"],
     "period":"once",
     "needs":{
       "M":["5-2"],
@@ -2883,7 +2892,7 @@ const ALL_QUESTS_LIST = {
   },
   "B52":{
     "Jp":"「第十六戦隊(第一次)」出撃せよ！",
-    "En":"Sortie the 16th Squadron (First Generation)",
+    "En":"Sortie the 16th Squadron (First GeneRation)",
     "content":"Sortie Ashigara as flagship, Kuma, Nagara and up to 3 additional ships to World 2-2 and obtain an S-Rank at the boss",
     "tips":"",
     "ressources":{
@@ -2897,7 +2906,7 @@ const ALL_QUESTS_LIST = {
       ["I","Present box",1]
     ],
     "requires":["A58"],
-    "unlocks":["A63"],
+    "unlocks":["A63","A75"],
     "period":"once",
     "needs":{
       "M":["2-2"],
@@ -2920,7 +2929,7 @@ const ALL_QUESTS_LIST = {
       ["I","Irako",1]
     ],
     "requires":["A59"],
-    "unlocks":["A60","A68","F26"],
+    "unlocks":["A60","A68","F26","A69"],
     "period":"once",
     "needs":{
       "M":["1-4"],
@@ -2952,7 +2961,7 @@ const ALL_QUESTS_LIST = {
   },
   "B55":{
     "Jp":"「第十六戦隊(第二次)」出撃せよ！",
-    "En":"Sortie the 16th Squadron (Second Generation)",
+    "En":"Sortie the 16th Squadron (Second GeneRation)",
     "content":"Sortie Natori as flagship, Isuzu, Kinu and up to 3 additional ships to World 2-3 and score an S-rank victory at the boss",
     "tips":"",
     "ressources":{
@@ -2996,7 +3005,7 @@ const ALL_QUESTS_LIST = {
   },
   "B57":{
     "Jp":"「礼号作戦」実施せよ！",
-    "En":"Carry Out Operation Rei-go",
+    "En":"Carry Out OpeRation Rei-go",
     "content":"Sortie Kasumi as flagship, Ashigara, Ooyodo, Asashimo, Kiyoshimo and up to one additional ship to World 2-5 and score an S-rank victory at the boss",
     "tips":"",
     "ressources":{
@@ -3032,7 +3041,7 @@ const ALL_QUESTS_LIST = {
       ["E","Type 13 Air Radar Kai",1],
       ["I","Combat provision",1]
     ],
-    "requires":["A32", "A46", "C2"],
+    "requires":["A32", "C2"],
     "unlocks":["B59"],
     "period":"once",
     "needs":{
@@ -3078,7 +3087,7 @@ const ALL_QUESTS_LIST = {
       ["C","Improvement material",3],
       ["I","Hishimochi",1]
     ],
-    "requires":["A66"],
+    "requires":["A66","Bd1"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -3110,7 +3119,7 @@ const ALL_QUESTS_LIST = {
   },
   "B62":{
     "Jp":"強襲上陸作戦用戦力を増強せよ！",
-    "En":"Bolster the Capability for Amphibious Assault Operations!",
+    "En":"Bolster the Capability for Amphibious Assault OpeRations!",
     "content":"Sortie to World 6-3 and obtain an B-Rank or better at the boss",
     "tips":"",
     "ressources":{
@@ -3123,7 +3132,7 @@ const ALL_QUESTS_LIST = {
       ["C","Improvement material",3],
       ["E","Daihatsu Landing Craft",1]
     ],
-    "requires":["Bw9","F21"],
+    "requires":["Bw9","D19"],
     "unlocks":["B80","F43"],
     "period":"once",
     "needs":{
@@ -3142,11 +3151,11 @@ const ALL_QUESTS_LIST = {
       "B":"0"
     },
     "reward":[
-      ["I","Combat ration",1],
+      ["I","Combat Ration",1],
       ["I","Medal",1]
     ],
     "requires":["Bd2"],
-    "unlocks":["B64"],
+    "unlocks":["B64","D24"],
     "period":"once",
     "needs":{
       "M":["1-3"]
@@ -3164,7 +3173,7 @@ const ALL_QUESTS_LIST = {
       "B":"0"
     },
     "reward":[
-      ["I","Combat ration",1],
+      ["I","Combat Ration",1],
       ["I","Furniture Fairy",1]
     ],
     "requires":["B63", "F31"],
@@ -3209,7 +3218,7 @@ const ALL_QUESTS_LIST = {
       "B":"0"
     },
     "reward":[
-      ["I","Combat ration",1],
+      ["I","Combat Ration",1],
       ["C","Improvement material",3]
     ],
     "requires":["B59", "B65"],
@@ -3437,7 +3446,7 @@ const ALL_QUESTS_LIST = {
       ["I","Furniture box medium",1],
       ["I","Furniture Fairy", 1]
     ],
-    "requires":[],
+    "requires":["B9"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -3460,7 +3469,7 @@ const ALL_QUESTS_LIST = {
       ["I","Irako",1]
     ],
     "requires":["C2"],
-    "unlocks":["F38", "B82"],
+    "unlocks":["F38"],
     "period":"once",
     "needs":{
       "M":["2-2","2-3"]
@@ -3566,9 +3575,9 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["E","Searchlight",1],
-      ["I","Combat ration",1]
+      ["I","Combat Ration",1]
     ],
-    "requires":["B77"],
+    "requires":["B6"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -3599,7 +3608,7 @@ const ALL_QUESTS_LIST = {
   },
   "B84":{
     "Jp":"「第十六戦隊(第三次)」出撃せよ！",
-    "En":"16th Cruiser Division (3rd Generation), sortie!",
+    "En":"16th Cruiser Division (3rd GeneRation), sortie!",
     "content":"Sortie a fleet with Kinu, Aoba, Kitakami, Ooi and up to two wildcards to World 2-4 and obtain at least an A-Rank at the boss node.",
     "tips":"",
     "ressources":{
@@ -3680,7 +3689,7 @@ const ALL_QUESTS_LIST = {
       ["I","Irako",1],
       ["F","Furniture: \"Knit and Flooring\"",1]
     ],
-    "requires":["A10"],
+    "requires":["A9"],
     "unlocks":["B88","B95","G5"],
     "period":"once",
     "needs":{
@@ -3772,7 +3781,7 @@ const ALL_QUESTS_LIST = {
       ["I","Irako",1]
     ],
     "requires":["B69", "Bd5"],
-    "unlocks":["B92", "Bq2","B94","F49","F50"],
+    "unlocks":["B92", "Bq2","B94","F49","F50","Bq4"],
     "period":"once",
     "needs":{
       "M":["6-1"]
@@ -3860,7 +3869,7 @@ const ALL_QUESTS_LIST = {
       ["E","Kyoufuu Kai",1,"Choose one: "],
       ["E","New Kanhon Design Anti-torpedo Bulge (Medium)",1,"or "]
     ],
-    "requires":["B87"],
+    "requires":["B87","B50"],
     "unlocks":["B96","A76"],
     "period":"once",
     "needs":{
@@ -4058,7 +4067,7 @@ const ALL_QUESTS_LIST = {
 
   "WF01":{
     "Jp":"式の準備！(その壱)",
-    "En":"Preparation for the Ceremony (Part I)",
+    "En":"PrepaRation for the Ceremony (Part I)",
     "content":"Scrap equipment twice",
     "tips":"",
     "ressources":{
@@ -4077,7 +4086,7 @@ const ALL_QUESTS_LIST = {
   },
   "WC01":{
     "Jp":"式の準備！(その弐)",
-    "En":"Preparation for the Ceremony (Part II)",
+    "En":"PrepaRation for the Ceremony (Part II)",
     "content":"Win two battles in Exercises",
     "tips":"",
     "ressources":{
@@ -4096,7 +4105,7 @@ const ALL_QUESTS_LIST = {
   },
   "WA01":{
     "Jp":"式の準備！(その参)",
-    "En":"Preparation for the Ceremony (Part III)",
+    "En":"PrepaRation for the Ceremony (Part III)",
     "content":"Have a level 90 to 99 ship as your flagship",
     "tips":"",
     "ressources":{
@@ -4115,7 +4124,7 @@ const ALL_QUESTS_LIST = {
   },
   "WB01":{
     "Jp":"式の準備！(最終)",
-    "En":"Preparation for the Ceremony (Final)",
+    "En":"PrepaRation for the Ceremony (Final)",
     "content":"Defeat the boss in 2-3 with a Level 90-99 flagship (with S rank)",
     "tips":"",
     "ressources":{
@@ -4191,7 +4200,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":[],
-    "unlocks":[],
+    "unlocks":["G2"],
     "period":"once",
     "needs":{}
   },
@@ -4209,7 +4218,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Instant repair",1]
     ],
-    "requires":[],
+    "requires":["G1"],
     "unlocks":["G3"],
     "period":"daily",
     "needs":{}
@@ -4236,7 +4245,7 @@ const ALL_QUESTS_LIST = {
   },
   "G4":{
     "Jp":"「大型艦建造」の準備！(その壱)",
-    "En":"Preparation for Large Ship Construction (Part I)",
+    "En":"PrepaRation for Large Ship Construction (Part I)",
     "content":"Perform 4 successful modernizations",
     "tips":"",
     "ressources":{
@@ -4344,7 +4353,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":["F3"],
-    "unlocks":[],
+    "unlocks":["F42","F48"],
     "period":"once",
     "needs":{}
   },
@@ -4390,7 +4399,7 @@ const ALL_QUESTS_LIST = {
   },
   "F7":{
     "Jp":"装備「開発」集中強化！",
-    "En":"Intensify the Concentration in Developing Equipment",
+    "En":"Intensify the ConcentRation in Developing Equipment",
     "content":"Craft 3 pieces of equipment(Failures are OK)",
     "tips":"",
     "ressources":{
@@ -4403,7 +4412,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",2]
     ],
     "requires":["F6"],
-    "unlocks":["F8","F51","F53"],
+    "unlocks":["F8","F51","F53","F58"],
     "period":"daily",
     "needs":{}
   },
@@ -4448,7 +4457,7 @@ const ALL_QUESTS_LIST = {
   },
   "F10":{
     "Jp":"「大型艦建造」の準備！(その弐)",
-    "En":"Preparation for Large Ship Construction (Part II)",
+    "En":"PrepaRation for Large Ship Construction (Part II)",
     "content":"Scrap equipment 4 times",
     "tips":"",
     "ressources":{
@@ -4467,7 +4476,7 @@ const ALL_QUESTS_LIST = {
   },
   "F11":{
     "Jp":"輸送用ドラム缶の準備",
-    "En":"Preparation for Transport Use Drum Canister",
+    "En":"PrepaRation for Transport Use Drum Canister",
     "content":"Scrap equipment 3 times",
     "tips":"",
     "ressources":{
@@ -4499,7 +4508,7 @@ const ALL_QUESTS_LIST = {
       ["E","Drum Canister (Transport Use)",1]
     ],
     "requires":["Bw5"],
-    "unlocks":[],
+    "unlocks":["C9"],
     "period":"weekly",
     "needs":{}
   },
@@ -4568,7 +4577,7 @@ const ALL_QUESTS_LIST = {
   },
   "F16":{
     "Jp":"「伊良湖」の準備",
-    "En":"Preparation for Irako",
+    "En":"PrepaRation for Irako",
     "content":"Scrap equipment 10 times",
     "tips":"",
     "ressources":{
@@ -4580,7 +4589,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["I","Irako",4]
     ],
-    "requires":["F8"],
+    "requires":["F8","B2"],
     "unlocks":[],
     "period":"once",
     "needs":{}
@@ -4600,7 +4609,7 @@ const ALL_QUESTS_LIST = {
       ["C","Improvement material",7]
     ],
     "requires":["A45"],
-    "unlocks":["F18"],
+    "unlocks":["F18","F54"],
     "period":"once",
     "needs":{}
   },
@@ -4669,7 +4678,7 @@ const ALL_QUESTS_LIST = {
   },
   "F21":{
     "Jp":"試作艤装の準備",
-    "En":"Preparation of the Prototype Equipment",
+    "En":"PrepaRation of the Prototype Equipment",
     "content":"Scrap equipment 7 times",
     "tips":"",
     "ressources":{
@@ -4682,7 +4691,7 @@ const ALL_QUESTS_LIST = {
       ["I","Prototype Flight Deck Catapult",1]
     ],
     "requires":["D19"],
-    "unlocks":["A59", "B62"],
+    "unlocks":["A59","F26"],
     "period":"once",
     "needs":{}
   },
@@ -4723,8 +4732,8 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["I","Prototype Flight Deck Catapult",1]
     ],
-    "requires":["B54"],
-    "unlocks":["F29"],
+    "requires":["B54","A59"],
+    "unlocks":["F29","A62"],
     "period":"once",
     "needs":{}
   },
@@ -4742,7 +4751,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["E","Type 0 Fighter Model 52 (Skilled)",1]
     ],
-    "requires":["F22", "A59", "A39"],
+    "requires":["F22", "A59"],
     "unlocks":["F25", "F26"],
     "period":"once",
     "needs":{
@@ -4763,7 +4772,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["E","Type 0 Fighter Model 52 (Skilled)",1]
     ],
-    "requires":["Bm5", "Bm6", "F24"],
+    "requires":["Bm5", "F24"],
     "unlocks":[],
     "period":"monthly",
     "needs":{
@@ -4784,7 +4793,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["E","Zero Fighter Model 52C (w/ Iwai Flight)",1]
     ],
-    "requires":["B53", "F24"],
+    "requires":["B53", "F24","F21"],
     "unlocks":["F27"],
     "period":"once",
     "needs":{
@@ -4881,7 +4890,7 @@ const ALL_QUESTS_LIST = {
   },
   "F31":{
     "Jp":"新家具の準備",
-    "En":"Preparations for New Furniture",
+    "En":"PrepaRations for New Furniture",
     "content":"Scrap 9 pieces of equipment",
     "tips":"",
     "ressources":{
@@ -4900,7 +4909,7 @@ const ALL_QUESTS_LIST = {
   },
   "F32":{
     "Jp":"新装備の準備",
-    "En":"Preparations for New Equipment",
+    "En":"PrepaRations for New Equipment",
     "content":"Scrap 5 pieces of equipment.",
     "tips":"",
     "ressources":{
@@ -4912,7 +4921,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["I","Furniture box medium",1]
     ],
-    "requires":["Bw2"],
+    "requires":["Bw2","A13"],
     "unlocks":["C9"],
     "period":"once",
     "needs":{}
@@ -4996,8 +5005,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["E","Prototype 61cm Sextuple (Oxygen) Torpedo Mount",1]
     ],
-    "requires":["B71",
-    "F34"],
+    "requires":["B71","F34"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -5007,7 +5015,7 @@ const ALL_QUESTS_LIST = {
   },
   "F37":{
     "Jp":"「航空基地設営」事前準備",
-    "En":"Preparations for the Construction of an Air Base",
+    "En":"PrepaRations for the Construction of an Air Base",
     "content":"Have two 7.7mm Machine Guns & two Type 96 Fighters in your inventory, and scrap two Drum Canisters.",
     "tips":"※Equipment must be unlocked.※Consumes the equipment. ※It doesn't matter whether you scrap the drums before or after procuring the other items.",
     "ressources":{
@@ -5126,7 +5134,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["I","Furniture Fairy",1]
     ],
-    "requires":["C4"],
+    "requires":["F4","A15","C4"],
     "unlocks":["F44"],
     "period":"once",
     "needs":{
@@ -5172,7 +5180,7 @@ const ALL_QUESTS_LIST = {
       ["I","Furniture Fairy",1]
     ],
     "requires":["F42", "C2"],
-    "unlocks":["F48"],
+    "unlocks":[],
     "period":"once",
     "needs":{
       "E":[["14cm Single Gun Mount",2],["12.7cm Twin High-angle Gun Mount",2],["15.2cm Single Gun Mount",2]],
@@ -5216,7 +5224,7 @@ const ALL_QUESTS_LIST = {
       ["E","Kikka Kai",1],
       ["C","Development material",2]
     ],
-    "requires":["C3", "F45"],
+    "requires":["C3", "F45","D21"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -5260,7 +5268,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["I","Furniture Fairy",1]
     ],
-    "requires":["C2", "F44"],
+    "requires":["F4"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -5395,8 +5403,8 @@ const ALL_QUESTS_LIST = {
       ["I","Medal",1,"Choose one: "],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
-    "requires":["F53"],
-    "unlocks":["D23"],
+    "requires":["F53","A45","F17"],
+    "unlocks":["D23","F55"],
     "period":"once",
     "needs":{
       "R":[["Steel",12000]],
@@ -5419,7 +5427,7 @@ const ALL_QUESTS_LIST = {
       ["I","Medal",1,"Choose one: "],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
-    "requires":["D23"],
+    "requires":["D23","F54"],
     "unlocks":[],
     "period":"quarterly",
     "needs":{
@@ -5453,7 +5461,7 @@ const ALL_QUESTS_LIST = {
   },
   "F57":{
     "Jp":"民生産業への協力",
-    "En":"Cooperation with the civil industry",
+    "En":"CoopeRation with the consumer industry",
     "content":"Prepare 12000 fuel, scrap 16 small guns.",
     "tips":"",
     "ressources":{
@@ -5468,7 +5476,7 @@ const ALL_QUESTS_LIST = {
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
     "requires":["F56"],
-    "unlocks":[],
+    "unlocks":["F59"],
     "period":"once",
     "needs":{
       "R":[["Fuel",12000]],
@@ -5489,13 +5497,59 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["E","Zuiun (634 Air Group/Skilled)",1]
     ],
-    "requires":["B102"],
+    "requires":["B102","F7"],
     "unlocks":[],
     "period":"once",
     "needs":{
       "S":["Hyuuga Kai"],
       "I":[["Skilled Crew Member",1]],
       "E":[["Type 99 Dive Bomber",2],["Zuiun",2],["Drum Canister",2]]
+    }
+  },
+  "F59":{
+    "Jp":"民生産業への協力を継続せよ！",
+    "En":"Continue your coopeRation with the Consumer Industry.",
+    "content":"Prepare 15000 Steel and scrap 10 Anti-Air Guns.",
+    "tips":"",
+    "ressources":{
+      "F":"0",
+      "A":"0",
+      "S":"0",
+      "B":"300"
+    },
+    "reward":[
+      ["I","Combat Ration",2],
+      ["I","Medal",1,"Choose one: "],
+      ["I","Furniture Fairy",1,"or "]
+    ],
+    "requires":["F57"],
+    "unlocks":[],
+    "period":"once",
+    "needs":{
+      "R":[["Steel",15000]],
+      "E":[["Anti-Air gun",10]]
+    }
+  },
+  "F60":{
+    "Jp":"新型戦闘糧食の試作",
+    "En":"The Start of the Special Combat Rations.",
+    "content":"Prepare 2 Combat Rations, 800 Fuel and 150 Bauxite.",
+    "tips":"",
+    "ressources":{
+      "F":"0",
+      "A":"100",
+      "S":"0",
+      "B":"0"
+    },
+    "reward":[
+      ["I","Combat Ration (Special Onigiri)",1]
+    ],
+    "requires":[],
+    "unlocks":[],
+    "period":"once",
+    "needs":{
+      "R":[["Fuel",800],["Bauxite",150]],
+      "I":[["Combat Ration",2]]
     }
   },
 
@@ -5535,7 +5589,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":["B2"],
-    "unlocks":[],
+    "unlocks":["E3"],
     "period":"once",
     "needs":{}
   },
@@ -5553,7 +5607,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Instant repair",2]
     ],
-    "requires":[],
+    "requires":["E2"],
     "unlocks":["E4"],
     "period":"daily",
     "needs":{}
@@ -5589,9 +5643,11 @@ const ALL_QUESTS_LIST = {
       "S":"30",
       "B":"30"
     },
-    "reward":[      ],
+    "reward":[
+      ["I","Furniture box small",1]
+    ],
     "requires":["A5"],
-    "unlocks":["D4"],
+    "unlocks":["D4","D2"],
     "period":"once",
     "needs":{}
   },
@@ -5609,8 +5665,8 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Development material",1]
     ],
-    "requires":[],
-    "unlocks":["D3","D22", "B59", "D20"],
+    "requires":["D1"],
+    "unlocks":["D3","D22", "B59"],
     "period":"daily",
     "needs":{}
   },
@@ -5636,7 +5692,7 @@ const ALL_QUESTS_LIST = {
   },
   "D4":{
     "Jp":"大規模遠征作戦、発令！",
-    "En":"Official Announcement, Operation Large-scale Expedition",
+    "En":"Official Announcement, OpeRation Large-scale Expedition",
     "content":"Perform 30 successful expeditions within the same week.",
     "tips":"",
     "ressources":{
@@ -5656,7 +5712,7 @@ const ALL_QUESTS_LIST = {
   },
   "D5":{
     "Jp":"第一次潜水艦派遣作戦",
-    "En":"The First Submarine Dispatch Operation",
+    "En":"The First Submarine Dispatch OpeRation",
     "content":"Complete Expedition 30 for the first time",
     "tips":"",
     "ressources":{
@@ -5677,7 +5733,7 @@ const ALL_QUESTS_LIST = {
   },
   "D6":{
     "Jp":"第二次潜水艦派遣作戦",
-    "En":"The Second Submarine Dispatch Operation",
+    "En":"The Second Submarine Dispatch OpeRation",
     "content":"Complete Expedition 30 one more time",
     "tips":"",
     "ressources":{
@@ -5698,7 +5754,7 @@ const ALL_QUESTS_LIST = {
   },
   "D7":{
     "Jp":"潜水艦派遣作戦による技術入手の継続",
-    "En":"Continue to Obtain Technology through Submarine Dispatch Operations",
+    "En":"Continue to Obtain Technology through Submarine Dispatch OpeRations",
     "content":"Complete Expedition 30 two more times",
     "tips":"",
     "ressources":{
@@ -5720,7 +5776,7 @@ const ALL_QUESTS_LIST = {
   },
   "D8":{
     "Jp":"潜水艦派遣による海外艦との接触作戦",
-    "En":"Operation Contact Foreign Ship through Submarine Dispatch",
+    "En":"OpeRation Contact Foreign Ship through Submarine Dispatch",
     "content":"Complete Expedition 31",
     "tips":"",
     "ressources":{
@@ -5742,7 +5798,7 @@ const ALL_QUESTS_LIST = {
   },
   "D9":{
     "Jp":"南方への輸送作戦を成功させよ！",
-    "En":"Complete the Transport Operations towards South",
+    "En":"Complete the Transport OpeRations towards South",
     "content":"Complete Expedition 37 or 38",
     "tips":"",
     "ressources":{
@@ -5827,7 +5883,7 @@ const ALL_QUESTS_LIST = {
   },
   "D13":{
     "Jp":"遠洋潜水艦作戦を実施せよ！",
-    "En":"Carry Out the Deep Sea Submarine Operations",
+    "En":"Carry Out the Deep Sea Submarine OpeRations",
     "content":"Complete Expedition 39",
     "tips":"",
     "ressources":{
@@ -5849,7 +5905,7 @@ const ALL_QUESTS_LIST = {
   },
   "D14":{
     "Jp":"遠洋潜水艦作戦の成果を拡大せよ！",
-    "En":"Expand the Result of the Deep Sea Submarine Operations",
+    "En":"Expand the Result of the Deep Sea Submarine OpeRations",
     "content":"Complete Expedition 39 two more times",
     "tips":"",
     "ressources":{
@@ -5893,7 +5949,7 @@ const ALL_QUESTS_LIST = {
   },
   "D16":{
     "Jp":"囮機動部隊支援作戦を実施せよ！",
-    "En":"Carry Out the Decoy Task Force Support Operation",
+    "En":"Carry Out the Decoy Task Force Support OpeRation",
     "content":"Complete Expedition 15",
     "tips":"",
     "ressources":{
@@ -5972,7 +6028,7 @@ const ALL_QUESTS_LIST = {
       ["I","Large furniture box",1]
     ],
     "requires":["D9", "B50"],
-    "unlocks":["F21"],
+    "unlocks":["F21","B62"],
     "period":"once",
     "needs":{
       "M":["Exp. 35","Exp. 26"]
@@ -5980,7 +6036,7 @@ const ALL_QUESTS_LIST = {
   },
   "D20":{
     "Jp":"潜水艦派遣作戦による航空機技術入手",
-    "En":"Submarine Dispatch Operation to Acquire Aircraft Technology",
+    "En":"Submarine Dispatch OpeRation to Acquire Aircraft Technology",
     "content":"Complete Expedition 30 & 31",
     "tips":"",
     "ressources":{
@@ -5992,7 +6048,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["I","New Technology Aircraft Blueprint",1]
     ],
-    "requires":["D2", "D6"],
+    "requires":["D6"],
     "unlocks":["D21"],
     "period":"once",
     "needs":{
@@ -6001,7 +6057,7 @@ const ALL_QUESTS_LIST = {
   },
   "D21":{
     "Jp":"潜水艦派遣作戦による噴式技術の入手",
-    "En":"Submarine Dispatch Operation to Acquire Jet Engine Technology",
+    "En":"Submarine Dispatch OpeRation to Acquire Jet Engine Technology",
     "content":"Have 5000 steel and 1500 bauxite. Complete Expedition 30 and 31 once each. (The resources will be consumed upon Quest Completion)",
     "tips":"",
     "ressources":{
@@ -6015,7 +6071,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",2]
     ],
     "requires":["D20", "B88"],
-    "unlocks":["F47"],
+    "unlocks":["F47","F46"],
     "period":"once",
     "needs":{
       "M":["Exp. 30","Exp. 31"],
@@ -6065,6 +6121,28 @@ const ALL_QUESTS_LIST = {
       "M":["Exp. 4","Exp. 5","Exp. 9"]
     }
   },
+  "D24":{
+    "Jp":"海上通商航路の警戒を厳とせよ！",
+    "En":"Stay Alert on the Maritime Routes!",
+    "content":"Complete expedition 3, expedition 4, expedition 5, expedition 10 once. ",
+    "tips":"",
+    "ressources":{
+      "F":"800",
+      "A":"0",
+      "S":"0",
+      "B":"0"
+    },
+    "reward":[
+      ["C","Development material",4],
+      ["I","Combat Ration",2]
+    ],
+    "requires":["B63"],
+    "unlocks":[],
+    "period":"quarterly",
+    "needs":{
+      "M":["Exp. 3","Exp. 4","Exp. 5","Exp. 10"]
+    }
+  },
 
 
 
@@ -6083,7 +6161,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":[],
-    "unlocks":[],
+    "unlocks":["C2"],
     "period":"once",
     "needs":{}
   },
@@ -6101,8 +6179,8 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Instant construction",1]
     ],
-    "requires":[],
-    "unlocks":["C3", "C4", "B58", "B77", "C10", "C11", "F44", "F48","A76", "B101"],
+    "requires":["C1"],
+    "unlocks":["C3", "C4", "B58", "B77", "C10", "C11", "F44","A76", "B101"],
     "period":"daily",
     "needs":{}
   },
@@ -6186,7 +6264,7 @@ const ALL_QUESTS_LIST = {
   },
   "C7":{
     "Jp":"北方再突入に備え、練度向上に努めよ！",
-    "En":"Strive to Increase the Level of Training in Preparation for Another Rush to the Northern Sea",
+    "En":"Strive to Increase the Level of Training in PrepaRation for Another Rush to the Northern Sea",
     "content":"Get 4 victories in Exercises within the same day",
     "tips":"",
     "ressources":{
@@ -6200,7 +6278,7 @@ const ALL_QUESTS_LIST = {
       ["C","Improvement material",1]
     ],
     "requires":["B46"],
-    "unlocks":["A55"],
+    "unlocks":["A55","B47"],
     "period":"once",
     "needs":{}
   },
@@ -6239,7 +6317,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",2],
       ["I","Combat provision",1]
     ],
-    "requires":["F32", "Bd2"],
+    "requires":["F32", "Bd2","F12"],
     "unlocks":["F33"],
     "period":"once",
     "needs":{}
@@ -6286,6 +6364,7 @@ const ALL_QUESTS_LIST = {
   },
 
 
+
   "Bq1":{
     "Jp":"沖ノ島海域迎撃戦",
     "En":"Okinoshima Sea Counter Attack",
@@ -6310,7 +6389,7 @@ const ALL_QUESTS_LIST = {
   },
   "Bq2":{
     "Jp":"戦果拡張任務！「Ｚ作戦」前段作戦",
-    "En":"Ranking Expansion Mission: 'Operation Z' Frontal Operation!",
+    "En":"Ranking Expansion Mission: 'OpeRation Z' Frontal OpeRation!",
     "content":"Sortie to World 2-4, 6-1, 6-3 and obtain A-rank or higher victories at the Boss nodes. Sortie to World 6-4 and obtain an S-rank victory at the Boss node.",
     "tips":"",
     "ressources":{
@@ -6329,6 +6408,50 @@ const ALL_QUESTS_LIST = {
     "period":"quarterly",
     "needs":{
       "M":["2-4","6-1","6-3","6-4"]
+    }
+  },
+  "Bq3":{
+    "Jp":"強行輸送艦隊、抜錨！",
+    "En":"Transport Fleet Forces, Launch!",
+    "content":"Sortie a fleet with either 2 Aviation Battleships and up to 4 additional ships or 2 Fleet Oilers along with up to 4 additional ships to world 1-6 and reach the goal point twice.",
+    "tips":"",
+    "ressources":{
+      "F":"1000",
+      "A":"400",
+      "S":"400",
+      "B":"0"
+    },
+    "reward":[
+      ["C","Instant Repair",4],
+    ["I","Underway Replenishment",1]
+    ],
+    "requires":["B10"],
+    "unlocks":["Bq4"],
+    "period":"quarterly",
+    "needs":{
+      "M":["1-6"]
+    }
+  },
+  "Bq4":{
+    "Jp":"前線の航空偵察を実施せよ！",
+    "En":"Perform aerial reconnaissance on the frontlines!",
+    "content":"Sortie a fleet with 1 Seaplane Tender, 2 Light Cruisers + 3 additional ships to world 6-3 and score 2 A-rank or better victories at the boss node.",
+    "tips":"",
+    "ressources":{
+      "F":"0",
+      "A":"800",
+      "S":"0",
+      "B":"1000"
+    },
+    "reward":[
+      ["C","Development Material",8],
+    ["C","Improvement Material",4]
+    ],
+    "requires":["B91","Bq3"],
+    "unlocks":[],
+    "period":"quarterly",
+    "needs":{
+      "M":["6-3"]
     }
   },
   "Bm1":{
@@ -6458,7 +6581,7 @@ const ALL_QUESTS_LIST = {
       ["C","Improvement material",2]
     ],
     "requires":["B20", "Bw4"],
-    "unlocks":["Bm7", "Bq1", "A56", "A59", "F22","F25"],
+    "unlocks":["Bm7", "Bq1", "A56", "A59", "F22"],
     "period":"monthly",
     "needs":{
       "M":["4-2"]
@@ -6480,7 +6603,7 @@ const ALL_QUESTS_LIST = {
       ["C","Improvement material",2]
     ],
     "requires":["A46", "Bm6"],
-    "unlocks":["A61","A76"],
+    "unlocks":["A61"],
     "period":"monthly",
     "needs":{
       "M":["2-5"]
@@ -6488,7 +6611,7 @@ const ALL_QUESTS_LIST = {
   },
   "Bw1":{
     "Jp":"あ号作戦",
-    "En":"Operation A-gou",
+    "En":"OpeRation A-gou",
     "content":"Launch your fleet 36 times, encounter 24 bosses, kill 12 bosses, and get 6 S-Rank victories",
     "tips":"",
     "ressources":{
@@ -6508,7 +6631,7 @@ const ALL_QUESTS_LIST = {
   },
   "Bw2":{
     "Jp":"い号作戦",
-    "En":"Operation I-gou",
+    "En":"OpeRation I-gou",
     "content":"Sink 20 Aircraft Carriers.Light Carriers are fine too",
     "tips":"",
     "ressources":{
@@ -6527,7 +6650,7 @@ const ALL_QUESTS_LIST = {
   },
   "Bw3":{
     "Jp":"海上通商破壊作戦",
-    "En":"Maritime Trade Disrupt Operation",
+    "En":"Maritime Trade Disrupt OpeRation",
     "content":"Sink 20 Transport Ships",
     "tips":"",
     "ressources":{
@@ -6546,7 +6669,7 @@ const ALL_QUESTS_LIST = {
   },
   "Bw4":{
     "Jp":"ろ号作戦",
-    "En":"Operation Ro-gou",
+    "En":"OpeRation Ro-gou",
     "content":"Sink 50 Transport Ships",
     "tips":"",
     "ressources":{
@@ -6579,7 +6702,7 @@ const ALL_QUESTS_LIST = {
       ["C","Improvement material",1]
     ],
     "requires":["Bw2"],
-    "unlocks":["Bw6", "Bw7", "F12", "A71", "B72", "F41","B100"],
+    "unlocks":["Bw6", "Bw7", "F12", "B72", "F41","B100"],
     "period":"weekly",
     "needs":{}
   },
@@ -6707,7 +6830,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":["B4"],
-    "unlocks":["Bd2", "Bd4", "Bd6", "A54", "A68", "A72"],
+    "unlocks":["Bd2", "Bd4", "Bd6", "A54", "A72","B60"],
     "period":"daily",
     "needs":{}
   },
@@ -6727,7 +6850,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":["Bd1"],
-    "unlocks":["Bd3", "Bd5", "Bw1", "Bw3", "A58", "A66", "A67", "B48", "B63", "C8", "C9", "F31", "B98"],
+    "unlocks":["Bd3", "Bd5", "Bw1", "Bw3", "A66", "A67", "B48", "B63", "C8", "C9", "F31", "B98"],
     "period":"daily",
     "needs":{}
   },
