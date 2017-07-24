@@ -1832,12 +1832,12 @@ var undeterminedQuests = [];
       resetTimes.daily = moment(lastTime).diff(dailyReset) < 0 ? dailyReset : dailyReset.add(1,"days");
       //weekly
       // reset every monday at 5 AM
-      var weeklyReset =  moment(lastTime).utcOffset("+00:00",false).isoWeekday(1).hour(20).minute(0).second(0);
-      resetTimes.weekly = moment(lastTime).diff(weeklyReset) < 0 ? weeklyReset : weeklyReset.add(1,"weeks").subtract(1,"days");
+      var weeklyReset =  moment(lastTime).utcOffset("+00:00",false).isoWeekday(1).hour(20).minute(0).second(0).subtract(1,"days");
+      resetTimes.weekly = moment(lastTime).diff(weeklyReset) < 0 ? weeklyReset : weeklyReset.add(1,"weeks");
       //monthly
       // reset every month at 5 AM
-      var MonthlyReset =  moment(lastTime).utcOffset("+00:00",false).date(1).hour(20).minute(0).second(0);
-      resetTimes.monthly = moment(lastTime).diff(MonthlyReset) < 0 ? MonthlyReset : MonthlyReset.add(1,"months").subtract(1,"days");
+      var MonthlyReset =  moment(lastTime).utcOffset("+00:00",false).date(1).hour(20).minute(0).second(0).subtract(1,"days");
+      resetTimes.monthly = moment(lastTime).diff(MonthlyReset) < 0 ? MonthlyReset : MonthlyReset.add(1,"months");
       //quarterly
       // reset first of march, june, september and December => the day before UTC su substract one day
       // months are 0 indexed
