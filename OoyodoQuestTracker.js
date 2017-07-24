@@ -51,7 +51,6 @@ $(function () {
         displayAllQuestBoxes(Object.keys(ALL_QUESTS_LIST));
         activateQuestBoxesEventListenners();
         var questCookie = JSON.parse(getCookie('user_quests'));
-questCookie.timeStamp = moment(questCookie.timeStamp).subtract(1,"days");
         console.log(questCookie);
         loadFlowchart();
         resizeWindow();
@@ -1851,7 +1850,6 @@ var undeterminedQuests = [];
       else  if (moment(lastTime).diff(thisYear_September)<0){resetTimes.quarterly = thisYear_September;}
       else  if (moment(lastTime).diff(thisYear_December)<0){resetTimes.quarterly = thisYear_December;}
       else  {resetTimes.quarterly = nextYear_March;}
-      console.log(resetTimes);
       return resetTimes;
 
     }
