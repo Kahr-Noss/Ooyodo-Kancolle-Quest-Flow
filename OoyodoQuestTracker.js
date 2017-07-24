@@ -1851,6 +1851,7 @@ var undeterminedQuests = [];
       else  if (moment(lastTime).diff(thisYear_September)<0){resetTimes.quarterly = thisYear_September;}
       else  if (moment(lastTime).diff(thisYear_December)<0){resetTimes.quarterly = thisYear_December;}
       else  {resetTimes.quarterly = nextYear_March;}
+      console.log(resetTimes);
       return resetTimes;
 
     }
