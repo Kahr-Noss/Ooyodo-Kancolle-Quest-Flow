@@ -3,6 +3,8 @@ B83 req
 B93 req
 B97 req
 F45 req
+A79
+B104
 
 */
 const ICONS_LINK = {
@@ -1776,6 +1778,28 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{
       "S":["Yura Kai Ni", "Murasame" ,"Yuudachi", "Harusame", "Samidare"]
+    }
+  },
+  "A79":{
+    "Jp":"精鋭「第二二駆逐隊」を再編成せよ！",
+    "En":"Reorganize the Elite 22th Destroyer Squadron!",
+    "content":"Have Fumizuki Kai Ni, Satsuki Kai Ni, Minazuki Kai and Nagatsuki Kai in your first fleet",
+    "tips":"",
+    "ressources":{
+      "F":"220",
+      "A":"0",
+      "S":"220",
+      "B":"0"
+    },
+    "reward":[
+      ["C","Instant repair",2],
+      ["I","Combat Ration",2]
+    ],
+    "requires":[],
+    "unlocks":["B104"],
+    "period":"once",
+    "needs":{
+      "S":["Fumizuki Kai Ni", "Satsuki Kai Ni" ,"Nagatsuki Kai", "Minazuki Kai"]
     }
   },
   "B1":{
@@ -4062,7 +4086,30 @@ const ALL_QUESTS_LIST = {
       "M":["2-3", "5-1"]
     }
   },
-
+  "B104":{
+    "Jp":"精鋭「第二二駆逐隊」出撃せよ!",
+    "En":"Sortie the Elite 22th Destroyer Squadron!",
+    "content":"Sortie a torpedo squadron consists of Fumizuki Kai Ni, Satsuki Kai Ni, Minazuki Kai and Nagatsuki Kai to world 3-2 and obtain an S-rank victory at the boss node.",
+    "tips":"",
+    "ressources":{
+      "F":"0",
+      "A":"700",
+      "S":"0",
+      "B":"100"
+    },
+    "reward":[
+      ["I","Reinforcement Expansion",1,"Choose one: "],
+      ["E","Daihatsu Landing Craft",1,"or "],
+      ["I","New Model Gun Mount Improvement Material",1,"or "]
+    ],
+    "requires":["A79"],
+    "unlocks":[],
+    "period":"once",
+    "needs":{
+      "S":["Fumizuki Kai Ni", "Satsuki Kai Ni", "Minazuki Kai", "Nagatsuki Kai"],
+      "M":["3-2"]
+    }
+  },
 
 
   "WF01":{
