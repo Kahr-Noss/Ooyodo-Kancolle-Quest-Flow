@@ -1800,7 +1800,7 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{
       "S":["Fumizuki Kai Ni", "Satsuki Kai Ni" ,"Nagatsuki Kai", "Minazuki Kai"]
-    }
+    },
   },
   "B1":{
     "Jp":"はじめての「出撃」！",
@@ -3628,7 +3628,7 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{
       "M":["1-4"]
-    }
+    },
   },
   "B84":{
     "Jp":"「第十六戦隊(第三次)」出撃せよ！",
@@ -6999,6 +6999,25 @@ const ALL_QUESTS_LIST = {
     "needs":{
       "M":["2-1", "2-2", "2-3", "2-4", "2-5"]
     }
+  },
+  "Bd8":{
+    "Jp":"敵潜水艦を制圧せよ！",
+    "En":"Suppress the Enemy Submarines",
+    "content":"Sink 6 enemy Submarines",
+    "tips":"",
+    "ressources":{
+      "F":"300",
+      "A":"30",
+      "S":"300",
+      "B":"30"
+    },
+    "reward":[
+      ["C","Instant repair",1]
+    ],
+    "requires":["Bd7"],
+    "unlocks":["B49"],
+    "period":"daily",
+    "needs":{}
   },
   "Unknown":{
     "Jp":"知らない必要クエスト",
