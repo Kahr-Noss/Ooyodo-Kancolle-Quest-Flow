@@ -1,3 +1,5 @@
+Ooyodo quest flowchart is a tool for the Japanese game Kantai Collection that helps you too browse efficently through and manage the quests.
+
 # Functions:
 
 ## Flowchart : 
