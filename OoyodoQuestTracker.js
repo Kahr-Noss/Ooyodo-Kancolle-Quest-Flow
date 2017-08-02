@@ -12,6 +12,7 @@ $(function () {
     G:"#CAA6DD",
     S:"#EC6063",
     W:"#FDD0F0",
+    U:"#9494b8",
     selected:{
       border_color:"#ff0000",
       border_width:10,
@@ -293,7 +294,7 @@ $(function () {
       myDiagram.clearHighlighteds();
       myDiagram.clearSelection();
       myDiagram.nodes.each(function(n) {
-        updateNodeDisplay(n, COLORS.notHighlighted.background_color,"notHighlighted",ALL_QUESTS_LIST[n.data.key].period);
+        updateNodeDisplay(n, COLORS.notHighlighted.background_color,"notHighlighted");
       });
 
       selectedNodes.forEach(quest => {
@@ -303,7 +304,7 @@ $(function () {
         }
         //for requirements calculation purposes, the highlight downward will always be run, but only displayed is the checkbox is checked
         highlightDownward(node, requieredQuestList);
-        updateNodeDisplay(node, getQuestColor(node.data.key), "selected",ALL_QUESTS_LIST[node.data.key].period);
+        updateNodeDisplay(node, getQuestColor(node.data.key), "selected");
       });
       model.commitTransaction("highlight");
       // delete doubles
@@ -315,7 +316,7 @@ $(function () {
 
     // recrusive function that highlight unlocked quests
     function highlightUpward(node){
-      updateNodeDisplay(node, getQuestColor(node.data.key),"default",ALL_QUESTS_LIST[node.data.key].period);
+      updateNodeDisplay(node, getQuestColor(node.data.key),"default");
       node.findLinksOutOf().each(function(link) {
         link.isHighlighted = true;
         if(link.toNode.visible){
@@ -332,7 +333,7 @@ $(function () {
         }
         // display only if highlight_downward is checked
         if($("#FC_RM_highlight_downward").is(':checked')){
-          updateNodeDisplay(node, getQuestColor(node.data.key),"default",ALL_QUESTS_LIST[node.data.key].period);
+          updateNodeDisplay(node, getQuestColor(node.data.key),"default");
         }
         node.findLinksInto().each(function(link) {
           // display only if highlight_downward is checked
@@ -351,7 +352,7 @@ $(function () {
       myDiagram.startTransaction("no highlighteds");
       myDiagram.clearHighlighteds();
       myDiagram.nodes.each(function(n) {
-        updateNodeDisplay(n, getQuestColor(n.data.key),"default", ALL_QUESTS_LIST[n.data.key].period);
+        updateNodeDisplay(n, getQuestColor(n.data.key),"default");
       });
       myDiagram.commitTransaction("no highlighteds");
     }
@@ -580,6 +581,7 @@ $(function () {
           });
         }
       });
+
       displayQuestListSelect(Object.keys(ALL_QUESTS_LIST));
       return JSON.stringify({nodeDataArray:questNodeDataArray, linkDataArray:questLinkDataArray});
     };
@@ -1302,7 +1304,7 @@ var undeterminedQuests = [];
     // **********    DISPLAY FUNCTIONS   ***********
 
     // change the colors of a node on flowchart
-    function updateNodeDisplay(node,fill, displayMode, period){
+    function updateNodeDisplay(node,fill, displayMode){
       node.findObject("SHAPE").fill = fill;
       node.findObject("SHAPE").stroke = COLORS[displayMode].border_color;
       node.findObject("SHAPE").strokeWidth =  COLORS[displayMode].border_width;
@@ -1326,6 +1328,7 @@ var undeterminedQuests = [];
 
     // display quest data in the footer
     function displayQuestData(questCode){
+      if(questCode !== "unknown"){
       var quest = ALL_QUESTS_LIST[questCode];
       var color = getQuestColor(questCode);
       $('#FC_FT .cellDiv').css('background', color).css('color',tinycolor(color).isLight() ? "#000000" : "#ffffff");
@@ -1350,6 +1353,7 @@ var undeterminedQuests = [];
         addRibbonToDiv($("#FC_FT_ribbon_support"),getRibbonColor(ALL_QUESTS_LIST[questCode].period), ALL_QUESTS_LIST[questCode].period);
       }
     }
+  }
 
     // display all the quest boxes listed
     function displayAllQuestBoxes(listQuests){

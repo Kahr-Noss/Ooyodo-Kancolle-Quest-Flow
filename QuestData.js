@@ -2,7 +2,7 @@
 B83 req
 B93 req
 B97 req
-F45 req
+F60
 A79
 B104
 
@@ -1795,7 +1795,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant repair",2],
       ["I","Combat Ration",2]
     ],
-    "requires":[],
+    "requires":["Unknown"],
     "unlocks":["B104"],
     "period":"once",
     "needs":{
@@ -3623,7 +3623,7 @@ const ALL_QUESTS_LIST = {
       ["I","Furniture box medium",1],
       ["I","Furniture Fairy",1]
     ],
-    "requires":[],
+    "requires":["Unknown"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -3848,7 +3848,7 @@ const ALL_QUESTS_LIST = {
       ["I","Irako",1],
       ["I","Mamiya",1]
     ],
-    "requires":[],
+    "requires":["Unknown"],
     "unlocks":["B94"],
     "period":"once",
     "needs":{
@@ -3939,7 +3939,7 @@ const ALL_QUESTS_LIST = {
       ["I","Irako",2],
       ["I","Furniture Fairy",1]
     ],
-    "requires":[],
+    "requires":["Unknown"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -5591,7 +5591,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["I","Combat Ration (Special Onigiri)",1]
     ],
-    "requires":[],
+    "requires":["Unknown"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -7000,23 +7000,21 @@ const ALL_QUESTS_LIST = {
       "M":["2-1", "2-2", "2-3", "2-4", "2-5"]
     }
   },
-  "Bd8":{
-    "Jp":"敵潜水艦を制圧せよ！",
-    "En":"Suppress the Enemy Submarines",
-    "content":"Sink 6 enemy Submarines",
-    "tips":"",
+  "Unknown":{
+    "Jp":"知らない必要クエスト",
+    "En":"Unknown requierments",
+    "content":"The quests linked to this haven't their requiered quests figured out yet.",
+    "tips":"Just wqit for qn update",
     "ressources":{
-      "F":"300",
-      "A":"30",
-      "S":"300",
-      "B":"30"
+      "F":"#",
+      "A":"#",
+      "S":"#",
+      "B":"#"
     },
-    "reward":[
-      ["C","Instant repair",1]
-    ],
-    "requires":["Bd7"],
-    "unlocks":["B49"],
-    "period":"daily",
+    "reward":[],
+    "requires":[],
+    "unlocks":["B83","B93","B97","F60","A79"],
+    "period":"once",
     "needs":{}
   }
 }
