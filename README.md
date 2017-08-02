@@ -1,6 +1,6 @@
-Functions:
+#Functions:
 
-Cuteness overflow: A little Ooyodo will be there to help you with your quest management.
+*Cuteness overflow: A little Ooyodo will be there to help you with your quest management.
 
 Flowchart : Browse through the full quest tree of Kancolle, search, and plan out your actions with the following tools:
   Interactive flowchart: Zoom, move around and highlight quests chains by clicking on a quest or typing it's code, and find all the other quests linked to it.
