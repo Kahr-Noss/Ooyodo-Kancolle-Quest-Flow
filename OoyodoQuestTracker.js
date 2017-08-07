@@ -1444,7 +1444,7 @@ var undeterminedQuests = [];
             } else {
               if (has.call(ICONS_LINK, item[0])){
                 // if the item icon is listed, show it
-                requirementsHTML += `${item[1]} x <span><img class="reward_icon" src="${ICONS_LINK[item]}"></span> ${item[0]}<br>`;
+                requirementsHTML += `${item[1]} x <span><img class="reward_icon" src="${ICONS_LINK[item[0]]}"></span> ${item[0]}<br>`;
               } else{
                 requirementsHTML += `${item[1]} x ${item[0]}<br>`;
               }
