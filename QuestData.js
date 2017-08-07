@@ -136,6 +136,10 @@ const ICONS_LINK = {
 "Zuiun (634 Air Group/Skilled)":"files/webpage/game_icons/Seaplane.png",
   //other
   "350 Ranking points":"files/webpage/game_icons/Ranking_point.png",
+  "Fuel":"files/webpage/game_icons/Fuel.png",
+  "Ammo":"files/webpage/game_icons/Ammo.png",
+  "Steel":"files/webpage/game_icons/Steel.png",
+  "Bauxite":"files/webpage/game_icons/Bauxite.png",
 }
 
 
