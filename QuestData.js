@@ -6473,7 +6473,7 @@ const ALL_QUESTS_LIST = {
       "B":"0"
     },
     "reward":[
-      ["C","Instant Repair",4],
+      ["C","Instant repair",4],
     ["I","Underway Replenishment",1]
     ],
     "requires":["B10"],
