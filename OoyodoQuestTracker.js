@@ -2176,7 +2176,7 @@ displayRemainingQuests();
           }
           case "reddit":{
             displayBubbleMessage(`Thanks a lot, feedbacks are always welcomed!<br>
-              <a href="TODO">Here is the link to the reddit thread.</a> <br>
+              <a href="https://www.reddit.com/r/kancolle/comments/6skq1o/miscooyodos_quest_tracker/">Here is the link to the reddit thread.</a> <br>
               Just post in the comments.`,
               "welcome",`MSG_click_Ooyodo_reddit`,true,true,true );
               break;
