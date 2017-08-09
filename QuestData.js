@@ -6495,8 +6495,8 @@ const ALL_QUESTS_LIST = {
       "B":"1000"
     },
     "reward":[
-      ["C","Development Material",8],
-    ["C","Improvement Material",4]
+      ["C","Development material",8],
+    ["C","Improvement material",4]
     ],
     "requires":["B91","Bq3"],
     "unlocks":[],
