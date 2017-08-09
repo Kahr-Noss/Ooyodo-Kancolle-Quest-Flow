@@ -217,7 +217,7 @@ const ALL_QUESTS_LIST = {
       ["A","Unlocks the expeditions tab",1]
     ],
     "requires":["A3"],
-    "unlocks":["A6", "A9","A69"],
+    "unlocks":["A6", "A9"],
     "period":"once",
     "needs":{}
   },
@@ -314,7 +314,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development material",1]
     ],
     "requires":["A4"],
-    "unlocks":["A10", "A45","B87"],
+    "unlocks":["A10", "A45","B87","A69"],
     "period":"once",
     "needs":{}
   },
@@ -1581,7 +1581,7 @@ const ALL_QUESTS_LIST = {
     "reward":[
       ["C","Instant repair",2]
     ],
-    "requires":["A4","B53"],
+    "requires":["A9"],
     "unlocks":["B70"],
     "period":"once",
     "needs":{}
@@ -2957,7 +2957,7 @@ const ALL_QUESTS_LIST = {
       ["I","Irako",1]
     ],
     "requires":["A59"],
-    "unlocks":["A60","A68","F26","A69"],
+    "unlocks":["A60","A68","F26"],
     "period":"once",
     "needs":{
       "M":["1-4"],
@@ -6450,7 +6450,7 @@ const ALL_QUESTS_LIST = {
       "B":"0"
     },
     "reward":[
-      ["I","Mamiya",3],
+      ["I","Irako",3],
       ["C","Improvement material",4],
       ["A","350 Ranking points",1]
     ],
