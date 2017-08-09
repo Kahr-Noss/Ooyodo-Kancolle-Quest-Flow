@@ -1944,7 +1944,7 @@ var undeterminedQuests = [];
     $(".HD_option_btn").click(function () {
 
       if($(this).val() === "IPQ"){
-        displayBubbleMessage(`<center><textarea id="MSG_IPQ_txt_area" rows="8" cols="22">A42,A65,B53,B62,F25,Bw1</textarea>
+        displayBubbleMessage(`<center><textarea id="MSG_IPQ_txt_area" rows="8" cols="22"></textarea>
         <br>  Type <strong>ALL</strong> your pending quests code separated by commas.
         <br>
         <span id="MSG_IPQ_error_msg" style="color:red;"></span>
