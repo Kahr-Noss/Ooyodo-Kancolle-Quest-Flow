@@ -12,7 +12,7 @@ Browse through the full quest tree of Kancolle, search, and plan out your action
 
 
 ## Quest List : 
-A complete list of all quests with a complete search enngine.
+A complete list of all quests with a complete search engine.
   * Search function: Use one of the following filter (ship required / reward / map / quest period) to easily find what you are looking for.
   * Tips (not complete yet): Get useful additional information about the quests you are about to complete by clicking the "+" button at the bottom of the description.
   * Transfer to flowchart: Select the quests you are interested in and display them on the flowchart by a simple click.
