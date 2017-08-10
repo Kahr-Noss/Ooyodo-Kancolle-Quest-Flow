@@ -8,7 +8,7 @@ button{
 }
 
 i{
-   font-style: italic;
+  font-style: italic;
 }
 
 #background{
@@ -34,15 +34,15 @@ i{
 
 .HD_main_tab_btn, .HD_option_btn{
   height: 100%;
-  width: 250px;
+  width: calc((55% - 70px) / 3);
   float: right;
   background-color:rgba(0, 0, 0, 0);
   background-repeat: no-repeat;
-  font-size: 30px;
+  font-size: 3vw;
   text-align: center;
   cursor:pointer;
   color:#ffffff;
-  background-size: 250px 60px;
+  background-size: cover;
   border: none;
   background-image:url(files/webpage/hexagon_button_HD.png);
 }
@@ -94,19 +94,19 @@ i{
 }
 
 #QL_display_mode{
-    position: fixed;
-    top:70px;
-    left:0px;
-    width: calc(100% - 195px);
-    height:20px;
-    background-color: #0c938f;
-    color: #ffffff;
-    z-index: 40;
+  position: fixed;
+  top:70px;
+  left:0px;
+  width: calc(100% - 195px);
+  height:20px;
+  background-color: #0c938f;
+  color: #ffffff;
+  z-index: 40;
 }
 
 button:focus {
-   outline: none;
- }
+  outline: none;
+}
 
 #Ooyodo{
   height:266px;
@@ -119,7 +119,7 @@ button:focus {
 }
 
 #Ooyodo:hover{
-cursor: pointer;
+  cursor: pointer;
 }
 
 #Ooyodo_text{
@@ -267,7 +267,7 @@ cursor: pointer;
 }
 
 .link:hover{
-   text-decoration: underline;
+  text-decoration: underline;
 }
 
 .QL_selected_checkbox{
@@ -286,10 +286,10 @@ cursor: pointer;
   z-index:50;
   position: fixed;
   background-color: #3a3a3a;
-min-height: 195px;
-vertical-align: top;
-color: #ffffff;
-border: 5px solid #0c938f;
+  min-height: 195px;
+  vertical-align: top;
+  color: #ffffff;
+  border: 5px solid #0c938f;
 }
 
 .square{
@@ -297,16 +297,16 @@ border: 5px solid #0c938f;
   border: dotted 5px #f00;
   z-index:100;
   position:fixed;
-   animation: borderBlink 1s step-end infinite;
+  animation: borderBlink 1s step-end infinite;
 }
 
 @keyframes borderBlink {
-    from, to {
-        border-color: transparent
-    }
-    50% {
-        border-color: #f00
-    }
+  from, to {
+    border-color: transparent
+  }
+  50% {
+    border-color: #f00
+  }
 }
 
 #Ooyodo_tuto{
@@ -321,14 +321,14 @@ border: 5px solid #0c938f;
 }
 
 #closeBtn_tuto{
-position:absolute;
-top:0px;
-right:5px;
-color:#b8b8b8;
-font: 15px "Arial Black", sans-serif;
-cursor: pointer;
-padding-left: 5px;
-padding-right: 5px;
+  position:absolute;
+  top:0px;
+  right:5px;
+  color:#b8b8b8;
+  font: 15px "Arial Black", sans-serif;
+  cursor: pointer;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 #closeBtn_tuto:hover{
@@ -371,14 +371,14 @@ padding-right: 5px;
 /* ===========================    CLOSING BUTTON    =========================*/
 
 .closeBtn{
-position:absolute;
-top:0px;
-right:5px;
-color:#3a3a3a;
-font: 15px "Arial Black", sans-serif;
-cursor: pointer;
-padding-left: 5px;
-padding-right: 5px;
+  position:absolute;
+  top:0px;
+  right:5px;
+  color:#3a3a3a;
+  font: 15px "Arial Black", sans-serif;
+  cursor: pointer;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .closeBtn:hover{
@@ -389,12 +389,12 @@ padding-right: 5px;
 /* ===========================    TIPS BUTTON    =========================*/
 
 .quest_tips{
-position:absolute;
-bottom:0px;
-right:0px;
-color:#3a3a3a;
-font: 15px "Arial Black", sans-serif;
-cursor: pointer;
+  position:absolute;
+  bottom:0px;
+  right:0px;
+  color:#3a3a3a;
+  font: 15px "Arial Black", sans-serif;
+  cursor: pointer;
 
 }
 
