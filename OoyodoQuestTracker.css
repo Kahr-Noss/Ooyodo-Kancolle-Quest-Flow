@@ -42,7 +42,7 @@ i{
   text-align: center;
   cursor:pointer;
   color:#ffffff;
-   background-size: 100% 60px;
+   background-size: 100% 100%;
   border: none;
   background-image:url(files/webpage/hexagon_button_HD.png);
 }
