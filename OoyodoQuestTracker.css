@@ -130,7 +130,7 @@ button:focus {
   z-index: 40;
   position: fixed;
   bottom: 10px;
-  left: calc(100% - 190px);
+  left: calc(100% - 185px);
   pointer-events: none;
 }
 
