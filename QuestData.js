@@ -1921,7 +1921,7 @@ const ALL_QUESTS_LIST = {
       ["S","Tatsuta",1]
     ],
     "requires":["B5"],
-    "unlocks":["B7", "B30","B67","B82"],
+    "unlocks":["B7", "B30","B67"],
     "period":"once",
     "needs":{}
   },
@@ -3497,7 +3497,7 @@ const ALL_QUESTS_LIST = {
       ["I","Irako",1]
     ],
     "requires":["C2"],
-    "unlocks":["F38"],
+    "unlocks":["F38","B82"],
     "period":"once",
     "needs":{
       "M":["2-2","2-3"]
@@ -3605,7 +3605,7 @@ const ALL_QUESTS_LIST = {
       ["E","Searchlight",1],
       ["I","Combat Ration",1]
     ],
-    "requires":["B6"],
+    "requires":["B77"],
     "unlocks":[],
     "period":"once",
     "needs":{
