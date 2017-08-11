@@ -1725,7 +1725,7 @@ var undeterminedQuests = [];
             case "C":return "Consummables";
             case "I":return "Misc";
             case "Q":return "Quests";
-            case "R":return "Ressources"
+            case "R":return "Resources"
           }
         }
       }
