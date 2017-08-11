@@ -6,6 +6,10 @@ F60
 A79
 B104
 
+B82 might need Bm1 IMPLEMENTED according /u/Nadke + /u/Taslom
+A69 changed to english wiki according to /MBiteSK
+
+
 */
 const ICONS_LINK = {
 
@@ -149,7 +153,7 @@ const ALL_QUESTS_LIST = {
     "En":"The First Organization",
     "content":"Have 2 ships in your main fleet.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"20",
       "A":"20",
       "S":"0",
@@ -166,16 +170,16 @@ const ALL_QUESTS_LIST = {
   "A2":{
     "Jp":"「駆逐隊」を編成せよ！",
     "En":"Organize a Destroyer Division",
-    "content":"Have 4 Destroyers in your fleet",
+    "content":"Have 4 DD in your fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"30",
       "A":"30",
       "S":"30",
       "B":"0"
     },
     "reward":[
-      ["C","Instant construction",1]
+      ["C","Instant Construction",1]
     ],
     "requires":["A1"],
     "unlocks":["A3"],
@@ -185,9 +189,9 @@ const ALL_QUESTS_LIST = {
   "A3":{
     "Jp":"「水雷戦隊」を編成せよ！",
     "En":"Organize a Torpedo Squadron",
-    "content":"Consists of a Light Cruiser as your flagship and 3 Destroyers",
+    "content":"Consists of a CL as your flagship and 3 DD",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"40",
       "A":"40",
       "S":"0",
@@ -206,7 +210,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize a Fleet of 6 Ships",
     "content":"Have 6 ships in your fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"50",
       "A":"0",
       "S":"50",
@@ -224,16 +228,16 @@ const ALL_QUESTS_LIST = {
   "A5":{
     "Jp":"軽巡2隻を擁する隊を編成せよ！",
     "En":"Organize a Fleet of 2 Light Cruisers",
-    "content":"Have 2 Light Cruisers in your fleet",
+    "content":"Have 2 CL in your fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"60",
       "A":"60",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["A3"],
     "unlocks":["A7","A8", "B29", "D1","B67","F11"],
@@ -245,14 +249,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the Second Fleet",
     "content":"Have a flagship in your second fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"50",
       "A":"50",
       "S":"100",
       "B":"0"
     },
     "reward":[
-      ["C","Instant construction",1]
+      ["C","Instant Construction",1]
     ],
     "requires":["A4"],
     "unlocks":["B3"],
@@ -262,16 +266,16 @@ const ALL_QUESTS_LIST = {
   "A7":{
     "Jp":"「重巡戦隊」を編成せよ！",
     "En":"Organize a Heavy Cruiser Division",
-    "content":"Have 2 Heavy Cruisers in your fleet (Aviation Cruisers don't count)",
+    "content":"Have 2 CA in your fleet (CAV don't count)",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"70",
       "S":"0",
       "B":"30"
     },
     "reward":[
-      ["C","Instant construction",1]
+      ["C","Instant Construction",1]
     ],
     "requires":["A5"],
     "unlocks":["A14","A12"],
@@ -283,14 +287,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize both Sisters of the Tenryuu-class Light Cruisers",
     "content":"Have Tenryuu and Tatsuta in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"100",
       "S":"100",
       "B":"50"
     },
     "reward":[
-      ["C","Instant construction",2]
+      ["C","Instant Construction",2]
     ],
     "requires":["A5"],
     "unlocks":["A17"],
@@ -302,16 +306,16 @@ const ALL_QUESTS_LIST = {
   "A9":{
     "Jp":"「水上機母艦」を配備せよ！",
     "En":"Deploy a Seaplane Tender",
-    "content":"Have a Seaplane Tender in your fleet",
+    "content":"Have an AV in your fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["A4"],
     "unlocks":["A10", "A45","B87","A69"],
@@ -323,7 +327,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 6th Destroyer Division",
     "content":"Have ONLY Akatsuki, Hibiki, Ikazuchi and Inazuma in your second fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"150",
       "S":"0",
@@ -342,16 +346,16 @@ const ALL_QUESTS_LIST = {
   "A11":{
     "Jp":"第2艦隊で空母機動部隊を編成せよ！",
     "En":"Organize a Carrier Task Force in Your Second Fleet",
-    "content":"Have an Aircraft Carrier / Light Aircraft Carrier and 3 Destroyers in your SECOND fleet",
+    "content":"Have an CV / CVL and 3 DD in your SECOND fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"0",
       "S":"0",
       "B":"100"
     },
     "reward":[
-      ["C","Instant construction",2]
+      ["C","Instant Construction",2]
     ],
     "requires":["B3"],
     "unlocks":["B10"],
@@ -361,16 +365,16 @@ const ALL_QUESTS_LIST = {
   "A12":{
     "Jp":"「空母機動部隊」を編成せよ！",
     "En":"Organize a Carrier Task Force",
-    "content":"Have an Aircraft Carrier / Light Aircraft Carrier and 3 Destroyers in your main fleet",
+    "content":"Have an CV / CVL and 3 DD in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"50",
       "A":"0",
       "S":"0",
       "B":"100"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["A7"],
     "unlocks":["A13"],
@@ -380,16 +384,16 @@ const ALL_QUESTS_LIST = {
   "A13":{
     "Jp":"戦艦と重巡による主力艦隊を編成せよ！",
     "En":"Organize the Main Fleet with a Battleship and Heavy Cruisers",
-    "content":"Have a Battleship and 2 Heavy Cruisers in your main fleet(Aviation Battleships don't count)",
+    "content":"Have a BB and 2 CA in your main fleet(BBV don't count)",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"150",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant construction",2]
+      ["C","Instant Construction",2]
     ],
     "requires":["A12"],
     "unlocks":["A19", "A20","F32"],
@@ -401,7 +405,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize All 3 Sisters of the Sendai-class Light Cruisers",
     "content":"Have Sendai, Jintsuu, and Naka in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"0",
       "S":"100",
@@ -422,15 +426,15 @@ const ALL_QUESTS_LIST = {
     "En":"Organize All 4 Sisters of the Myoukou-class Heavy Cruisers",
     "content":"Have Myoukou, Nachi, Ashigara and Haguro in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"100",
       "S":"150",
       "B":"100"
     },
     "reward":[
-      ["C","Instant repair",1],
-      ["C","Development material",1]
+      ["C","Instant Repair",1],
+      ["C","Development Material",1]
     ],
     "requires":["A14"],
     "unlocks":["A16","F42"],
@@ -444,7 +448,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize a Fast Battleship Force with the Kongou-class",
     "content":"Have Kongou, Hiei, Haruna and Kirishima in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -465,15 +469,15 @@ const ALL_QUESTS_LIST = {
     "En":"Organize Both Sisters of the Fusou-class Battleships",
     "content":"Have Fusou and Yamashiro in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"200",
       "B":"200"
     },
     "reward":[
-      ["C","Instant repair",1],
-      ["C","Development material",1]
+      ["C","Instant Repair",1],
+      ["C","Development Material",1]
     ],
     "requires":["A8"],
     "unlocks":["A18"],
@@ -487,15 +491,15 @@ const ALL_QUESTS_LIST = {
     "En":"Organize Both Sisters of the Ise-class Battleships",
     "content":"Have Ise and Hyuuga in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"200",
       "S":"300",
       "B":"200"
     },
     "reward":[
-      ["C","Instant repair",2],
-      ["C","Development material",2]
+      ["C","Instant Repair",2],
+      ["C","Development Material",2]
     ],
     "requires":["A17"],
     "unlocks":[],
@@ -509,15 +513,15 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the Nagumo Carrier Task Force",
     "content":"Have ONLY Akagi, Kaga, Hiryuu and Souryuu in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"500",
       "S":"500",
       "B":"500"
     },
     "reward":[
-      ["C","Instant construction",2],
-      ["C","Development material",4]
+      ["C","Instant Construction",2],
+      ["C","Development Material",4]
     ],
     "requires":["A13"],
     "unlocks":["F22"],
@@ -531,17 +535,17 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the Mikawa Fleet",
     "content":"Have Choukai, Aoba, Kako,Furutaka,and Tenryuu in your main fleet,with one additional FAST ship",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"0",
       "S":"200",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",3]
+      ["C","Instant Repair",3]
     ],
     "requires":["A13"],
-    "unlocks":["A21","B11","A58"],
+    "unlocks":["A21","B11"],
     "period":"once",
     "needs":{
       "S":["Choukai","Aoba","Kako","Furutaka","Tenryuu"]
@@ -552,15 +556,15 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 4th Cruiser Division",
     "content":"Have Takao, Atago, Choukai, and Maya in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"150",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
-      ["C","Development material",1]
+      ["C","Instant Repair",2],
+      ["C","Development Material",1]
     ],
     "requires":["A20"],
     "unlocks":["A22", "A24", "A25","A27", "A29", "B13"],
@@ -574,7 +578,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the Nishimura Fleet",
     "content":"Have Fusou, Yamashiro, Mogami, and Shigure in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"200",
@@ -593,9 +597,9 @@ const ALL_QUESTS_LIST = {
   "A23":{
     "Jp":"「第五航空戦隊」を編成せよ！",
     "En":"Organize the 5th Carrier Division",
-    "content":"Have both Shoukaku, Zuikaku, and 2 Destroyers in your main fleet",
+    "content":"Have both Shoukaku, Zuikaku, and 2 DD in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"0",
       "S":"0",
@@ -616,7 +620,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the New Mikawa Fleet",
     "content":"Have Choukai, Aoba, Kinugasa, Kako, Furutaka, and Tenryuu in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"0",
       "S":"300",
@@ -635,9 +639,9 @@ const ALL_QUESTS_LIST = {
   "A25":{
     "Jp":"潜水艦隊を編成せよ！",
     "En":"Organize a Submarine Fleet",
-    "content":"Have 2 Submarines in any one of your fleets",
+    "content":"Have 2 SS in any one of your fleets",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"150",
       "S":"0",
@@ -654,16 +658,16 @@ const ALL_QUESTS_LIST = {
   "A26":{
     "Jp":"航空水上打撃艦隊を編成せよ！",
     "En":"Organize an Aviation Surface Attack Fleet",
-    "content":"Have ONLY 2 Aviation Battleships and 2 Aviation Cruisers in your main fleet",
+    "content":"Have ONLY 2 BBV and 2 CAV in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"200",
       "B":"200"
     },
     "reward":[
-      ["C","Instant repair",2]
+      ["C","Instant Repair",2]
     ],
     "requires":["A22"],
     "unlocks":["B18"],
@@ -673,9 +677,9 @@ const ALL_QUESTS_LIST = {
   "A27":{
     "Jp":"中規模潜水艦隊を編成せよ！",
     "En":"Organize a Medium-sized Submarine Fleet",
-    "content":"Have 3 Submarines in any one of your fleets",
+    "content":"Have 3 SS in any one of your fleets",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"150",
       "S":"0",
@@ -694,7 +698,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 6th Cruiser Division",
     "content":"Have Furutaka, Kako, Kinugasa, and Aoba in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"250",
       "A":"300",
       "S":"0",
@@ -715,14 +719,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 5th Fleet",
     "content":"Have Nachi, Ashigara, Tama, and Kiso in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"0",
       "S":"300",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",3]
+      ["C","Instant Repair",3]
     ],
     "requires":["A21"],
     "unlocks":["A30"],
@@ -736,7 +740,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 1st Torpedo Squadron",
     "content":"Have Abukuma, Akebono, Ushio, Kasumi, and Shiranui in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"300",
       "S":"0",
@@ -757,14 +761,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 8th Destroyer Division",
     "content":"Have ONLY Asashio, Michishio, Ooshio, and Arashio in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"150",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",3]
+      ["C","Development Material",3]
     ],
     "requires":["A25"],
     "unlocks":["A33", "B20","A67"],
@@ -778,14 +782,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 18th Destroyer Division",
     "content":"Have ONLY Kasumi, Arare, Kagerou, and Shiranui in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"180",
       "A":"180",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",1],
+      ["C","Development Material",1],
       ["I","Repair Team",1]
     ],
     "requires":["B20"],
@@ -797,17 +801,17 @@ const ALL_QUESTS_LIST = {
   },
   "A33":{
     "Jp":"「第三十駆逐隊（第一次）」を編成せよ！",
-    "En":"Organize the 30th Destroyer Division (First GeneRation)",
+    "En":"Organize the 30th Destroyer Division (First Generation)",
     "content":"Have ONLY Mutsuki, Kisaragi, Yayoi, and Mochizuki in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
+      ["C","Instant Repair",2],
       ["I","Repair Team",1]
     ],
     "requires":["A31"],
@@ -819,17 +823,17 @@ const ALL_QUESTS_LIST = {
   },
   "A34":{
     "Jp":"「第三十駆逐隊(第二次)」を編成せよ！",
-    "En":"Organize the 30th Destroyer Division (Second GeneRation)",
+    "En":"Organize the 30th Destroyer Division (Second Generation)",
     "content":"Have ONLY Mutsuki, Yayoi, Uzuki, and Mochizuki in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"220",
       "A":"220",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",3]
+      ["C","Development Material",3]
     ],
     "requires":["A33"],
     "unlocks":["A50", "B24"],
@@ -843,14 +847,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 5th Cruiser Division",
     "content":"Have Myoukou, Nachi, and Haguro in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"300",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",5]
+      ["C","Development Material",5]
     ],
     "requires":["B24"],
     "unlocks":["A38", "A44", "Bm1", "D17"],
@@ -862,17 +866,17 @@ const ALL_QUESTS_LIST = {
   "A36":{
     "Jp":"新編「第二航空戦隊」を編成せよ！",
     "En":"Organize the New 2nd Carrier Division",
-    "content":"Have Hiryuu Kai Ni as flagship, Souryuu and 2 Destroyers in your main fleet",
+    "content":"Have Hiryuu Kai Ni as flagship, Souryuu and 2 DD in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
       "B":"400"
     },
     "reward":[
-      ["C","Instant repair",2],
-      ["C","Development material",2]
+      ["C","Instant Repair",2],
+      ["C","Development Material",2]
     ],
     "requires":["A28"],
     "unlocks":["B25"],
@@ -884,16 +888,16 @@ const ALL_QUESTS_LIST = {
   "A37":{
     "Jp":"潜水艦隊「第六艦隊」を編成せよ！",
     "En":"Organize the Submarine Fleet: \"6th Fleet\"",
-    "content":"Have a Submarine Tender as flagship and 4 Submarines or more in your main fleet",
+    "content":"Have 1 AS as flagship and 4 SS or more in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"250",
       "A":"250",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",3]
+      ["C","Development Material",3]
     ],
     "requires":["A27"],
     "unlocks":["D13"],
@@ -907,7 +911,7 @@ const ALL_QUESTS_LIST = {
     "En":"Deploy the New Radar Type",
     "content":"Have Myoukou Kai Ni as flagship",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"0",
       "S":"0",
@@ -926,17 +930,17 @@ const ALL_QUESTS_LIST = {
   "A39":{
     "Jp":"再編成「第二航空戦隊」を強化せよ！",
     "En":"Strengthen the Reorganized 2nd Carrier Division",
-    "content":"Have Souryuu Kai Ni as flagship with Hiryuu Kai Ni and 2 Destroyers in your main fleet",
+    "content":"Have Souryuu Kai Ni as flagship with Hiryuu Kai Ni and 2 DD in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
       "B":"450"
     },
     "reward":[
-      ["C","Development material",2],
-      ["C","Instant construction",2]
+      ["C","Development Material",2],
+      ["C","Instant Construction",2]
     ],
     "requires":["B25"],
     "unlocks":["B26"],
@@ -950,7 +954,7 @@ const ALL_QUESTS_LIST = {
     "En":"Gather All of the Elite 3rd Battleship Division",
     "content":"Have Kongou Kai Ni, Hiei Kai Ni, Haruna Kai Ni, and Kirishima Kai Ni in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"100",
       "S":"0",
@@ -971,14 +975,14 @@ const ALL_QUESTS_LIST = {
     "En":"Deploy the New Standard Aircraft Carrier Class",
     "content":"Have Unryuu in your fleet as flagship",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"100",
       "S":"100",
       "B":"300"
     },
     "reward":[
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["A23"],
     "unlocks":["B28"],
@@ -992,14 +996,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the Main Battleship Force: \"The 2nd Squadron\"",
     "content":"Have Nagato, Mutsu, Fusou, and Yamashiro in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"250",
       "S":"250",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2]
+      ["C","Instant Repair",2]
     ],
     "requires":["A32"],
     "unlocks":["B31"],
@@ -1011,16 +1015,16 @@ const ALL_QUESTS_LIST = {
   "A43":{
     "Jp":"戦艦を主力とした水上打撃部隊を編成せよ！",
     "En":"Organize a Surface Task Force with Battleships Comprising the Main Force",
-    "content":"Have 3 of any ship from either the Nagato,Ise,Fusou, or Yamato classes and 1 Light Cruiser in your main fleet",
+    "content":"Have 3 of any ship from either the Nagato,Ise,Fusou, or Yamato classes and 1 CL in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",3]
+      ["C","Development Material",3]
     ],
     "requires":["B31"],
     "unlocks":["Bm4"],
@@ -1032,15 +1036,15 @@ const ALL_QUESTS_LIST = {
     "En":"Reorganize the Nishimura Fleet",
     "content":"Have Fusou, Yamashiro, Mogami, Shigure, and Michishio in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",3],
-      ["C","Improvement material",3]
+      ["C","Development Material",3],
+      ["C","Improvement Material",3]
     ],
     "requires":["A35", "B14"],
     "unlocks":["B33"],
@@ -1054,14 +1058,14 @@ const ALL_QUESTS_LIST = {
     "En":"Prepare the Improvement Arsenal",
     "content":"Have Akashi as flagship in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"0",
       "S":"100",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",5]
+      ["C","Improvement Material",5]
     ],
     "requires":["A9"],
     "unlocks":["Bw10","F17","F54"],
@@ -1073,17 +1077,17 @@ const ALL_QUESTS_LIST = {
   "A46":{
     "Jp":"軽快な「水上反撃部隊」を編成せよ！",
     "En":"Organize a Light Surface Counterattack Fleet",
-    "content":"Have Kasumi as flagship, Ashigara, 1 Light Cruiser, and 3 Destroyers in your main fleet",
+    "content":"Have Kasumi as flagship, Ashigara, 1 CL, and 3 DD in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"250",
       "A":"250",
       "S":"0",
       "B":"50"
     },
     "reward":[
-      ["C","Instant repair",2],
-      ["C","Development material",2]
+      ["C","Instant Repair",2],
+      ["C","Development Material",2]
     ],
     "requires":["A23"],
     "unlocks":["Bm7","A65"],
@@ -1097,14 +1101,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 11th Destroyer Division",
     "content":"Have ONLY Fubuki, Shirayuki, Hatsuyuki, and Murakumo in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"110",
       "A":"110",
       "S":"110",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",3]
+      ["C","Development Material",3]
     ],
     "requires":["A32"],
     "unlocks":["B35", "B36"],
@@ -1118,14 +1122,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 21st Destroyer Division",
     "content":"Have ONLY Hatsuharu, Hatsushimo, Nenohi, and Wakaba in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"210",
       "A":"210",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",3]
+      ["C","Instant Repair",3]
     ],
     "requires":["B35"],
     "unlocks":["B37"],
@@ -1137,17 +1141,17 @@ const ALL_QUESTS_LIST = {
   "A49":{
     "Jp":"「第二二駆逐隊」を編成せよ！",
     "En":"Organize the 22nd Destroyer Division",
-    "content":"Have ONLY Satsuki, Fumizuki, Nagatsuki, and 1 more Destroyer in your main fleet",
+    "content":"Have ONLY Satsuki, Fumizuki, Nagatsuki, and 1 more DD in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"220",
       "A":"220",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
-      ["C","Improvement material",2]
+      ["C","Instant Repair",2],
+      ["C","Improvement Material",2]
     ],
     "requires":["B38"],
     "unlocks":["B39"],
@@ -1161,14 +1165,14 @@ const ALL_QUESTS_LIST = {
     "En":"Reorganize the Mikawa Fleet and Prepare to Rush in",
     "content":"Have Choukai Kai Ni as flagship and fill the rest of the fleet with any combination of Furutaka, Kako, Aoba, Kinugasa, Yuubari, or Tenryuu for a total of 6 ships.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2]
+      ["C","Instant Repair",2]
     ],
     "requires":["A34", "B16"],
     "unlocks":["A57", "C5"],
@@ -1182,14 +1186,14 @@ const ALL_QUESTS_LIST = {
     "En":"Reorganize the 18th Squadron",
     "content":"Have Tenryuu, Tatsuta, and at least two other ships in your fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"180",
       "A":"180",
       "S":"0",
       "B":"180"
     },
     "reward":[
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["B42"],
     "unlocks":["B43"],
@@ -1203,15 +1207,15 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the Marine Rush Fleet",
     "content":"Have Hiei, Kirishima, Nagara, Akatsuki, Ikazuchi, and Inazuma in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"300",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
-      ["C","Development material",2]
+      ["C","Instant Repair",2],
+      ["C","Development Material",2]
     ],
     "requires":["B16"],
     "unlocks":["B44"],
@@ -1225,7 +1229,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the New 6th Destroyer Division",
     "content":"Have only Akatsuki Kai Ni as flagship with Hibiki (Верный is ok), Ikazuchi, and Inazuma in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"150",
       "S":"0",
@@ -1246,14 +1250,14 @@ const ALL_QUESTS_LIST = {
     "En":"1st Torpedo Squadron, Prepare for a Rush to the Northern Sea",
     "content":"Have Abukuma as flagship with Hibiki (Верный is ok), Hatsushimo, Wakaba, Samidare and Shimakaze in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"150",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
+      ["C","Instant Repair",2],
       ["I","Furniture box medium",1]
     ],
     "requires":["B21", "Bd1"],
@@ -1268,14 +1272,14 @@ const ALL_QUESTS_LIST = {
     "En":"1st Torpedo Squadron, Prepare for Another Rush to the Northern Sea",
     "content":"Have Abukuma Kai Ni as flagship with Hibiki (Верный is ok), Yuugumo, Naganami, Akigumo and Shimakaze in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",3],
+      ["C","Instant Repair",3],
       ["I","Large furniture box",1]
     ],
     "requires":["C7"],
@@ -1290,14 +1294,14 @@ const ALL_QUESTS_LIST = {
     "En":"Reorganize the 5th Carrier Division",
     "content":"Have Shoukaku, Zuikaku, Oboro and Akigumo in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"0",
       "S":"0",
       "B":"300"
     },
     "reward":[
-      ["C","Development material",3]
+      ["C","Development Material",3]
     ],
     "requires":["A23", "Bm6"],
     "unlocks":["B50"],
@@ -1311,15 +1315,15 @@ const ALL_QUESTS_LIST = {
     "En":"Prepare the New 21st Squadron for Sortie",
     "content":"Have Nachi Kai Ni, Ashigara Kai Ni, Tama and Kiso in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"150",
       "S":"150",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",2],
-      ["C","Improvement material",2]
+      ["C","Development Material",2],
+      ["C","Improvement Material",2]
     ],
     "requires":["A50", "B34"],
     "unlocks":["B51"],
@@ -1330,20 +1334,20 @@ const ALL_QUESTS_LIST = {
   },
   "A58":{
     "Jp":"「第十六戦隊(第一次)」を編成せよ！",
-    "En":"Organize the 16th Squadron (First GeneRation)",
+    "En":"Organize the 16th Squadron (First Generation)",
     "content":"Have Ashigara as flagship with Kuma and Nagara in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"150",
       "S":"150",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",2],
-      ["C","Instant repair",2]
+      ["C","Development Material",2],
+      ["C","Instant Repair",2]
     ],
-    "requires":["A20"],
+    "requires":["Bd2"],
     "unlocks":["B52"],
     "period":"once",
     "needs":{
@@ -1355,14 +1359,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 3rd Carrier Division",
     "content":"Have Zuikaku Kai as flagship, Zuihou, Chitose Carrier and Chiyoda Carrier (both as CVL, not AV) in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Development material",2],
+      ["C","Development Material",2],
       ["I","Skilled Crew Member",1]
     ],
     "requires":["Bm6", "F21"],
@@ -1377,14 +1381,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 4th Carrier Division",
     "content":"Have Ise Kai and Hyuuga Kai in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"200",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Improvement material",2],
+      ["C","Improvement Material",2],
       ["E","Zuiun (634 Air Group)",1]
     ],
     "requires":["B53"],
@@ -1399,14 +1403,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize Ozawa's Fleet",
     "content":"Have Zuikaku Kai as flagship, Zuihou Kai, Chitose Carrier, Chiyoda Carrier, Ise Kai and Hyuuga Kai in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"0",
       "S":"0",
       "B":"300"
     },
     "reward":[
-      ["C","Development material",2],
+      ["C","Development Material",2],
       ["I","Repair Team",1]
     ],
     "requires":["Bm7", "A60"],
@@ -1419,9 +1423,9 @@ const ALL_QUESTS_LIST = {
   "A62":{
     "Jp":"新航空戦隊を編成せよ！",
     "En":"Organize the New Carrier Division",
-    "content":"Have Zuikaku Kai Ni, Shoukaku Kai Ni and two Destroyers in your fleet",
+    "content":"Have Zuikaku Kai Ni, Shoukaku Kai Ni and two DD in your fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"300",
       "S":"300",
@@ -1441,18 +1445,18 @@ const ALL_QUESTS_LIST = {
   },
   "A63":{
     "Jp":"「第十六戦隊(第二次)」を編成せよ！",
-    "En":"Organize the 16th Squadron (Second GeneRation)",
+    "En":"Organize the 16th Squadron (Second Generation)",
     "content":"Have Natori as flagship, Isuzu and Kinu in your fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"160",
       "A":"160",
       "S":"160",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",2],
-      ["C","Instant repair",2]
+      ["C","Development Material",2],
+      ["C","Instant Repair",2]
     ],
     "requires":["B52"],
     "unlocks":["B55"],
@@ -1464,17 +1468,17 @@ const ALL_QUESTS_LIST = {
   "A64":{
     "Jp":"「新編成航空戦隊」を編成せよ！",
     "En":"Organize the New Carrier Division",
-    "content":"Have 2 Aircraft Carrier / Light Aircraft Carrier, 2 Aviation Battleships or Aviation Cruisers and 2 Destroyers in your fleet",
+    "content":"Have 2 CV / CVL, 2 BBV / CAV and 2 DD in your fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"200",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Improvement material",2],
-      ["C","Development material",2]
+      ["C","Improvement Material",2],
+      ["C","Development Material",2]
     ],
     "requires":["B50", "B55"],
     "unlocks":["B56"],
@@ -1486,14 +1490,14 @@ const ALL_QUESTS_LIST = {
     "En":"Reorganize the Strengthened Surface Counterattack Fleet",
     "content":"Have Kasumi as flagship, Ashigara, Ooyodo, Asashimo and Kiyoshimo in your fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",3]
+      ["C","Instant Repair",3]
     ],
     "requires":["B56","A46"],
     "unlocks":["B57"],
@@ -1504,17 +1508,17 @@ const ALL_QUESTS_LIST = {
   },
   "A66":{
     "Jp":"「第三十一戦隊(第一次)」を編成せよ！",
-    "En":"Organize the 31st Division (First GeneRation)",
+    "En":"Organize the 31st Division (First Generation)",
     "content":"Have Isuzu Kai Ni as flagship, Satsuki Kai Ni and Uzuki Kai in your fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"310",
       "A":"310",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
+      ["C","Instant Repair",2],
       ["I","Irako",1]
     ],
     "requires":["Bd2", "B55"],
@@ -1529,15 +1533,15 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the 27th Destroyer Division",
     "content":"Have ONLY Shiratsuyu Kai, Shigure, Harusame and Samidare in your fleet, with Shiratsuyu set as the flagship.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"270",
       "S":"270",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",2],
-      ["C","Instant repair",2]
+      ["C","Development Material",2],
+      ["C","Instant Repair",2]
     ],
     "requires":["A31","Bd2"],
     "unlocks":["B61"],
@@ -1549,16 +1553,16 @@ const ALL_QUESTS_LIST = {
   "A68":{
     "Jp":"強行高速輸送部隊を編成せよ！",
     "En":"Organise a Forced High-speed Transport Fleet!",
-    "content":"Have Sendai Kai Ni as flagship, Kawakaze Kai Ni, Shigure Kai Ni and two other destroyers in your fleet.",
+    "content":"Have Sendai Kai Ni as flagship, Kawakaze Kai Ni, Shigure Kai Ni and two other DD in your fleet.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"100",
       "S":"100",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2]
+      ["C","Instant Repair",2]
     ],
     "requires":["B53"],
     "unlocks":["B68"],
@@ -1572,14 +1576,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organise a New Torpedo Squadron!",
     "content":"Have a CL/CLT/CT as the flagship and 4 DD in any of your fleets.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2]
+      ["C","Instant Repair",2]
     ],
     "requires":["A9"],
     "unlocks":["B70"],
@@ -1591,14 +1595,14 @@ const ALL_QUESTS_LIST = {
     "En":"Reorganise the New 8th Destroyer Division!",
     "content":"Have ONLY Asashio Kai Ni/Asashio Kai Ni D as flagship, Michishio, Ooshio and Arashio in your fleet.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",3]
+      ["C","Development Material",3]
     ],
     "requires":["B20"],
     "unlocks":["B73"],
@@ -1613,14 +1617,14 @@ const ALL_QUESTS_LIST = {
     "En":"Elite! DesDiv 8, 1st platoon!",
     "content":"Have Asashio Kai Ni D and Ooshio Kai Ni in your fleet.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"250",
       "A":"250",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",3],
+      ["C","Improvement Material",3],
       ["I","Irako",1]
     ],
     "requires":["B72"],
@@ -1635,14 +1639,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organise the 19th Destroyer Division!",
     "content":"Have Isonami, Uranami, Ayanami and Shikinami in your fleet.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"190",
       "A":"190",
       "S":"190",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
+      ["C","Instant Repair",2],
       ["I","Combat Ration",1]
     ],
     "requires":["B21", "Bd1"],
@@ -1654,18 +1658,18 @@ const ALL_QUESTS_LIST = {
   },
   "A73":{
     "Jp":"「第十六戦隊(第三次)」を編成せよ！",
-    "En":"Form the 16th Cruiser Division (Third GeneRation)!",
+    "En":"Form the 16th Cruiser Division (Third Generation)!",
     "content":"Have Kinu, Aoba, Kitakami and Ooi in your fleet.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"200",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
-      ["C","Development material",2]
+      ["C","Instant Repair",2],
+      ["C","Development Material",2]
     ],
     "requires":["B55"],
     "unlocks":["B84"],
@@ -1679,14 +1683,14 @@ const ALL_QUESTS_LIST = {
     "En":"Reorganise the Elite 16th Cruiser Division!",
     "content":"Have Kinu Kai Ni as flagship, Kitakami Kai Ni, Ooi Kai Ni, Kuma Kai, Aoba Kai, Uranami Kai, Shikinami Kai.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",3],
+      ["C","Instant Repair",3],
       ["I","Repair Team",1]
     ],
     "requires":["B84"],
@@ -1701,14 +1705,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the New First Squadron!",
     "content":"Have Nagato Kai Ni as flagship and Mutsu Kai as second ship in your main fleet.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"880",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
+      ["C","Instant Repair",2],
       ["I","Irako",1]
     ],
     "requires":["B31","B52"],
@@ -1723,14 +1727,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the New Seventh Squadron!",
     "content":"Have Kumano Kai Ni as flagship, Suzuya Kai Ni as second ship, Mogami Kai and Mikuma Kai in your main fleet.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
       "B":"700"
     },
     "reward":[
-      ["C","Instant repair",2],
+      ["C","Instant Repair",2],
       ["I","Irako",1]
     ],
     "requires":["B95","C2"],
@@ -1745,14 +1749,14 @@ const ALL_QUESTS_LIST = {
     "En":'Reorganize the Elite "Fourth Carrier Division"!',
     "content":"Have Ise and Hyuuga both above level 50 as flagship and 2nd ship along with 1CL + 2 DD and 1 additional ship in your main fleet.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
       "B":"400"
     },
     "reward":[
-      ["C","Development material",4],
+      ["C","Development Material",4],
       ["I","Skilled Crew Member",1]
     ],
     "requires":["A60","B14"],
@@ -1767,14 +1771,14 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the New 4th Torpedo Squadron!",
     "content":"Have Yura Kai Ni as flagship, Murasame, Yuudachi, Harusame, Samidare and 1 DD in your main fleet.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"0",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",4],
+      ["C","Instant Repair",4],
       ["I","Repair Team",1]
     ],
     "requires":["A54","B15"],
@@ -1789,14 +1793,14 @@ const ALL_QUESTS_LIST = {
     "En":"Reorganize the Elite 22th Destroyer Squadron!",
     "content":"Have Fumizuki Kai Ni, Satsuki Kai Ni, Minazuki Kai and Nagatsuki Kai in your first fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"220",
       "A":"0",
       "S":"220",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
+      ["C","Instant Repair",2],
       ["I","Combat Ration",2]
     ],
     "requires":["Unknown"],
@@ -1811,14 +1815,14 @@ const ALL_QUESTS_LIST = {
     "En":"The First Sortie",
     "content":"Sortie your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"20",
       "A":"20",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",1]
+      ["C","Instant Repair",1]
     ],
     "requires":[],
     "unlocks":["B2"],
@@ -1830,14 +1834,14 @@ const ALL_QUESTS_LIST = {
     "En":"Guard the Sea in Front of the Naval Base",
     "content":"Sortie to World 1-1 and clear the stage",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"30",
       "A":"30",
       "S":"30",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",1]
+      ["C","Instant Repair",1]
     ],
     "requires":["B1"],
     "unlocks":["E1", "E2","B4","F16"],
@@ -1849,14 +1853,14 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie The 2nd Fleet",
     "content":"Sortie your second fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"200",
       "B":"200"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["A6"],
     "unlocks":["A11"],
@@ -1868,14 +1872,14 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie to World 1-2 and clear the stage",
     "content":"Sortie to World 1-2, defeat the boss and clear the stage",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"40",
       "A":"40",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",1]
+      ["C","Instant Repair",1]
     ],
     "requires":["B2"],
     "unlocks":["Bd1","B5"],
@@ -1889,14 +1893,14 @@ const ALL_QUESTS_LIST = {
     "En":"Intercept the Approaching Enemy Vanguard Fleet",
     "content":"Sortie to World 1-2 AGAIN and clear the stage",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"50",
       "A":"0",
       "S":"50",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",1],
+      ["C","Development Material",1],
       ["S","Miyuki",1]
     ],
     "requires":["B4"],
@@ -1909,9 +1913,9 @@ const ALL_QUESTS_LIST = {
   "B6":{
     "Jp":"「水雷戦隊」で出撃せよ！",
     "En":"Sortie a Torpedo Squadron",
-    "content":"Sortie a Light Cruiser as flagship and 3 Destroyers",
+    "content":"Sortie a CL as flagship and 3 DD",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"60",
       "A":"60",
       "S":"0",
@@ -1928,16 +1932,16 @@ const ALL_QUESTS_LIST = {
   "B7":{
     "Jp":"「重巡洋艦」を出撃させよ！",
     "En":"Sortie a Heavy Cruiser",
-    "content":"Sortie a fleet with a Heavy Cruiser as flagship",
+    "content":"Sortie a fleet with a CA as flagship",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"70",
       "A":"0",
       "S":"70",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["B6"],
     "unlocks":["B8", "D15"],
@@ -1947,16 +1951,16 @@ const ALL_QUESTS_LIST = {
   "B8":{
     "Jp":"「戦艦」を出撃させよ！",
     "En":"Sortie a Battleship",
-    "content":"Sortie a fleet with a Battleship as flagship. Aviation Battleships (BBVs) don't count",
+    "content":"Sortie a fleet with a BB as flagship. BBV (BBVs) don't count",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"150",
       "S":"150",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["B7"],
     "unlocks":["B9","B88"],
@@ -1966,16 +1970,16 @@ const ALL_QUESTS_LIST = {
   "B9":{
     "Jp":"「空母機動部隊」出撃せよ！",
     "En":"Sortie a Carrier Task Force",
-    "content":"Sortie a Light or Standard Carrier flagship and 5 Light Cruisers, Destroyers, or Seaplane Tenders",
+    "content":"Sortie a Light or Standard Carrier flagship and 5 CL, DD, or AV",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"0",
       "S":"0",
       "B":"300"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["B8"],
     "unlocks":["F35","B76"],
@@ -1985,9 +1989,9 @@ const ALL_QUESTS_LIST = {
   "B10":{
     "Jp":"敵空母を撃沈せよ！",
     "En":"Sink an Enemy Carrier",
-    "content":"Sink an enemy Aircraft Carrier / Light Aircraft Carrier.",
+    "content":"Sink an enemy CV / CVL.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -2006,7 +2010,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the Mikawa Fleet",
     "content":"Sortie Choukai, Aoba, Kako, Furutaka and Tenryuu, with one additional fast ship to any map",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"200",
       "S":"0",
@@ -2027,14 +2031,14 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 6th Destroyer Division",
     "content":"Sortie ONLY Akatsuki, Hibiki, Ikazuchi, and Inazuma to any map",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"0",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",1]
+      ["C","Instant Repair",1]
     ],
     "requires":["A10", "Bw3"],
     "unlocks":[],
@@ -2048,14 +2052,14 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 4th Cruiser Division",
     "content":"Sortie Takao, Atago, Maya, Choukai and 2 additional ships to World 2-2 and defeat the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"100",
       "S":"150",
       "B":"100"
     },
     "reward":[
-      ["C","Instant repair",1]
+      ["C","Instant Repair",1]
     ],
     "requires":["A21"],
     "unlocks":[],
@@ -2070,7 +2074,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the Nishimura Fleet",
     "content":"Sortie Fusou, Yamashiro, Mogami, Shigure and 2 additional ships to World 2-3 and defeat the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"0",
       "S":"400",
@@ -2078,7 +2082,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Furniture box small",1],
-      ["C","Instant repair",2]
+      ["C","Instant Repair",2]
     ],
     "requires":["A22"],
     "unlocks":["A44", "A53","A77"],
@@ -2093,7 +2097,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 5th Carrier Division",
     "content":"Sortie Shoukaku, Zuikaku, and 4 additional ships to World 3-1 and defeat the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"0",
@@ -2101,7 +2105,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Furniture box medium",1],
-      ["C","Instant repair",2]
+      ["C","Instant Repair",2]
     ],
     "requires":["A23"],
     "unlocks":["A78"],
@@ -2116,7 +2120,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the New Mikawa Fleet",
     "content":"Sortie Choukai, Furutaka, Kako, Aoba, Kinugasa, and Tenryuu to World 2-3 and defeat the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"150",
       "S":"100",
@@ -2136,9 +2140,9 @@ const ALL_QUESTS_LIST = {
   "B17":{
     "Jp":"「潜水艦隊」出撃せよ！?",
     "En":"Sortie a Submarine Fleet",
-    "content":"Sortie 2 Submarines and 4 additional ships to World 2-3 and defeat the boss",
+    "content":"Sortie 2 SS and 4 additional ships to World 2-3 and defeat the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"0",
       "S":"300",
@@ -2157,9 +2161,9 @@ const ALL_QUESTS_LIST = {
   "B18":{
     "Jp":"「航空水上打撃艦隊」出撃せよ！",
     "En":"Sortie an Aviation Surface Attack Fleet",
-    "content":"Sortie 2 Aviation Cruisers, 2 Aviation Battleships, and 2 additional ships to World 4-2 and defeat the boss",
+    "content":"Sortie 2 CAV, 2 BBV, and 2 additional ships to World 4-2 and defeat the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"150",
       "S":"0",
@@ -2180,7 +2184,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 6th Cruiser Division",
     "content":"Sortie Aoba, Furutaka, Kako, Kinugasa and 2 additional ships to World 2-3 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"150",
       "S":"0",
@@ -2203,7 +2207,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 8th Destroyer Division",
     "content":"Sortie Arashio, Asashio, Michishio, Ooshio and 2 additional ships to World 2-3 and defeat the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"100",
       "S":"400",
@@ -2211,7 +2215,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Furniture box medium",1],
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["A31"],
     "unlocks":["A32", "A70", "B65", "Bm6", "D10"],
@@ -2226,7 +2230,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 18th Destroyer Division",
     "content":"Sortie Arare, Kagerou, Kasumi, Shiranui and 2 additional ships to World 3-1 and defeat the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"100",
       "S":"0",
@@ -2234,7 +2238,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Large furniture box",1],
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["A32"],
     "unlocks":["Bm5","A54","A72"],
@@ -2246,10 +2250,10 @@ const ALL_QUESTS_LIST = {
   },
   "B22":{
     "Jp":"「第三十駆逐隊(第一次)」出撃せよ！",
-    "En":"Sortie the 30th Destroyer Division (First GeneRation)",
-    "content":"Sortie Mutsuki, Kisaragi, Mochizuki, Yayoi and 2 additional Destroyers (or Destroyer and Light Cruiser flagship) to World 3-2 and obtain a C-Rank or better at the boss",
+    "En":"Sortie the 30th Destroyer Division (First Generation)",
+    "content":"Sortie Mutsuki, Kisaragi, Mochizuki, Yayoi and 2 additional DD (or 1 CL flagship and  1 DD) to World 3-2 and obtain a C-Rank or better at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"100",
       "S":"100",
@@ -2269,9 +2273,9 @@ const ALL_QUESTS_LIST = {
   "B23":{
     "Jp":"「航空戦艦」抜錨せよ！",
     "En":"Sortie an Aviation Battleship",
-    "content":"Sortie a fleet with at least 2 Aviation Battleships to World 4-4 and defeat the boss",
+    "content":"Sortie a fleet with at least 2 BBV to World 4-4 and defeat the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"300",
       "S":"300",
@@ -2279,7 +2283,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Large furniture box",1],
-      ["C","Instant repair",3]
+      ["C","Instant Repair",3]
     ],
     "requires":["D10"],
     "unlocks":[],
@@ -2293,7 +2297,7 @@ const ALL_QUESTS_LIST = {
     "En":"The 30th Destroyer Division Anti-Submarine Patrol",
     "content":"Sortie Mutsuki, Mochizuki, Uzuki and Yayoi to World 1-5 and obtain a C-Rank or better at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"330",
       "A":"330",
       "S":"330",
@@ -2313,9 +2317,9 @@ const ALL_QUESTS_LIST = {
   "B25":{
     "Jp":"新編「第二航空戦隊」出撃せよ！",
     "En":"Sortie the New 2nd Carrier Division",
-    "content":"Sortie Hiryuu Kai Ni as flagship, Souryuu (Kai or Kai-2 is ok), and 2 Destroyers (you may add additional ships) to World 5-2 and obtain an S-Rank at the boss",
+    "content":"Sortie Hiryuu Kai Ni as flagship, Souryuu (Kai or Kai-2 is ok), and 2 DD (you may add additional ships) to World 5-2 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"500",
       "S":"0",
@@ -2335,9 +2339,9 @@ const ALL_QUESTS_LIST = {
   "B26":{
     "Jp":"精鋭「第二航空戦隊」抜錨せよ！",
     "En":"Sortie the Elite 2nd Carrier Division",
-    "content":"Sortie Souryuu Kai Ni as flagship, Hiryuu Kai Ni, 2 Destroyers and 2 additional ship to World 4-3 and obtain an S-Rank at the boss",
+    "content":"Sortie Souryuu Kai Ni as flagship, Hiryuu Kai Ni, 2 DD and 2 additional ship to World 4-3 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"0",
       "S":"500",
@@ -2359,7 +2363,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the Battleship: \"Haruna\"",
     "content":"Sortie Haruna Kai Ni and 5 additional ships to World 5-1 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"0",
       "S":"0",
@@ -2381,7 +2385,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 601st Naval Air Group",
     "content":"Sortie Unryuu Kai and 5 additional ships to World 5-2 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"300",
       "S":"0",
@@ -2401,16 +2405,16 @@ const ALL_QUESTS_LIST = {
   "B29":{
     "Jp":"「軽空母」戦隊、出撃せよ！",
     "En":"Sortie a Light Carrier Squadron",
-    "content":"Sortie 1-2 Light Carriers, 1 Light Cruiser, and 3-4 Destroyers to World 2-1 and obtain an S-Rank at the boss",
+    "content":"Sortie 1-2 CVL, 1 CL, and 3-4 DD to World 2-1 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"300",
       "S":"0",
       "B":"300"
     },
     "reward":[
-      ["C","Instant repair",3],
+      ["C","Instant Repair",3],
       ["I","Repair Team",1]
     ],
     "requires":["A5"],
@@ -2423,9 +2427,9 @@ const ALL_QUESTS_LIST = {
   "B30":{
     "Jp":"「水雷戦隊」バシー島沖緊急展開",
     "En":"The Torpedo Squadron Bashi Island Emergency Deployment",
-    "content":"Sortie 1-2 Light Cruisers, which one of must be the flagship, and 4-5 Destroyers to World 2-2 and obtain an S-Rank at the boss",
+    "content":"Sortie 1-2 CL, which one of must be the flagship, and 4-5 DD to World 2-2 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"0",
@@ -2447,7 +2451,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 2nd Squadron",
     "content":"Sortie Fusou, Mutsu, Nagato, Yamashiro and 2 additional ships to World 4-2 and obtain two S-Rank victories at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"400",
       "S":"0",
@@ -2467,16 +2471,16 @@ const ALL_QUESTS_LIST = {
   "B32":{
     "Jp":"「戦艦部隊」北方海域に突入せよ！",
     "En":"Rush the Battleship Force to the Northern Sea",
-    "content":"Sortie 2 Battleships (Aviation Battleships do not count), 1 Light Carrier, and 3 additional ships to World 3-5 and obtain an S-Rank at the boss",
+    "content":"Sortie 2 BB (BBV do not count), 1 CVL, and 3 additional ships to World 3-5 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"500",
       "S":"0",
       "B":"250"
     },
     "reward":[
-      ["C","Development material",2],
+      ["C","Development Material",2],
       ["E","Type 1 AP Shell",1]
     ],
     "requires":["Bm4"],
@@ -2491,14 +2495,14 @@ const ALL_QUESTS_LIST = {
     "En":"Advance the Nishimura Fleet to the Southern Sea",
     "content":"Sortie Fusou, Yamashiro, Mogami, Shigure, Michishio and 1 additional ship to World 5-1, and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"500",
       "B":"300"
     },
     "reward":[
-      ["C","Improvement material",5],
+      ["C","Improvement Material",5],
       ["I","Medal",1]
     ],
     "requires":["A44"],
@@ -2514,7 +2518,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 6th Squadron to the Southwestern Sea",
     "content":"Sortie Furutaka, Kako, Aoba, Kinugasa and 2 additional ships to World 2-5 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"400",
       "S":"0",
@@ -2537,7 +2541,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 11th Destroyer Division",
     "content":"Sortie Fubuki, Shirayuki, Hatsuyuki, Murakumo, and 2 additional ships to World 2-3 and defeat the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"300",
       "S":"300",
@@ -2559,14 +2563,14 @@ const ALL_QUESTS_LIST = {
     "En":"The 11th Destroyer Division Anti-Submarine Patrol",
     "content":"Sortie Fubuki, Shirayuki, Hatsuyuki, and Murakumo to World 1-5 and obtain at least a C or above Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"0",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Development material",2],
+      ["C","Development Material",2],
       ["E","Type 3 Sonar",1]
     ],
     "requires":["A47"],
@@ -2582,7 +2586,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 21st Destroyer Division",
     "content":"Sortie Hatsuharu, Nenohi, Wakaba, Hatsushimo, and 2 additional ships to World 3-1 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"300",
@@ -2604,7 +2608,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the Nachi Squadron",
     "content":"Sortie Nachi as flagship, Hatsushimo, Kasumi, Ushio, Akebono, and 1 other ship to World 2-2 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"300",
       "S":"0",
@@ -2612,7 +2616,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Large furniture box",1],
-      ["C","Improvement material",2]
+      ["C","Improvement Material",2]
     ],
     "requires":["B37","Bm1"],
     "unlocks":["A49"],
@@ -2625,9 +2629,9 @@ const ALL_QUESTS_LIST = {
   "B39":{
     "Jp":"「第二二駆逐隊」出撃せよ！",
     "En":"Sortie the 22nd Destroyer Division",
-    "content":"Sortie Satsuki, Fumizuki, Nagatsuki, 1 other Destroyer, and 2 other additional ships to World 1-4 and obtain an S-Rank at the boss",
+    "content":"Sortie Satsuki, Fumizuki, Nagatsuki, 1 other DD, and 2 other additional ships to World 1-4 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -2648,9 +2652,9 @@ const ALL_QUESTS_LIST = {
   "B40":{
     "Jp":"「改装防空重巡」出撃せよ！",
     "En":"Sortie the Remodeled Anti-Air Heavy Cruiser",
-    "content":"Sortie Maya (Kai or Kai-2), 1 Light Cruiser, and 2 Destroyers (you may add additional ships) to World 2-3 and obtain an S-Rank at the boss",
+    "content":"Sortie Maya (Kai or Kai-2), 1 CL, and 2 DD (you may add additional ships) to World 2-3 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"0",
       "S":"300",
@@ -2673,15 +2677,15 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the New Mikawa Fleet to the Solomon Waters",
     "content":"Sortie Choukai Kai Ni as flagship and any combination of Furutaka, Kako, Aoba, Kinugasa, Yuubari, or Tenryuu to World 5-1 and obtain an S-Rank at the boss (One of them will have to be left out)",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"480",
       "A":"480",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",3],
-      ["C","Improvement material",3]
+      ["C","Development Material",3],
+      ["C","Improvement Material",3]
     ],
     "requires":["C5"],
     "unlocks":["B80"],
@@ -2696,14 +2700,14 @@ const ALL_QUESTS_LIST = {
     "En":"The 6th Destroyer Division Anti-Submarine Patrol nanodesu",
     "content":"Sortie Akatsuki, Hibiki (Верный is ok), Ikazuchi, and Inazuma to World 1-5 and obtain a C-Rank or better at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"200",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",3],
+      ["C","Development Material",3],
       ["E","Type 93 Passive Sonar",1]
     ],
     "requires":["A10"],
@@ -2719,14 +2723,14 @@ const ALL_QUESTS_LIST = {
     "En":"Set Sail! The 18th Squadron",
     "content":"Sortie Tenryuu, Tatsuta, and at least two other ships to World 2-3 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"350",
       "A":"0",
       "S":"0",
       "B":"250"
     },
     "reward":[
-      ["C","Instant repair",3],
+      ["C","Instant Repair",3],
       ["I","Furniture Fairy",1]
     ],
     "requires":["A51"],
@@ -2742,15 +2746,15 @@ const ALL_QUESTS_LIST = {
     "En":"Deploy the Marine Rush Fleet",
     "content":"Sortie Hiei, Kirishima, Nagara, Akatsuki, Ikazuchi, and Inazuma to World 5-1 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"0",
       "S":"500",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",5],
-      ["C","Improvement material",2]
+      ["C","Development Material",5],
+      ["C","Improvement Material",2]
     ],
     "requires":["A52", "Bw9"],
     "unlocks":[],
@@ -2765,14 +2769,14 @@ const ALL_QUESTS_LIST = {
     "En":"A Thorough 6th Destroyer Division Anti-Submarine Patrol nanodesu",
     "content":"Sortie Akatsuki Kai Ni, Hibiki (Верный is ok), Ikazuchi, and Inazuma to World 1-5 and obtain an A-Rank or better at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",2],
+      ["C","Improvement Material",2],
       ["E","Type 93 Passive Sonar",1]
     ],
     "requires":["A53", "B42"],
@@ -2788,14 +2792,14 @@ const ALL_QUESTS_LIST = {
     "En":"Rush the 1st Torpedo Squadron to OpeRation KE",
     "content":"Sortie Abukuma as flagship with Hibiki (Верный is ok), Hatsushimo, Wakaba, Samidare and Shimakaze to World 3-2 and obtain a victory (B-Rank or better) at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"300",
       "S":"0",
       "B":"400"
     },
     "reward":[
-      ["C","Instant repair",3],
+      ["C","Instant Repair",3],
       ["I","Furniture Fairy",1]
     ],
     "requires":["A54"],
@@ -2811,15 +2815,15 @@ const ALL_QUESTS_LIST = {
     "En":"Rush the 1st Torpedo Squadron to OpeRation KE Again",
     "content":"Sortie Abukuma Kai Ni as flagship with Hibiki (Верный is ok), Yuugumo, Naganami, Akigumo and Shimakaze to World 3-2 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"400",
       "S":"0",
       "B":"500"
     },
     "reward":[
-      ["C","Development material",4],
-      ["C","Improvement material",4]
+      ["C","Development Material",4],
+      ["C","Improvement Material",4]
     ],
     "requires":["A55","C7"],
     "unlocks":[],
@@ -2834,7 +2838,7 @@ const ALL_QUESTS_LIST = {
     "En":"Strengthen the Anti-Submarine Patrol in Front of the Naval Base!",
     "content":"Sortie to World 1-5 and obtain four A-Ranks (or better) at the boss.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"0",
@@ -2853,16 +2857,16 @@ const ALL_QUESTS_LIST = {
   "B49":{
     "Jp":"「空母機動部隊」北方海域に進出せよ！",
     "En":"\"Carrier Task Force\", advance to the Northern Sea!",
-    "content":"Sortie a fleet with an aircraft carrier as flagship to World 3-5 and obtain an S-Rank at the boss",
+    "content":"Sortie a fleet with an CV as flagship to World 3-5 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"0",
       "S":"500",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",3],
+      ["C","Improvement Material",3],
       ["I","Combat provision",2]
     ],
     "requires":["Bd8", "B32"],
@@ -2877,14 +2881,14 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 5th Carrier Division to the Southern Sea Coral Islands",
     "content":"Sortie Shoukaku, Zuikaku, Oboro, Akigumo and up to 2 additional ships to World 5-2 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"500",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",3],
+      ["C","Instant Repair",3],
       ["I","Irako",1]
     ],
     "requires":["A56"],
@@ -2900,7 +2904,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the New 21st Squadron to the North",
     "content":"Sortie Nachi Kai Ni, Ashigara Kai Ni, Tama, Kiso and up to 2 additional ships to World 3-1 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"0",
@@ -2920,10 +2924,10 @@ const ALL_QUESTS_LIST = {
   },
   "B52":{
     "Jp":"「第十六戦隊(第一次)」出撃せよ！",
-    "En":"Sortie the 16th Squadron (First GeneRation)",
+    "En":"Sortie the 16th Squadron (First Generation)",
     "content":"Sortie Ashigara as flagship, Kuma, Nagara and up to 3 additional ships to World 2-2 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"0",
       "S":"200",
@@ -2946,14 +2950,14 @@ const ALL_QUESTS_LIST = {
     "En":"3rd Carrier Division: defend the Nansei Islands",
     "content":"Sortie Zuikaku Kai as flagship, Zuihou, Chitose Carrier and Chiyoda Carrier (both as CVL) (you can add 2 more ships) to World 1-4 and score an S-rank victory at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"300",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
+      ["C","Instant Repair",2],
       ["I","Irako",1]
     ],
     "requires":["A59"],
@@ -2969,14 +2973,14 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the Ozawa's fleet",
     "content":"Sortie Zuikaku Kai(Kai Ni is OK) as flagship, Zuihou Kai, Chitose Carrier, Chiyoda Carrier, Ise Kai and Hyuuga Kai to World 2-4 and score an S-rank victory at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"0",
       "S":"300",
       "B":"300"
     },
     "reward":[
-      ["C","Instant repair",3],
+      ["C","Instant Repair",3],
       ["E","Zero Fighter Model 52C (601 Air Group)",1]
     ],
     "requires":["A61"],
@@ -2989,10 +2993,10 @@ const ALL_QUESTS_LIST = {
   },
   "B55":{
     "Jp":"「第十六戦隊(第二次)」出撃せよ！",
-    "En":"Sortie the 16th Squadron (Second GeneRation)",
+    "En":"Sortie the 16th Squadron (Second Generation)",
     "content":"Sortie Natori as flagship, Isuzu, Kinu and up to 3 additional ships to World 2-3 and score an S-rank victory at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"320",
       "A":"0",
       "S":"320",
@@ -3012,16 +3016,16 @@ const ALL_QUESTS_LIST = {
   "B56":{
     "Jp":"新編成航空戦隊、北方へ進出せよ！",
     "En":"Sortie the New Carrier Division to the North",
-    "content":"Sortie 2 Aircraft Carriers or Light Aircraft Carriers, 2 Aviation Battleships or Aviation Cruisers and 2 Destroyers to World 3-3 and score an S-rank victory at the boss",
+    "content":"Sortie 2 CV / CVL, 2 BBV / CAV and 2 DD to World 3-3 and score an S-rank victory at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"400",
       "S":"0",
       "B":"400"
     },
     "reward":[
-      ["C","Improvement material",2],
+      ["C","Improvement Material",2],
       ["I","Furniture Fairy",1]
     ],
     "requires":["A64"],
@@ -3036,14 +3040,14 @@ const ALL_QUESTS_LIST = {
     "En":"Carry Out OpeRation Rei-go",
     "content":"Sortie Kasumi as flagship, Ashigara, Ooyodo, Asashimo, Kiyoshimo and up to one additional ship to World 2-5 and score an S-rank victory at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"700",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",3],
+      ["C","Improvement Material",3],
       ["I","Present box",1]
     ],
     "requires":["A65", "Bm5"],
@@ -3059,7 +3063,7 @@ const ALL_QUESTS_LIST = {
     "En":"Send the Flagship Kasumi to Patrol the Northern Sea",
     "content":"Sortie a fleet with Kasumi Kai Ni as flagship, 3 DD and up to 2 additional ships to World 3-1 and score a victory at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"0",
       "S":"300",
@@ -3082,14 +3086,14 @@ const ALL_QUESTS_LIST = {
     "En":"Flagship Kasumi, Sortieing! Destroy the Enemy Fleet",
     "content":"Sortie a fleet with Kasumi Kai Ni as flagship, 2 DD and up to 3 additional ships to World 2-5 and score an S rank victory at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"500",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",3],
+      ["C","Improvement Material",3],
       ["E","25mm Triple Autocannon Mount (Concentrated Deployment)",1]
     ],
     "requires":["B58", "D2"],
@@ -3105,14 +3109,14 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 31st Division",
     "content":"Sortie Isuzu Kai Ni as flagship, Satsuki Kai Ni, Uzuki Kai and up to 3 additional ships to World 1-6 and reach the end node",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"600",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",3],
+      ["C","Improvement Material",3],
       ["I","Hishimochi",1]
     ],
     "requires":["A66","Bd1"],
@@ -3128,7 +3132,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 27th Destroyer Division",
     "content":"Sortie Shiratsuyu Kai as flagship, Shigure, Harusame and Samidare and up to 2 additional ships to World 2-3 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"0",
       "S":"500",
@@ -3150,14 +3154,14 @@ const ALL_QUESTS_LIST = {
     "En":"Bolster the Capability for Amphibious Assault OpeRations!",
     "content":"Sortie to World 6-3 and obtain an B-Rank or better at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"600",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",3],
+      ["C","Improvement Material",3],
       ["E","Daihatsu Landing Craft",1]
     ],
     "requires":["Bw9","D19"],
@@ -3172,7 +3176,7 @@ const ALL_QUESTS_LIST = {
     "En":"Defend the Oil Refinery Zone!",
     "content":"Sortie a torpedo squadron (1 CL 5 DD) to World 1-3 and obtain three S-Ranks at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"0",
       "S":"0",
@@ -3194,7 +3198,7 @@ const ALL_QUESTS_LIST = {
     "En":"Reinforce the Nansei Islands Defence Line!",
     "content":"Sortie to World 1-4 and obtain five S-Ranks at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"400",
@@ -3216,7 +3220,7 @@ const ALL_QUESTS_LIST = {
     "En":"Secure Control of the Orel Sea!",
     "content":"Sortie a fleet with Ooshio (model doesn't matter) as flagship to World 2-3 and obtain six S-Ranks at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"400",
       "S":"0",
@@ -3239,7 +3243,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the flagship \"Ooshio\"!",
     "content":"Sortie a fleet with Ooshio Kai Ni as flagship to World 3-5 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"500",
       "S":"0",
@@ -3247,7 +3251,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Combat Ration",1],
-      ["C","Improvement material",3]
+      ["C","Improvement Material",3]
     ],
     "requires":["B59", "B65"],
     "unlocks":[],
@@ -3262,7 +3266,7 @@ const ALL_QUESTS_LIST = {
     "En":"Fleet, Third Anniversary!",
     "content":"Sortie a fleet to World 2-2 and World 2-3 and obtain an S-Rank at both bosses.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"1000",
       "A":"1000",
       "S":"1000",
@@ -3281,16 +3285,16 @@ const ALL_QUESTS_LIST = {
   "B68":{
     "Jp":"強行高速輸送部隊、出撃せよ！",
     "En":"Forced High-speed Transport Fleet, sortie!",
-    "content":"Sortie a fleet with Sendai Kai Ni (she doesn't have to be the flagship), Kawakaze Kai Ni, Shigure Kai Ni, two other destroyers and up to one wildcard to World 4-1 and obtain at least an A-Rank at the boss.",
+    "content":"Sortie a fleet with Sendai Kai Ni (she doesn't have to be the flagship), Kawakaze Kai Ni, Shigure Kai Ni, two other DD and up to one wildcard to World 4-1 and obtain at least an A-Rank at the boss.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"0",
       "S":"500",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",2],
+      ["C","Improvement Material",2],
       ["I","Irako",1]
     ],
     "requires":["A68"],
@@ -3306,14 +3310,14 @@ const ALL_QUESTS_LIST = {
     "En":"\"1st Carrier Division\", into the West!",
     "content":"Sortie a fleet with Akagi as flagship, Kaga and up to four wildcards to World 4-5 and obtain an S-Rank at the boss.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"800",
       "S":"0",
       "B":"800"
     },
     "reward":[
-      ["C","Improvement material",3],
+      ["C","Improvement Material",3],
       ["I","Skilled Crew Member",1]
     ],
     "requires":["B68","F33"],
@@ -3329,7 +3333,7 @@ const ALL_QUESTS_LIST = {
     "En":"Set Sail Towards the Nansei Islands Defence Line",
     "content":"Sortie a fleet with a CL/CLT/CT flagship, 4 DD, and up to 1 additional ship to World 1-4 and obtain at least an A-rank at the boss.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"300",
@@ -3337,7 +3341,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Mamiya",1],
-      ["C","Instant repair",3]
+      ["C","Instant Repair",3]
     ],
     "requires":["A69"],
     "unlocks":["B71","B75"],
@@ -3351,14 +3355,14 @@ const ALL_QUESTS_LIST = {
     "En":"Ensure the Safety of the Naval Base's Nearby Routes",
     "content":"Sortie a fleet with a CL flagship, 4 DD, and up to 1 additional ship to World 1-6 and complete the map.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"900",
       "S":"900",
       "B":"900"
     },
     "reward":[
-      ["C","Development material",4],
+      ["C","Development Material",4],
       ["I","Furniture Fairy",1]
     ],
     "requires":["B70"],
@@ -3373,14 +3377,14 @@ const ALL_QUESTS_LIST = {
     "En":"31st Cruiser Division, suppress the enemy submarines!",
     "content":"Sortie a fleet with Isuzu Kai Ni as flagship, Satsuki Kai Ni, Uzuki Kai, and three wildcards to World 1-6 and reach the goal point twice.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"310",
       "A":"310",
       "S":"0",
       "B":"310"
     },
     "reward":[
-      ["C","Improvement material",2],
+      ["C","Improvement Material",2],
       ["E","Type 3 Active Sonar",1]
     ],
     "requires":["Bw5", "A66"],
@@ -3396,7 +3400,7 @@ const ALL_QUESTS_LIST = {
     "En":"New 8th Destroyer Division, sortie!",
     "content":"Sortie a fleet with Asashio Kai Ni/Asashio Kai Ni D as flagship, Michishio, Ooshio, Arashio, and two wildcards to World 1-6 and reach the goal point.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"400",
       "S":"0",
@@ -3419,14 +3423,14 @@ const ALL_QUESTS_LIST = {
     "En":"Elite 8th Destroyer Division on ASW patrol!",
     "content":"Sortie a fleet that includes Asashio Kai Ni D and Ooshio Kai Ni to World 1-5 and score two S-Ranks at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"800",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Improvement material",4],
+      ["C","Improvement Material",4],
       ["E","Type 4 Passive Sonar",1]
     ],
     "requires":["A71"],
@@ -3440,16 +3444,16 @@ const ALL_QUESTS_LIST = {
   "B75":{
     "Jp":"水雷戦隊,南西諸島防衛線に反復出撃せよ！",
     "En":"Torpedo Squadron, repeatedly sortie to the Nansei Islands defence line!",
-    "content":"Sortie a fleet with light cruiser type (i.e. CL/CLT/CT) as flagship, four destroyers and a wildcard to World 1-4 and score two S-Ranks at the boss node.",
+    "content":"Sortie a fleet with CL type (i.e. CL/CLT/CT) as flagship, four DD and a wildcard to World 1-4 and score two S-Ranks at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"350",
       "S":"0",
       "B":"350"
     },
     "reward":[
-      ["C","Instant repair",4],
+      ["C","Instant Repair",4],
       ["I","Irako",1]
     ],
     "requires":["B70"],
@@ -3462,9 +3466,9 @@ const ALL_QUESTS_LIST = {
   "B76":{
     "Jp":"製油所地帯沿岸の哨戒を実施せよ！",
     "En":"Patrol the Coastal Refinery Zone!",
-    "content":"Sortie a fleet with a light aircraft carrier as flagship, three destroyers and two wildcards to World 1-3 and score an S-Rank at the boss node.",
+    "content":"Sortie a fleet with a CVL as flagship, three DD and two wildcards to World 1-3 and score an S-Rank at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"600",
       "A":"0",
       "S":"0",
@@ -3484,9 +3488,9 @@ const ALL_QUESTS_LIST = {
   "B77":{
     "Jp":"水雷戦隊、南西諸島海域を哨戒せよ！",
     "En":"Torpedo Squadron, patrol the Nansei Islands area!",
-    "content":"Sortie a fleet with a light cruiser as flagship, four destroyers and one wildcard to both World 2-2 and World 2-3, and score an S-Rank at each boss node.",
+    "content":"Sortie a fleet with a CL as flagship, four DD and one wildcard to both World 2-2 and World 2-3, and score an S-Rank at each boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"600",
       "A":"600",
       "S":"0",
@@ -3497,7 +3501,7 @@ const ALL_QUESTS_LIST = {
       ["I","Irako",1]
     ],
     "requires":["C2"],
-    "unlocks":["F38","B82"],
+    "unlocks":["F38"],
     "period":"once",
     "needs":{
       "M":["2-2","2-3"]
@@ -3508,14 +3512,14 @@ const ALL_QUESTS_LIST = {
     "En":"19th Destroyer Division, sortie!",
     "content":"Sortie a fleet with Isonami, Uranami, Ayanami and Shikinami to World 1-5, and score at least an A-Rank at the boss node.",
     "tips":"※Because of the branching rules you can have only these four in your fleet. Enjoy the pre-boss compass trolling.",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"300",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",3],
+      ["C","Instant Repair",3],
       ["I","Irako", 1]
     ],
     "requires":["A72"],
@@ -3530,14 +3534,14 @@ const ALL_QUESTS_LIST = {
     "En":"19th Destroyer Division, engage the enemy main forces!",
     "content":"Sortie a fleet with Isonami, Uranami, Ayanami, Shikinami and up to two wildcards to World 2-5, and score at least an A-Rank at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"600",
       "A":"600",
       "S":"0",
       "B":"300"
     },
     "reward":[
-      ["C","Improvement material",4],
+      ["C","Improvement Material",4],
       ["I","Underway Replenishment",1]
     ],
     "requires":["B78"],
@@ -3553,7 +3557,7 @@ const ALL_QUESTS_LIST = {
     "En":"Prepare for the Construction of the Land-Base!",
     "content":"Sortie to World 6-3 and obtain an S-rank at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -3574,7 +3578,7 @@ const ALL_QUESTS_LIST = {
     "En":"Rush into Night Battle! Attack the Enemy Landing Forces!",
     "content":"Sortie to World 5-3 and obtain at least an A-rank at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -3595,7 +3599,7 @@ const ALL_QUESTS_LIST = {
     "En":"Obtain the Searchlight that brightens the Dark Sea!",
     "content":"Sortie to World 2-1 and obtain an S-rank at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"100",
       "S":"0",
@@ -3605,7 +3609,7 @@ const ALL_QUESTS_LIST = {
       ["E","Searchlight",1],
       ["I","Combat Ration",1]
     ],
-    "requires":["B77"],
+    "requires":["Bm1"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -3617,7 +3621,7 @@ const ALL_QUESTS_LIST = {
     "En":"Reinforce the Nansei Islands Defense Line!",
     "content":"Sortie a fleet with an AV or CAV as flagship and up to five wildcards to World 1-4 and obtain an S-rank at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"0",
@@ -3636,10 +3640,10 @@ const ALL_QUESTS_LIST = {
   },
   "B84":{
     "Jp":"「第十六戦隊(第三次)」出撃せよ！",
-    "En":"16th Cruiser Division (3rd GeneRation), sortie!",
+    "En":"16th Cruiser Division (3rd Generation), sortie!",
     "content":"Sortie a fleet with Kinu, Aoba, Kitakami, Ooi and up to two wildcards to World 2-4 and obtain at least an A-Rank at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"0",
       "S":"0",
@@ -3662,7 +3666,7 @@ const ALL_QUESTS_LIST = {
     "En":"Elite 16th Cruiser Division, engage the enemy!",
     "content":"Sortie a fleet with Kinu Kai Ni as flagship and any combination of Kitakami Kai Ni, Ooi Kai Ni, Kuma Kai, Aoba Kai, Uranami Kai or Shikinami Kai to World 2-5 and obtain an S-Rank at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"600",
       "A":"600",
       "S":"0",
@@ -3682,16 +3686,16 @@ const ALL_QUESTS_LIST = {
   "B86":{
     "Jp":"輸送作戦を成功させ、帰還せよ！",
     "En":"Complete a transport mission and return!",
-    "content":"Sortie a fleet with Kinu Kai Ni as flagship, Uranami Kai, exactly three other destroyers, and up to one wildcard (not a DD) to World 2-2 and obtain an S-Rank at the boss node.",
+    "content":"Sortie a fleet with Kinu Kai Ni as flagship, Uranami Kai, exactly three other DD, and up to one wildcard (not a DD) to World 2-2 and obtain an S-Rank at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"1000",
       "A":"0",
       "S":"1000",
       "B":"3000"
     },
     "reward":[
-      ["C","Improvement material",5],
+      ["C","Improvement Material",5],
       ["I","Underway Replenishment",1]
     ],
     "requires":["B79", "B85"],
@@ -3707,7 +3711,7 @@ const ALL_QUESTS_LIST = {
     "En":"Heavy Cruiser Division, Set Sail!",
     "content":"Sortie a CA(V) as flagship, three other CA(V), and two additional ships to World 2-3 and obtain an S-Rank at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"400",
       "S":"0",
@@ -3729,14 +3733,14 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie a Battleship Division!",
     "content":"Sortie a (F)BB(V) as flagship, 1 other (F)BB(V) and up to 4 additional ships to World 3-3 and obtain an S-Rank at the boss node.",
     "tips":"※Due to the branching rules you're required to bring at least 2 CV(L).※You will be prompted to choose between one of the two equipment rewards, so choose wisely.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"800",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Improvement material",2],
+      ["C","Improvement Material",2],
       ["E","PBY-5A Catalina",1,"Choose one: "],
       ["E","Type 2 Seaplane Fighter Kai",1,"or "]
     ],
@@ -3752,7 +3756,7 @@ const ALL_QUESTS_LIST = {
     "En":"Main BB Fleet, Sortie out!",
     "content":"Sortie a fleet which includes 2 or more slow BB/BBV Obtain S-Rank Victory at the Boss node of World 2-4",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"800",
       "S":"400",
@@ -3775,7 +3779,7 @@ const ALL_QUESTS_LIST = {
     "En":"Elite 8th DD Division, Sortie!",
     "content":"Sortie a Fleet with Arashio Kai Ni as Flagship, which includes at least one of either Asashio, Ooshio or Michishio as well.Sortie to World 5-5 and obtain 2 A-rank or higher victories!",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"800",
       "A":"800",
       "S":"0",
@@ -3783,7 +3787,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Reinforcement Expansion",1],
-      ["C","Improvement material",4]
+      ["C","Improvement Material",4]
     ],
     "requires":["B73", "B81"],
     "unlocks":[],
@@ -3798,14 +3802,14 @@ const ALL_QUESTS_LIST = {
     "En":"Submarine Fleet, patrol the Central Waters!",
     "content":"Sortie a Fleet consisting of 4 SS(V) with an SS(V) as flagship and 2 additional ships.Sortie to World 6-1 and score a victory at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"300",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",3],
+      ["C","Improvement Material",3],
       ["I","Irako",1]
     ],
     "requires":["B69", "Bd5"],
@@ -3820,7 +3824,7 @@ const ALL_QUESTS_LIST = {
     "En":"Heavy Armored Cruiser, Embark into the Iron Bottom Sound!",
     "content":"Sortie Zara due as Flagship with 5 additional ships.Sortie to World 5-3 and score an A-rank or higher victory at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"700",
@@ -3842,7 +3846,7 @@ const ALL_QUESTS_LIST = {
     "En":"Defeat the Enemy Fleet at the Nansei Islands!",
     "content":"Sortie a Fleet with a CL as flagship and 5 additional ships.Sortie to World 1-4, 2-2, 2-3 and score S rank victories at the boss nodes.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"0",
       "S":"300",
@@ -3864,14 +3868,14 @@ const ALL_QUESTS_LIST = {
     "En":"Expand the Offshore Aviation Forces!",
     "content":"Sortie a Fleet with an AV/CV/CVL/CVB as Flagship and 5 additional ships.Sortie to World 3-5, 4-4, 6-2 and score S-rank victories at the boss nodes.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"500",
       "S":"0",
       "B":"1000"
     },
     "reward":[
-      ["C","Development material",5],
+      ["C","Development Material",5],
       ["I","Skilled Crew Member",1]
     ],
     "requires":["B93", "B91"],
@@ -3886,14 +3890,14 @@ const ALL_QUESTS_LIST = {
     "En":"Remodeled Aviation Cruiser, Sortie!",
     "content":"Sortie a Fleet with Suzuya Kai Ni as the flagship.Sortie to World 5-1, 5-3 and obtain A rank or higher victories at the boss nodes.",
     "tips":"※The CVL version cannot complete the quest. Must be CAV.",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"300",
       "B":"700"
     },
     "reward":[
-      ["C","Improvement material",4],
+      ["C","Improvement Material",4],
       ["E","Kyoufuu Kai",1,"Choose one: "],
       ["E","New Kanhon Design Anti-torpedo Bulge (Medium)",1,"or "]
     ],
@@ -3910,7 +3914,7 @@ const ALL_QUESTS_LIST = {
     "En":"Remodeled Attack Light Aircraft Carrier, Deploy to the Frontlines!",
     "content":"Sortie a Fleet with Suzuya Carrier Kai Ni as the flagship.Sortie to World 6-2, 6-5 and obtain S-rank victories at the Boss nodes.",
     "tips":"※The CAV version cannot complete the quest. Must be CVL.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"1000",
       "S":"0",
@@ -3931,9 +3935,9 @@ const ALL_QUESTS_LIST = {
   "B97":{
     "Jp":"鎮守府海域警戒を厳とせよ！",
     "En":"Patrol the Naval Base Ocean Areas Vigilantly!",
-    "content":"Sortie a fleet with a Cruiser as the flagship, with at least 2 Destroyers.Sortie to World 1-2, 1-3, 1-4, 1-5 and obtain S-rank victories at the Boss nodes.",
+    "content":"Sortie a fleet with a Cruiser as the flagship, with at least 2 DD.Sortie to World 1-2, 1-3, 1-4, 1-5 and obtain S-rank victories at the Boss nodes.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"400",
       "S":"400",
@@ -3953,16 +3957,16 @@ const ALL_QUESTS_LIST = {
   "B98":{
     "Jp":"海上護衛体制の強化に努めよ！",
     "En":"Focus the Strengthening of the Maritime Escort !",
-    "content":"Sortie a fleet with at least 3 Destroyers or Coastal Defense Ships to world 1-3, 1-4, 1-5, S rank the boss nodes. Sortie to world 1-6 and reqch node N.",
+    "content":"Sortie a fleet with at least 3 DD or Coastal Defense Ships to world 1-3, 1-4, 1-5, S rank the boss nodes. Sortie to world 1-6 and reqch node N.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"0",
       "S":"0",
       "B":"400"
     },
     "reward":[
-      ["C","Development material",4],
+      ["C","Development Material",4],
       ["I","Furniture Fairy",1]
     ],
     "requires":["Bd2"],
@@ -3977,14 +3981,14 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the New First Squadron!",
     "content":"Sortie a fleet with Nagato Kai Ni as flagship, Mutsu Kai as second ship and up to 4 additional ships to world 4-5 and 5-5. S rank the boss nodes.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"880",
       "S":"880",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",4],
+      ["C","Improvement Material",4],
       ["E","New Kanhon Design Anti-torpedo Bulge (Large)",1]
     ],
     "requires":["A75","B98"],
@@ -3998,9 +4002,9 @@ const ALL_QUESTS_LIST = {
   "B100":{
     "Jp":"増強海上護衛総隊、抜錨せよ！",
     "En":"Enhanced Maritime Escort Fleet, Sortie!",
-    "content":"Sortie a fleet with 1 Light Cruiser, 2 Destroyers or Coastal Defense Ships, 1 Aviation Cruiser or Light Carrier, up to 2 additional ships to world 2-2, 2-3, 2-4, 2-5 and obtain A rank victories at the boss nodes.",
+    "content":"Sortie a fleet with 1 CL, 2 DD or Coastal Defense Ships, 1 CAV or CVL, up to 2 additional ships to world 2-2, 2-3, 2-4, 2-5 and obtain A rank victories at the boss nodes.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"700",
       "A":"0",
       "S":"0",
@@ -4022,14 +4026,14 @@ const ALL_QUESTS_LIST = {
     "En":"New Seventh Squadron, Sortie!",
     "content":"Sortie a fleet with Kumano Kai Ni/Kumano Carrier Kai Ni as flagship, Suzuya Kai Ni/Suzuya Carrier Kai Ni as second ship, Mogami Kai, Mikuma Kai, up to 2 additional ships to world 4-5, 6-2 and obtain S rank victories at the boss nodes.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"1000",
       "B":"500"
     },
     "reward":[
-      ["C","Improvement material",4],
+      ["C","Improvement Material",4],
       ["I","Medal",1],
       ["I","New Model Gun Mount Improvement Material",1],
       ["E","Type 0 Fighter Model 63 (Fighter-bomber)",1],
@@ -4047,14 +4051,14 @@ const ALL_QUESTS_LIST = {
     "En":'Elite "Fourth Carrier Division", set sail!',
     "content":"Sortie Ise and Hyuuga both above level 50 as flagship and 2nd ship along with 1CL + 2 DD and 1 additional ship to World 2-5, 3-5 and obatain at least A rank victory at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"0",
       "S":"500",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",4],
+      ["C","Improvement Material",4],
       ["I","Medal",1,"Choose one: "],
       ["I","Skilled Crew Member",1,"or "]
     ],
@@ -4071,7 +4075,7 @@ const ALL_QUESTS_LIST = {
     "En":"Flagship Yura, set sail!",
     "content":"Sortie Yura Kai Ni as flagship, with at least 2 of the following ships: Murasame, Yuudachi, Harusame, Samidare, Akizuki, up to 3 additional ships to World 2-3, 5-1 and obtain A rank or above victory at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"400",
       "S":"0",
@@ -4095,7 +4099,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the Elite 22th Destroyer Squadron!",
     "content":"Sortie a torpedo squadron consists of Fumizuki Kai Ni, Satsuki Kai Ni, Minazuki Kai and Nagatsuki Kai to world 3-2 and obtain an S-rank victory at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"700",
       "S":"0",
@@ -4121,14 +4125,14 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRation for the Ceremony (Part I)",
     "content":"Scrap equipment twice",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"88",
       "A":"88",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["A16"],
     "unlocks":["WC01"],
@@ -4140,14 +4144,14 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRation for the Ceremony (Part II)",
     "content":"Win two battles in Exercises",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"88",
       "B":"88"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["WF01"],
     "unlocks":["WA01"],
@@ -4159,7 +4163,7 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRation for the Ceremony (Part III)",
     "content":"Have a level 90 to 99 ship as your flagship",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"88",
       "A":"88",
       "S":"88",
@@ -4178,7 +4182,7 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRation for the Ceremony (Final)",
     "content":"Defeat the boss in 2-3 with a Level 90-99 flagship (with S rank)",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4199,7 +4203,7 @@ const ALL_QUESTS_LIST = {
     "En":"A New Voyage",
     "content":"Have a Level 100 ship as your flagship along with five others in your main fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"200",
@@ -4220,7 +4224,7 @@ const ALL_QUESTS_LIST = {
     "En":"A Couple's First Quest",
     "content":"Defeat the boss in 4-3 with a level 100+ flagship (with S rank)",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"300",
@@ -4241,14 +4245,14 @@ const ALL_QUESTS_LIST = {
     "En":"The First Modernization",
     "content":"Perform a successful modernization",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"50",
       "B":"30"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":[],
     "unlocks":["G2"],
@@ -4260,14 +4264,14 @@ const ALL_QUESTS_LIST = {
     "En":"Carry Out Ship Modernizations",
     "content":"Perform 2 successful modernizations within the same day",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"20",
       "A":"20",
       "S":"50",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",1]
+      ["C","Instant Repair",1]
     ],
     "requires":["G1"],
     "unlocks":["G3"],
@@ -4279,15 +4283,15 @@ const ALL_QUESTS_LIST = {
     "En":"Proceed with Modernization, and Prepare for War",
     "content":"Perform 15 successful modernizations within the same week",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"300",
       "B":"100"
     },
     "reward":[
-      ["C","Instant construction",1],
-      ["C","Development material",2]
+      ["C","Instant Construction",1],
+      ["C","Development Material",2]
     ],
     "requires":["G2"],
     "unlocks":["G5"],
@@ -4299,7 +4303,7 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRation for Large Ship Construction (Part I)",
     "content":"Perform 4 successful modernizations",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"400",
@@ -4316,7 +4320,7 @@ const ALL_QUESTS_LIST = {
     "En":"Modernisation of Aircraft Carrier Rigging",
     "content":"Prepare 5500 steel & 2500 bauxite, then perform 2 successful modernizations on a CV(B) each with 5 carriers as material.",
     "tips":"※Modernisation target must be a CV(B). CVL and AV do not count.※Modernisation materials can be CV or CVL. AV does not count.※You don't have to modernise the same carrier twice.※You must use 5 CV(L) at once for each modernisation attempt.※The specified resources will be consumed upon clearing the quest.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4335,14 +4339,14 @@ const ALL_QUESTS_LIST = {
     "En":"The First Construction",
     "content":"Craft a ship",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"50",
       "A":"50",
       "S":"50",
       "B":"50"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":[],
     "unlocks":["F2"],
@@ -4354,14 +4358,14 @@ const ALL_QUESTS_LIST = {
     "En":"The First Development",
     "content":"Craft a piece of equipment",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"100",
       "S":"100",
       "B":"100"
     },
     "reward":[
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["F1"],
     "unlocks":["F3","F5"],
@@ -4373,15 +4377,15 @@ const ALL_QUESTS_LIST = {
     "En":"The First Dismantling",
     "content":"Dismantle a ship",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"60",
       "A":"60",
       "S":"60",
       "B":"60"
     },
     "reward":[
-      ["C","Instant construction",1],
-      ["C","Development material",1]
+      ["C","Instant Construction",1],
+      ["C","Development Material",1]
     ],
     "requires":["F2"],
     "unlocks":["F4"],
@@ -4393,15 +4397,15 @@ const ALL_QUESTS_LIST = {
     "En":"The First Scrapping",
     "content":"Scrap a piece of equipment",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"80",
       "A":"80",
       "S":"80",
       "B":"80"
     },
     "reward":[
-      ["C","Instant repair",2],
-      ["C","Development material",1]
+      ["C","Instant Repair",2],
+      ["C","Development Material",1]
     ],
     "requires":["F3"],
     "unlocks":["F42","F48"],
@@ -4413,15 +4417,15 @@ const ALL_QUESTS_LIST = {
     "En":"Instructions to Develop New Equipment",
     "content":"Craft a piece of equipment(Failures are OK)",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"40",
       "A":"40",
       "S":"40",
       "B":"40"
     },
     "reward":[
-      ["C","Instant construction",1],
-      ["C","Development material",1]
+      ["C","Instant Construction",1],
+      ["C","Development Material",1]
     ],
     "requires":["F2"],
     "unlocks":["F6"],
@@ -4433,15 +4437,15 @@ const ALL_QUESTS_LIST = {
     "En":"Instructions to Construct New Ship",
     "content":"Craft a ship",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"50",
       "A":"50",
       "S":"50",
       "B":"50"
     },
     "reward":[
-      ["C","Instant repair",1],
-      ["C","Development material",1]
+      ["C","Instant Repair",1],
+      ["C","Development Material",1]
     ],
     "requires":["F5"],
     "unlocks":["F7"],
@@ -4453,14 +4457,14 @@ const ALL_QUESTS_LIST = {
     "En":"Intensify the ConcentRation in Developing Equipment",
     "content":"Craft 3 pieces of equipment(Failures are OK)",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"100",
       "S":"100",
       "B":"100"
     },
     "reward":[
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["F6"],
     "unlocks":["F8","F51","F53","F58"],
@@ -4472,15 +4476,15 @@ const ALL_QUESTS_LIST = {
     "En":"Strengthen the Fleet by Constructing Shipgirls",
     "content":"Craft 3 ships",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"300",
       "B":"100"
     },
     "reward":[
-      ["C","Instant construction",1],
-      ["C","Development material",2]
+      ["C","Instant Construction",1],
+      ["C","Development Material",2]
     ],
     "requires":["F7"],
     "unlocks":["F9", "F16", "F18"],
@@ -4492,14 +4496,14 @@ const ALL_QUESTS_LIST = {
     "En":"Response to Disarmament Treaty",
     "content":"Scrap 2 ships",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
       "B":"50"
     },
     "reward":[
-      ["C","Instant repair",1]
+      ["C","Instant Repair",1]
     ],
     "requires":["F8"],
     "unlocks":[],
@@ -4511,7 +4515,7 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRation for Large Ship Construction (Part II)",
     "content":"Scrap equipment 4 times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"800",
       "A":"800",
       "S":"0",
@@ -4530,7 +4534,7 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRation for Transport Use Drum Canister",
     "content":"Scrap equipment 3 times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"30",
@@ -4549,7 +4553,7 @@ const ALL_QUESTS_LIST = {
     "En":"Recycling Resources (Part II)",
     "content":"Scrap equipment 24 times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"100",
@@ -4568,7 +4572,7 @@ const ALL_QUESTS_LIST = {
     "En":"Model Conversion: Type 97 Torpedo Bomber (Tomonaga Squadron)",
     "content":"Have a Carrier secretary equipped with Type 97 Torpedo Bomber (Tomonaga Squadron), scrap 2 Tenzan.",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4589,7 +4593,7 @@ const ALL_QUESTS_LIST = {
     "En":"Model Conversion: Type 99 Dive Bomber (Egusa Squadron)",
     "content":"Have a Carrier secretary equipped with Type 99 Dive Bomber (Egusa Squadron), then scrap 2 Suisei.",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4610,7 +4614,7 @@ const ALL_QUESTS_LIST = {
     "En":"Model Conversion: Zero Fighter Model 52C (601 Air Group)",
     "content":"Have a Carrier secretary equipped with Zero Fighter Model 52C (601 Air Group), then scrap 2 Reppuu.",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4631,7 +4635,7 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRation for Irako",
     "content":"Scrap equipment 10 times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"0",
       "S":"0",
@@ -4650,14 +4654,14 @@ const ALL_QUESTS_LIST = {
     "En":"The First Equipment Improvement",
     "content":"Do equipment modernization 1 time",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"100",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",7]
+      ["C","Improvement Material",7]
     ],
     "requires":["A45"],
     "unlocks":["F18","F54"],
@@ -4669,14 +4673,14 @@ const ALL_QUESTS_LIST = {
     "En":"Reinforce Improvement for Equipment",
     "content":"Do equipment modernization 1 time",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"50",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",1]
+      ["C","Improvement Material",1]
     ],
     "requires":["F8", "F17"],
     "unlocks":["F34","F50"],
@@ -4688,7 +4692,7 @@ const ALL_QUESTS_LIST = {
     "En":"Model Conversion: Type 97 Torpedo Bomber (Murata Squadron)",
     "content":"Have Shoukaku equipped with Type 97 Torpedo Bomber (Murata Squadron) as secretary, scrap 2 Tenzan.",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4710,7 +4714,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the Elite Type 97 Torpedo Bomber Force",
     "content":"Have Shoukaku or Akagi as secretary, scrap 3 Type 97 Torpedo Bomber",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4732,7 +4736,7 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRation of the Prototype Equipment",
     "content":"Scrap equipment 7 times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"100",
@@ -4751,7 +4755,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the New Elite Fighter Force",
     "content":"Prepare a Skilled Crew Member in your inventory, have Houshou equipped a rank 7 Type 0 Fighter Model 21 as secretary , then scrap 2 Type 0 Fighter Model 21 and a Type 96 Fighter.",
     "tips":"※Equipment must be unlocked.※One is consumed in the process.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4774,7 +4778,7 @@ const ALL_QUESTS_LIST = {
     "En":"Addition to Prototype Aviation Equipment",
     "content":"Scrap equipment 9 times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"100",
@@ -4793,7 +4797,7 @@ const ALL_QUESTS_LIST = {
     "En":"Model Conversion: Type 0 Fighter Model 21 (Skilled)",
     "content":"Equip a Type 0 Fighter Model 21 (Skilled) on a Carrier secretary, then scrap 2 Type 0 Fighter Model 52.",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4814,7 +4818,7 @@ const ALL_QUESTS_LIST = {
     "En":"Model Conversion: Type 0 Fighter Model 21 (Skilled)",
     "content":"Equip a rank 7 Type 0 Fighter Model 21 (Skilled) on a Carrier secretary, then scrap 2 Type 0 Fighter Model 52.",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4835,7 +4839,7 @@ const ALL_QUESTS_LIST = {
     "En":"Reorganize the Fighter Force: Type 0 Fighter Model 52 (Skilled)",
     "content":"Equip a rank 7 Type 0 Fighter Model 52 (Skilled) on Zuikaku as secretary, then scrap Zero Fighter Model 52C (601 Air Group).",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4857,7 +4861,7 @@ const ALL_QUESTS_LIST = {
     "En":"Model Conversion & Reorganization: Zero Fighter Model 52C (w/ Iwai Flight)",
     "content":"Equip a rank 7 Zero Fighter Model 52C (w/ Iwai Flight) on Zuikaku as secretary, then scrap 2 Type 0 Fighter Model 62 (Fighter-bomber).",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4879,7 +4883,7 @@ const ALL_QUESTS_LIST = {
     "En":"Reorganize the Fighter Force: Type 0 Fighter Model 21 (Skilled)",
     "content":"Equip a rank 7 Type 0 Fighter Model 21 (Skilled) on Zuikaku as secretary, then scrap 2 Type 0 Fighter Model 21.",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4900,7 +4904,7 @@ const ALL_QUESTS_LIST = {
     "En":"Model Conversion: Zero Fighter Model 21 (w/ Iwamoto Flight)",
     "content":"Equip a rank 7 Zero Fighter Model 21 (w/ Iwamoto Flight) on Zuikaku as secretary, then scrap 2 Type 0 Fighter Model 52.",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4922,7 +4926,7 @@ const ALL_QUESTS_LIST = {
     "En":"Model Conversion & Reorganization: Zero Fighter Model 52A (w/ Iwamoto Flight)",
     "content":"Equip a rank 7 Zero Fighter Model 52A (w/ Iwamoto Flight) on Zuikaku as secretary, then scrap 2 Saiun.",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -4944,7 +4948,7 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRations for New Furniture",
     "content":"Scrap 9 pieces of equipment",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"90",
@@ -4963,7 +4967,7 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRations for New Equipment",
     "content":"Scrap 5 pieces of equipment.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"50",
@@ -4982,7 +4986,7 @@ const ALL_QUESTS_LIST = {
     "En":"Supply of New Landing Force Equipment",
     "content":"Scrap two 7.7mm Machine Gun and two 12.7mm Single Machine Gun Mount",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"50",
       "A":"0",
       "S":"0",
@@ -5003,15 +5007,15 @@ const ALL_QUESTS_LIST = {
     "En":"Anti-Air Gun Mass Production",
     "content":"Scrap 6 pieces of Anti-Air Guns.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"100",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Improvement material",1],
-      ["C","Development material",2]
+      ["C","Improvement Material",1],
+      ["C","Development Material",2]
     ],
     "requires":["F18"],
     "unlocks":["F36"],
@@ -5023,14 +5027,14 @@ const ALL_QUESTS_LIST = {
     "En":"Skilled Crew Member Training",
     "content":"Have Houshou equipped with a Type 96 Fighter that is both rank 7 and ★max as secretary . 2 Medals are consumed in the process.",
     "tips":"※Consumes the equipment. ※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
       "B":"100"
     },
     "reward":[
-      ["C","Improvement material",4],
+      ["C","Improvement Material",4],
       ["I","Skilled Crew Member",1]
     ],
     "requires":["B9"],
@@ -5047,7 +5051,7 @@ const ALL_QUESTS_LIST = {
     "En":"Development of a New Torpedo Armament",
     "content":"Have Shimakaze as secretary equipped with a ★max 61cm Quintuple (Oxygen) Torpedo Mount and a ★max 61cm Triple (Oxygen) Torpedo Mount. 2 Medals are consumed in the process.",
     "tips":"※Consumes the equipment.※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"600",
       "S":"0",
@@ -5069,14 +5073,14 @@ const ALL_QUESTS_LIST = {
     "En":"PrepaRations for the Construction of an Air Base",
     "content":"Have two 7.7mm Machine Guns & two Type 96 Fighters in your inventory, and scrap two Drum Canisters.",
     "tips":"※Equipment must be unlocked.※Consumes the equipment. ※It doesn't matter whether you scrap the drums before or after procuring the other items.",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"0",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Development material",3],
+      ["C","Development Material",3],
       ["E","Type 96 Land-based Attack Aircraft",1]
     ],
     "requires":["B56"],
@@ -5091,7 +5095,7 @@ const ALL_QUESTS_LIST = {
     "En":"Expansion of Land-based Air Groups",
     "content":"Have two 7.7mm Machine Guns & two Type 99 Dive Bombers in your inventory.",
     "tips":"※Equipment must be unlocked.※Consumes the equipment.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"200",
       "S":"0",
@@ -5112,7 +5116,7 @@ const ALL_QUESTS_LIST = {
     "En":"Supply of the Land-based Main Bomber Force",
     "content":"Have a Type 96 Land-based Attack Aircraft & two Type 97 Torpedo Bombers in your inventory, and scrap two Type 0 Fighters Model 21.",
     "tips":"※Equipment must be unlocked. ※Consumes the equipment.※It doesn't matter whether you scrap the fighters before or after procuring the other items.",
-    "ressources":{
+    "resources":{
       "F":"250",
       "A":"250",
       "S":"0",
@@ -5133,7 +5137,7 @@ const ALL_QUESTS_LIST = {
     "En":"Procurement of the improved Type 1 Land-based Attack Aircraft",
     "content":"Have a Type 1 Land-based Attack Aircraft & two Tenzan in your inventory.",
     "tips":"※Equipment must be unlocked. ※Consumes the equipment. ※The land-based aircraft's proficiency level carries over to the reward.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5154,7 +5158,7 @@ const ALL_QUESTS_LIST = {
     "En":"Monthly Procurement of Maritime Supply Goods",
     "content":"Have 750 fuel, 750 ammo, two Drum Canisters, one Type 91 AP Shell in your inventory, and scrap one Type 3 Shell.",
     "tips":"※Equipment must be unlocked. ※Consumes all the resources and equipment. ※It doesn't matter whether you scrap the shell before or after procuring the other items.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5176,7 +5180,7 @@ const ALL_QUESTS_LIST = {
     "En":"Procurement of Custom-Made Furniture",
     "content":"Have 5000 Furniture Coins, two 25mm Twin Autocannon Mount, two 25mm Triple Autocannon Mount in your inventory, and scrap one 25mm Single Autocannon Mount.",
     "tips":"※Equipment must be unlocked.※Consumes all the resources and equipment. ※It doesn't matter whether you scrap the autocannon before or after procuring the other items.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5198,7 +5202,7 @@ const ALL_QUESTS_LIST = {
     "En":"Launch the LBAS to the Central Ocean Area",
     "content":"Prepare 1200 fuel, 3000 bauxite and a Construction Corps in your inventory, scrap 2 Drum Canister (Transport Use)",
     "tips":"※Consumes all the resources and equipment.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5221,7 +5225,7 @@ const ALL_QUESTS_LIST = {
     "En":"Procurement of Custom-made furniture",
     "content":"Scrap 2 12.7cm Twin High-angle Gun Mount, prepare 5000 furniture coin, 2 14cm Single Gun Mount and 2 15.2cm Single Gun Mount (all are consumed upon Quest completion).",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"100",
       "S":"0",
@@ -5243,14 +5247,14 @@ const ALL_QUESTS_LIST = {
     "En":"Development of a New Reconnaissance Aircraft",
     "content":"Have one Type 1 Land-based Attack Aircraft, two Saiun in your inventory, and scrap two Type 0 Reconnaissance Seaplane.",
     "tips":"※Equipment must be unlocked. ※Consumes all the equipment.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
       "B":"100"
     },
     "reward":[
-      ["C","Development material",2],
+      ["C","Development Material",2],
       ["E","Prototype Keiun (Carrier-based Reconnaissance Model)",1]
     ],
     "requires":["F43", "A62"],
@@ -5265,7 +5269,7 @@ const ALL_QUESTS_LIST = {
     "En":"Development of Jet-type Bomber",
     "content":"Scrap 3 Shiden Kai 2, have 2 New Technology Aircraft Blueprint and 1 Ne Type Engine prepared.",
     "tips":"※The New Technology Aircraft Blueprints & Ne Type Engine are consumed upon quest completion.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5273,7 +5277,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["E","Kikka Kai",1],
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["C3", "F45","D21"],
     "unlocks":[],
@@ -5288,7 +5292,7 @@ const ALL_QUESTS_LIST = {
     "En":"Increased Production of the Ne-type Engine",
     "content":"Scrap 3 Type 0 Fighter Model 52. Prepare 2 Reppuu, 2 Ryuusei, and 8000 steel.",
     "tips":"※Equipment must be unlocked.※Consumes the equipment.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5310,7 +5314,7 @@ const ALL_QUESTS_LIST = {
     "En":"Procurement of Custom made Furniture (Arsenal Quest)",
     "content":"Scrap 12.7cm Main Gun two times, prepare 5000 furniture coins, 2x 7.7mm AA Gun and 2x Type 96 Fighter. The Equipment and Furniture Coins will all be consumed upon quest completion",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5332,7 +5336,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the Seiran 631 Air Group!",
     "content":"Equip a Prototype Seiran in first slot and a Zuiun (631 Air Group) in second slot on either I-401, I-13 or I-14 as secretary.",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5354,7 +5358,7 @@ const ALL_QUESTS_LIST = {
     "En":"Enhance Submarine Armaments",
     "content":"Prepare 3x 61cm Quadruple (Oxygen) Torpedo Mount, 3x Type 93 Passive Sonar and 120 development materials in your inventory. Scrap 4x 61cm Triple Torpedo Mount.",
     "tips":"※Equipment must be unlocked.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"100",
       "S":"0",
@@ -5376,7 +5380,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the New Elite Seaplane Group",
     "content":"Prepare one Skilled Crew Member in your inventory, equip a Type 2 Seaplane Fighter Kai that is both rank 7 and ★max in the first slot of your Secretary Ship, then scrap 2 Type 0 Fighter Model 21 and 2 Zuiun.",
     "tips":"※Equipment must be unlocked.※One Skilled Crew Member is consumed in the process.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5398,7 +5402,7 @@ const ALL_QUESTS_LIST = {
     "En":"Expand the New Elite Seaplane Group",
     "content":"Prepare one Skilled Crew Member in your inventory, equip a Type 2 Seaplane Fighter Kai that is both rank 7 and ★max in the first slot of your Secretary Ship, then scrap 2 Type 0 Fighter Model 21 and 2 Zuiun.",
     "tips":"※Equipment must be unlocked.※One Skilled Crew Member is consumed in the process.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5420,7 +5424,7 @@ const ALL_QUESTS_LIST = {
     "En":"Reinforcement of New Model Cannon Improvement, Start!",
     "content":"Prepare 6000 Steel, scrap 10 secondary guns.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"400",
       "S":"0",
@@ -5443,14 +5447,14 @@ const ALL_QUESTS_LIST = {
     "En":"Development of New Type Equipment Fitting Research",
     "content":"Prepare 12000 Steel, scrap 10 secondary guns.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"400",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",2],
+      ["C","Development Material",2],
       ["I","Medal",1,"Choose one: "],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
@@ -5467,14 +5471,14 @@ const ALL_QUESTS_LIST = {
     "En":"Continuation of New Type Equipment Fitting Research",
     "content":"Prepare 18000 Steel, scrap 10 heavy guns.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"600",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",3],
+      ["C","Development Material",3],
       ["I","Medal",1,"Choose one: "],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
@@ -5491,14 +5495,14 @@ const ALL_QUESTS_LIST = {
     "En":"Utilizing radar technology for shooting equipment",
     "content":"Prepare 8000 Ammo and Steel, scrap 10 radars.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
       "B":"300"
     },
     "reward":[
-      ["C","Development material",2],
+      ["C","Development Material",2],
       ["I","Medal",1,"Choose one: "],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
@@ -5515,7 +5519,7 @@ const ALL_QUESTS_LIST = {
     "En":"CoopeRation with the consumer industry",
     "content":"Prepare 12000 fuel, scrap 16 small guns.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"600",
@@ -5539,7 +5543,7 @@ const ALL_QUESTS_LIST = {
     "En":"Organize the Elite Zuiun Group.",
     "content":"Prepare 2 Type 99 Dive Bomber, 2 Zuiun and a Skilled Crew Member in your inventory, have Hyuuga Kai equipped a ★max Zuiun (634 Air Group) in her 4th slot as secretary. Scrap 2 Drum Canister (Transport Use).",
     "tips":"※Equipment must be unlocked.※One Skilled Crew Member Icon is consumed in the process.",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5562,7 +5566,7 @@ const ALL_QUESTS_LIST = {
     "En":"Continue your coopeRation with the Consumer Industry.",
     "content":"Prepare 15000 Steel and scrap 10 Anti-Air Guns.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5586,7 +5590,7 @@ const ALL_QUESTS_LIST = {
     "En":"The Start of the Special Combat Rations.",
     "content":"Prepare 2 Combat Rations, 800 Fuel and 150 Bauxite.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"100",
       "S":"0",
@@ -5611,14 +5615,14 @@ const ALL_QUESTS_LIST = {
     "En":"The First Resupply",
     "content":"Resupply a ship",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"20",
       "A":"20",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",1]
+      ["C","Instant Repair",1]
     ],
     "requires":["B2"],
     "unlocks":[],
@@ -5630,14 +5634,14 @@ const ALL_QUESTS_LIST = {
     "En":"The First Repair",
     "content":"Repair a ship",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"30",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["B2"],
     "unlocks":["E3"],
@@ -5649,14 +5653,14 @@ const ALL_QUESTS_LIST = {
     "En":"The Fleet's Large Maintenance",
     "content":"Repair 5 ships",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"30",
       "A":"30",
       "S":"30",
       "B":"30"
     },
     "reward":[
-      ["C","Instant repair",2]
+      ["C","Instant Repair",2]
     ],
     "requires":["E2"],
     "unlocks":["E4"],
@@ -5668,15 +5672,15 @@ const ALL_QUESTS_LIST = {
     "En":"The Fleet's Canteen Festival",
     "content":"Resupply 15 times (1 time is 1 click of the resupply button)",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"50",
       "A":"50",
       "S":"50",
       "B":"50"
     },
     "reward":[
-      ["C","Instant construction",1],
-      ["C","Development material",1]
+      ["C","Instant Construction",1],
+      ["C","Development Material",1]
     ],
     "requires":["E3"],
     "unlocks":[],
@@ -5688,7 +5692,7 @@ const ALL_QUESTS_LIST = {
     "En":"The First Expedition",
     "content":"Perform an expedition",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"30",
       "A":"30",
       "S":"30",
@@ -5707,14 +5711,14 @@ const ALL_QUESTS_LIST = {
     "En":"Complete 3 Expeditions",
     "content":"Perform 3 successful expeditions within the same day.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"100",
       "S":"100",
       "B":"100"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["D1"],
     "unlocks":["D3","D22", "B59"],
@@ -5726,7 +5730,7 @@ const ALL_QUESTS_LIST = {
     "En":"Complete 10 Expeditions",
     "content":"Perform 10 successful expeditions within the same day.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"300",
       "S":"300",
@@ -5746,7 +5750,7 @@ const ALL_QUESTS_LIST = {
     "En":"Official Announcement, OpeRation Large-scale Expedition",
     "content":"Perform 30 successful expeditions within the same week.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"500",
       "S":"500",
@@ -5754,7 +5758,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Large furniture box",1],
-      ["C","Development material",3]
+      ["C","Development Material",3]
     ],
     "requires":["D1"],
     "unlocks":[],
@@ -5766,7 +5770,7 @@ const ALL_QUESTS_LIST = {
     "En":"The First Submarine Dispatch OpeRation",
     "content":"Complete Expedition 30 for the first time",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"10",
@@ -5787,7 +5791,7 @@ const ALL_QUESTS_LIST = {
     "En":"The Second Submarine Dispatch OpeRation",
     "content":"Complete Expedition 30 one more time",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"10",
@@ -5808,7 +5812,7 @@ const ALL_QUESTS_LIST = {
     "En":"Continue to Obtain Technology through Submarine Dispatch OpeRations",
     "content":"Complete Expedition 30 two more times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5830,7 +5834,7 @@ const ALL_QUESTS_LIST = {
     "En":"OpeRation Contact Foreign Ship through Submarine Dispatch",
     "content":"Complete Expedition 31",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"100",
       "S":"0",
@@ -5852,7 +5856,7 @@ const ALL_QUESTS_LIST = {
     "En":"Complete the Transport OpeRations towards South",
     "content":"Complete Expedition 37 or 38",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"0",
       "S":"0",
@@ -5873,7 +5877,7 @@ const ALL_QUESTS_LIST = {
     "En":"Enhance the Use of Aviation Firepower",
     "content":"Complete Expedition 23",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5894,15 +5898,15 @@ const ALL_QUESTS_LIST = {
     "En":"Continue Carrying Out the Rat Transportation (Tokyo Express) towards South",
     "content":"Complete Expedition 37 or 38 a total of 7 times in a week",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"0",
       "S":"0",
       "B":"400"
     },
     "reward":[
-      ["C","Development material",2],
-      ["C","Improvement material",1]
+      ["C","Development Material",2],
+      ["C","Improvement Material",1]
     ],
     "requires":["D9"],
     "unlocks":[],
@@ -5916,7 +5920,7 @@ const ALL_QUESTS_LIST = {
     "En":"(Continuation) Enhance the Use of Aviation Firepower",
     "content":"Complete Expedition 23 four more times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"0",
@@ -5937,7 +5941,7 @@ const ALL_QUESTS_LIST = {
     "En":"Carry Out the Deep Sea Submarine OpeRations",
     "content":"Complete Expedition 39",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"200",
       "S":"0",
@@ -5959,7 +5963,7 @@ const ALL_QUESTS_LIST = {
     "En":"Expand the Result of the Deep Sea Submarine OpeRations",
     "content":"Complete Expedition 39 two more times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"400",
       "S":"0",
@@ -5981,7 +5985,7 @@ const ALL_QUESTS_LIST = {
     "En":"Carry Out Air Defense Exercises",
     "content":"Complete Expedition 6 three times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"200",
       "S":"0",
@@ -5989,7 +5993,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["E","25mm Triple Autocannon Mount",1],
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["B7"],
     "unlocks":["B40"],
@@ -6003,7 +6007,7 @@ const ALL_QUESTS_LIST = {
     "En":"Carry Out the Decoy Task Force Support OpeRation",
     "content":"Complete Expedition 15",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"0",
       "S":"0",
@@ -6011,7 +6015,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["E","Type 91 Anti-Aircraft Fire Director",1],
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["B40"],
     "unlocks":[],
@@ -6025,14 +6029,14 @@ const ALL_QUESTS_LIST = {
     "En":"Carry Out Naval Review Rehearsals",
     "content":"Complete Expedition 7 twice",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"0",
       "S":"0",
       "B":"150"
     },
     "reward":[
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["A35"],
     "unlocks":["C6"],
@@ -6046,14 +6050,14 @@ const ALL_QUESTS_LIST = {
     "En":"Execute Naval Review",
     "content":"Complete Expedition 8",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"300",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",1],
+      ["C","Improvement Material",1],
       ["I","Headquarters Personnel",1]
     ],
     "requires":["C6"],
@@ -6068,14 +6072,14 @@ const ALL_QUESTS_LIST = {
     "En":"Enhance the Use of the Task Force",
     "content":"Complete Expeditions 35 and 26",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"400",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",2],
+      ["C","Improvement Material",2],
       ["I","Large furniture box",1]
     ],
     "requires":["D9", "B50"],
@@ -6090,7 +6094,7 @@ const ALL_QUESTS_LIST = {
     "En":"Submarine Dispatch OpeRation to Acquire Aircraft Technology",
     "content":"Complete Expedition 30 & 31",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"100",
       "S":"0",
@@ -6111,7 +6115,7 @@ const ALL_QUESTS_LIST = {
     "En":"Submarine Dispatch OpeRation to Acquire Jet Engine Technology",
     "content":"Have 5000 steel and 1500 bauxite. Complete Expedition 30 and 31 once each. (The resources will be consumed upon Quest Completion)",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"0",
       "S":"0",
@@ -6119,7 +6123,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Ne Type Engine",1],
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["D20", "B88"],
     "unlocks":["F47","F46"],
@@ -6134,7 +6138,7 @@ const ALL_QUESTS_LIST = {
     "En":"Reinforce the Transport Escort !",
     "content":"Complete Expedition 5 four times.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"1000",
       "A":"0",
       "S":"0",
@@ -6155,15 +6159,15 @@ const ALL_QUESTS_LIST = {
     "En":"Maritime Escort Squadron, Expedition Start!",
     "content":"Complete expedition 4, 5 and 9.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"700",
       "A":"700",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",2],
-      ["C","Instant repair",2]
+      ["C","Development Material",2],
+      ["C","Instant Repair",2]
     ],
     "requires":["D22", "F54"],
     "unlocks":["F55"],
@@ -6177,14 +6181,14 @@ const ALL_QUESTS_LIST = {
     "En":"Stay Alert on the Maritime Routes!",
     "content":"Complete expedition 3, expedition 4, expedition 5, expedition 10 once. ",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"800",
       "A":"0",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",4],
+      ["C","Development Material",4],
       ["I","Combat Ration",2]
     ],
     "requires":["B63"],
@@ -6202,14 +6206,14 @@ const ALL_QUESTS_LIST = {
     "En":"The First Exercise",
     "content":"Challenge another fleet in Exercise",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"10",
       "A":"10",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":[],
     "unlocks":["C2"],
@@ -6221,14 +6225,14 @@ const ALL_QUESTS_LIST = {
     "En":"Increase the Level of Training by Exercising",
     "content":"Challenge 3 other fleets in Exercises (defeat is ok) within the same day",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"50",
       "A":"0",
       "S":"50",
       "B":"0"
     },
     "reward":[
-      ["C","Instant construction",1]
+      ["C","Instant Construction",1]
     ],
     "requires":["C1"],
     "unlocks":["C3", "C4", "B58", "B77", "C10", "C11", "F44","A76", "B101"],
@@ -6240,14 +6244,14 @@ const ALL_QUESTS_LIST = {
     "En":"Overwhelm the Other Admirals through Exercises",
     "content":"Get 5 victories in Exercises within the same day",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"50",
       "S":"0",
       "B":"50"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["C2"],
     "unlocks":["F46"],
@@ -6259,15 +6263,15 @@ const ALL_QUESTS_LIST = {
     "En":"Large-scale Exercises",
     "content":"Get 20 victories in Exercises within the same week",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"200",
       "A":"200",
       "S":"200",
       "B":"200"
     },
     "reward":[
-      ["C","Development material",2],
-      ["C","Improvement material",1]
+      ["C","Development Material",2],
+      ["C","Improvement Material",1]
     ],
     "requires":["C2"],
     "unlocks":["F42"],
@@ -6279,14 +6283,14 @@ const ALL_QUESTS_LIST = {
     "En":"Strive to Increase the Level of the Fleet's Training",
     "content":"Get 3 victories in Exercises within the same day",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"300",
       "B":"300"
     },
     "reward":[
-      ["C","Instant repair",2]
+      ["C","Instant Repair",2]
     ],
     "requires":["A50"],
     "unlocks":["B41"],
@@ -6298,15 +6302,15 @@ const ALL_QUESTS_LIST = {
     "En":"Continue Exercising, and Strive to Increase the Level of Fleet's Training",
     "content":"Get 4 victories in Exercises within the same day",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"300",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
-      ["C","Improvement material",1]
+      ["C","Instant Repair",2],
+      ["C","Improvement Material",1]
     ],
     "requires":["D17"],
     "unlocks":["D18"],
@@ -6318,15 +6322,15 @@ const ALL_QUESTS_LIST = {
     "En":"Strive to Increase the Level of Training in PrepaRation for Another Rush to the Northern Sea",
     "content":"Get 4 victories in Exercises within the same day",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"0",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
-      ["C","Improvement material",1]
+      ["C","Instant Repair",2],
+      ["C","Improvement Material",1]
     ],
     "requires":["B46"],
     "unlocks":["A55","B47"],
@@ -6338,14 +6342,14 @@ const ALL_QUESTS_LIST = {
     "En":"Elite Fleet Practice",
     "content":"Get 7 victories in Exercises within the same day",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"400",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Instant repair",2],
+      ["C","Instant Repair",2],
       ["I","Combat provision",1]
     ],
     "requires":["Bd2"],
@@ -6358,14 +6362,14 @@ const ALL_QUESTS_LIST = {
     "En":"Landing Force Practice",
     "content":"Get 4 victories in Exercises within the same day",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"200",
       "S":"200",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",2],
+      ["C","Development Material",2],
       ["I","Combat provision",1]
     ],
     "requires":["F32", "Bd2","F12"],
@@ -6378,7 +6382,7 @@ const ALL_QUESTS_LIST = {
     "En":"Large-scale Autumn Season Exercise",
     "content":"Get 8 victories in Exercises within the same day",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"1000",
       "A":"0",
       "S":"300",
@@ -6398,7 +6402,7 @@ const ALL_QUESTS_LIST = {
     "En":"Large-scale Winter Season Exercise",
     "content":"Get 8 victories in Exercises within the same day",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"1000",
       "S":"0",
@@ -6406,7 +6410,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Mamiya",1],
-      ["C","Instant repair",3]
+      ["C","Instant Repair",3]
     ],
     "requires":["C2"],
     "unlocks":[],
@@ -6421,14 +6425,14 @@ const ALL_QUESTS_LIST = {
     "En":"Okinoshima Sea Counter Attack",
     "content":"Sortie a fleet to World 2-4 and obtain two S-Ranks at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"800",
       "A":"800",
       "S":"800",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",5],
+      ["C","Improvement Material",5],
       ["I","Mamiya",1]
     ],
     "requires":["Bm6", "B19"],
@@ -6443,7 +6447,7 @@ const ALL_QUESTS_LIST = {
     "En":"Ranking Expansion Mission: 'OpeRation Z' Frontal OpeRation!",
     "content":"Sortie to World 2-4, 6-1, 6-3 and obtain A-rank or higher victories at the Boss nodes. Sortie to World 6-4 and obtain an S-rank victory at the Boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"2000",
       "S":"0",
@@ -6451,7 +6455,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Irako",3],
-      ["C","Improvement material",4],
+      ["C","Improvement Material",4],
       ["A","350 Ranking points",1]
     ],
     "requires":["Bw2", "B91"],
@@ -6464,16 +6468,16 @@ const ALL_QUESTS_LIST = {
   "Bq3":{
     "Jp":"強行輸送艦隊、抜錨！",
     "En":"Transport Fleet Forces, Launch!",
-    "content":"Sortie a fleet with either 2 Aviation Battleships and up to 4 additional ships or 2 Fleet Oilers along with up to 4 additional ships to world 1-6 and reach the goal point twice.",
+    "content":"Sortie a fleet with either 2 BBV and up to 4 additional ships or 2 AO along with up to 4 additional ships to world 1-6 and reach the goal point twice.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"1000",
       "A":"400",
       "S":"400",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",4],
+      ["C","Instant Repair",4],
     ["I","Underway Replenishment",1]
     ],
     "requires":["B10"],
@@ -6486,17 +6490,17 @@ const ALL_QUESTS_LIST = {
   "Bq4":{
     "Jp":"前線の航空偵察を実施せよ！",
     "En":"Perform aerial reconnaissance on the frontlines!",
-    "content":"Sortie a fleet with 1 Seaplane Tender, 2 Light Cruisers + 3 additional ships to world 6-3 and score 2 A-rank or better victories at the boss node.",
+    "content":"Sortie a fleet with 1 AV, 2 CL + 3 additional ships to world 6-3 and score 2 A-rank or better victories at the boss node.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"800",
       "S":"0",
       "B":"1000"
     },
     "reward":[
-      ["C","Development material",8],
-    ["C","Improvement material",4]
+      ["C","Development Material",8],
+    ["C","Improvement Material",4]
     ],
     "requires":["B91","Bq3"],
     "unlocks":[],
@@ -6510,7 +6514,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the 5th Squadron",
     "content":"Sortie Myoukou, Nachi, Haguro and 3 additional ships to World 2-5 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"550",
       "S":"550",
@@ -6518,10 +6522,10 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Large furniture box",1],
-      ["C","Development material",5]
+      ["C","Development Material",5]
     ],
     "requires":["A35"],
-    "unlocks":["B38", "Bm5"],
+    "unlocks":["B38", "Bm5","B82"],
     "period":"monthly",
     "needs":{
       "M":["2-5"],
@@ -6533,7 +6537,7 @@ const ALL_QUESTS_LIST = {
     "En":"Sortie the Submarine Fleet",
     "content":"Sortie to World 6-1 and obtain an S-Rank at the boss three times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"600",
       "S":"0",
@@ -6553,16 +6557,16 @@ const ALL_QUESTS_LIST = {
   "Bm3":{
     "Jp":"「水雷戦隊」南西へ！",
     "En":"Torpedo Squadron, toward Southwest",
-    "content":"Sortie 1-3 Light Cruisers, with one as flagship, and 3-5 Destroyers to World 1-4 and obtain an S-Rank at the boss",
+    "content":"Sortie 1-3 CL, with one as flagship, and 3-5 DD to World 1-4 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"0",
       "S":"0",
       "B":"300"
     },
     "reward":[
-      ["C","Improvement material",3],
+      ["C","Improvement Material",3],
       ["I","Irako",1]
     ],
     "requires":["Bw4"],
@@ -6575,17 +6579,17 @@ const ALL_QUESTS_LIST = {
   "Bm4":{
     "Jp":"「水上打撃部隊」南方へ！",
     "En":"Surface Task Force, toward South",
-    "content":"Sortie only 3 of the following classes: Yamato-class, Nagato-class, Ise-class and Fusou-class Slow Battleships, 1 Light Cruiser and 2 additional ships to World 5-1 and obtain an S-Rank at the boss",
+    "content":"Sortie only 3 of the following classes: Yamato-class, Nagato-class, Ise-class and Fusou-class Slow BB, 1 CL and 2 additional ships to World 5-1 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"350",
       "A":"400",
       "S":"350",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",3],
-      ["C","Improvement material",4]
+      ["C","Instant Repair",3],
+      ["C","Improvement Material",4]
     ],
     "requires":["A43"],
     "unlocks":["B32"],
@@ -6599,15 +6603,15 @@ const ALL_QUESTS_LIST = {
     "En":"Month-long Strengthening of the Marine Escort",
     "content":"Sortie to World 1-5 and obtain an A-Rank or higher at the boss 10 times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"800",
       "A":"0",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",5],
-      ["C","Improvement material",3]
+      ["C","Development Material",5],
+      ["C","Improvement Material",3]
     ],
     "requires":["B21", "Bm1"],
     "unlocks":["B57", "F25"],
@@ -6619,9 +6623,9 @@ const ALL_QUESTS_LIST = {
   "Bm6":{
     "Jp":"「空母機動部隊」西へ！",
     "En":"Carrier Task Force, toward West",
-    "content":"Sortie 2 Aircraft Carriers (CVL/CV/CVB), 2 Destroyers and 2 additional ships to World 4-2 and obtain an S-Rank at the boss",
+    "content":"Sortie 2 CVL/CV/CVB, 2 DD and 2 additional ships to World 4-2 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"0",
       "S":"600",
@@ -6629,7 +6633,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Large furniture box",2],
-      ["C","Improvement material",2]
+      ["C","Improvement Material",2]
     ],
     "requires":["B20", "Bw4"],
     "unlocks":["Bm7", "Bq1", "A56", "A59", "F22"],
@@ -6641,17 +6645,17 @@ const ALL_QUESTS_LIST = {
   "Bm7":{
     "Jp":"「水上反撃部隊」突入せよ！",
     "En":"Send in the Surface Counterattack Fleet",
-    "content":"Sortie a Destroyer as flagship, 1 Heavy Cruiser (CAVs don't count), 1 Light Cruiser and 3 other Destroyers to World 2-5 and obtain an S-Rank at the boss",
+    "content":"Sortie a DD as flagship, 1 CA (CAVs don't count), 1 CL and 3 other DD to World 2-5 and obtain an S-Rank at the boss",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"600",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Development material",4],
-      ["C","Improvement material",2]
+      ["C","Development Material",4],
+      ["C","Improvement Material",2]
     ],
     "requires":["A46", "Bm6"],
     "unlocks":["A61"],
@@ -6665,15 +6669,15 @@ const ALL_QUESTS_LIST = {
     "En":"OpeRation A-gou",
     "content":"Launch your fleet 36 times, encounter 24 bosses, kill 12 bosses, and get 6 S-Rank victories",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"300",
       "B":"100"
     },
     "reward":[
-      ["C","Instant construction",2],
-      ["C","Development material",2]
+      ["C","Instant Construction",2],
+      ["C","Development Material",2]
     ],
     "requires":["Bd2"],
     "unlocks":["Bw4"],
@@ -6683,16 +6687,16 @@ const ALL_QUESTS_LIST = {
   "Bw2":{
     "Jp":"い号作戦",
     "En":"OpeRation I-gou",
-    "content":"Sink 20 Aircraft Carriers.Light Carriers are fine too",
+    "content":"Sink 20 ennemy CV. CVL are fine too",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"500",
       "S":"0",
       "B":"500"
     },
     "reward":[
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["Bd5"],
     "unlocks":["Bw5", "F32","Bq2"],
@@ -6702,16 +6706,16 @@ const ALL_QUESTS_LIST = {
   "Bw3":{
     "Jp":"海上通商破壊作戦",
     "En":"Maritime Trade Disrupt OpeRation",
-    "content":"Sink 20 Transport Ships",
+    "content":"Sink 20 ennemy Transport Ships",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"0",
       "S":"400",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",3]
+      ["C","Development Material",3]
     ],
     "requires":["Bd2"],
     "unlocks":["B12"],
@@ -6723,14 +6727,14 @@ const ALL_QUESTS_LIST = {
     "En":"OpeRation Ro-gou",
     "content":"Sink 50 Transport Ships",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"0",
       "S":"800",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",3]
+      ["C","Instant Repair",3]
     ],
     "requires":["Bw1"],
     "unlocks":["Bw10", "Bm3","Bm6"],
@@ -6740,17 +6744,17 @@ const ALL_QUESTS_LIST = {
   "Bw5":{
     "Jp":"海上護衛戦",
     "En":"Marine Escort Battle",
-    "content":"Sink 15 Submarines",
+    "content":"Sink 15 ennemy SS",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"600",
       "A":"0",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",2],
-      ["C","Improvement material",1]
+      ["C","Instant Repair",2],
+      ["C","Improvement Material",1]
     ],
     "requires":["Bw2"],
     "unlocks":["Bw6", "Bw7", "F12", "B72", "F41","B100"],
@@ -6762,14 +6766,14 @@ const ALL_QUESTS_LIST = {
     "En":"Destroy the Enemy's Eastern Fleet",
     "content":"Defeat 12 bosses in the World 4: 西方海域",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"400",
       "A":"0",
       "S":"0",
       "B":"700"
     },
     "reward":[
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["Bw5"],
     "unlocks":["Bw8"],
@@ -6783,7 +6787,7 @@ const ALL_QUESTS_LIST = {
     "En":"Destroy the Main Force of the Enemy's Northern Fleet",
     "content":"Defeat 5 bosses in the Northern Sea 3-3,  3-4, or 3-5",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"300",
       "S":"400",
@@ -6791,8 +6795,8 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[
       ["I","Furniture box medium",1],
-      ["C","Development material",3],
-      ["C","Improvement material",3]
+      ["C","Development Material",3],
+      ["C","Improvement Material",3]
     ],
     "requires":["Bw5"],
     "unlocks":[],
@@ -6806,15 +6810,15 @@ const ALL_QUESTS_LIST = {
     "En":"Crush the Core of the Enemy's Eastern Fleet",
     "content":"Defeat the boss in 4-4",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"500",
       "A":"0",
       "S":"500",
       "B":"0"
     },
     "reward":[
-      ["C","Instant repair",1],
-      ["C","Development material",1]
+      ["C","Instant Repair",1],
+      ["C","Development Material",1]
     ],
     "requires":["Bw6"],
     "unlocks":["Bw9"],
@@ -6828,15 +6832,15 @@ const ALL_QUESTS_LIST = {
     "En":"Seize Air Superiority on the Southern Sea Coral Islands",
     "content":"Sortie to 5-2 and get an S-Rank at the boss node 2 times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"300",
       "S":"0",
       "B":"800"
     },
     "reward":[
-      ["C","Development material",2],
-      ["C","Improvement material",2]
+      ["C","Development Material",2],
+      ["C","Improvement Material",2]
     ],
     "requires":["Bw8"],
     "unlocks":["B44", "B62"],
@@ -6850,14 +6854,14 @@ const ALL_QUESTS_LIST = {
     "En":"Strive to Ensure the Security of the Marine Transportation Route",
     "content":"Sortie to 1-5 and get at least an A-rank at the boss node 3 times",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"0",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Improvement material",3]
+      ["C","Improvement Material",3]
     ],
     "requires":["A45", "Bw4"],
     "unlocks":[],
@@ -6871,14 +6875,14 @@ const ALL_QUESTS_LIST = {
     "En":"Crush the Enemy Fleet",
     "content":"Defeat an enemy fleet",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"50",
       "A":"50",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["B4"],
     "unlocks":["Bd2", "Bd4", "Bd6", "A54", "A72","B60"],
@@ -6890,18 +6894,18 @@ const ALL_QUESTS_LIST = {
     "En":"Destroy the Main Force of the Enemy Fleet",
     "content":"Complete a battle.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"50",
       "A":"50",
       "S":"50",
       "B":"50"
     },
     "reward":[
-      ["C","Instant repair",1],
-      ["C","Development material",1]
+      ["C","Instant Repair",1],
+      ["C","Development Material",1]
     ],
     "requires":["Bd1"],
-    "unlocks":["Bd3", "Bd5", "Bw1", "Bw3", "A66", "A67", "B48", "B63", "C8", "C9", "F31", "B98"],
+    "unlocks":["Bd3", "Bd5", "Bw1", "Bw3", "A66", "A67", "B48", "B63", "C8", "C9", "F31", "B98","A58"],
     "period":"daily",
     "needs":{}
   },
@@ -6910,14 +6914,14 @@ const ALL_QUESTS_LIST = {
     "En":"Ambush the Enemy Fleet 10 Times",
     "content":"Defeat 10 enemy fleets.",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"150",
       "A":"150",
       "S":"200",
       "B":"100"
     },
     "reward":[
-      ["C","Development material",1]
+      ["C","Development Material",1]
     ],
     "requires":["Bd2"],
     "unlocks":[],
@@ -6927,16 +6931,16 @@ const ALL_QUESTS_LIST = {
   "Bd4":{
     "Jp":"敵空母を3隻撃沈せよ！",
     "En":"Sink 3 Enemy Carriers",
-    "content":"Sink 3 enemy Aircraft Carriers. Light Carriers are fine too. Armored Carrier Princess does not workNeed to verify for Seaplane Tender Princess",
-    "tips":"",
-    "ressources":{
+    "content":"Sink 3 enemy CV. CVL are fine too.",
+    "tips":"Armored Carrier Princess does not work.",
+    "resources":{
       "F":"150",
       "A":"150",
       "S":"150",
       "B":"300"
     },
     "reward":[
-      ["C","Instant repair",2]
+      ["C","Instant Repair",2]
     ],
     "requires":["Bd1"],
     "unlocks":[],
@@ -6948,15 +6952,15 @@ const ALL_QUESTS_LIST = {
     "En":"Sink 3 Enemy Transport Ships",
     "content":"Sink 3 enemy Transport Ships",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"100",
       "A":"50",
       "S":"200",
       "B":"50"
     },
     "reward":[
-      ["C","Instant repair",1],
-      ["C","Development material",1]
+      ["C","Instant Repair",1],
+      ["C","Development Material",1]
     ],
     "requires":["Bd2"],
     "unlocks":["Bd7", "Bw2","B91"],
@@ -6968,14 +6972,14 @@ const ALL_QUESTS_LIST = {
     "En":"Strike the Enemy Transport Group",
     "content":"Sink 5 enemy Transport Ships",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"0",
       "A":"200",
       "S":"0",
       "B":"0"
     },
     "reward":[
-      ["C","Development material",2]
+      ["C","Development Material",2]
     ],
     "requires":["Bd1"],
     "unlocks":[],
@@ -6987,15 +6991,15 @@ const ALL_QUESTS_LIST = {
     "En":"Seize Control of the Southwestern Archipelago Sea",
     "content":"Defeat 5 boss nodes in World 2: 南西諸島海域",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"0",
       "S":"0",
       "B":"200"
     },
     "reward":[
-      ["C","Instant repair",1],
-      ["C","Instant construction",1]
+      ["C","Instant Repair",1],
+      ["C","Instant Construction",1]
     ],
     "requires":["Bd5"],
     "unlocks":["Bd8"],
@@ -7007,16 +7011,16 @@ const ALL_QUESTS_LIST = {
   "Bd8":{
     "Jp":"敵潜水艦を制圧せよ！",
     "En":"Suppress the Enemy Submarines",
-    "content":"Sink 6 enemy Submarines",
+    "content":"Sink 6 enemy SS",
     "tips":"",
-    "ressources":{
+    "resources":{
       "F":"300",
       "A":"30",
       "S":"300",
       "B":"30"
     },
     "reward":[
-      ["C","Instant repair",1]
+      ["C","Instant Repair",1]
     ],
     "requires":["Bd7"],
     "unlocks":["B49"],
@@ -7028,7 +7032,7 @@ const ALL_QUESTS_LIST = {
     "En":"Unknown requierments",
     "content":"The quests linked to this haven't their requiered quests figured out yet.",
     "tips":"Just wqit for qn update",
-    "ressources":{
+    "resources":{
       "F":"#",
       "A":"#",
       "S":"#",
