@@ -1208,7 +1208,7 @@ var undeterminedQuests = [];
                 requirements[category].push(item);
               }
             } else {
-              // if the object is an array, it's associated with a quentity (equipemnt, ressources ...)
+              // if the object is an array, it's associated with a quentity (equipemnt, resources ...)
               var i=0;
               var isInArray = false;
               // for each object in the category array
@@ -1275,10 +1275,10 @@ var undeterminedQuests = [];
 
       <div class="cellDiv" style="width:25%; height:110px;  bottom:75px; left:0px;">
       <div class="centeredContent" style="text-align:left; overflow-y:hidden; padding-left:10px;">
-      &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Fuel.png"></span> &nbsp;${quest.ressources.F} <br>
-      &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Ammo.png"></span> &nbsp;${quest.ressources.A} <br>
-      &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Steel.png"></span> &nbsp;${quest.ressources.S} <br>
-      &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Bauxite.png"></span> &nbsp;${quest.ressources.B}</div>
+      &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Fuel.png"></span> &nbsp;${quest.resources.F} <br>
+      &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Ammo.png"></span> &nbsp;${quest.resources.A} <br>
+      &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Steel.png"></span> &nbsp;${quest.resources.S} <br>
+      &nbsp;<span><img class="reward_icon" src="files/webpage/game_icons/Bauxite.png"></span> &nbsp;${quest.resources.B}</div>
       </div>
 
       <div class="cellDiv" style="width:75%; height:110px;  bottom:75px; left:25%;">
@@ -1338,7 +1338,7 @@ var undeterminedQuests = [];
       $('#FC_FT_quest_info_name_English').text(quest.En);
       $('#FC_FT_quest_info_content').html(addShipImageToContent(quest));
       addShipNameHoveringEvents($('#FC_FT_quest_info_content'));
-      $('#FC_FT_quest_info_ressources').html(`<span><img class="reward_icon" src="files/webpage/game_icons/Fuel.png"></span> &nbsp;${quest.ressources.F} / <span><img class="reward_icon" src="files/webpage/game_icons/Ammo.png"></span> &nbsp;${quest.ressources.A} / <span><img class="reward_icon" src="files/webpage/game_icons/Steel.png"></span> &nbsp;${quest.ressources.S} / <span><img class="reward_icon" src="files/webpage/game_icons/Bauxite.png"></span> &nbsp;${quest.ressources.B}`);
+      $('#FC_FT_quest_info_resources').html(`<span><img class="reward_icon" src="files/webpage/game_icons/Fuel.png"></span> &nbsp;${quest.resources.F} / <span><img class="reward_icon" src="files/webpage/game_icons/Ammo.png"></span> &nbsp;${quest.resources.A} / <span><img class="reward_icon" src="files/webpage/game_icons/Steel.png"></span> &nbsp;${quest.resources.S} / <span><img class="reward_icon" src="files/webpage/game_icons/Bauxite.png"></span> &nbsp;${quest.resources.B}`);
       $('#FC_FT_quest_info_reward').html(parseRewardObject(quest.reward));
       $('#FC_FT_quest_info_requires').html(((quest.requires.length !== 0) ? `Requires: ${quest.requires.join(", ")}` : ''));
       $('#FC_FT_quest_info_unlocks').html(((quest.unlocks.length !== 0) ? `Unlocks: ${quest.unlocks.join(", ")}` : ''));
