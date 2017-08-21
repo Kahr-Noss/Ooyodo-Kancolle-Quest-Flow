@@ -1,6 +1,7 @@
 
 body {
   margin:0;
+  font: 15px "Arial", sans-serif;
 }
 
 button{
@@ -32,14 +33,14 @@ i{
   z-index:10;
 }
 
+/*TODO change size*/
 .HD_main_tab_btn, .HD_option_btn{
-  height: 100%;
-  width: calc((55% - 70px) / 3);
-  max-width: 250px;
+  height: 60px;
+  width: 250px;
   float: right;
   background-color:rgba(0, 0, 0, 0);
   background-repeat: no-repeat;
-  font-size: 2.3vw;
+  font-size: 36px;
   text-align: center;
   cursor:pointer;
   color:#ffffff;
@@ -48,6 +49,17 @@ i{
   background-image:url(files/webpage/hexagon_button_HD.png);
 }
 
+#HD_emptyBox{
+  height:60px;
+  width:0px;
+  display: inline-block;
+}
+
+
+#myDiagramDiv{
+  border: solid 1px black;
+   top: 60px;
+}
 
 /*    MENU CSS    */
 
@@ -146,6 +158,33 @@ button:focus {
   left: 0px;
   border: 1px solid black;
   background: linear-gradient(#3a3a3a , #303030);
+}
+
+#FT_showHide{
+  position: relative;
+  height: 10px;
+  width: 100%;
+  left: 0PX;
+  top: -18px;
+  text-align: center;
+  z-index: 100;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+}
+
+.arrow-down {
+
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
 }
 
 #FC_FT_quest_list{
@@ -458,4 +497,29 @@ button:focus {
 
 .ribbon:after{
   right:0;
+}
+
+
+
+/*            IF THE SCREEN IS TOO SMALL            */
+/*TODO change size*/
+@media only screen and (max-width: 1000px) {
+  #HD{
+    height:120px;
+  }
+
+#HD_emptyBox{
+  width: calc(100% - 100px);
+}
+
+  .RM{
+    height: calc(100% - 120px);
+    top: 120px;
+  }
+
+  #myDiagramDiv{
+     top: 120px;
+  }
+
+
 }
