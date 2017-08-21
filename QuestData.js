@@ -14,10 +14,10 @@ A69 changed to english wiki according to /MBiteSK
 const ICONS_LINK = {
 
   //consummables
-  "Improvement material":"files/webpage/game_icons/Improvement_Material.png",
-  "Development material":"files/webpage/game_icons/Development_Material.png",
-  "Instant construction":"files/webpage/game_icons/Instant_construction.png",
-  "Instant repair":"files/webpage/game_icons/Instant_repair.png",
+  "Improvement Material":"files/webpage/game_icons/Improvement_Material.png",
+  "Development Material":"files/webpage/game_icons/Development_Material.png",
+  "Instant Construction":"files/webpage/game_icons/Instant_construction.png",
+  "Instant Repair":"files/webpage/game_icons/Instant_repair.png",
 
   //items
   "Repair Team":"files/webpage/game_icons/Emergency_repair.png",
@@ -5372,7 +5372,7 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{
       "E":[["61cm Quadruple (Oxygen) Torpedo Mount",3],["Type 93 Passive Sonar",3],["61cm Triple Torpedo Mount",4]],
-      "C":[["Development material",120]]
+      "C":[["Development Material",120]]
     }
   },
   "F51":{

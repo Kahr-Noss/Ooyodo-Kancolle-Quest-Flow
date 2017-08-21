@@ -522,13 +522,13 @@ $("#tuto").show('slow');
       <br>
       Now let's show only the quests rewarding screws.<br>
       Choose the search mode "By reward", then click on the option "Consumable".<br>
-      In the dropdown list choose "Improvement material"`
+      In the dropdown list choose "Improvement Material"`
     );
 
     drawSquareAroundElements([$("#QL_RM_select_search_method")]);
     $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "reward"; }).css("background-color","red");
     $("#QL_RM_select_search_method, input[name=QL_RM_search_reward][value=C]").on("change.tutorial_answer", function(){
-      $("#QL_RM_search_select_reward option").filter(function () { return $(this).text() === "Improvement material"; }).css("background-color","red");
+      $("#QL_RM_search_select_reward option").filter(function () { return $(this).text() === "Improvement Material"; }).css("background-color","red");
     });
 
 
@@ -537,14 +537,14 @@ $("#tuto").show('slow');
       $("#QL_RM_search_select_reward").off("change.tutorial_answer");
       $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "reward"; }).css("background-color","");
       $("#QL_RM_select_search_method,  input[name=QL_RM_search_reward][value=C]").off("change.tutorial_answer");
-      $("#QL_RM_search_select_reward option").filter(function () { return $(this).text() === "Improvement material"; }).css("background-color","");
+      $("#QL_RM_search_select_reward option").filter(function () { return $(this).text() === "Improvement Material"; }).css("background-color","");
 
       $(".square").remove();
     };
 
     $("#QL_RM_search_select_reward").on("change.tutorial_answer", function(){
 
-      if ($("#QL_RM_search_select_reward option:selected").text() === "Improvement material"){
+      if ($("#QL_RM_search_select_reward option:selected").text() === "Improvement Material"){
         closeStep();
         step_15_selectQuests();
       } else {
