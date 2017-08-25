@@ -124,7 +124,7 @@ button:focus {
 #Ooyodo{
   display: block;
   max-width:195px;
-  max-height:calc(100% - 60px - 420px);
+  max-height:calc(100% - 60px - 350px);
   width: auto;
   height: auto;
   position:absolute;
@@ -188,6 +188,9 @@ button:focus {
 }
 
 #FC_FT_quest_list{
+position: absolute;
+top: 0px;
+left: 0px;
   width: 100px;
   float: left;
   height: 100%;
@@ -227,6 +230,7 @@ button:focus {
 #FC_FT_select_quest_list{
   width:100%;
   background-color: #3a3a3a;
+  top:0px;
 }
 
 .range_indicator{
@@ -304,12 +308,12 @@ button:focus {
   display: inline-block;
 }
 
-.link{
+.link, .questLink{
   cursor:pointer;
   color:#0645AD;
 }
 
-.link:hover{
+.link:hover, .questLink:hover{
   text-decoration: underline;
 }
 
@@ -320,6 +324,13 @@ button:focus {
   -webkit-transform: scale(2); /* Safari and Chrome */
   -o-transform: scale(2); /* Opera */
   padding: 10px;
+}
+
+.bookmark_checkbox{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 20;
 }
 
 
@@ -384,7 +395,7 @@ button:focus {
 
 .bubble {
   position:absolute;
-  bottom: 280px;
+  bottom: calc(100% - 60px - 370px);
   right:50px;
   width:250px;
   padding:15px;
@@ -512,6 +523,11 @@ button:focus {
   width: calc(100% - 100px);
 }
 
+#QL_quest_boxes{
+    height: calc(100% - 140px);
+    top: 140px;
+}
+
   .RM{
     height: calc(100% - 120px);
     top: 120px;
@@ -519,6 +535,18 @@ button:focus {
 
   #myDiagramDiv{
      top: 120px;
+  }
+
+  #Ooyodo{
+    max-height:calc(100% - 120px - 350px);
+  }
+
+  .bubble{
+      bottom: calc(100% - 120px - 370px);
+  }
+
+  #QL_display_mode{
+top:130px;
   }
 
 

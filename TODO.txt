@@ -1,0 +1,27 @@
+TODO list
+
+no resizing title                                    DONE
+quest description ship code consistency              DONE
+GoJS evaluation                                   IMPOSSIBLE
+font choice                                          DONE
+Calculate button display                             DONE
+Filter capitalization letter                          DONE
+Filters put together                                 DONE   =>  test tuto
+ressources                                           DONE
+
+open quest card when clicking                       DONE
+change ribbon on flowchart                           DONE
+Undo set quest as completed / select quest state
+Change layout                                        NO
+show / hide quest data panel                        DONE
+add rewards to flowchart tooltips                   DONE
+transparancy to unselected quests                   DONE
+Customization options                          PAIN IN THE ASS
+zoom slider                                         WHY ?
+quest bookmarking                              DONE    => tester cookie size + change icon
+search by required equipment                        DONE
+
+update function test
+calcultaion quest linked to unknow test
+
+change min size of screen for header toolbar resizing

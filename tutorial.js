@@ -489,16 +489,16 @@ $("#tuto").show('slow');
       Ah... Admiral... I got a message from Akashi... We are getting low
       on screws and need to replenish our stocks. Let's plan out our action.<br>
       <br>
-      Choose the search mode "By state", then click on "Uncompleted".`
+      Choose the search mode "By state / period", then click on "Uncompleted".`
     );
 
     drawSquareAroundElements([$("#QL_RM_select_search_method")]);
-    $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "state"; }).css("background-color","red");
+    $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "filter"; }).css("background-color","red");
 
     closeStep = function(){
       $("#tuto").hide();
       $("input[type=radio][name=QL_RM_display_state]").off("change.tutorial_answer");
-      $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "state"; }).css("background-color","");
+      $("#QL_RM_select_search_method option").filter(function () { return $(this).val() === "filter"; }).css("background-color","");
       $(".square").remove();
     };
 
