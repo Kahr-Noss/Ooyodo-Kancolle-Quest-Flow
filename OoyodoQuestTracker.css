@@ -200,7 +200,7 @@ left: 0px;
   overflow-y: auto;
 }
 
-.QL_questBox_complete_btn, .QL_questBox_goToChart_btn{
+.QL_questBox_set_as, .QL_questBox_goToChart_btn{
   width:93px;
   height:40px;
   float:right;
@@ -214,7 +214,7 @@ left: 0px;
   background-repeat: no-repeat;
 }
 
-#FC_FT_quest_info_complete_btn{
+#FC_FT_quest_info_set_as{
   width:100%;
   position: absolute;
   bottom:0px;
@@ -327,16 +327,39 @@ left: 0px;
 }
 
 .bookmark_checkbox{
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  z-index: 20;
+  display:none;
 }
+.bookmark_checkbox + label{
+background-image:url(files/webpage/not_bookmarked.png);
+background-size: 25px;
+background-repeat: no-repeat;
+position: absolute;
+top: -3px;
+left: 5px;
+z-index: 20;
+height: 71px;
+width: 25px;
+cursor: pointer;
+}
+
+.bookmark_checkbox:checked + label{
+background-image:url(files/webpage/bookmarked.png);
+background-size: 25px;
+background-repeat: no-repeat;
+position: absolute;
+top: -3px;
+left: 5px;
+z-index: 20;
+height: 71px;
+width: 25px;
+cursor: pointer;
+}
+
 
 
 /*    TUTORIAL      */
 
-#tuto{
+#tuto, #NF_guide{
   z-index:50;
   position: fixed;
   background-color: #3a3a3a;

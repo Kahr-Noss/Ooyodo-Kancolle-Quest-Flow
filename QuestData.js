@@ -57,6 +57,7 @@ const EQUIPMENT_TYPE = {
   "15.2cm Single Gun Mount":"Medium gun",
   "12.7cm Main Gun":"High-angle gun",
   "Secondary gun":"Secondary gun",
+  "Medium gun": "Medium gun",
   "Heavy gun":"Heavy gun",
   "Anti-Air gun":"Anti-air gun",
   "Small gun":"Small gun",
@@ -157,6 +158,8 @@ const ICONS_LINK = {
 
   "Radar":"files/webpage/game_icons/Radar.png",
   "Heavy gun":"files/webpage/game_icons/RedGunHeavy.png",
+  "Medium gun":"files/webpage/game_icons/RedGunMedium.png",
+  "Secondary gun":"files/webpage/game_icons/YellowGun.png",
   "Small gun":"files/webpage/game_icons/RedGunSmall.png",
   "SCAMP":"files/webpage/game_icons/SCAMP.png",
   "AP Shell":"files/webpage/game_icons/AP_Shell.png",
@@ -171,8 +174,6 @@ const ICONS_LINK = {
   "Armor bulge":"files/webpage/game_icons/Armor_Bulge.png",
   "High-angle gun":"files/webpage/game_icons/GreenGun.png",
   "Engine":"files/webpage/game_icons/Engine.png",
-  "Medium gun":"files/webpage/game_icons/RedGunMedium.png",
-  "Secondary gun":"files/webpage/game_icons/YellowGun.png",
   "Dive bomber":"files/webpage/game_icons/RedPlane.png",
   "Seaplane":"files/webpage/game_icons/Seaplane.png",
   "Seaplane fighter":"files/webpage/game_icons/Seaplane_Fighter.png",
@@ -5484,7 +5485,7 @@ const ALL_QUESTS_LIST = {
   "F54":{
     "Jp":"新型艤装の開発研究",
     "En":"Development of New Type Equipment Fitting Research",
-    "content":"Prepare 12000 Steel, scrap 10 secondary guns.",
+    "content":"Prepare 12000 Steel, scrap 10 medium guns.",
     "tips":"",
     "resources":{
       "F":"0",
@@ -5502,7 +5503,7 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{
       "R":[["Steel",12000]],
-      "E":[["Secondary gun",10]]
+      "E":[["Medium gun",10]]
     }
   },
   "F55":{
