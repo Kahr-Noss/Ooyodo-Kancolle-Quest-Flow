@@ -11,7 +11,7 @@ ressources                                           DONE
 
 open quest card when clicking                       DONE
 change ribbon on flowchart                           DONE
-Undo set quest as completed / select quest state     DONE tester pour les unknown quests
+Undo set quest as completed / select quest state     DONE 
 Change layout                                        NO
 show / hide quest data panel                        DONE
 add rewards to flowchart tooltips                   DONE
