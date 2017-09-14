@@ -33,11 +33,12 @@ i{
   z-index:10;
 }
 
-/*TODO change size*/
+
 .HD_main_tab_btn, .HD_option_btn{
   height: 60px;
   width: 250px;
-  float: right;
+  position: absolute;
+  bottom: 0px;
   background-color:rgba(0, 0, 0, 0);
   background-repeat: no-repeat;
   font-size: 36px;
@@ -49,11 +50,7 @@ i{
   background-image:url(files/webpage/hexagon_button_HD.png);
 }
 
-#HD_emptyBox{
-  height:60px;
-  width:0px;
-  display: inline-block;
-}
+
 
 
 #myDiagramDiv{
@@ -337,7 +334,7 @@ position: absolute;
 top: -3px;
 left: 5px;
 z-index: 20;
-height: 71px;
+height: 45px;
 width: 25px;
 cursor: pointer;
 }
@@ -350,7 +347,7 @@ position: absolute;
 top: -3px;
 left: 5px;
 z-index: 20;
-height: 71px;
+height: 45px;
 width: 25px;
 cursor: pointer;
 }
@@ -536,8 +533,8 @@ cursor: pointer;
 
 
 /*            IF THE SCREEN IS TOO SMALL            */
-/*TODO change size*/
-@media only screen and (max-width: 1000px) {
+
+@media only screen and (max-width: 1400px) {
   #HD{
     height:120px;
   }
@@ -571,6 +568,5 @@ cursor: pointer;
   #QL_display_mode{
 top:130px;
   }
-
 
 }

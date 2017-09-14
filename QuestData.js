@@ -3,8 +3,6 @@ B83 req
 B93 req
 B97 req
 F60
-A79
-B104
 
 B82 might need Bm1 IMPLEMENTED according /u/Nadke + /u/Taslom
 A69 changed to english wiki according to /MBiteSK
@@ -21,6 +19,8 @@ const EQUIPMENT_TYPE = {
   "Prototype 35.6cm Triple Gun Mount":"Heavy gun",
   "Searchlight":"Searchlight",
   "Skilled Carrier-based Aircraft Maintenance Personnel":"SCAMP",
+  "Night Operation Aviation Personnel":"SCAMP",
+  "Night Operation Aviation Personnel + Skilled Deckhands":"SCAMP",
   "Type 1 AP Shell":"AP Shell",
   "Type 91 AP Shell":"AP Shell",
   "Type 93 Passive Sonar":"Sonar",
@@ -112,7 +112,12 @@ const EQUIPMENT_TYPE = {
   "Prototype Seiran":"Seaplane",
   "Ryuusei":"Bomber",
   "Zuiun (634 Air Group/Skilled)":"Seaplane",
-
+"F6F-3":"Fighter",
+"F4U-1D":"Dive bomber",
+"TBF":"Bomber",
+"F6F-3N":"Night plane",
+"F6F-5N":"Night plane",
+"BM-3D":"Night plane",
 }
 
 const ICONS_LINK = {
@@ -153,6 +158,7 @@ const ICONS_LINK = {
   "Ne Type Engine":"files/webpage/game_icons/Ne_Type_Engine.png",
   "Prototype Flight Deck Catapult":"files/webpage/game_icons/Prototype_Deck_Catapult.png",
   "Marriage Ring and Documents":"files/webpage/game_icons/Marriage_Papers.png",
+  "New Model Aerial Armament Materials":"files/webpage/game_icons/New_Model_Aerial_Armament_Materials.png",
 
   //equipment
 
@@ -184,6 +190,7 @@ const ICONS_LINK = {
   "Bomber":"files/webpage/game_icons/BluePlane.png",
   "Flying boat":"files/webpage/game_icons/Large_Flying_Boat.png",
 "Searchlight":"files/webpage/game_icons/Searchlight.png",
+"Night plane":"files/webpage/game_icons/Night_Fighter_Aircraft_Icon.png",
 }
 
 
@@ -1831,7 +1838,7 @@ const ALL_QUESTS_LIST = {
   "A79":{
     "Jp":"精鋭「第二二駆逐隊」を再編成せよ！",
     "En":"Reorganize the Elite 22th Destroyer Squadron!",
-    "content":"Have Fumizuki Kai Ni, Satsuki Kai Ni, Minazuki Kai and Nagatsuki Kai in your first fleet",
+    "content":"Have Fumizuki Kai Ni, Satsuki Kai Ni, Minazuki Kai and Nagatsuki Kai in your first fleet.",
     "tips":"",
     "resources":{
       "F":"220",
@@ -1843,11 +1850,35 @@ const ALL_QUESTS_LIST = {
       ["C","Instant Repair",2],
       ["I","Combat Ration",2]
     ],
-    "requires":["Unknown"],
+    "requires":["B39"],
     "unlocks":["B104"],
     "period":"once",
     "needs":{
       "S":["Fumizuki Kai Ni", "Satsuki Kai Ni" ,"Nagatsuki Kai", "Minazuki Kai"]
+    },
+  },
+  "A80":{
+    "Jp":"精強「任務部隊」を編成せよ！",
+    "En":"Organize a Powerful Task Force!",
+    "content":"Have Saratoga Mk.II or Saratoga Mk.II Mod.2 as flagship with 1 CL and 2 DD in your main fleet.",
+    "tips":"",
+    "resources":{
+      "F":"0",
+      "A":"300",
+      "S":"0",
+      "B":"300"
+    },
+    "reward":[
+      ["E","F6F-3",1,"Choose one: "],
+      ["E","F4U-1D",1,"or "],
+      ["E","TBF",1,"Choose one: "],
+      ["I","New Model Aerial Armament Materials",1,"or "]
+    ],
+    "requires":["Bd1"],
+    "unlocks":["B105","F61"],
+    "period":"once",
+    "needs":{
+      "S":["Saratoga Mk.II"]
     },
   },
   "B1":{
@@ -2682,7 +2713,7 @@ const ALL_QUESTS_LIST = {
       ["I","Irako",1]
     ],
     "requires":["A49"],
-    "unlocks":[],
+    "unlocks":["A79"],
     "period":"once",
     "needs":{
       "M":["1-4"],
@@ -4150,7 +4181,7 @@ const ALL_QUESTS_LIST = {
       ["E","Daihatsu Landing Craft",1,"or "],
       ["I","New Model Gun Mount Improvement Material",1,"or "]
     ],
-    "requires":["A79"],
+    "requires":["A79","C2"],
     "unlocks":[],
     "period":"once",
     "needs":{
@@ -4158,7 +4189,59 @@ const ALL_QUESTS_LIST = {
       "M":["3-2"]
     }
   },
-
+  "B105":{
+    "Jp":"精強大型航空母艦、抜錨！",
+    "En":"Large Powerful Aircraft Carrier, Setting Sail!",
+    "content":"Sortie Saratoga Mk.II or Saratoga Mk.II Mod.2 as flagship, 1 CL, 2 DD with 2 additional ships to world 5-5, 6-2 and obtain S-rank victories at the boss nodes.",
+    "tips":"",
+    "resources":{
+      "F":"0",
+      "A":"0",
+      "S":"700",
+      "B":"700"
+    },
+    "reward":[
+      ["E","F6F-3",1,"Choose one: "],
+      ["I","Skilled Crew Member",1,"or "],
+        ["I","New Model Aerial Armament Materials",1,"or "],
+      ["E","TBF",1,"Choose one: "],
+      ["E","Night Operation Aviation Personnel",1,"or "]
+    ],
+    "requires":["A80","Bd2"],
+    "unlocks":["B106"],
+    "period":"once",
+    "needs":{
+      "S":["Saratoga Mk.II"],
+      "M":["5-5","6-2"]
+    }
+  },
+  "B106":{
+    "Jp":"夜間作戦空母、前線に出撃せよ！",
+    "En":"Night Carrier, to the Front Lines!",
+    "content":"Sortie Saratoga Mk.II as flagship to world 6-5 and obtain S-rank at the boss node.",
+    "tips":"",
+    "resources":{
+      "F":"0",
+      "A":"0",
+      "S":"0",
+      "B":"1000"
+    },
+    "reward":[
+      ["E","TBF",1,"Choose one: "],
+      ["E","Night Operation Aviation Personnel + Skilled Deckhands",1,"or "],
+      ["I","New Model Aerial Armament Materials",1,"or "],
+      ["I","Reinforcement Expansion",1,"Choose one: "],
+      ["I","New Model Aerial Armament Materials",1,"or "],
+      ["I","Skilled Crew Member",1,"or "]
+    ],
+    "requires":["B105"],
+    "unlocks":[],
+    "period":"once",
+    "needs":{
+      "S":["Saratoga Mk.II"],
+      "M":["6-5"]
+    }
+  },
 
   "WF01":{
     "Jp":"式の準備！(その壱)",
@@ -4527,7 +4610,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development Material",2]
     ],
     "requires":["F7"],
-    "unlocks":["F9", "F16", "F18"],
+    "unlocks":["F9", "F16", "F18","F61"],
     "period":"daily",
     "needs":{}
   },
@@ -5627,7 +5710,7 @@ const ALL_QUESTS_LIST = {
   },
   "F60":{
     "Jp":"新型戦闘糧食の試作",
-    "En":"The Start of the Special Combat Rations.",
+    "En":"The Start of the Special Combat Rations",
     "content":"Prepare 2 Combat Rations, 800 Fuel and 150 Bauxite.",
     "tips":"",
     "resources":{
@@ -5647,7 +5730,75 @@ const ALL_QUESTS_LIST = {
       "I":[["Combat Ration",2]]
     }
   },
-
+  "F61":{
+    "Jp":"夜戦型艦上戦闘機の開発",
+    "En":"Nighttime Carrier-based Fighter Development",
+    "content":"Prepare 30 Development Material, 6 Improvement Materials, 5000 bauxite and one New Model Aerial Armament Materials in your inventory. Have a ★max and Aircraft Proficiency Gold Chevron F6F-3 equipped in the first slot of the secretary ship, scrap two Type 13 Air Radar and two Type 22 Surface Radar",
+    "tips":"※Equipment must be unlocked.※Consumes all the resources and equipment. ",
+    "resources":{
+      "F":"0",
+      "A":"100",
+      "S":"0",
+      "B":"0"
+    },
+    "reward":[
+      ["E","F6F-3N",1]
+    ],
+    "requires":["F8","A80"],
+    "unlocks":["F62","F63"],
+    "period":"once",
+    "needs":{
+      "R":[["Bauxite",5000]],
+      "I":[["Development Material",30],["Improvement Material",6],["New Model Aerial Armament Materials",1]],
+      "E":[["F6F-3",1],["Type 13 Air Radar",2],["Type 22 Surface Radar",2]]
+    }
+  },
+  "F62":{
+    "Jp":"夜間作戦型艦上攻撃機の開発",
+    "En":"Nighttime Carrier-based Torpedo Bomber Development",
+    "content":"Prepare 40 Development material, 10 Improvement Materials, 5000 ammo, 8000 bauxite, one Skilled Crew Member and one New Model Aerial Armament Materials in your inventory. Have a TBF equipped in the first slot of the secretary ship, scrap two Type 13 Air Radar and two Type 22 Surface Radar.",
+    "tips":"※Equipment must be unlocked.※Consumes all the resources and equipment. ",
+    "resources":{
+      "F":"100",
+      "A":"0",
+      "S":"0",
+      "B":"0"
+    },
+    "reward":[
+      ["E","TBM-3D",1]
+    ],
+    "requires":["F61"],
+    "unlocks":[],
+    "period":"once",
+    "needs":{
+      "R":[["Bauxite",8000],["Ammo",5000]],
+      "I":[["Development Material",40],["Improvement Material",10],["New Model Aerial Armament Materials",1],["Skilled Crew Member",1]],
+      "E":[["TBF",1],["Type 13 Air Radar",2],["Type 22 Surface Radar",2]]
+    }
+  },
+  "F63":{
+    "Jp":"夜戦型艦上戦闘機の性能強化",
+    "En":"Performance Improvement of the Carrier-based Night Fighter",
+    "content":"Prepare 40 Development Material, 8 Improvement Materials, 6000 bauxite and one New Model Aerial Armament Materials in your inventory. Have a ★max and Aircraft Proficiency Gold Chevron F6F-5 equipped in the first slot of the secretary ship, scrap two Type 13 Air Radar and two Type 22 Surface Radar.",
+    "tips":"※Equipment must be unlocked.※Consumes all the resources and equipment. ",
+    "resources":{
+      "F":"0",
+      "A":"100",
+      "S":"0",
+      "B":"0"
+    },
+    "reward":[
+      ["E","F6F-5N",1]
+    ],
+    "requires":["F61"],
+    "unlocks":[],
+    "period":"once",
+    "needs":{
+      "R":[["Bauxite",6000]],
+      "I":[["Development Material",40],["Improvement Material",8],["New Model Aerial Armament Materials",1]],
+      "E":[["F6F-5",1],["Type 13 Air Radar",2],["Type 22 Surface Radar",2]]
+    }
+  },
 
 
   "E1":{
@@ -6275,7 +6426,7 @@ const ALL_QUESTS_LIST = {
       ["C","Instant Construction",1]
     ],
     "requires":["C1"],
-    "unlocks":["C3", "C4", "B58", "B77", "C10", "C11", "F44","A76", "B101"],
+    "unlocks":["C3", "C4", "B58", "B77", "C10", "C11", "F44","A76", "B101","B104"],
     "period":"daily",
     "needs":{}
   },
@@ -6440,7 +6591,7 @@ const ALL_QUESTS_LIST = {
   "C11":{
     "Jp":"冬季大演習",
     "En":"Large-scale Winter Season Exercise",
-    "content":"Get 8 victories in Exercises within the same day",
+    "content":"Get 8 victories in Exercises within the same day.",
     "tips":"",
     "resources":{
       "F":"300",
@@ -6457,7 +6608,27 @@ const ALL_QUESTS_LIST = {
     "period":"once",
     "needs":{}
   },
-
+  "C12":{
+    "Jp":"輸送部隊の練度向上に務めよ！",
+    "En":"Raise the Transport Unit's Experience!",
+    "content":"Get 4 victories in Exercises within the same day.",
+    "tips":"",
+    "resources":{
+      "F":"300",
+      "A":"300",
+      "S":"0",
+      "B":"0"
+    },
+    "reward":[
+      ["C","Improvement Material",2],
+      ["E","Daihatsu Landing Craft",1,"Choose one: "],
+      ["I","Furniture Fairy",1,"or "]
+    ],
+    "requires":["Bd5"],
+    "unlocks":[],
+    "period":"once",
+    "needs":{}
+  },
 
 
   "Bq1":{
@@ -6925,7 +7096,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development Material",1]
     ],
     "requires":["B4"],
-    "unlocks":["Bd2", "Bd4", "Bd6", "A54", "A72","B60"],
+    "unlocks":["Bd2", "Bd4", "Bd6", "A54", "A72","B60","A80"],
     "period":"daily",
     "needs":{}
   },
@@ -6945,7 +7116,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development Material",1]
     ],
     "requires":["Bd1"],
-    "unlocks":["Bd3", "Bd5", "Bw1", "Bw3", "A66", "A67", "B48", "B63", "C8", "C9", "F31", "B98","A58"],
+    "unlocks":["Bd3", "Bd5", "Bw1", "Bw3", "A66", "A67", "B48", "B63", "C8", "C9", "F31", "B98","A58","B105"],
     "period":"daily",
     "needs":{}
   },
@@ -7003,7 +7174,7 @@ const ALL_QUESTS_LIST = {
       ["C","Development Material",1]
     ],
     "requires":["Bd2"],
-    "unlocks":["Bd7", "Bw2","B91"],
+    "unlocks":["Bd7", "Bw2","B91","C12"],
     "period":"daily",
     "needs":{}
   },
@@ -7080,7 +7251,7 @@ const ALL_QUESTS_LIST = {
     },
     "reward":[],
     "requires":[],
-    "unlocks":["B83","B93","B97","F60","A79"],
+    "unlocks":["B83","B93","B97","F60"],
     "period":"once",
     "needs":{}
   }
@@ -7089,7 +7260,6 @@ const ALL_QUESTS_LIST = {
 //test to check if links between quests are correct
 Object.keys(ALL_QUESTS_LIST).forEach(quest => {
   ALL_QUESTS_LIST[quest].requires.forEach(req => {
-
     if (ALL_QUESTS_LIST[req].unlocks.indexOf(quest) === -1){
       console.log(`la quete ${quest} n'est pas dans la liste d'unlocks de la quete ${req}`);
     }
@@ -7097,8 +7267,7 @@ Object.keys(ALL_QUESTS_LIST).forEach(quest => {
 });
 
 Object.keys(ALL_QUESTS_LIST).forEach(quest => {
-  ALL_QUESTS_LIST[quest].unlocks.forEach(unlk => {
-
+  ALL_QUESTS_LIST[quest].unlocks.forEach(unlk => {    
     if (ALL_QUESTS_LIST[unlk].requires.indexOf(quest) === -1){
       console.log(`la quete ${quest} n'est pas dans la liste de requires de la quete ${unlk}`);
     }

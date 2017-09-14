@@ -1,5 +1,5 @@
 const updates = {
-  update_1:{
+/*  update_examnple:{
     implementationDate:"2017-08-17T15:15:32+09:00",
     questsAdded:["A3"],
     questsReqModified:{
@@ -8,11 +8,20 @@ const updates = {
         added:["A1"]
       }
     }
-  },
+  },*/
 
-  update_2:{
-    implementationDate:"2017-08-07T15:15:32+09:00",
-    questsAdded:["B2"],
-    questsReqModified:{}
+  update_1:{
+    implementationDate:"2017-09-14T00:00:01+09:00",
+    questsAdded:["A80","C12","B105","B106","F61","F62","F63"],
+    questsReqModified:{
+      "A79":{
+        removed:["Unknown"],
+        added:["B39"]
+      },
+      "B104":{
+        removed:[],
+        added:["C2"]
+      },
+    }
   }
 }
