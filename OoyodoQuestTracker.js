@@ -6,6 +6,7 @@ $(function () {
   function initialisation(){
         //load various data in the DOM
         var questCookie = JSON.parse(getCookie('user_quests'));
+        console.log(questCookie);
         loadQuestStateFromCookie(questCookie);
         // if the cookie had a save
         $("#pending_quests").text(getQuestsInState(ALL_QUEST_STATE,"pending").join(", "));
