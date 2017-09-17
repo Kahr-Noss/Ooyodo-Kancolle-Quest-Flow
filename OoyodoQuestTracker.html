@@ -4,204 +4,22 @@
   <meta charset="utf-8">
   <title>Ooyodo Quest Tracker</title>
   <link rel="icon" type="image/png" href="files\webpage\favicon.png" />
-  <link rel="stylesheet" type="text/css" href="OoyodoQuestTracker.css"/>
 </head>
 
 <body>
+      <img id="Ooyodo" src="files/webpage/Ooyodo/welcome.png"></img>
+This site was a beta version, and has now moved to a new adress :
+<br> <a href="https://www.kahr-noss.com/OoyodoQuestTracker.html">https://www.kahr-noss.com/OoyodoQuestTracker.html</a>
+<br>
+There is also a new thread about it on reddit, please check it out.
+<br> <a href="https://www.reddit.com/r/kancolle/comments/70m0jl/misc_ooyodos_quest_tracker/">https://www.reddit.com/r/kancolle/comments/70m0jl/misc_ooyodos_quest_tracker/</a>
+<br>
+<br>You will have to input again your pending quests, so here is a list you can copy paste to make it easier.
+<br><span id="pending_quests"><span>
 
-  <!--  Title bar  -->
-  <div id="HD" style="background-image:url(files/webpage/header_background.jpg);">
-    <img src="files/webpage/Ooyodo_Icon.png" style="width:63px; height:60px;">
-    <img src="files/webpage/header_title.png" style="max-width:45%; height:60px;">
-    <button class="HD_option_btn" value="IPQ" style="font-size: 1.5vw;">Calculate<br>progress</button>
-    <button class="HD_main_tab_btn" value="QL">Quest List</button>
-    <button class="HD_main_tab_btn" value="FC">Flowchart</button>
+    <!--  SCRIPTS  -->
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="QuestData.js"></script>
+    <script src="OoyodoQuestTracker.js"></script>
 
-  </div>
-
-  <!--  Flowchart tab  -->
-  <div class="main_tab" id="FC">
-
-    <!--  Flowchart  -->
-    <div id="myDiagramDiv" style="border: solid 1px black; top: 60px; "></div>
-
-    <!--  Right Menu  -->
-    <div class="RM" id="FC_RM">
-      <button type="button" id='FC_RM_remaining_btn'>REMAINING QUESTS</button>
-      <br>
-      Starting quests:
-      <br>
-      <input type="text" id="FC_RM_starting_quests" onfocus="this.select();">
-      <br>
-      <input type="checkbox" id="FC_RM_use_pending_quests"> &nbsp;Use pending quests
-      <br><input type="checkbox" id="FC_RM_use_periodic_quests" checked> &nbsp;Show periodic quests
-  <br><hr>
-      Ending quests:
-      <br>
-      <input type="text" id="FC_RM_ending_quests" onfocus="this.select();">
-      <br><br>
-      <select id="FC_RM_select_preset_quests">
-        <option selected disabled hidden value="">Select a quests chain</option>
-        <option value="all">All quests</option>
-        <option value="F21">Catapult 1</option>
-        <option value="F23">Catapult 2</option>
-        <option value="D8">Z1</option>
-        <option value="F45,F46">Jets</option>
-        <option disabled>=== Periodic Quests ===</option>
-        <option value="Bd8,Bd6,Bd3,G2,F9,F18,E4,D3,C3">Dailies</option>
-        <option value="G3,F12,F34,D4,D11,C4,Bw3,Bw10,Bw9,Bw7">Weeklies</option>
-        <option value="F25,F41,F22,D22,C8,Bm2,Bm3,Bm4,Bm7">Monthlies</option>
-        <option value="F35,F39,F55,Bq1,Bq2">Quarterlies</option>
-      </select>
-      <br><hr>
-      <button type="button" id='FC_RM_loading_btn'>LOAD</button>
-      <br><hr>
-      <input type="checkbox" id="FC_RM_highlight_downward" checked> &nbsp;Highlight downward
-      <br>
-      <input type="checkbox" id="FC_RM_highlight_upward" checked> &nbsp;Highlight upward
-      <br>
-      <input type="checkbox" id="FC_FT_quest_requirement_hide_quest_rewards" checked> &nbsp;Hide loots from previous quests
-<br>  <button type="button" id='FC_RM_center_btn'>VIEW AUTOSCALE</button>
-    </div>
-
-    <!--  Footer  -->
-    <div class="FT" id="FC_FT">
-      <div id="FC_FT_quest_list">
-        <span style="color:#ffffff">Search a quest:<span>
-        <br>
-        <input type="text" id="FC_FT_search_Quest" style="width:96%;"><br>
-        <select id="FC_FT_select_quest_list" size='8'></select>
-      </div>
-      <div class="cellDiv" style="width:calc((100% - 400px) * 0.1); height:75%;  top:0px; left:100px;">
-        <div class="centeredContent" id="FC_FT_quest_info_quest_code"></div>
-        <span><img class="quest_state_icon" id="FC_FT_quest_info_state_icon" src="files/webpage/undefined.png"></span>
-        <button type="button" class="complete_btn" id='FC_FT_quest_info_complete_btn' hidden>Set as completed</button>
-
-      </div>
-      <div class="cellDiv" style="width:calc((100% - 400px) * 0.6); height:25%;  top:0px; left:calc((100% - 400px) * 0.1 + 100px);">
-        <div class="centeredContent" id="FC_FT_quest_info_quest_code">
-          <span id='FC_FT_quest_info_name_Japanese'></span>
-          <br><span id='FC_FT_quest_info_name_English'></span>
-        </div>
-      </div>
-      <div class="cellDiv" style="width:calc((100% - 400px) * 0.6); height:50%;  top:25%; left:calc((100% - 400px) * 0.1 + 100px);">
-        <div class="centeredContent" id="FC_FT_quest_info_content"></div>
-        <button type="button" class="quest_tips" id=''>+</button>
-      </div>
-      <div class="cellDiv" style="width:calc((100% - 400px) * 0.3); height:25%;  top:75%; left:100px;">
-        <div class="centeredContent" id="FC_FT_quest_info_resources"></div>
-      </div>
-      <div class="cellDiv" style="width:calc((100% - 400px) * 0.3); height:75%;  top:0px; left:calc((100% - 400px) * 0.7 + 100px);">
-        <div class="centeredContent" id="FC_FT_quest_info_reward"></div>
-      </div>
-      <div class="cellDiv" style="width:calc((100% - 400px) * 0.35); height:25%;  top:75%; left:calc((100% - 400px) * 0.3 + 100px);">
-        <div class="centeredContent" id="FC_FT_quest_info_requires"></div>
-      </div>
-      <div class="cellDiv" style="width:calc((100% - 400px) * 0.35); height:25%;  top:75%; left:calc((100% - 400px) * 0.65 + 100px);">
-        <div class="centeredContent" id="FC_FT_quest_info_unlocks"></div>
-      </div>
-<div id="FC_FT_ribbon_support" style="position:absolute; width:20px; height:20px;  top:0px; right:300px; "></div>
-
-
-      <div id="FC_FT_quest_requirement" style="position:absolute; width:300px; height:100%;  top:0px; right:0px; color:#ffffff; background-color:rgba(0, 0, 0, 0); ">
-        <b><center>REQUIREMENTS</center></b>
-        <div id="FC_FT_quest_requirement_list" style="overflow:auto;padding-left:15px;">
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!--  Quest List tab  -->
-  <div class="main_tab" id="QL" hidden>
-    <div id="QL_quest_boxes"></div>
-    <div class="RM" id="QL_RM">
-      Choose a search method:
-      <br>
-      <select id="QL_RM_select_search_method">
-        <option value="quest_code">By code</option>
-        <option value="ship_required">By ship required</option>
-        <option value="reward">By reward</option>
-        <option value="map_required">By map / expedition</option>
-          <option disabled>=== Filters ===</option>
-        <option value="state">By state</option>
-        <option value="period">By period</option>
-      </select>
-      <br><br>
-
-      <div class="QL_RM_select_search_method" id="QL_RM_search_quest_code">
-        <input type="text" id="QL_RM_searchQuest"><br>
-        <i><br>Input quest code.<br>
-        Multiple quests can be inputed, separated by commas.</i>
-      </div>
-
-      <div class="QL_RM_select_search_method" id="QL_RM_search_ship_required" hidden>
-        <select id="QL_RM_select_required_ship"></select><br>
-        <i><br>Select required ship in the list above.</i>
-      </div>
-
-      <div class="QL_RM_select_search_method" id="QL_RM_search_reward" hidden>
-        <input type="radio" name="QL_RM_search_reward" value="C" checked> Consumable<br>
-        <input type="radio" name="QL_RM_search_reward" value="S"> Ship<br>
-        <input type="radio" name="QL_RM_search_reward" value="E"> Equipment<br>
-        <input type="radio" name="QL_RM_search_reward" value="I"> Item<br>
-        <input type="radio" name="QL_RM_search_reward" value="F"> Furniture<br>
-        <input type="radio" name="QL_RM_search_reward" value="A"> Account<br>
-        <br><select id="QL_RM_search_select_reward" style="width:100%;"></select><br>
-        <i><br>Select a reward category, then chose the reward in the list above.</i>
-      </div>
-
-      <div class="QL_RM_select_search_method" id="QL_RM_search_map_required" hidden>
-        <select id="QL_RM_select_required_map"></select><br>
-        <i><br>Select required map in the list above.</i>
-      </div>
-
-      <div class="QL_RM_select_search_method" id="QL_RM_search_state" hidden>
-        <input type="radio" name="QL_RM_display_state" value='{"state":["pending","locked","completed"]}' checked>All<br>
-        <input type="radio" name="QL_RM_display_state" value='{"state":["pending"]}'>Pending<br>
-        <input type="radio" name="QL_RM_display_state" value='{"state":["pending","locked"]}'>Uncompleted<br>
-        <input type="radio" name="QL_RM_display_state" value='{"state":["completed"]}'>Completed<br>
-        <i><br>Choose the state of displayed quests.
-        <br>(This settings will remain with other search methods)</i>
-      </div>
-
-      <div class="QL_RM_select_search_method" id="QL_RM_search_period" hidden>
-        <input type="checkbox" id="QL_RM_display_period_all" checked> &nbsp;(All)<br>
-        <input type="checkbox" class="QL_RM_display_period" value="once" checked> &nbsp;One time quest<br>
-        <input type="checkbox" class="QL_RM_display_period" value="quarterly" checked> &nbsp;Quaterly<br>
-        <input type="checkbox" class="QL_RM_display_period" value="monthly" checked> &nbsp;Monthly<br>
-        <input type="checkbox" class="QL_RM_display_period" value="weekly" checked> &nbsp;Weekly<br>
-        <input type="checkbox" class="QL_RM_display_period" value="daily" checked> &nbsp;Daily<br>
-        <i><br>  Choose the perdiod(s) of displayed quests.
-        <br>(This settings will remain with other search methods)</i>
-      </div>
-
-      <button type="button" id='QL_RM_reset_search' style="bottom:310px;">Clear search parameters</button>
-      <button type="button" id='QL_RM_reset_selection' style="bottom:280px;">Unselect all quests</button>
-    </div>
-    <div id="QL_display_mode" class="centeredContent">
-      <span>State displayed: &nbsp; <b><span id="QL_displayed_state">All</span></b></span> &nbsp; &nbsp; &nbsp;
-      <span>Period displayed: &nbsp; <b><span id="QL_displayed_period">All</span></b></span>
-    </div>
-  </div>
-
-  <!--  the little Ooyodo on right menus  -->
-        <img id="Ooyodo" src="files/webpage/Ooyodo/welcome.png"></img>
-        <span id="Ooyodo_text">Click<br>on me!</span>
-
-  <!--  the div containing the messages  -->
-<div id="BBL"></div>
-
-<div id="background"></div>
-
-  <!--  SCRIPTS  -->
-  <script src="jquery-3.2.1.min.js"></script>
-  <script src="GoJs.js"></script>
-  <script type='text/javascript' src='tinycolor.js'></script>
-  <script src='moment.js'></script>
-  <script src="QuestData.js"></script>
-<script src="OoyodoQuestTracker.js"></script>
-<script src="tutorial.js"></script>
-
-</body>
+  </body>
